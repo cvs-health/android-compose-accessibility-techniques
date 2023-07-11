@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Compose Accessibility Techniques</string>
+    <string name="navigate_up">Navigate up</string>
+
+    <!-- HomeScreen -->
+    <string name="home_title">Home</string>
+    <string name="home_heading">Android Compose Accessibility Techniques Demo App</string>
+    <string name="home_description">This application demonstrates a variety of accessibility best practices for Jetpack Compose-based UIs, as well as the problems they can address.</string>
+    <string name="home_description_2">Use the cards below to pick a topic area and follow the directions on the screen regarding the assistive technology employed in that demonstration.</string>
+
+    <!-- HeadingSemanticsScreen -->
+    <string name="heading_semantics_title">Heading semantics</string>
+    <string name="heading_semantics_heading">Heading text must be marked as an accessibility heading</string>
+    <string name="heading_semantics_description_1">Accessibility headings both convey the semantic meaning that text is a heading to a screen reader user and allow heading navigation in screen readers.</string>
+    <string name="heading_semantics_description_2">Turn on TalkBack and read the following text for examples. Switch TalkBack to use the Reading Control \"Headings\" and swipe down and up to experience heading navigation.</string>
+    <string name="heading_semantics_example_1_heading">Bad example 1: Big text that is not a heading</string>
+    <string name="heading_semantics_example_1_body_text">Graphically large text won\'t act as a heading for accessibility purposes by itself; it must be marked as a heading.</string>
+    <string name="heading_semantics_example_2_heading">Bad example 2: Ending contentDescription with \'Heading\' is not a heading</string>
+    <string name="heading_semantics_faux_heading_content_description">%1$s, Heading.</string>
+    <string name="heading_semantics_example_2_body_text">Marking a Composable with a contentDescription that appends \"Heading\" to the text does not give that Composable accessibility heading semantics. The large text above might announce \"Heading\" in TalkBack, but it is not recognized as having that role by the TalkBack \"Headings\" Reading Control.</string>
+    <string name="heading_semantics_example_3_heading">Good example 3: Use semantics heading() property</string>
+    <string name="heading_semantics_example_3_body_text">Composables can be marked as accessibility headings by adding the Modifier.semantics heading() property.</string>
+
+</resources>

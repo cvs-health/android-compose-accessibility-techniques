@@ -21,4 +21,30 @@
     <string name="heading_semantics_example_3_heading">Good example 3: Use semantics heading() property</string>
     <string name="heading_semantics_example_3_body_text">Composables can be marked as accessibility headings by adding the Modifier.semantics heading() property.</string>
 
+    <!-- InteractiveControlLabels -->
+    <string name="interactive_control_labels_title">Interactive control labels</string>
+    <string name="interactive_control_labels_heading">Associate interactive controls programmatically with labels</string>
+    <string name="interactive_control_labels_description">Turn on TalkBack and swipe through this page to hear demonstrations of interactive controls with and without programmatically-associated labels.</string>
+    <string name="interactive_control_labels_example_1">Bad example 1: TextField without associated field label</string>
+    <string name="interactive_control_labels_unassociated_textfield_label">Text not associated with TextField</string>
+    <string name="interactive_control_labels_example_2">Good example 2: TextField automatically associates label and uses as hint</string>
+    <string name="interactive_control_labels_associated_textinput_label">Associated field label/hint</string>
+    <string name="interactive_control_labels_example_3">Bad example 3: CheckBox without associated field label</string>
+    <string name="interactive_control_labels_unassociated_checkbox_label">Text not associated with CheckBox</string>
+    <string name="interactive_control_labels_example_4">Good example 4: CheckBox with associated field label</string>
+    <string name="interactive_control_labels_associated_checkbox_label">Field label associated with CheckBox</string>
+    <string name="interactive_control_labels_example_5">Bad example 5: Switch without associated field label</string>
+    <string name="interactive_control_labels_unassociated_switch_label">Text not associated with Switch</string>
+    <string name="interactive_control_labels_example_6">Good example 6: Switch with associated field label (text)</string>
+    <string name="interactive_control_labels_associated_switch_label">Field label associated with Switch</string>
+    <string name="interactive_control_labels_example_7">Bad example 7: RadioButton group without associated field labels, etc.</string>
+    <string name="interactive_control_labels_unassociated_radio_button_label_1">Text not associated with RadioButton 1</string>
+    <string name="interactive_control_labels_unassociated_radio_button_label_2">Text not associated with RadioButton 2</string>
+    <string name="interactive_control_labels_example_8">Good example 8: RadioButton group with associated field labels, etc.</string>
+    <string name="interactive_control_labels_radio_button_group_label">RadioButton group label</string>
+    <string name="interactive_control_labels_associated_radio_button_label_1">Field label for RadioButton 1</string>
+    <string name="interactive_control_labels_associated_radio_button_label_2">Field label for RadioButton 2</string>
+    <string name="interactive_control_labels_example_9">Good example 9: Button with associated label</string>
+    <string name="interactive_control_labels_associated_button_label">Button label</string>
+
 </resources>

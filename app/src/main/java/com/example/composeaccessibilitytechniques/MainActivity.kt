@@ -24,6 +24,7 @@ import com.example.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.example.composeaccessibilitytechniques.ui.components.RadioGroup
 import com.example.composeaccessibilitytechniques.ui.heading_semantics.HeadingSemanticsScreen
 import com.example.composeaccessibilitytechniques.ui.home.HomeScreen
+import com.example.composeaccessibilitytechniques.ui.interactive_control_labels.InteractiveControlLabelsScreen
 import com.example.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 class MainActivity : ComponentActivity() {
@@ -63,6 +64,9 @@ fun ComposeAccessibilityTechniquesNavHost(
         }
         composable(route = ComposeAccessibilityTechniquesRoute.HeadingSemantics.route) {
             HeadingSemanticsScreen { navController.popBackStack() }
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.InteractiveControlLabels.route) {
+            InteractiveControlLabelsScreen { navController.popBackStack() }
         }
         composable(route = ComposeAccessibilityTechniquesRoute.RadioGroupSample.route) {
             RadioGroupComponent { navController.popBackStack() }

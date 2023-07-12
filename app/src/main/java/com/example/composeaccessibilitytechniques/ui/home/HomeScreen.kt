@@ -67,6 +67,11 @@ fun HomeScreen(
                 onNavigationButtonClicked = onNavigationButtonClicked
             )
             NavigationCard(
+                label = stringResource(R.string.interactive_control_labels_title),
+                route = ComposeAccessibilityTechniquesRoute.InteractiveControlLabels,
+                onNavigationButtonClicked = onNavigationButtonClicked
+            )
+            NavigationCard(
                 label = "Radio Group Component",
                 route = ComposeAccessibilityTechniquesRoute.RadioGroupSample,
                 onNavigationButtonClicked = onNavigationButtonClicked

@@ -75,7 +75,7 @@ fun verifyThatDecorativeImageHasNoContentDescription() {
 }
 ```
 
-To verify actual application texts, use `createAndroidComposeRule\<MainActivity\>\(\)`, and retrieve string values with `testRule.activity.getString\(R.string.sample_screen_heading\)`.
+To verify actual application texts, use `createAndroidComposeRule<MainActivity>()`, and retrieve string values with `testRule.activity.getString(R.string.sample_screen_heading)`.
 
 * Verify that toggleable layouts are toggleable and do toggle:
 

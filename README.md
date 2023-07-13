@@ -23,6 +23,6 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [ ] Custom state descriptions
     - [ ] Custom accessibility actions
 - Other
-    - [ ] Compose Semantics automated testing](doc/AutomatedComposableAccessibilityTesting.md)
+    - [x] Compose Semantics automated testing](doc/AutomatedComposableAccessibilityTesting.md)
 
 Copyright 2023 CVS Health and/or one of its affiliates

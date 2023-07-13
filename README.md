@@ -1,3 +1,5 @@
+# android-compose-accessibility-techniques
+
 Demonstrates a variety of accessibility best practices for Android Jetpack Compose-based UIs, as well as the problems they can address.
 Using the app will demonstrate the impact of accessibility best practices, and reviewing the app project source code will help you learn how to apply those techniques in working code.
 
@@ -24,5 +26,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [ ] Custom accessibility actions
 - Other
     - [x] [Compose Semantics automated testing](doc/AutomatedComposeAccessibilityTesting.md)
+
+----
 
 Copyright 2023 CVS Health and/or one of its affiliates

@@ -11,9 +11,9 @@ For example, given this Composable, the test code following will verify that it 
 
 ```kotlin
 @Composable
-fun TestScreen() {
+fun SampleScreen() {
     Text(
-        text = stringResource(id = R.string.test_screen_heading),
+        text = stringResource(id = R.string.sample_screen_heading),
         style = MaterialTheme.typography.headlineSmall,
         modifier = Modifier
             .testTag("screenHeading")
@@ -21,7 +21,7 @@ fun TestScreen() {
             .semantics { heading() }
     )
     Text(
-        text = stringResource(R.string.test_screen_description),
+        text = stringResource(R.string.sample_screen_description),
         modifier = Modifier
             .testTag("bodyCopy")
             .fillMaxWidth(),
@@ -31,6 +31,7 @@ fun TestScreen() {
 ```
 
 ```kotlin
+class SampleTests {
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -38,7 +39,7 @@ fun TestScreen() {
     fun setup() {
         composeTestRule.setContent {
             AppTheme {
-                TestScreen()
+                SampleScreen()
             }
         }
     }
@@ -52,6 +53,7 @@ fun TestScreen() {
             .onNode(hasTestTag("bodyCopy") and !isHeading())
             .assertExists()
     }
+}
 ```
 
 * Verify contentDescription on informative and actionable Images (and null contentDescription on decorative images)
@@ -73,7 +75,7 @@ fun verifyThatDecorativeImageHasNoContentDescription() {
 }
 ```
 
-To verify actual application texts, use `createAndroidComposeRule\<MainActivity\>\(\)`, and retrieve string values with `testRule.activity.getString\(R.string.test_screen_heading\)`.
+To verify actual application texts, use `createAndroidComposeRule\<MainActivity\>\(\)`, and retrieve string values with `testRule.activity.getString\(R.string.sample_screen_heading\)`.
 
 * Verify that toggleable layouts are toggleable and do toggle:
 

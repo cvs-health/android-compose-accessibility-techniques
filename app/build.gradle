@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.composeaccessibilitytechniques'
+    namespace 'com.cvshealth.accessibility.apps.composeaccessibilitytechniques'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.composeaccessibilitytechniques"
+        applicationId "com.cvshealth.accessibility.apps.composeaccessibilitytechniques"
         minSdk 24
         targetSdk 33
         versionCode 1

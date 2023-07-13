@@ -1,0 +1,119 @@
+# Interactive Control Labels
+All interactive controls must have associated labels, as required by WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships). Android Jetpack Compose uses several techniques to associate controls and labels, depending on the control type.
+
+## Use the `label` parameter to associate a label with a `TextField`
+
+`TextField` and `OutlinedTextField` composables are labeled by their `label` parameter.
+
+For example:
+
+```kotlin
+val textState = remember { mutableStateOf("") }
+OutlinedTextField(
+    value = textState.value,
+    onValueChange = { textState.value = it },
+    modifier = Modifier.fillMaxWidth(),
+    label = {
+        Text(text = "TextField label")
+    }
+)
+```
+
+## Use the `content` parameter to associate a label with a `Button` or `IconButton`
+
+`Button` composables are labeled by their `@Composable` `content` parameter (which is often coded as a trailing lambda). 
+
+For example:
+
+```kotlin
+Button(
+    onClick = { /* TODO */ }
+) {
+    Text("Button label")
+}
+```
+
+In the case of the `IconButton`, the label is sometimes only an icon, in which case, it must also have a non-null (and non-empty) `contentDescription`.
+
+```kotlin
+IconButton(onClick = { onCloseIconClick() }) {
+    Icon(
+        painter = painterResource(id = R.drawable.ic_close_outline),
+        contentDescription = "Close"
+    )
+}
+```
+
+## Use wrapping layouts to label the `Checkbox`, `Switch`, and `RadioButton` composables
+
+The `Checkbox`, `Switch`, and `RadioButton` composables all require a wrapping layout with special coding to associate a label with the control.
+
+For example, a `Checkbox` can be labeled as follows.
+
+```kotlin
+val checkboxState = remember { mutablestateOf(false) }
+Row(
+    modifier = modifier
+        .toggleable(
+            value = checkboxState.value,
+            role = Role.Checkbox,
+            onValueChange = { newState -> 
+                checkboxState.value = newState
+            } 
+        ),
+    verticalAlignment = Alignment.CenterVertically
+) {
+    Checkbox(
+        checked = checkboxState.value,
+        onCheckedChange = null,
+        modifier = Modifier.defaultMinSize(minWidth = 48.dp, minHeight = 48.dp)
+    )
+    Text(
+        text = "Checkbox", 
+        modifier = Modifier.padding(end = 12.dp)
+    )
+}
+```
+
+The key points are:
+1. Set `Modifier.toggleable` on the enclosing `Row` layout with the checkbox state handling and `role = Role.Checkbox`. (Applying the click handler here automatically merges the child descendants' semantics.)
+2. In the `Checkbox`, set `onCheckedChange = null`.
+3. Appropriately size the `Checkbox` using `Modifier.defaultMinSize()`, because nulling `onCheckedChange` will remove Compose's automatic tap target padding.  
+
+`Switch` works similarly with `role = Role.Switch`.
+
+`RadioButton` has one additional consideration: the layout enclosing all of the labeling radio button layouts (here, a `Column`) needs `Modifier.selectableGroup()`.
+
+```kotlin
+val initialRadioButtonIndex = 0
+val buttonLabels = listOf("Yes", "No")
+val radioButtonSelectionState = remember { mutableState(initialRadioButtonIndex) }
+Column(modifier = Modifier.selectableGroup()) {
+    buttonLabels.forEachIndexed { index: Int, label: String ->
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .selectable(
+                    selected = (radioButtonSelectionState.value == index),
+                    role = Role.RadioButton,
+                    onClick = { radioButtonSelectionState.value = index }
+                ),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RadioButton(
+                selected = (radioButtonSelectionState.value == index),
+                onClick = null,
+                modifier = Modifier.defaultMinSize(minWidth = 48.dp, minHeight = 48.dp)
+            )
+            Text(
+                text = label, 
+                modifier = Modifier.padding(start = 8.dp)
+            )
+        }
+    }
+}
+```
+
+----
+
+Copyright 2023 CVS Health and/or one of its affiliates

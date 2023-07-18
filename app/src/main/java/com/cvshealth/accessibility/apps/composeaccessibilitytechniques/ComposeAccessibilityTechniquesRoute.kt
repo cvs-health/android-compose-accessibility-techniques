@@ -7,5 +7,6 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     Home("home"),
     RadioGroupSample("radioGroupSample"),
     HeadingSemantics("headingSemantics"),
-    InteractiveControlLabels("interactiveControlLabels")
+    InteractiveControlLabels("interactiveControlLabels"),
+    AccordionControls("accordionControls"),
 }

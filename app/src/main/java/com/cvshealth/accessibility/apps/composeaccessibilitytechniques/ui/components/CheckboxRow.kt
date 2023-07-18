@@ -1,11 +1,11 @@
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
+import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,8 +27,9 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  * 3. The Checkbox() composable itself has a null onClick handler; clicks are handled at the
  *    Row()-level only. (This prevents the Checkbox() from becoming a separate focusable element
  *    within the Row(), leading to a poor audio user experience.)
- * 4. Given that the Checkbox() is no longer clickable, appropriate padding is applied manually to
- *    replace the automatic padding that Compose adds to clickable elements.
+ * 4. Given that the Checkbox() is no longer clickable, appropriate padding is applied manually
+ *    with .minimumInteractiveComponentSize() to replace the automatic padding that Compose adds to
+ *    clickable elements.
  */
 @Composable
 fun CheckboxRow(
@@ -49,7 +50,7 @@ fun CheckboxRow(
         Checkbox(
             checked = checked,
             onCheckedChange = null,
-            modifier = Modifier.defaultMinSize(minWidth = 48.dp, minHeight = 48.dp)
+            modifier = Modifier.minimumInteractiveComponentSize()
         )
         Text(text = text, modifier = Modifier.padding(end = 12.dp))
     }
@@ -58,7 +59,7 @@ fun CheckboxRow(
 @Preview(showBackground = true)
 @Composable
 fun CheckboxRowPreview() {
-    ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+    ComposeAccessibilityTechniquesTheme() {
         val checkboxState = remember { mutableStateOf(false) }
         CheckboxRow(
             text = "Test Checkbox",

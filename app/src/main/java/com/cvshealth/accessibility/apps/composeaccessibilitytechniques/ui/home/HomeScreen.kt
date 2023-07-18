@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,8 +18,10 @@ import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -34,7 +35,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -72,6 +73,11 @@ fun HomeScreen(
                 onNavigationButtonClicked = onNavigationButtonClicked
             )
             NavigationCard(
+                label = stringResource(R.string.accordion_title),
+                route = ComposeAccessibilityTechniquesRoute.AccordionControls,
+                onNavigationButtonClicked = onNavigationButtonClicked
+            )
+            NavigationCard(
                 label = "Radio Group Component",
                 route = ComposeAccessibilityTechniquesRoute.RadioGroupSample,
                 onNavigationButtonClicked = onNavigationButtonClicked
@@ -83,7 +89,7 @@ fun HomeScreen(
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+    ComposeAccessibilityTechniquesTheme() {
         HomeScreen() {}
     }
 }
@@ -108,7 +114,7 @@ private fun NavigationCard(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(start = 8.dp, end = 4.dp, top = 4.dp, bottom = 4.dp)
-                .defaultMinSize(minHeight = 48.dp),
+                .minimumInteractiveComponentSize(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -127,7 +133,7 @@ private fun NavigationCard(
 @Preview(showBackground = true)
 @Composable
 fun NavigationCardPreview() {
-    ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+    ComposeAccessibilityTechniquesTheme() {
         NavigationCard(
             label = "Home",
             route = ComposeAccessibilityTechniquesRoute.Home,

@@ -2,13 +2,13 @@ package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compo
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,8 +30,9 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  * 2. Each radio button Row() applied Modifier.selectable() with role=Role.RadioButton and performs
  *    click handling at the Row level.
  * 3. Each RadioButton() has a null onClick handler; clicks are handled at the Row()-level only.
- * 4. Given that the RadioButton is no longer clickable, appropriate padding is applied manually to
- *    replace the automatic padding that Compose adds to clickable elements.
+ * 4. Given that the RadioButton is no longer clickable, appropriate padding is applied manually
+ *    with .minimumInteractiveComponentSize() to replace the automatic padding that Compose adds to
+ *    clickable elements.
  */
 @Composable
 fun RadioGroup(
@@ -57,7 +58,7 @@ fun RadioGroup(
                     RadioButton(
                         selected = (current == index),
                         onClick = null,
-                        modifier = Modifier.defaultMinSize(minWidth = 48.dp, minHeight = 48.dp)
+                        modifier = Modifier.minimumInteractiveComponentSize()
                     )
                     Text(text = label, modifier = Modifier.padding(start = 8.dp))
                 }
@@ -71,7 +72,7 @@ fun RadioGroup(
 fun RadioGroupPreview() {
     val options = listOf( "Banana", "Grape", "Orange")
     val selectedOption = remember { mutableStateOf(0) }
-    ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+    ComposeAccessibilityTechniquesTheme() {
         Column() {
             RadioGroup(
                 groupLabel = "Pick a fruit:",

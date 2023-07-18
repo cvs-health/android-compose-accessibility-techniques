@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Compose Accessibility Techniques</string>
     <string name="navigate_up">Navigate up</string>
+    <string name="collapse_button_description">Collapse</string>
+    <string name="expand_button_description">Expand</string>
 
     <!-- HomeScreen -->
     <string name="home_title">Home</string>
@@ -46,5 +48,21 @@
     <string name="interactive_control_labels_associated_radio_button_label_2">Field label for RadioButton 2</string>
     <string name="interactive_control_labels_example_9">Good example 9: Button with associated label</string>
     <string name="interactive_control_labels_associated_button_label">Button label</string>
+
+    <!-- Accordion controls -->
+    <string name="accordion_title">Accordion controls</string>
+    <string name="accordion_heading">Accordion controls require an expand or collapse semantics property</string>
+    <string name="accordion_description_1">Accordion controls must declare the appropriate Modifier.semantics expand() or collapse() action property, depending on their collapsed/expanded state, in addition to any tap to toggle action.</string>
+    <string name="accordion_description_2">There are many ways to code these controls - as layout elements or list items, but all require this additional semantics in order to announce their expanded/collapsed state.</string>
+    <string name="accordion_description_3">Turn on TalkBack, navigate the page, and activate the controls for a demonstration. Listen for expanded/collapsed state announcement as well as special expand/collapse actions.</string>
+    <string name="accordion_section_1">Bad example 1: Accordion without expand/collapse actions</string>
+    <string name="accordion_item_1_1">Incorrect Accordion example, Item 1</string>
+    <string name="accordion_item_1_2">Incorrect Accordion example, Item 2</string>
+    <string name="accordion_item_1_3">Incorrect Accordion example, Item 3</string>
+    <string name="accordion_section_2">Good example 2: Accordion with expand/collapse actions</string>
+    <string name="accordion_item_2_1">Correct Accordion example, Item 1</string>
+    <string name="accordion_item_2_2">Correct Accordion example, Item 2</string>
+    <string name="accordion_item_2_3">Correct Accordion example, Item 3</string>
+    <string name="accordion_item_2_4">Correct Accordion example, Item 4</string>
 
 </resources>

@@ -1,11 +1,11 @@
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,8 +27,9 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  * 3. The Switch() composable itself has a null onClick handler; clicks are handled at the
  *    Row()-level only. (This prevents the Switch() from becoming a separate focusable element
  *    within the Row(), leading to a poor audio user experience.)
- * 4. Given that the Switch() is no longer clickable, appropriate padding is applied manually to
- *    replace the automatic padding that Compose adds to clickable elements.
+ * 4. Given that the Switch() is no longer clickable, appropriate padding is applied manually
+ *    with .minimumInteractiveComponentSize() to replace the automatic padding that Compose adds to
+ *    clickable elements.
  */
 @Composable
 fun SwitchRow(
@@ -50,7 +51,7 @@ fun SwitchRow(
         Switch(
             checked = checked,
             onCheckedChange = null,
-            modifier = Modifier.defaultMinSize(minWidth = 48.dp, minHeight = 48.dp)
+            modifier = Modifier.minimumInteractiveComponentSize()
         )
     }
 }
@@ -58,7 +59,7 @@ fun SwitchRow(
 @Preview(showBackground = true)
 @Composable
 fun SwitchRowPreview() {
-    ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+    ComposeAccessibilityTechniquesTheme() {
         val switchState = remember { mutableStateOf(false) }
         SwitchRow(
             text = "Test Switch",

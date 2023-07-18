@@ -20,7 +20,7 @@ class HeadingSemanticsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+            ComposeAccessibilityTechniquesTheme() {
                 HeadingSemanticsScreen { }
             }
         }

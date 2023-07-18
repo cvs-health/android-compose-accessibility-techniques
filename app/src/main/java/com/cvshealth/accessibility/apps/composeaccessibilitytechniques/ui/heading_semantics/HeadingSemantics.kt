@@ -145,7 +145,7 @@ private fun ContentDescriptionFauxHeading(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewWithScaffold() {
-    ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+    ComposeAccessibilityTechniquesTheme() {
         HeadingSemanticsScreen {}
     }
 }

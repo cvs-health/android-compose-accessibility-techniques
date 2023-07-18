@@ -66,7 +66,7 @@ Row(
     Checkbox(
         checked = checkboxState.value,
         onCheckedChange = null,
-        modifier = Modifier.defaultMinSize(minWidth = 48.dp, minHeight = 48.dp)
+        modifier = Modifier.minimumInteractiveComponentSize()
     )
     Text(
         text = "Checkbox", 
@@ -78,7 +78,7 @@ Row(
 The key points are:
 1. Set `Modifier.toggleable` on the enclosing `Row` layout with the checkbox state handling and `role = Role.Checkbox`. (Applying the click handler here automatically merges the child descendants' semantics.)
 2. In the `Checkbox`, set `onCheckedChange = null`.
-3. Appropriately size the `Checkbox` using `Modifier.defaultMinSize()`, because nulling `onCheckedChange` will remove Compose's automatic tap target padding.  
+3. Appropriately size the `Checkbox` using `Modifier.minimumInteractiveComponentSize()` (Material 3) or `Modifier.defaultMinSize()` (Material 2), because nulling `onCheckedChange` will remove Compose's automatic tap target padding.  
 
 `Switch` works similarly with `role = Role.Switch`.
 
@@ -103,7 +103,7 @@ Column(modifier = Modifier.selectableGroup()) {
             RadioButton(
                 selected = (radioButtonSelectionState.value == index),
                 onClick = null,
-                modifier = Modifier.defaultMinSize(minWidth = 48.dp, minHeight = 48.dp)
+                modifier = Modifier.minimumInteractiveComponentSize()
             )
             Text(
                 text = label, 

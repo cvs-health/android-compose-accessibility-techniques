@@ -20,6 +20,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.AccordionControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.RadioGroup
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.heading_semantics.HeadingSemanticsScreen
@@ -33,7 +34,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+            ComposeAccessibilityTechniquesTheme() {
                 val navController = rememberNavController()
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -57,19 +58,23 @@ fun ComposeAccessibilityTechniquesNavHost(
         startDestination = "home",
         modifier = modifier
     ) {
+        val popBackStack: () -> Unit = { navController.popBackStack() }
         composable(route = ComposeAccessibilityTechniquesRoute.Home.route) {
             HomeScreen { route: ComposeAccessibilityTechniquesRoute ->
                 navController.navigate(route.route)
             }
         }
         composable(route = ComposeAccessibilityTechniquesRoute.HeadingSemantics.route) {
-            HeadingSemanticsScreen { navController.popBackStack() }
+            HeadingSemanticsScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.InteractiveControlLabels.route) {
-            InteractiveControlLabelsScreen { navController.popBackStack() }
+            InteractiveControlLabelsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.AccordionControls.route) {
+            AccordionControlsScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.RadioGroupSample.route) {
-            RadioGroupComponent { navController.popBackStack() }
+            RadioGroupComponent(onBackPressed = popBackStack)
         }
     }
 }
@@ -100,7 +105,7 @@ fun RadioGroupComponent(
 @Preview(showBackground = true)
 @Composable
 fun RadioGroupSamplePreview() {
-    ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+    ComposeAccessibilityTechniquesTheme() {
         RadioGroupComponent() {}
     }
 }

@@ -83,8 +83,8 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun ComposeAccessibilityTechniquesTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    // Dynamic color is available on Android 12+, but this app uses fixed colors by default
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

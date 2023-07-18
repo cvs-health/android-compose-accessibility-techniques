@@ -237,7 +237,7 @@ fun InteractiveControlLabelsScreen(
 @Preview(showBackground = true)
 @Composable
 fun InteractiveControlLabelsScreenPreview() {
-    ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+    ComposeAccessibilityTechniquesTheme() {
         InteractiveControlLabelsScreen() {}
     }
 }
@@ -277,7 +277,7 @@ fun FauxCheckboxRow(
 @Preview(showBackground = true)
 @Composable
 fun FauxCheckboxRowPreview() {
-    ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+    ComposeAccessibilityTechniquesTheme() {
         val checkboxState = remember { mutableStateOf(false) }
         FauxCheckboxRow(
             text = "Test Checkbox",
@@ -324,7 +324,7 @@ fun FauxSwitchRow(
 @Preview(showBackground = true)
 @Composable
 fun FauxSwitchRowPreview() {
-    ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+    ComposeAccessibilityTechniquesTheme() {
         val switchState = remember { mutableStateOf(false) }
         FauxSwitchRow(
             text = "Test Switch",
@@ -376,7 +376,7 @@ fun FauxRadioGroup(
 fun FauxRadioGroupPreview() {
     val options = listOf( "Banana", "Grape", "Orange")
     val selectedOption = remember { mutableStateOf(0) }
-    ComposeAccessibilityTechniquesTheme(dynamicColor = false) {
+    ComposeAccessibilityTechniquesTheme() {
         FauxRadioGroup(
             groupLabel = "Pick a fruit:",
             itemLabels = options,

@@ -63,6 +63,11 @@ fun HomeScreen(
             BodyText(textId = R.string.home_description_2)
             Spacer(modifier = Modifier.height(8.dp))
             NavigationCard(
+                label = stringResource(R.string.text_alternatives_title),
+                route = ComposeAccessibilityTechniquesRoute.TextAlternatives,
+                onNavigationButtonClicked = onNavigationButtonClicked
+            )
+            NavigationCard(
                 label = stringResource(R.string.heading_semantics_title),
                 route = ComposeAccessibilityTechniquesRoute.HeadingSemantics,
                 onNavigationButtonClicked = onNavigationButtonClicked

@@ -1,5 +1,6 @@
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
@@ -7,6 +8,9 @@ import androidx.compose.ui.test.SemanticsMatcher
 
 fun hasNoTestTag(): SemanticsMatcher =
     SemanticsMatcher.keyNotDefined(SemanticsProperties.TestTag)
+@OptIn(ExperimentalComposeUiApi::class)
+fun isInvisibleToUser(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.InvisibleToUser)
 
 fun hasText(): SemanticsMatcher {
     val propertyName = "${SemanticsProperties.Text.name} + ${SemanticsProperties.EditableText.name}"

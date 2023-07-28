@@ -26,6 +26,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.heading_semantics.HeadingSemanticsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.home.HomeScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.InteractiveControlLabelsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.TextAlternativesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 class MainActivity : ComponentActivity() {
@@ -63,6 +64,9 @@ fun ComposeAccessibilityTechniquesNavHost(
             HomeScreen { route: ComposeAccessibilityTechniquesRoute ->
                 navController.navigate(route.route)
             }
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.TextAlternatives.route) {
+            TextAlternativesScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.HeadingSemantics.route) {
             HeadingSemanticsScreen(onBackPressed = popBackStack)

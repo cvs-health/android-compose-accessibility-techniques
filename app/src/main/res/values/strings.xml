@@ -10,7 +10,46 @@
     <string name="home_description">This application demonstrates a variety of accessibility best practices for Jetpack Compose-based UIs, as well as the problems they can address.</string>
     <string name="home_description_2">Use the cards below to pick a topic area and follow the directions on the screen regarding the assistive technology employed in that demonstration.</string>
 
-    <!-- HeadingSemanticsScreen -->
+    <!-- Text alternatives -->
+    <string name="text_alternatives_title">Text alternatives</string>
+    <string name="text_alternatives_heading">Provide text alternatives for non-text content when appropriate</string>
+    <string name="text_alternatives_description_1">All informative non-text content must have a text alternative associated with it, generally via the contentDescription property. Purely decorative content that conveys no meaning must be marked as such with a null contentDescription.</string>
+    <string name="text_alternatives_description_2">Informative non-text content that is redundant with adjacent text content should be grouped with that text content and given a null contentDescription. See example 4 below.</string>
+    <string name="text_alternatives_description_3">Turn on TalkBack and read the screen elements for examples.</string>
+    <string name="text_alternatives_example_1_heading">Bad example 1: Sunrise and sunset times and icons with empty text alternatives</string>
+    <string name="text_alternatives_example_sunrise_time">6:24am</string>
+    <string name="text_alternatives_example_sunset_time">5:35pm</string>
+    <string name="text_alternatives_example_2_heading">OK example 2: Sunrise and sunset times and icons with text alternatives</string>
+    <string name="text_alternatives_example_sunrise_description">Sunrise</string>
+    <string name="text_alternatives_example_sunset_description">Sunset</string>
+    <string name="text_alternatives_example_3_heading">Good example 3: Sunrise and sunset times grouped with their icons</string>
+    <string name="text_alternatives_example_4_heading">Good example 4: Sunrise and sunset times grouped with their icons and redundant text</string>
+    <string name="text_alternatives_example_4_note">Note that almost all example headings in this app use a similar technique.</string>
+    <string name="text_alternatives_example_5_heading">Good example 5: Sunrise and sunset times and icons with group text alternatives</string>
+    <string name="text_alternatives_example_5_grouped_sunrise_text">Sunrise at 6:24am</string>
+    <string name="text_alternatives_example_5_grouped_sunset_text">Sunset at 5:35pm</string>
+    <string name="text_alternatives_example_6_heading">Bad example 6: A \'Share\' icon button with an empty text alternative</string>
+    <string name="text_alternatives_example_6_message">Share icon with an empty text alternative clicked.</string>
+    <string name="text_alternatives_example_6_note">Note that the \'Share\' icon with an empty text alternative cannot be selected with TalkBack.</string>
+    <string name="text_alternatives_example_7_heading">Bad example 7: A \'Share\' icon button with a null text alternative</string>
+    <string name="text_alternatives_example_7_message">Share icon with a null text alternative clicked.</string>
+    <string name="text_alternatives_example_8_heading">Good example 8: A \'Share\' icon button with a text alternative</string>
+    <string name="text_alternatives_example_8_content_description">Share</string>
+    <string name="text_alternatives_example_8_message">Share icon with text alternative clicked.</string>
+    <string name="text_alternatives_example_9_heading">Bad example 9: Decorative images with empty contentDescription</string>
+    <string name="text_alternatives_example_9_decorated_text">Example decorated text.</string>
+    <string name="text_alternatives_example_10_heading">Bad example 10: Decorative images with text alternatives</string>
+    <string name="text_alternatives_example_10_content_description">Sprout</string>
+    <string name="text_alternatives_example_10_decorated_text">Example decorated text.</string>
+    <string name="text_alternatives_example_11_heading">Good example 11: Decorative images with null contentDescription</string>
+    <string name="text_alternatives_example_11_decorated_text">Example decorated text.</string>
+    <string name="text_alternatives_example_12_heading">OK example 12: Grouped decorative images with invisibleToUser()</string>
+    <string name="text_alternatives_example_12_content_description">Sprout</string>
+    <string name="text_alternatives_example_12_decorated_text">Example decorated text.</string>
+    <string name="text_alternatives_example_13_heading">Good example 13: Grouped decorative images with null contentDescription</string>
+    <string name="text_alternatives_example_13_decorated_text">Example decorated text.</string>
+
+    <!-- Heading semantics -->
     <string name="heading_semantics_title">Heading semantics</string>
     <string name="heading_semantics_heading">Heading text must be marked as an accessibility heading</string>
     <string name="heading_semantics_description_1">Accessibility headings both convey the semantic meaning that text is a heading to a screen reader user and allow heading navigation in screen readers.</string>
@@ -23,7 +62,7 @@
     <string name="heading_semantics_example_3_heading">Good example 3: Use semantics heading() property</string>
     <string name="heading_semantics_example_3_body_text">Composables can be marked as accessibility headings by adding the Modifier.semantics heading() property.</string>
 
-    <!-- InteractiveControlLabels -->
+    <!-- Interactive control labels -->
     <string name="interactive_control_labels_title">Interactive control labels</string>
     <string name="interactive_control_labels_heading">Associate interactive controls programmatically with labels</string>
     <string name="interactive_control_labels_description">Turn on TalkBack and swipe through this page to hear demonstrations of interactive controls with and without programmatically-associated labels.</string>

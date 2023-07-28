@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2023 CVS Health and/or one of its affiliates
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M12,-0C5.373,-0 -0,5.373 -0,12C-0,18.627 5.373,24 12,24C18.627,24 24,18.627 24,12C24,8.817 22.736,5.765 20.485,3.515C18.235,1.264 15.183,-0 12,-0ZM17.56,5.25L18.27,5.95L16.85,7.37L16.15,6.66L17.56,5.25ZM11.5,3L12.5,3L12.5,5L11.5,5L11.5,3ZM12,6C14.083,6 15.988,7.177 16.919,9.04C17.851,10.904 17.65,13.133 16.4,14.8L15.6,14.2C16.187,13.423 16.504,12.474 16.5,11.5C16.5,9.015 14.485,7 12,7C9.515,7 7.5,9.015 7.5,11.5C7.496,12.474 7.813,13.423 8.4,14.2L7.6,14.8C6.35,13.133 6.149,10.904 7.081,9.04C8.012,7.177 9.917,6 12,6L12,6ZM13.52,14.33L14.22,15.03L12.35,16.9C12.259,16.997 12.133,17.052 12,17.052C11.867,17.052 11.741,16.997 11.65,16.9L9.78,15L10.48,14.3L11.48,15.3L11.48,12L12.48,12L12.48,15.34L13.52,14.33ZM6.35,5.25L7.77,6.66L7.06,7.37L5.65,6L6.35,5.25ZM3.5,11L5.5,11L5.5,12L3.5,12L3.5,11ZM20.5,19L20.5,19L3.5,19L3.5,18L20.5,18L20.5,19ZM18.5,12L18.5,11L20.5,11L20.5,12L18.5,12Z"
+      android:fillType="evenOdd"/>
+</vector>

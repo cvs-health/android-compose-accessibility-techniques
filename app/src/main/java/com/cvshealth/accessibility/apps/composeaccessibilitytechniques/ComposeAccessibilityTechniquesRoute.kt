@@ -6,6 +6,7 @@ package com.cvshealth.accessibility.apps.composeaccessibilitytechniques
 enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     Home("home"),
     RadioGroupSample("radioGroupSample"),
+    TextAlternatives("textAlternatives"),
     HeadingSemantics("headingSemantics"),
     InteractiveControlLabels("interactiveControlLabels"),
     AccordionControls("accordionControls"),

@@ -467,7 +467,7 @@ private fun BadExample10() {
         text = stringResource(id = R.string.text_alternatives_example_10_heading),
         modifier = Modifier.testTag(textAlternativesExample10HeadingTestTag)
     )
-    
+
     Row(
         modifier = Modifier.padding(top = 8.dp),
         verticalAlignment = Alignment.CenterVertically

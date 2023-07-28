@@ -9,7 +9,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
 
 ## Topics
 - Informative Content
-    - [ ] Text alternatives
+    - [x] [Text alternatives](doc/content/TextAlternatives.md)
     - [ ] Text resizing and reflow
     - [ ] Content grouping
     - [ ] Content group replacement

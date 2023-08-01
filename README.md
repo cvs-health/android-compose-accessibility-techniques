@@ -12,7 +12,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Text alternatives](doc/content/TextAlternatives.md)
     - [ ] Text resizing and reflow
     - [ ] Content grouping
-    - [ ] Content group replacement
+    - [x] [Content group replacement](doc/content/ContentGroupReplacement.md)
     - [x] [Heading semantics](doc/content/HeadingSemantics.md)
     - [ ] List semantics
     - [ ] Device orientation and screen sizes

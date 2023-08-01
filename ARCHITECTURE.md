@@ -41,7 +41,7 @@ The following process is suggested for adding a new screen to the application. T
 4. If necessary, in the same package, create \<ScreenName\>ViewModel.kt to hold state data and/or \<ScreenName\>Model.kt to hold data classes and objects.
 5. Add a new route enum to ComposeAccessibilityTechniquesRoute.kt holding the new Composable screen route string.
 6. Edit MainActivity.kt to add a new composable() navigation to ComposeAccessibilityTechniquesNavHost(). 
-7. Edit HomeScreen.kt to copy a NavigationCard, adjust it to the new screen name, and place it in the appropriate layout location. 
+7. Edit HomeScreen.kt to copy a NavigationCard, adjust it to the new screen name and route enum, and place it in the appropriate layout location. 
 8. Build, run, and test the app.
 
 ----

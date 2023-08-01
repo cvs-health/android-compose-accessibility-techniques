@@ -68,6 +68,11 @@ fun HomeScreen(
                 onNavigationButtonClicked = onNavigationButtonClicked
             )
             NavigationCard(
+                label = stringResource(R.string.content_group_replacement_title),
+                route = ComposeAccessibilityTechniquesRoute.ContentGroupReplacement,
+                onNavigationButtonClicked = onNavigationButtonClicked
+            )
+            NavigationCard(
                 label = stringResource(R.string.heading_semantics_title),
                 route = ComposeAccessibilityTechniquesRoute.HeadingSemantics,
                 onNavigationButtonClicked = onNavigationButtonClicked

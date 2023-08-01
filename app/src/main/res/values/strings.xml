@@ -49,6 +49,24 @@
     <string name="text_alternatives_example_13_heading">Good example 13: Grouped decorative images with null contentDescription</string>
     <string name="text_alternatives_example_13_decorated_text">Example decorated text.</string>
 
+    <!-- Content group replacement -->
+    <string name="content_group_replacement_title">Content group replacement</string>
+    <string name="content_group_replacement_heading">Grouped content can be replaced to enhance screen reader experience</string>
+    <string name="content_group_replacement_description">Sometimes the graphical components of a layout group do not convey their meaning well to screen readers, even if grouped into a single text. In this case, replace the screen reader text for the layout group with something better.</string>
+    <string name="content_group_replacement_description_2">Turn on TalkBack and listen to the items on this page for a demonstration.</string>
+    <string name="content_group_replacement_ungrouped_rating_heading">Bad example 1: Rating with content ungrouped</string>
+    <string name="content_group_replacement_rating_group_heading">Bad example 2: Rating with content grouped</string>
+    <string name="content_group_replacement_rating_group_note">Note how the LinearProgressIndicator is announced separately in TalkBack, despite the Row\'s merge semantics.</string>
+    <string name="content_group_replacement_rating_group_replaced_heading">Good example 3: Rating with grouped content replaced with invisibleToUser()</string>
+    <string name="content_group_replacement_rating_group_overridden_heading">Good example 4: Rating with grouped content replaced with mergeAndSetSemantics</string>
+    <string name="content_group_replacement_rating_label">Rating: </string>
+    <string name="content_group_replacement_rating_text">%1$s / %2$s</string>
+    <string name="content_group_replacement_reviews">Reviews: %1$d</string>
+    <plurals name="content_group_replacement_rating_group_content_description">
+        <item quantity="one">Rating: %1$s out of %2$s stars, based on %3$d review</item>
+        <item quantity="other">Rating: %1$s out of %2$s stars, based on %3$d reviews</item>
+    </plurals>
+
     <!-- Heading semantics -->
     <string name="heading_semantics_title">Heading semantics</string>
     <string name="heading_semantics_heading">Heading text must be marked as an accessibility heading</string>

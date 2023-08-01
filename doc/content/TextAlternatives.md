@@ -107,7 +107,7 @@ The issue with this approach is fragility: any change to the child composables m
 
 ### Overriding content with `Modifier.clearAndSetSemantics`
 
-The other approach of overriding grouped composable content is to use `Modifier.clearAndSetSemantics`. This method removes the existing semantics of the element _and all of its child composables_ and replaces it with the semantic values supplied by a lambda. 
+The other approach of overriding grouped composable content is to use `Modifier.clearAndSetSemantics`. This method removes the existing semantics of a composable _and all of its child composables_ and replaces it with the semantic values supplied by a lambda. 
 
 ```kotlin
 Row(

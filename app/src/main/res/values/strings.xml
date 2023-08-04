@@ -110,6 +110,36 @@
     <string name="heading_semantics_example_3_heading">Good example 3: Use semantics heading() property</string>
     <string name="heading_semantics_example_3_body_text">Composables can be marked as accessibility headings by adding the Modifier.semantics heading() property.</string>
 
+    <!-- List semantics -->
+    <string name="list_semantics_title">List semantics</string>
+    <string name="list_semantics_heading">Mark visual lists with accessibility list semantics</string>
+    <string name="list_semantics_description_1">Lists created with LazyColumn and LazyRow automatically provide list semantics to accessibility services like TalkBack, reading things like “in list” / “out of list” and “1 of 5.” However, visual lists created with Column or Row need to have list semantics added via the collectionInfo and collectionItemInfo semantics properties.</string>
+    <string name="list_semantics_description_2">Turn on TalkBack and swipe through this page to hear demonstrations of visual lists without and with list semantics applied.</string>
+    <string name="list_semantics_bullet_point_alt_text">Bullet.</string>
+    <string name="list_semantics_example_1">Bad example 1: Visual list without list semantics</string>
+    <string name="list_semantics_bad_point_1">Bad example, Point 1</string>
+    <string name="list_semantics_bad_point_2">Bad example, Point 2</string>
+    <string name="list_semantics_bad_point_3">Bad example, Point 3</string>
+    <string name="list_semantics_after_bad_example">Text after a non-semantic visual list.</string>
+    <string name="list_semantics_example_2">Good example 2: Bullet list with list semantics</string>
+    <string name="list_semantics_good_point_1">Good example, Point 1</string>
+    <string name="list_semantics_good_point_2">Good example, Point 2</string>
+    <string name="list_semantics_good_point_3">Good example, Point 3</string>
+    <string name="list_semantics_after_list">Text after a semantic bullet list.</string>
+    <string name="list_semantics_example_3">Good example 3: Numbered list with list semantics</string>
+    <string name="list_semantics_good_point_1_numbered">1. Good numbered example, Point 1</string>
+    <string name="list_semantics_good_point_2_numbered">2. Good numbered example, Point 2</string>
+    <string name="list_semantics_good_point_3_numbered">3. Good numbered example, Point 3</string>
+    <string name="list_semantics_after_list_2">Text after a semantic numbered list.</string>
+    <string name="list_semantics_example_4">Good example 4: LazyRow list with automatic list semantics</string>
+    <string name="list_semantics_lazyrow_1">LazyRow 1</string>
+    <string name="list_semantics_lazyrow_2">LazyRow 2</string>
+    <string name="list_semantics_lazyrow_3">LazyRow 3</string>
+    <string name="list_semantics_lazyrow_4">LazyRow 4</string>
+    <string name="list_semantics_lazyrow_5">LazyRow 5</string>
+    <string name="list_semantics_lazyrow_6">LazyRow 6</string>
+    <string name="list_semantics_after_list_3">Text after a LazyRow list.</string>
+
     <!-- Interactive control labels -->
     <string name="interactive_control_labels_title">Interactive control labels</string>
     <string name="interactive_control_labels_heading">Associate interactive controls programmatically with labels</string>

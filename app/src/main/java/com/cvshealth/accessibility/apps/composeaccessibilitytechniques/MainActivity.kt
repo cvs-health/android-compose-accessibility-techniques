@@ -28,6 +28,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.conten
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.heading_semantics.HeadingSemanticsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.home.HomeScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.InteractiveControlLabelsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.list_semantics.ListSemanticsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.TextAlternativesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -78,6 +79,9 @@ fun ComposeAccessibilityTechniquesNavHost(
         }
         composable(route = ComposeAccessibilityTechniquesRoute.HeadingSemantics.route) {
             HeadingSemanticsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.ListSemantics.route) {
+            ListSemanticsScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.InteractiveControlLabels.route) {
             InteractiveControlLabelsScreen(onBackPressed = popBackStack)

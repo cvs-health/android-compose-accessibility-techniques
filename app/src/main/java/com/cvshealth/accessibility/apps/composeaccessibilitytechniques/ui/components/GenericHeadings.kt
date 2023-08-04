@@ -88,7 +88,6 @@ fun GoodExampleHeading(text: String, modifier: Modifier = Modifier) {
     )
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun GoodExampleHeadingShortPreview() {

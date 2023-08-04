@@ -10,6 +10,7 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     ContentGrouping("contentGrouping"),
     ContentGroupReplacement("contentGroupReplacement"),
     HeadingSemantics("headingSemantics"),
+    ListSemantics("listSemantics"),
     InteractiveControlLabels("interactiveControlLabels"),
     AccordionControls("accordionControls"),
 }

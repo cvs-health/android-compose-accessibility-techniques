@@ -83,6 +83,11 @@ fun HomeScreen(
                 onNavigationButtonClicked = onNavigationButtonClicked
             )
             NavigationCard(
+                label = stringResource(R.string.list_semantics_title),
+                route = ComposeAccessibilityTechniquesRoute.ListSemantics,
+                onNavigationButtonClicked = onNavigationButtonClicked
+            )
+            NavigationCard(
                 label = stringResource(R.string.interactive_control_labels_title),
                 route = ComposeAccessibilityTechniquesRoute.InteractiveControlLabels,
                 onNavigationButtonClicked = onNavigationButtonClicked

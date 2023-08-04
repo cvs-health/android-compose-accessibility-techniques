@@ -27,13 +27,13 @@ import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.AccessibleOutlinedTextField
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.AccessibleTextField
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BadExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.CheckboxRow
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ErrorHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.RadioGroup
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SuccessHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SwitchRow
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -79,7 +79,7 @@ fun InteractiveControlLabelsScreen(
             BodyText(textId = R.string.interactive_control_labels_description)
 
             // Bad example 1: TextField without associated field label
-            ErrorHeading(
+            BadExampleHeading(
                 text = stringResource(id = R.string.interactive_control_labels_example_1),
                 modifier = Modifier.testTag(interactiveControlLabelsExample1HeadingTestTag)
             )
@@ -98,7 +98,7 @@ fun InteractiveControlLabelsScreen(
             )
 
             // Good example 2: TextField automatically associates label and uses as hint
-            SuccessHeading(
+            GoodExampleHeading(
                 text = stringResource(id = R.string.interactive_control_labels_example_2),
                 modifier = Modifier.testTag(interactiveControlLabelsExample2HeadingTestTag)
             )
@@ -116,7 +116,7 @@ fun InteractiveControlLabelsScreen(
             )
 
             // Bad example 3: CheckBox without associated field label
-            ErrorHeading(
+            BadExampleHeading(
                 text = stringResource(id = R.string.interactive_control_labels_example_3),
                 modifier = Modifier.testTag(interactiveControlLabelsExample3HeadingTestTag)
             )
@@ -131,7 +131,7 @@ fun InteractiveControlLabelsScreen(
             )
 
             // Good example 4: CheckBox with associated field label
-            SuccessHeading(
+            GoodExampleHeading(
                 text = stringResource(id = R.string.interactive_control_labels_example_4),
                 modifier = Modifier.testTag(interactiveControlLabelsExample4HeadingTestTag)
             )
@@ -146,7 +146,7 @@ fun InteractiveControlLabelsScreen(
             )
 
             // Bad example 5: Switch without associated field label
-            ErrorHeading(
+            BadExampleHeading(
                 text = stringResource(id = R.string.interactive_control_labels_example_5),
                 modifier = Modifier.testTag(interactiveControlLabelsExample5HeadingTestTag)
             )
@@ -163,7 +163,7 @@ fun InteractiveControlLabelsScreen(
             )
 
             // Good example 6: Switch with associated field label
-            SuccessHeading(
+            GoodExampleHeading(
                 text = stringResource(id = R.string.interactive_control_labels_example_6),
                 modifier = Modifier.testTag(interactiveControlLabelsExample6HeadingTestTag)
             )
@@ -180,7 +180,7 @@ fun InteractiveControlLabelsScreen(
             )
 
             // Bad example 7: RadioButton group without associated field labels, etc.
-            ErrorHeading(
+            BadExampleHeading(
                 text = stringResource(id = R.string.interactive_control_labels_example_7),
                 modifier = Modifier.testTag(interactiveControlLabelsExample7HeadingTestTag)
             )
@@ -197,7 +197,7 @@ fun InteractiveControlLabelsScreen(
             )
 
             // Good example 8: RadioButton group with associated field labels, etc.
-            SuccessHeading(
+            GoodExampleHeading(
                 text = stringResource(id = R.string.interactive_control_labels_example_8),
                 modifier = Modifier.testTag(interactiveControlLabelsExample8HeadingTestTag)
             )
@@ -214,7 +214,7 @@ fun InteractiveControlLabelsScreen(
             )
 
             // Good example 9: Button with associated label
-            SuccessHeading(
+            GoodExampleHeading(
                 text = stringResource(id = R.string.interactive_control_labels_example_9),
                 modifier = Modifier.testTag(interactiveControlLabelsExample9HeadingTestTag)
             )

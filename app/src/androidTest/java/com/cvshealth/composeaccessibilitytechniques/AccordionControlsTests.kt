@@ -14,8 +14,8 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performSemanticsAction
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.MainActivity
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.accordionExample1Item1TestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.accordionExample1Item2TestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.accordionExample1Item3TestTag

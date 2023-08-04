@@ -49,6 +49,36 @@
     <string name="text_alternatives_example_13_heading">Good example 13: Grouped decorative images with null contentDescription</string>
     <string name="text_alternatives_example_13_decorated_text">Example decorated text.</string>
 
+    <!-- Content grouping -->
+    <string name="content_grouping_title">Content grouping</string>
+    <string name="content_grouping_heading">Some content should be grouped for screen readers</string>
+    <string name="content_grouping_description">Some text, particularly in simple tables, cards, and list items, should be read as single block by a screen reader, even when the content consists of separate Text composables. This enables a screen reader user to skip to the next content block instead of hearing each text separately. If a card or list item is clickable, this is handled automatically; otherwise, it should be done manually.</string>
+    <string name="content_grouping_description_2">Turn on TalkBack and listen the following items for a demonstration.</string>
+    <string name="content_grouping_table_examples">Simple table examples</string>
+    <string name="content_grouping_table_example_1">Bad example 1: Ungrouped table</string>
+    <string name="content_grouping_table_example_2">Bad example 2: Misgrouped table</string>
+    <string name="content_grouping_table_example_3">Good example 3: Properly grouped table</string>
+    <string name="content_grouping_table_example_header_1">City name</string>
+    <string name="content_grouping_table_example_header_2">Population</string>
+    <string name="content_grouping_table_example_header_3">Area (sq mi)</string>
+    <string name="content_grouping_table_example_value_1">Boston</string>
+    <string name="content_grouping_table_example_value_2">675,647</string>
+    <string name="content_grouping_table_example_value_3">48.4</string>
+    <string name="content_grouping_card_examples">Card examples</string>
+    <string name="content_grouping_card1_title">Bad example 4: Card without grouped content</string>
+    <string name="content_grouping_card1_author">First Author</string>
+    <string name="content_grouping_card1_date">January, 2014</string>
+    <string name="content_grouping_card1_description">This card does not group its content for screen readers. Note how you have to swipe through each separate Text.</string>
+    <string name="content_grouping_card2_title">Good example 5: Card with grouped content</string>
+    <string name="content_grouping_card2_author">Second Author</string>
+    <string name="content_grouping_card2_date">March, 2020</string>
+    <string name="content_grouping_card2_description">This card groups its content for screen readers using Modifier.semantics( mergeDescendants = true ). Note how a single swipe takes you to the next card.</string>
+    <string name="content_grouping_card3_title">Good example 6: Another card with grouped content</string>
+    <string name="content_grouping_card3_author">Third Author</string>
+    <string name="content_grouping_card3_date">May, 2022</string>
+    <string name="content_grouping_card3_description">This card groups its content by being clickable.</string>
+    <string name="content_grouping_card3_message">Activating a card would normally open a detail view of the card\'s content.</string>
+
     <!-- Content group replacement -->
     <string name="content_group_replacement_title">Content group replacement</string>
     <string name="content_group_replacement_heading">Grouped content can be replaced to enhance screen reader experience</string>

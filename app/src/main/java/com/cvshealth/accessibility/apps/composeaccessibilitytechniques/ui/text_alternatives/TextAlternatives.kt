@@ -30,12 +30,12 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BadExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ErrorHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SuccessHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 const val textAlternativesHeadingTestTag = "textAlternativesHeading"
@@ -157,7 +157,7 @@ private fun TextAlternativesHeadingSectionPreview() {
 @Composable
 private fun BadExample1() {
     // Bad example 1: Sunrise and sunset times and icons with empty text alternatives
-    ErrorHeading(
+    BadExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_1_heading),
         modifier = Modifier.testTag(textAlternativesExample1HeadingTestTag)
     )
@@ -186,7 +186,7 @@ private fun BadExample1Preview() {
 @Composable
 private fun OkExample2() {
     // OK example 2: Sunrise and sunset times and icons with text alternatives
-    OkHeading(
+    OkExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_2_heading),
         modifier = Modifier.testTag(textAlternativesExample2HeadingTestTag)
     )
@@ -217,7 +217,7 @@ private fun OkExample2Preview() {
 @Composable
 private fun GoodExample3() {
     // Good example 3: Sunrise and sunset times grouped with their icons
-    SuccessHeading(
+    GoodExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_3_heading),
         modifier = Modifier.testTag(textAlternativesExample3HeadingTestTag)
     )
@@ -250,7 +250,7 @@ private fun GoodExample3Preview() {
 @Composable
 private fun GoodExample4() {
     // Good example 4: Sunrise and sunset times grouped with their icons and redundant text
-    SuccessHeading(
+    GoodExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_4_heading),
         modifier = Modifier.testTag(textAlternativesExample4HeadingTestTag)
     )
@@ -286,7 +286,7 @@ private fun GoodExample4Preview() {
 @Composable
 private fun GoodExample5() {
     // Good example 5: Sunrise and sunset times and icons with group text alternatives
-    SuccessHeading(
+    GoodExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_5_heading),
         modifier = Modifier.testTag(textAlternativesExample5HeadingTestTag)
     )
@@ -322,7 +322,7 @@ private fun GoodExample5Preview() {
 @Composable
 private fun BadExample6() {
     // Bad example 6: A 'Share' icon button with an empty text alternative
-    ErrorHeading(
+    BadExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_6_heading),
         modifier = Modifier.testTag(textAlternativesExample6HeadingTestTag)
     )
@@ -355,7 +355,7 @@ private fun BadExample6Preview() {
 @Composable
 private fun BadExample7() {
     // Bad example 7: A 'Share' icon button with a null text alternative
-    ErrorHeading(
+    BadExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_7_heading),
         modifier = Modifier.testTag(textAlternativesExample7HeadingTestTag)
     )
@@ -390,7 +390,7 @@ private fun BadExample7Preview() {
 @Composable
 private fun GoodExample8() {
     // Good example 8: A 'Share' icon button with a text alternative
-    SuccessHeading(
+    GoodExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_8_heading),
         modifier = Modifier.testTag(textAlternativesExample8HeadingTestTag)
     )
@@ -424,7 +424,7 @@ private fun GoodExample8Preview() {
 @Composable
 private fun BadExample9() {
     // Bad example 9: Decorative images with empty contentDescription
-    ErrorHeading(
+    BadExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_9_heading),
         modifier = Modifier.testTag(textAlternativesExample9HeadingTestTag)
     )
@@ -463,7 +463,7 @@ private fun BadExample9Preview() {
 @Composable
 private fun BadExample10() {
     // Bad example 10: Decorative images with text alternatives
-    ErrorHeading(
+    BadExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_10_heading),
         modifier = Modifier.testTag(textAlternativesExample10HeadingTestTag)
     )
@@ -508,7 +508,7 @@ private fun GoodExample11() {
     // Good example 11: Decorative images with null contentDescription
 
     // Key technique: Use Icon(..., contentDescription = null) to mark the images as decorative.
-    SuccessHeading(
+    GoodExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_11_heading),
         modifier = Modifier.testTag(textAlternativesExample11HeadingTestTag)
     )
@@ -554,7 +554,7 @@ private fun OkExample12() {
     //    applicable to the accessibility API.
     // Use the invisibleToUser() technique for more complex composables, because for Icons,
     // contentDescription=null is a simpler approach. See Good Example 13 below.
-    OkHeading(
+    OkExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_12_heading),
         modifier = Modifier.testTag(textAlternativesExample12HeadingTestTag)
     )
@@ -601,7 +601,7 @@ private fun GoodExample13() {
     // Key techniques:
     // 1. Use Modifier.semantics(mergeDescendants = true) to merge the Row contents.
     // 2. Use Icon(..., contentDescription = null) to mark the images as decorative.
-    SuccessHeading(
+    GoodExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_13_heading),
         modifier = Modifier.testTag(textAlternativesExample13HeadingTestTag)
     )

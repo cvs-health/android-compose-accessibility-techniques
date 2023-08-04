@@ -26,11 +26,11 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BadExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ErrorHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SuccessHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 
@@ -96,7 +96,7 @@ private fun PreviewWithScaffold() {
 @Composable
 private fun BadExample1() {
     // Bad example 1: Rating with content ungrouped
-    ErrorHeading(
+    BadExampleHeading(
         text = stringResource(id = R.string.content_group_replacement_ungrouped_rating_heading),
         modifier = Modifier.testTag(contentGroupReplacementExample1HeadingTestTag)
     )
@@ -158,7 +158,7 @@ private fun PreviewBadExample1() {
 @Composable
 private fun BadExample2() {
     // Bad example 2: Rating with content grouped
-    ErrorHeading(
+    BadExampleHeading(
         text = stringResource(id = R.string.content_group_replacement_rating_group_heading),
         modifier = Modifier.testTag(contentGroupReplacementExample2HeadingTestTag)
     )
@@ -224,7 +224,7 @@ private fun GoodExample3() {
     // 3. Remove the Row's existing content using Modifier.semantics { invisibleToUser() }
     //    on each child element, and when necessary on children of children. (In this case,
     //    the LinearProgressIndicator nested child requires this treatment.)
-    SuccessHeading(
+    GoodExampleHeading(
         text = stringResource(id = R.string.content_group_replacement_rating_group_replaced_heading),
         modifier = Modifier.testTag(contentGroupReplacementExample3HeadingTestTag)
     )
@@ -305,7 +305,7 @@ private fun GoodExample4() {
     // all semantics from the Row and its children from the accessibility node tree and replaces
     // them with the specified semantics in its lambda (in this case, just a contentDescription).
 
-    SuccessHeading(
+    GoodExampleHeading(
         text = stringResource(id = R.string.content_group_replacement_rating_group_overridden_heading),
         modifier = Modifier.testTag(contentGroupReplacementExample4HeadingTestTag)
     )

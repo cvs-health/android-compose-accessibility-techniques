@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SuccessHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ErrorRed
 
@@ -67,7 +67,7 @@ fun HeadingSemanticsScreen(
             BodyText(textId = R.string.heading_semantics_example_2_body_text)
 
             // Good example 3: Use semantics heading() property
-            SuccessHeading(
+            GoodExampleHeading(
                 text = stringResource(id = R.string.heading_semantics_example_3_heading),
                 modifier = Modifier.testTag(headingSemanticsExample3HeadingTestTag)
             )

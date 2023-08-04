@@ -45,7 +45,7 @@ fun SimpleHeadingHeadingLongPreview() {
 }
 
 @Composable
-fun GenericHeading(
+private fun GenericExampleHeading(
     text: String,
     modifier: Modifier = Modifier,
     painter: Painter? = null,
@@ -78,8 +78,8 @@ fun GenericHeading(
 }
 
 @Composable
-fun SuccessHeading(text: String, modifier: Modifier = Modifier) {
-    GenericHeading(
+fun GoodExampleHeading(text: String, modifier: Modifier = Modifier) {
+    GenericExampleHeading(
         text = text,
         modifier = modifier
             .padding(top = 8.dp),
@@ -91,15 +91,15 @@ fun SuccessHeading(text: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun SuccessHeadingShortPreview() {
+fun GoodExampleHeadingShortPreview() {
     ComposeAccessibilityTechniquesTheme() {
-        SuccessHeading(text = "This is a test")
+        GoodExampleHeading(text = "This is a test")
     }
 }
 
 @Composable
-fun OkHeading(text: String, modifier: Modifier = Modifier) {
-    GenericHeading(
+fun OkExampleHeading(text: String, modifier: Modifier = Modifier) {
+    GenericExampleHeading(
         text = text,
         modifier = modifier
             .padding(top = 8.dp),
@@ -111,15 +111,15 @@ fun OkHeading(text: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun OkHeadingShortPreview() {
+fun OkExampleHeadingShortPreview() {
     ComposeAccessibilityTechniquesTheme() {
-        OkHeading(text = "This is a test")
+        OkExampleHeading(text = "This is a test")
     }
 }
 
 @Composable
-fun ProblematicHeading(text: String, modifier: Modifier = Modifier) {
-    GenericHeading(
+fun ProblematicExampleHeading(text: String, modifier: Modifier = Modifier) {
+    GenericExampleHeading(
         text = text,
         modifier = modifier
             .padding(top = 8.dp),
@@ -131,15 +131,15 @@ fun ProblematicHeading(text: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun ProblematicHeadingShortPreview() {
+fun ProblematicExampleHeadingShortPreview() {
     ComposeAccessibilityTechniquesTheme() {
-        ProblematicHeading(text = "This is a test")
+        ProblematicExampleHeading(text = "This is a test")
     }
 }
 
 @Composable
-fun ErrorHeading(text: String, modifier: Modifier = Modifier) {
-    GenericHeading(
+fun BadExampleHeading(text: String, modifier: Modifier = Modifier) {
+    GenericExampleHeading(
         text = text,
         modifier = modifier
             .padding(top = 8.dp),
@@ -150,9 +150,9 @@ fun ErrorHeading(text: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun ErrorHeadingLongPreview() {
+fun BadExampleHeadingLongPreview() {
     ComposeAccessibilityTechniquesTheme() {
-        ErrorHeading(
+        BadExampleHeading(
             text = "This is a test. This is only a test. If this were a real heading, it would be shorter."
         )
     }

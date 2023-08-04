@@ -39,7 +39,7 @@ class ContentGroupReplacementTests {
 
     @Before
     fun setup() {
-        // Navigate from HomeScreen to TextAlternativesScreen.
+        // Navigate from HomeScreen to ContentGroupReplacementScreen.
         composeTestRule
             .onNodeWithText(composeTestRule.activity.getString(R.string.content_group_replacement_title))
             .performScrollTo()

@@ -1,3 +1,18 @@
+/*
+   Copyright 2023 CVS Health and/or one of its affiliates
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components
 
 import androidx.annotation.StringRes
@@ -24,6 +39,49 @@ import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
+/**
+ * Add accessibility collection semantics to a Modifier for a layout composable.
+ * Used for manually marking visually-presented lists with list semantics.
+ *
+ * Key technique: Apply Modifier.semantics { collectionInfo = CollectionInfo(...) }
+ * to the wrapping layout composable (here, a Column). Use -1 for rowCount and/or
+ * columnCount if they are indefinite or unknown.
+ *
+ * Note that lists are a special case of 2-dimensional collections, so Data Table/Grid Semantics
+ * can be applied with the same semantics property.
+ */
+fun Modifier.addListSemantics(size: Int): Modifier = this.semantics {
+    collectionInfo = CollectionInfo(rowCount = size, columnCount = 1)
+}
+
+
+/**
+ * Add accessibility collection item semantics to a Modifier for a layout's child composables.
+ * Used for manually marking items within a visually-presented list.
+ *
+ * Multiple associated composables can share the same index and will be treated semantically as the
+ * same list item.
+ *
+ * Key technique: Modifier.semantics { collectionItemInfo = CollectionItemInfo(...) } defines
+ * that this Row is a list item and its position and span within the list.
+ *
+ * Note: index is zero-based.
+ *
+ * Also note that lists are a special case of 2-dimensional collections, so Data Table/Grid
+ * Semantics can be applied with the same semantics property, including items which span multiple
+ * rows and columns.
+ */
+fun Modifier.addListItemSemantics(
+    index: Int
+): Modifier = this.semantics(mergeDescendants = true) {
+    collectionItemInfo = CollectionItemInfo(
+        rowIndex = index,
+        rowSpan = 1,
+        columnIndex = 0,
+        columnSpan = 1
+    )
+}
+
 
 @Composable
 fun GenericListColumn(
@@ -33,17 +91,8 @@ fun GenericListColumn(
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     content: @Composable ColumnScope.() -> Unit
 ) {
-    // Key technique: Apply Modifier.semantics { collectionInfo = CollectionInfo(...) }
-    // to the wrapping layout composable (here, a Column). Use -1 for rowCount and/or
-    // columnCount if they are indefinite or unknown.
-    //
-    // Note that "lists" are actually 2-dimensional collections, so Data Table/Grid Semantics can be
-    // applied in the same way.
     Column(
-        modifier = modifier
-            .semantics {
-                collectionInfo = CollectionInfo(rowCount = rowCount, columnCount = 1)
-            },
+        modifier = modifier.addListSemantics(rowCount),
         verticalArrangement = verticalArrangement,
         horizontalAlignment = horizontalAlignment,
         content = content
@@ -58,21 +107,8 @@ fun GenericListItemRow(
     verticalAlignment: Alignment.Vertical = Alignment.Top,
     content: @Composable RowScope.() -> Unit
 ) {
-    // Key technique: Modifier.semantics { collectionItemInfo = CollectionItemInfo(...) } defines
-    // that this Row is a list item and its position and span within the list.
-    //
-    // Note that "lists" are actually 2-dimensional collections, so Data Table/Grid Semantics can be
-    // applied in the same way.
     Row(
-        modifier = modifier
-            .semantics(mergeDescendants = true) {
-                collectionItemInfo = CollectionItemInfo(
-                    rowIndex = rowIndex,
-                    rowSpan = 1,
-                    columnIndex = 0,
-                    columnSpan = 1
-                )
-            },
+        modifier = modifier.addListItemSemantics(rowIndex),
         horizontalArrangement = horizontalArrangement,
         verticalAlignment = verticalAlignment,
         content = content
@@ -113,7 +149,7 @@ fun TextListItemRow(
 
 @Preview(showBackground = true)
 @Composable
-fun textListPreview() {
+fun TextListPreview() {
     ComposeAccessibilityTechniquesTheme() {
         GenericListColumn(rowCount = 1) {
             TextListItemRow(
@@ -139,6 +175,9 @@ fun BulletListItemRow(
         modifier = modifier,
         verticalAlignment = Alignment.Top,
     ) {
+        // Key technique: The Unicode "bullet point" character is not announced by TalkBack, so add
+        // a contentDescription to it, so the bulleted nature of each list item is announced.
+        // Not the only way to do this; for example, an Icon could be used instead of Text...
         val bulletPointAltText = stringResource(id = R.string.list_semantics_bullet_point_alt_text)
         Text(
             text = "\u2022",

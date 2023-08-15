@@ -1,3 +1,18 @@
+/*
+   Copyright 2023 CVS Health and/or one of its affiliates
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.list_semantics
 
 import androidx.annotation.StringRes
@@ -5,14 +20,12 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -21,7 +34,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -42,6 +54,26 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 const val listSemanticsHeadingTestTag = "listSemanticsHeading"
+const val listSemanticsExample1HeadingTestTag = "listSemanticsExample1Heading"
+const val listSemanticsExample1ColumnTestTag = "listSemanticsExample1Column"
+const val listSemanticsExample2HeadingTestTag = "listSemanticsExample2Heading"
+const val listSemanticsExample2ColumnTestTag = "listSemanticsExample2Column"
+const val listSemanticsExample2Row1TestTag = "listSemanticsExample2Row1"
+const val listSemanticsExample2Row2TestTag = "listSemanticsExample2Row2"
+const val listSemanticsExample2Row3TestTag = "listSemanticsExample2Row3"
+const val listSemanticsExample3HeadingTestTag = "listSemanticsExample3Heading"
+const val listSemanticsExample3ColumnTestTag = "listSemanticsExample3Column"
+const val listSemanticsExample3Row1TestTag = "listSemanticsExample3Row1"
+const val listSemanticsExample3Row2TestTag = "listSemanticsExample3Row2"
+const val listSemanticsExample3Row3TestTag = "listSemanticsExample3Row3"
+const val listSemanticsExample4HeadingTestTag = "listSemanticsExample4Heading"
+const val listSemanticsExample4LazyRowTestTag = "listSemanticsExample4LazyRow"
+const val listSemanticsExample4Column1TestTag = "listSemanticsExample4Column1"
+const val listSemanticsExample4Column2TestTag = "listSemanticsExample4Column2"
+const val listSemanticsExample4Column3TestTag = "listSemanticsExample4Column3"
+const val listSemanticsExample4Column4TestTag = "listSemanticsExample4Column4"
+const val listSemanticsExample4Column5TestTag = "listSemanticsExample4Column5"
+const val listSemanticsExample4Column6TestTag = "listSemanticsExample4Column6"
 
 @Composable
 fun ListSemanticsScreen(
@@ -111,9 +143,14 @@ private fun FauxBulletListRow(
 @Composable
 private fun BadExample1() {
     // Bad example 1: Visual list without list semantics
-    BadExampleHeading(text = stringResource(id = R.string.list_semantics_example_1))
+    BadExampleHeading(
+        text = stringResource(id = R.string.list_semantics_example_1),
+        modifier = Modifier.testTag(listSemanticsExample1HeadingTestTag)
+    )
     Column(
-        modifier = Modifier.padding(top = 8.dp)
+        modifier = Modifier
+            .testTag(listSemanticsExample1ColumnTestTag)
+            .padding(top = 8.dp)
     ) {
         FauxBulletListRow(textId = R.string.list_semantics_bad_point_1)
         FauxBulletListRow(textId = R.string.list_semantics_bad_point_2)
@@ -139,14 +176,31 @@ private fun BadExample1Preview() {
 @Composable
 private fun GoodExample2() {
     // Good example 2: Bullet list with list semantics
-    GoodExampleHeading(text = stringResource(id = R.string.list_semantics_example_2))
+    GoodExampleHeading(
+        text = stringResource(id = R.string.list_semantics_example_2),
+        modifier = Modifier.testTag(listSemanticsExample2HeadingTestTag)
+    )
     GenericListColumn(
         rowCount = 3,
-        modifier = Modifier.padding(top = 8.dp)
+        modifier = Modifier
+            .testTag(listSemanticsExample2ColumnTestTag)
+            .padding(top = 8.dp)
     ) {
-        BulletListItemRow(rowIndex = 0, textId = R.string.list_semantics_good_point_1)
-        BulletListItemRow(rowIndex = 1, textId = R.string.list_semantics_good_point_2)
-        BulletListItemRow(rowIndex = 2, textId = R.string.list_semantics_good_point_3)
+        BulletListItemRow(
+            rowIndex = 0,
+            textId = R.string.list_semantics_good_point_1,
+            modifier = Modifier.testTag(listSemanticsExample2Row1TestTag)
+        )
+        BulletListItemRow(
+            rowIndex = 1,
+            textId = R.string.list_semantics_good_point_2,
+            modifier = Modifier.testTag(listSemanticsExample2Row2TestTag)
+        )
+        BulletListItemRow(
+            rowIndex = 2,
+            textId = R.string.list_semantics_good_point_3,
+            modifier = Modifier.testTag(listSemanticsExample2Row3TestTag)
+        )
     }
     BodyText(textId = R.string.list_semantics_after_list)
 }
@@ -168,14 +222,31 @@ private fun GoodExample2Preview() {
 @Composable
 private fun GoodExample3() {
     // Good example 3: Numbered list with list semantics
-    GoodExampleHeading(text = stringResource(id = R.string.list_semantics_example_3))
+    GoodExampleHeading(
+        text = stringResource(id = R.string.list_semantics_example_3),
+        modifier = Modifier.testTag(listSemanticsExample3HeadingTestTag)
+    )
     GenericListColumn(
         rowCount = 3,
-        modifier = Modifier.padding(top = 8.dp)
+        modifier = Modifier
+            .testTag(listSemanticsExample3ColumnTestTag)
+            .padding(top = 8.dp)
     ) {
-        TextListItemRow(rowIndex = 0, textId = R.string.list_semantics_good_point_1_numbered)
-        TextListItemRow(rowIndex = 1, textId = R.string.list_semantics_good_point_2_numbered)
-        TextListItemRow(rowIndex = 2, textId = R.string.list_semantics_good_point_3_numbered)
+        TextListItemRow(
+            rowIndex = 0,
+            textId = R.string.list_semantics_good_point_1_numbered,
+            modifier = Modifier.testTag(listSemanticsExample3Row1TestTag)
+        )
+        TextListItemRow(
+            rowIndex = 1,
+            textId = R.string.list_semantics_good_point_2_numbered,
+            modifier = Modifier.testTag(listSemanticsExample3Row2TestTag)
+        )
+        TextListItemRow(
+            rowIndex = 2,
+            textId = R.string.list_semantics_good_point_3_numbered,
+            modifier = Modifier.testTag(listSemanticsExample3Row3TestTag)
+        )
     }
     BodyText(textId = R.string.list_semantics_after_list_2)
 }
@@ -217,19 +288,56 @@ private fun LazyRowItem(
 @Composable
 private fun GoodExample4() {
     // Good example 4: LazyColumn list with list semantics
-    GoodExampleHeading(text = stringResource(id = R.string.list_semantics_example_4))
+    GoodExampleHeading(
+        text = stringResource(id = R.string.list_semantics_example_4),
+        modifier = Modifier.testTag(listSemanticsExample4HeadingTestTag)
+    )
+
+    // Key technique: LazyRow and LazyColumn automatically apply list semantics
+    // (at least to the extent of announcing list entry and exit).
     LazyRow(
         modifier = Modifier
+            .testTag(listSemanticsExample4LazyRowTestTag)
             .padding(top = 8.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        item { LazyRowItem(textId = R.string.list_semantics_lazyrow_1) }
-        item { LazyRowItem(textId = R.string.list_semantics_lazyrow_2) }
-        item { LazyRowItem(textId = R.string.list_semantics_lazyrow_3) }
-        item { LazyRowItem(textId = R.string.list_semantics_lazyrow_4) }
-        item { LazyRowItem(textId = R.string.list_semantics_lazyrow_5) }
-        item { LazyRowItem(textId = R.string.list_semantics_lazyrow_6) }
+        item {
+            LazyRowItem(
+                textId = R.string.list_semantics_lazyrow_1,
+                modifier = Modifier.testTag(listSemanticsExample4Column1TestTag)
+            )
+        }
+        item {
+            LazyRowItem(
+                textId = R.string.list_semantics_lazyrow_2,
+                modifier = Modifier.testTag(listSemanticsExample4Column2TestTag)
+            )
+        }
+        item {
+            LazyRowItem(
+                textId = R.string.list_semantics_lazyrow_3,
+                modifier = Modifier.testTag(listSemanticsExample4Column3TestTag)
+            )
+        }
+        item {
+            LazyRowItem(
+                textId = R.string.list_semantics_lazyrow_4,
+                modifier = Modifier.testTag(listSemanticsExample4Column4TestTag)
+            )
+        }
+        item {
+            LazyRowItem(
+                textId = R.string.list_semantics_lazyrow_5,
+                modifier = Modifier.testTag(listSemanticsExample4Column5TestTag)
+            )
+        }
+        item {
+            LazyRowItem(
+                textId = R.string.list_semantics_lazyrow_6,
+                modifier = Modifier.testTag(listSemanticsExample4Column6TestTag)
+            )
+        }
     }
     BodyText(textId = R.string.list_semantics_after_list_3)
 }

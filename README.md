@@ -14,7 +14,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [ ] Content grouping
     - [x] [Content group replacement](doc/content/ContentGroupReplacement.md)
     - [x] [Heading semantics](doc/content/HeadingSemantics.md)
-    - [x] List semantics
+    - [x] [List semantics](doc/content/ListSemantics.md)
     - [ ] Device orientation and screen sizes
     - [ ] Dark theme
 - Interactive Controls

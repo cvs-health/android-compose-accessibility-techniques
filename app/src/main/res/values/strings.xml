@@ -182,6 +182,26 @@
     <string name="interactive_control_labels_example_9">Good example 9: Button with associated label</string>
     <string name="interactive_control_labels_associated_button_label">Button label</string>
 
+    <!-- Custom accessibility actions -->
+    <string name="custom_accessibility_actions_title">Custom accessibility actions</string>
+    <string name="custom_accessibility_actions_heading">Simplify screen reader user experience with custom accessibility actions</string>
+    <string name="custom_accessibility_actions_description_1">Turn on TalkBack and swipe through this page to hear demonstrations of cards with and without custom accessibility actions. Clicking on cards and buttons displays a snackbar message.</string>
+    <string name="custom_accessibility_actions_description_2">Alternatively, turn on Switch Access with two-button linear scanning, and use the Next switch to move through this page to see which elements are selectable. Use the Select switch on the good example cards to see their custom accessibility actions.</string>
+    <string name="custom_accessibility_actions_see_details">See details</string>
+    <string name="custom_accessibility_actions_example_1_card_heading">Bad example 1: Card without custom accessibility actions</string>
+    <string name="custom_accessibility_actions_example_1_card_description">Note how each button must be read as a separate item in TalkBack before the next card is read. TalkBack does not read \"Actions available…\" on this card.</string>
+    <string name="custom_accessibility_actions_example_2_card_heading">Good example 2: Card with custom accessibility actions</string>
+    <string name="custom_accessibility_actions_example_2_card_description">Note how the card is read as a single item. Buttons have become custom accessibility actions; TalkBack reads \"Actions available…\" and one swipe takes you to the next card instead of to a button within the card.</string>
+    <string name="custom_accessibility_actions_example_3_card_heading">Good example 3: Another card with custom accessibility actions</string>
+    <string name="custom_accessibility_actions_example_3_card_description">TalkBack also reads \"Actions available…\" on this card. Open the TalkBack menu and then the Actions menu to perform the buttons\' actions, or select the card with Switch Access. Isn\'t that easier to use?</string>
+    <string name="custom_accessibility_actions_example_like_button">Like this post</string>
+    <string name="custom_accessibility_actions_example_share_button">Share this post</string>
+    <string name="custom_accessibility_actions_example_report_button">Report this post as inappropriate</string>
+    <string name="custom_accessibility_actions_show_details_event">Selected to show details of card example #%1$d</string>
+    <string name="custom_accessibility_actions_like_event">Selected to like card example #%1$d</string>
+    <string name="custom_accessibility_actions_share_event">Selected to share card example #%1$d</string>
+    <string name="custom_accessibility_actions_report_event">Selected to report card example #%1$d as inappropriate</string>
+
     <!-- Accordion controls -->
     <string name="accordion_title">Accordion controls</string>
     <string name="accordion_heading">Accordion controls require an expand or collapse semantics property</string>

@@ -86,7 +86,6 @@ fun InteractiveControlLabelsScreen(
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-
             SimpleHeading(
                 text = stringResource(id = R.string.interactive_control_labels_heading),
                 modifier = Modifier.testTag(interactiveControlLabelsHeadingTestTag)

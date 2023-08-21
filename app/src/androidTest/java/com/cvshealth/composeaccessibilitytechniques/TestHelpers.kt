@@ -16,6 +16,7 @@
 package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
@@ -84,5 +85,18 @@ fun hasCollectionItemColumnIndex(expectedColumnIndex: Int) : SemanticsMatcher {
 fun hasCollectionItemColumnSpan(expectedColumnSpan: Int) : SemanticsMatcher {
     return SemanticsMatcher("CollectionInfo.columnSpan == ${expectedColumnSpan}") {
         expectedColumnSpan == it.config.getOrNull(SemanticsProperties.CollectionItemInfo)?.columnSpan
+    }
+}
+
+// CustomAction testing helpers
+fun hasCustomActions(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsActions.CustomActions)
+
+fun hasNoCustomActions(): SemanticsMatcher =
+    SemanticsMatcher.keyNotDefined(SemanticsActions.CustomActions)
+
+fun hasCustomActionLabelled(label: String) : SemanticsMatcher {
+    return SemanticsMatcher("CustomActions.label == ${label}") {
+        it.config.getOrNull(SemanticsActions.CustomActions)?.map { action -> action.label }?.contains(label) ?: false
     }
 }

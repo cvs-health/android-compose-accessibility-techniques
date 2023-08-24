@@ -16,37 +16,38 @@
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_accessibility_actions
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class CustomAccessibilityActionsViewModel : ViewModel() {
-    private val _messageEvent = MutableSharedFlow<CustomActionMessageEvent>()
-    val messageEvent = _messageEvent.asSharedFlow()
+    private val initialCustomActionScreenState = CustomActionScreenState(
+        cardStates = listOf(
+            CustomActionCardState(actionsActivated = setOf()),
+            CustomActionCardState(actionsActivated = setOf()),
+            CustomActionCardState(actionsActivated = setOf()),
+        )
+    )
+    private val _customActionScreenState = MutableStateFlow(initialCustomActionScreenState)
+    val customActionScreenState = _customActionScreenState.asStateFlow()
 
-    fun showPostDetails(cardId: Int) {
-        viewModelScope.launch {
-            _messageEvent.emit(CustomActionMessageEvent(CustomActionType.ShowDetails, cardId))
-        }
+    fun handleMessageEvent(messageEvent: CustomActionMessageEvent) {
+        if (messageEvent.cardId < 0 || messageEvent.cardId > customActionScreenState.value.cardStates.size)
+            return
+
+        val newActionsActivated = customActionScreenState.value.cardStates[messageEvent.cardId - 1].actionsActivated.plus(
+            messageEvent.actionType
+        )
+        val newCardState = customActionScreenState.value.cardStates[messageEvent.cardId - 1].copy(
+            actionsActivated = newActionsActivated
+        )
+        val newCardStates = customActionScreenState.value.cardStates.toMutableList()
+        newCardStates[messageEvent.cardId - 1] = newCardState
+
+        _customActionScreenState.value = CustomActionScreenState(newCardStates)
     }
 
-    fun likePost(cardId: Int) {
-        viewModelScope.launch {
-            _messageEvent.emit(CustomActionMessageEvent(CustomActionType.Like, cardId))
-        }
-    }
-
-    fun sharePost(cardId: Int) {
-        viewModelScope.launch {
-            _messageEvent.emit(CustomActionMessageEvent(CustomActionType.Share, cardId))
-        }
-    }
-
-    fun reportPost(cardId: Int) {
-        viewModelScope.launch {
-            _messageEvent.emit(CustomActionMessageEvent(CustomActionType.Report, cardId))
-        }
+    fun clearMessageEvents() {
+        _customActionScreenState.value = initialCustomActionScreenState
     }
 }
 
@@ -60,4 +61,12 @@ enum class CustomActionType {
 data class CustomActionMessageEvent(
     val actionType: CustomActionType,
     val cardId: Int
+)
+
+data class CustomActionScreenState(
+    val cardStates: List<CustomActionCardState>
+)
+
+data class CustomActionCardState(
+    val actionsActivated: Set<CustomActionType>
 )

@@ -33,6 +33,7 @@ import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -46,6 +47,7 @@ import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BadExampleTitle
@@ -69,12 +71,31 @@ fun CustomAccessibilityActionsScreen(
     onBackPressed: () -> Unit
 ) {
     val viewModel = viewModel<CustomAccessibilityActionsViewModel>()
+    val viewState: CustomActionScreenState by viewModel.customActionScreenState.collectAsStateWithLifecycle()
     val context = LocalContext.current
-    LaunchedEffect(key1 = Unit) {
-        viewModel.messageEvent.collect { messageEvent ->
-            handleMessageEvent(context, messageEvent)
+
+    // Launch Toast(s) for activated buttons. Normally would also change the display state of those
+    // buttons in the composables below and/or navigate to prompts for additional information.
+    // Instead state is cleared to catch next button activation.
+    //
+    // Note: Toasts are used instead of Snackbars to keep the code simpler and due to accessibility
+    // considerations. While Toasts are worse for accessibility in many ways, currently Compose
+    // Snackbars have a very bad TalkBack experience with regard to focus order, modal state, etc.
+    if (viewState.cardStates.any { cardState -> cardState.actionsActivated.isNotEmpty() }) {
+        LaunchedEffect(viewState) {
+            viewState.cardStates.forEachIndexed { index, cardState ->
+                cardState.actionsActivated.forEach { actionType ->
+                    val messageEvent = CustomActionMessageEvent(
+                        actionType,
+                        cardId = index + 1
+                    )
+                    displayMessageEvent(context, messageEvent)
+                }
+            }
+            viewModel.clearMessageEvents()
         }
     }
+
     GenericScaffold(
         title = stringResource(id = R.string.custom_accessibility_actions_title),
         onBackPressed = onBackPressed
@@ -93,9 +114,13 @@ fun CustomAccessibilityActionsScreen(
             BodyText(textId = R.string.custom_accessibility_actions_description_1)
             BodyText(textId = R.string.custom_accessibility_actions_description_2)
 
-            BadExample1()
-            GoodExample2()
-            GoodExample3()
+            val handleMessageEvent = { messageEvent: CustomActionMessageEvent ->
+                viewModel.handleMessageEvent(messageEvent)
+            }
+
+            BadExample1(handleMessageEvent)
+            GoodExample2(handleMessageEvent)
+            GoodExample3(handleMessageEvent)
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -111,9 +136,10 @@ private fun PreviewWithScaffold() {
 }
 
 @Composable
-private fun BadExample1() {
+private fun BadExample1(
+    handleMessageEvent: (CustomActionMessageEvent) -> Unit
+) {
     // Bad example 1: Card without custom accessibility actions
-    val viewModel = viewModel<CustomAccessibilityActionsViewModel>()
     val cardId = 1
     val showDetailsCLickLabel = stringResource(
         id = R.string.custom_accessibility_actions_see_details, cardId
@@ -125,7 +151,7 @@ private fun BadExample1() {
             .clickable(
                 onClickLabel = showDetailsCLickLabel
             ) {
-                viewModel.showPostDetails(cardId)
+                handleMessageEvent(CustomActionMessageEvent(CustomActionType.ShowDetails, cardId))
             }
     ) {
         // Note: Do not put a testTag() on this composable, because that would introduce an extra
@@ -147,15 +173,18 @@ private fun BadExample1() {
         ) {
             LikeButton(
                 cardId,
-                modifier = Modifier.testTag(customAccessibilityActionsExample1LikeButtonTestTag)
+                modifier = Modifier.testTag(customAccessibilityActionsExample1LikeButtonTestTag),
+                handleMessageEvent
             )
             ShareButton(
                 cardId,
-                modifier = Modifier.testTag(customAccessibilityActionsExample1ShareButtonTestTag)
+                modifier = Modifier.testTag(customAccessibilityActionsExample1ShareButtonTestTag),
+                handleMessageEvent
             )
             ReportButton(
                 cardId,
-                modifier = Modifier.testTag(customAccessibilityActionsExample1ReportButtonTestTag)
+                modifier = Modifier.testTag(customAccessibilityActionsExample1ReportButtonTestTag),
+                handleMessageEvent
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -171,15 +200,16 @@ private fun PreviewBadExample1() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            BadExample1()
+            BadExample1(handleMessageEvent = {})
         }
     }
 }
 
 @Composable
-private fun GoodExample2() {
+private fun GoodExample2(
+    handleMessageEvent: (CustomActionMessageEvent) -> Unit
+) {
     // Good example 2: Card with custom accessibility actions
-    val viewModel = viewModel<CustomAccessibilityActionsViewModel>()
     val cardId = 2
     // Tip: Retrieve custom accessibility action labels in the outer Composable context, not inside
     // Modifier.semantics { } where stringResource() is unavailable.
@@ -205,22 +235,30 @@ private fun GoodExample2() {
             .clickable(
                 onClickLabel = showDetailsCLickLabel
             ) {
-                viewModel.showPostDetails(cardId)
+                handleMessageEvent(CustomActionMessageEvent(CustomActionType.ShowDetails, cardId))
             }
             .semantics(mergeDescendants = true) {
                 // Key technique 1: Declare customActions in Modifier.semantics{}.
                 customActions = listOf(
                     CustomAccessibilityAction(showDetailsCLickLabel) {
-                        viewModel.showPostDetails(cardId); true
+                        handleMessageEvent(
+                            CustomActionMessageEvent(CustomActionType.ShowDetails, cardId)
+                        )
+                        true
                     },
                     CustomAccessibilityAction(likeActionLabel) {
-                        viewModel.likePost(cardId); true
+                        handleMessageEvent(CustomActionMessageEvent(CustomActionType.Like, cardId))
+                        true
                     },
                     CustomAccessibilityAction(shareActionLabel) {
-                        viewModel.showPostDetails(cardId); true
+                        handleMessageEvent(CustomActionMessageEvent(CustomActionType.Share, cardId))
+                        true
                     },
                     CustomAccessibilityAction(reportActionLabel) {
-                        viewModel.reportPost(cardId); true
+                        handleMessageEvent(
+                            CustomActionMessageEvent(CustomActionType.Report, cardId)
+                        )
+                        true
                     }
                 )
             }
@@ -238,9 +276,9 @@ private fun GoodExample2() {
         )
 
         // Key Technique 2a: Remove the buttons from the accessibility tree using
-        // Modifier.clearAndSetSemantics(). They will remain touch-clickable.
-        // Alternatively, apply Modifier.semantics { invisibleToUser() } to each button (see
-        // Example 3).
+        // Modifier.clearAndSetSemantics() on the enclosing Row. The buttons will remain touch-
+        // clickable and keyboard-activateable. Alternatively, apply
+        // Modifier.semantics { invisibleToUser() } to each button (see Example 3).
         Row(
             modifier = Modifier
                 .padding(horizontal = 8.dp)
@@ -248,9 +286,9 @@ private fun GoodExample2() {
                 .clearAndSetSemantics { },
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            LikeButton(cardId)
-            ShareButton(cardId)
-            ReportButton(cardId)
+            LikeButton(cardId = cardId, handleMessageEvent = handleMessageEvent)
+            ShareButton(cardId = cardId, handleMessageEvent = handleMessageEvent)
+            ReportButton(cardId = cardId, handleMessageEvent = handleMessageEvent)
         }
         Spacer(modifier = Modifier.height(8.dp))
     }
@@ -265,16 +303,17 @@ private fun PreviewGoodExample2() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample2()
+            GoodExample2(handleMessageEvent = {})
         }
     }
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-private fun GoodExample3() {
+private fun GoodExample3(
+    handleMessageEvent: (CustomActionMessageEvent) -> Unit
+) {
     // Good example 3: Card with custom accessibility actions
-    val viewModel = viewModel<CustomAccessibilityActionsViewModel>()
     val cardId = 3
     val showDetailsCLickLabel = stringResource(
         id = R.string.custom_accessibility_actions_see_details, cardId
@@ -295,22 +334,30 @@ private fun GoodExample3() {
             .clickable(
                 onClickLabel = showDetailsCLickLabel
             ) {
-                viewModel.showPostDetails(cardId)
+                handleMessageEvent(CustomActionMessageEvent(CustomActionType.ShowDetails, cardId))
             }
             .semantics(mergeDescendants = true) {
                 // Key technique 1: Declare customActions in Modifier.semantics{}.
                 customActions = listOf(
                     CustomAccessibilityAction(showDetailsCLickLabel) {
-                        viewModel.showPostDetails(cardId); true
+                        handleMessageEvent(
+                            CustomActionMessageEvent(CustomActionType.ShowDetails, cardId)
+                        )
+                        true
                     },
                     CustomAccessibilityAction(likeActionLabel) {
-                        viewModel.likePost(cardId); true
+                        handleMessageEvent(CustomActionMessageEvent(CustomActionType.Like, cardId))
+                        true
                     },
                     CustomAccessibilityAction(shareActionLabel) {
-                        viewModel.showPostDetails(cardId); true
+                        handleMessageEvent(CustomActionMessageEvent(CustomActionType.Share, cardId))
+                        true
                     },
                     CustomAccessibilityAction(reportActionLabel) {
-                        viewModel.reportPost(cardId); true
+                        handleMessageEvent(
+                            CustomActionMessageEvent(CustomActionType.Report, cardId)
+                        )
+                        true
                     }
                 )
             }
@@ -326,10 +373,10 @@ private fun GoodExample3() {
             textId = R.string.custom_accessibility_actions_example_3_card_description,
             modifier = Modifier.padding(horizontal = 8.dp)
         )
-        // Key Technique 2b: Remove the buttons from the accessibility tree using
-        // Modifier.semantics { invisibleToUser() } on each button. They will remain touch-clickable.
-        // Alternatively, use Modifier.clearAndSetSemantics {} on the surrounding Row (see
-        // Example 2).
+        // Key Technique 2b: Remove each button from the accessibility tree using
+        // Modifier.semantics { invisibleToUser() }. The buttons will remain touch-clickable and
+        // keyboard-activatable. Alternatively, use Modifier.clearAndSetSemantics {} on the
+        // surrounding Row (see Example 2).
         Row(
             modifier = Modifier
                 .padding(horizontal = 8.dp)
@@ -337,9 +384,9 @@ private fun GoodExample3() {
                 .clearAndSetSemantics { },
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            LikeButton(cardId, Modifier.semantics { invisibleToUser() })
-            ShareButton(cardId, Modifier.semantics { invisibleToUser() })
-            ReportButton(cardId, Modifier.semantics { invisibleToUser() })
+            LikeButton(cardId, Modifier.semantics { invisibleToUser() }, handleMessageEvent)
+            ShareButton(cardId, Modifier.semantics { invisibleToUser() }, handleMessageEvent)
+            ReportButton(cardId, Modifier.semantics { invisibleToUser() }, handleMessageEvent)
         }
         Spacer(modifier = Modifier.height(8.dp))
     }
@@ -354,7 +401,7 @@ private fun PreviewGoodExample3() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample3()
+            GoodExample3(handleMessageEvent = {})
         }
     }
 }
@@ -363,12 +410,12 @@ private fun PreviewGoodExample3() {
 @Composable
 private fun LikeButton(
     cardId: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    handleMessageEvent: (CustomActionMessageEvent) -> Unit
 ) {
-    val viewModel = viewModel<CustomAccessibilityActionsViewModel>()
     IconButton(
         onClick = {
-            viewModel.likePost(cardId)
+            handleMessageEvent(CustomActionMessageEvent(CustomActionType.Like, cardId))
         },
         modifier = modifier.minimumInteractiveComponentSize()
     ) {
@@ -386,12 +433,12 @@ private fun LikeButton(
 @Composable
 private fun ShareButton(
     cardId: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    handleMessageEvent: (CustomActionMessageEvent) -> Unit
 ) {
-    val viewModel = viewModel<CustomAccessibilityActionsViewModel>()
     IconButton(
         onClick = {
-            viewModel.sharePost(cardId)
+            handleMessageEvent(CustomActionMessageEvent(CustomActionType.Share, cardId))
         },
         modifier = modifier.minimumInteractiveComponentSize()
     ) {
@@ -409,13 +456,12 @@ private fun ShareButton(
 @Composable
 private fun ReportButton(
     cardId: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    handleMessageEvent: (CustomActionMessageEvent) -> Unit
 ) {
-    val viewModel = viewModel<CustomAccessibilityActionsViewModel>()
-
     IconButton(
         onClick = {
-            viewModel.reportPost(cardId)
+            handleMessageEvent(CustomActionMessageEvent(CustomActionType.Report, cardId))
         },
         modifier = modifier.minimumInteractiveComponentSize()
     ) {
@@ -429,7 +475,7 @@ private fun ReportButton(
     }
 }
 
-private fun handleMessageEvent(
+private fun displayMessageEvent(
     context: Context,
     messageEvent: CustomActionMessageEvent
 ) {

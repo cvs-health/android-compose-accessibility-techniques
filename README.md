@@ -25,7 +25,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [ ] Keyboard types
     - [ ] Keyboard actions
     - [ ] Custom state descriptions
-    - [ ] Custom accessibility actions
+    - [x] [Custom accessibility actions](doc/controls/CustomAccessibilityActions.md)
     - [ ] Custom semantics properties
 - Specific Component Types
     - [x] [Accordion controls](doc/components/AccordionControls.md)

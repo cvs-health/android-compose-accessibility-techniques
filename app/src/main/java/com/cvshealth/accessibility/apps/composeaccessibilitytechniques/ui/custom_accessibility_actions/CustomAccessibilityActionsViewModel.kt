@@ -22,30 +22,33 @@ import kotlinx.coroutines.flow.update
 
 class CustomAccessibilityActionsViewModel : ViewModel() {
     private val initialCustomActionScreenState = CustomActionScreenState(
-        cardStates = listOf(
-            CustomActionCardState(actionsActivated = setOf()),
-            CustomActionCardState(actionsActivated = setOf()),
-            CustomActionCardState(actionsActivated = setOf()),
+        cardStates = mapOf(
+            1 to CustomActionCardState(actionsActivated = setOf()),
+            2 to CustomActionCardState(actionsActivated = setOf()),
+            3 to CustomActionCardState(actionsActivated = setOf()),
         )
     )
     private val _customActionScreenState = MutableStateFlow(initialCustomActionScreenState)
     val customActionScreenState = _customActionScreenState.asStateFlow()
 
     fun handleMessageEvent(messageEvent: CustomActionMessageEvent) {
-        if (messageEvent.cardId < 0 || messageEvent.cardId > customActionScreenState.value.cardStates.size)
+        if (messageEvent.cardId < 0 ||
+            messageEvent.cardId > customActionScreenState.value.cardStates.size
+        ) {
             return
+        }
 
         _customActionScreenState.update { state ->
-                val newActionsActivated = state.cardStates[messageEvent.cardId - 1].actionsActivated.plus(
-                messageEvent.actionType
-            )
-            val newCardState = state.cardStates[messageEvent.cardId - 1].copy(
-                actionsActivated = newActionsActivated
-            )
-            val newCardStates = state.cardStates.toMutableList()
-            newCardStates[messageEvent.cardId - 1] = newCardState
-
-            return@update CustomActionScreenState(newCardStates)
+            val newActionsActivated =
+                state.cardStates[messageEvent.cardId]?.actionsActivated?.plus(
+                    messageEvent.actionType
+                )
+            return@update if (newActionsActivated != null) {
+                val newCardStates = state.cardStates.toMutableMap()
+                newCardStates.replace(messageEvent.cardId, CustomActionCardState(newActionsActivated))
+                CustomActionScreenState(newCardStates)
+            } else
+                state
         }
     }
 
@@ -67,7 +70,7 @@ data class CustomActionMessageEvent(
 )
 
 data class CustomActionScreenState(
-    val cardStates: List<CustomActionCardState>
+    val cardStates: Map<Int, CustomActionCardState>
 )
 
 data class CustomActionCardState(

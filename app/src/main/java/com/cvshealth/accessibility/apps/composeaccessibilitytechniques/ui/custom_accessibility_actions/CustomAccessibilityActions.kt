@@ -81,14 +81,11 @@ fun CustomAccessibilityActionsScreen(
     // Note: Toasts are used instead of Snackbars to keep the code simpler and due to accessibility
     // considerations. While Toasts are worse for accessibility in many ways, currently Compose
     // Snackbars have a very bad TalkBack experience with regard to focus order, modal state, etc.
-    if (viewState.cardStates.any { cardState -> cardState.actionsActivated.isNotEmpty() }) {
+    if (viewState.cardStates.any { (_, cardState) -> cardState.actionsActivated.isNotEmpty() }) {
         LaunchedEffect(viewState) {
-            viewState.cardStates.forEachIndexed { index, cardState ->
+            viewState.cardStates.forEach { cardId, cardState ->
                 cardState.actionsActivated.forEach { actionType ->
-                    val messageEvent = CustomActionMessageEvent(
-                        actionType,
-                        cardId = index + 1
-                    )
+                    val messageEvent = CustomActionMessageEvent(actionType, cardId)
                     displayMessageEvent(context, messageEvent)
                 }
             }

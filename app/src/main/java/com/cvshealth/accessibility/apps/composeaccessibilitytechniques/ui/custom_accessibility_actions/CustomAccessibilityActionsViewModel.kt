@@ -18,6 +18,7 @@ package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custo
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class CustomAccessibilityActionsViewModel : ViewModel() {
     private val initialCustomActionScreenState = CustomActionScreenState(
@@ -34,16 +35,18 @@ class CustomAccessibilityActionsViewModel : ViewModel() {
         if (messageEvent.cardId < 0 || messageEvent.cardId > customActionScreenState.value.cardStates.size)
             return
 
-        val newActionsActivated = customActionScreenState.value.cardStates[messageEvent.cardId - 1].actionsActivated.plus(
-            messageEvent.actionType
-        )
-        val newCardState = customActionScreenState.value.cardStates[messageEvent.cardId - 1].copy(
-            actionsActivated = newActionsActivated
-        )
-        val newCardStates = customActionScreenState.value.cardStates.toMutableList()
-        newCardStates[messageEvent.cardId - 1] = newCardState
+        _customActionScreenState.update { state ->
+                val newActionsActivated = state.cardStates[messageEvent.cardId - 1].actionsActivated.plus(
+                messageEvent.actionType
+            )
+            val newCardState = state.cardStates[messageEvent.cardId - 1].copy(
+                actionsActivated = newActionsActivated
+            )
+            val newCardStates = state.cardStates.toMutableList()
+            newCardStates[messageEvent.cardId - 1] = newCardState
 
-        _customActionScreenState.value = CustomActionScreenState(newCardStates)
+            return@update CustomActionScreenState(newCardStates)
+        }
     }
 
     fun clearMessageEvents() {

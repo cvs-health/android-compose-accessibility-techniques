@@ -11,7 +11,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
 - Informative Content
     - [x] [Text alternatives](doc/content/TextAlternatives.md)
     - [ ] Text resizing and reflow
-    - [ ] Content grouping
+    - [x] [Content grouping](doc/content/ContentGrouping.md)
     - [x] [Content group replacement](doc/content/ContentGroupReplacement.md)
     - [x] [Heading semantics](doc/content/HeadingSemantics.md)
     - [x] [List semantics](doc/content/ListSemantics.md)

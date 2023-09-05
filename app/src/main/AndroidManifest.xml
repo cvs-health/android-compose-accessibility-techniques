@@ -16,7 +16,8 @@
             android:name="com.cvshealth.accessibility.apps.composeaccessibilitytechniques.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.ComposeAccessibilityTechniques">
+            android:theme="@style/Theme.ComposeAccessibilityTechniques"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

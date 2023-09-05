@@ -108,6 +108,11 @@ fun HomeScreen(
                 onNavigationButtonClicked = onNavigationButtonClicked
             )
             NavigationCard(
+                label = stringResource(R.string.keyboard_types_title),
+                route = ComposeAccessibilityTechniquesRoute.KeyboardTypes,
+                onNavigationButtonClicked = onNavigationButtonClicked
+            )
+            NavigationCard(
                 label = stringResource(R.string.custom_accessibility_actions_title),
                 route = ComposeAccessibilityTechniquesRoute.CustomAccessibilityActions,
                 onNavigationButtonClicked = onNavigationButtonClicked

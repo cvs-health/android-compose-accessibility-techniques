@@ -27,6 +27,7 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     HeadingSemantics("headingSemantics"),
     ListSemantics("listSemantics"),
     InteractiveControlLabels("interactiveControlLabels"),
+    KeyboardTypes("keyboardTypes"),
     CustomAccessibilityActions("customAccessibilityActions"),
     AccordionControls("accordionControls"),
 }

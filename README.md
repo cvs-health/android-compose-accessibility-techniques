@@ -22,7 +22,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [ ] Minimum touch target size
     - [ ] Tap target grouping
     - [ ] UX change announcements
-    - [ ] Keyboard types
+    - [x] [Keyboard types and options](doc/controls/KeyboardTypes.md)
     - [ ] Keyboard actions
     - [ ] Custom state descriptions
     - [x] [Custom accessibility actions](doc/controls/CustomAccessibilityActions.md)

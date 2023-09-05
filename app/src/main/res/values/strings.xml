@@ -182,6 +182,40 @@
     <string name="interactive_control_labels_example_9">Good example 9: Button with associated label</string>
     <string name="interactive_control_labels_associated_button_label">Button label</string>
 
+    <!-- Keyboard types and options -->
+    <string name="keyboard_types_title">Keyboard types and options</string>
+    <string name="keyboard_types_heading">Match keyboard type and options to input data</string>
+    <string name="keyboard_types_description_1">Text input fields should configure a keyboard type and options appropriate to the data they accept. An inappropriate keyboard type can make data entry harder or even impossible.</string>
+    <string name="keyboard_types_description_2">Select each field below for editing and observe the soft keyboard type displayed.</string>
+    <string name="keyboard_types_example_1_header">Bad example 1: Numeric keyboard type prevents name text data entry</string>
+    <string name="keyboard_types_example_1_label">Name</string>
+    <string name="keyboard_types_example_2_header">Bad example 2: Decimal Keyboard type allows most data entry, but is not specific to the Phone field data type</string>
+    <string name="keyboard_types_example_2_label">Phone</string>
+    <string name="keyboard_types_example_3_header">Good example 3: Keyboard type for phone number (Phone)</string>
+    <string name="keyboard_types_example_3_label">Phone</string>
+    <string name="keyboard_types_example_4_header">Good example 4: Keyboard type for number (Number)</string>
+    <string name="keyboard_types_example_4_label">Count</string>
+    <string name="keyboard_types_example_5_header">Good example 5: Keyboard type for decimal number (Decimal)</string>
+    <string name="keyboard_types_example_5_label">Price</string>
+    <string name="keyboard_types_example_6_header">Good example 6: Keyboard type for generic text (Text)</string>
+    <string name="keyboard_types_example_6_label">Text</string>
+    <string name="keyboard_types_example_7_header">Good example 7: Keyboard type for full ASCII text (Ascii)</string>
+    <string name="keyboard_types_example_7_label">ASCII Text</string>
+    <string name="keyboard_types_example_8_header">Good example 8: Keyboard options for capitalized words (e.g., names)</string>
+    <string name="keyboard_types_example_8_label">Name</string>
+    <string name="keyboard_types_example_9_header">Good example 9: Keyboard options for sentences with autocorrect</string>
+    <string name="keyboard_types_example_9_label">Description</string>
+    <string name="keyboard_types_example_10_header">Good example 10: Keyboard options for sentences without autocorrect</string>
+    <string name="keyboard_types_example_10_label">Description</string>
+    <string name="keyboard_types_example_11_header">Good example 11: Keyboard type for email (Email)</string>
+    <string name="keyboard_types_example_11_label">Email</string>
+    <string name="keyboard_types_example_12_header">Good example 12: Keyboard type for URL (Uri)</string>
+    <string name="keyboard_types_example_12_label">URL</string>
+    <string name="keyboard_types_example_13_header">Good example 13: Keyboard type for text passwords (Password), plus masking</string>
+    <string name="keyboard_types_example_13_label">Password (text)</string>
+    <string name="keyboard_types_example_14_header">Good example 14: Keyboard type for numeric passwords (NumberPassword), plus masking</string>
+    <string name="keyboard_types_example_14_label">Password (numeric)</string>
+
     <!-- Custom accessibility actions -->
     <string name="custom_accessibility_actions_title">Custom accessibility actions</string>
     <string name="custom_accessibility_actions_heading">Simplify screen reader user experience with custom accessibility actions</string>

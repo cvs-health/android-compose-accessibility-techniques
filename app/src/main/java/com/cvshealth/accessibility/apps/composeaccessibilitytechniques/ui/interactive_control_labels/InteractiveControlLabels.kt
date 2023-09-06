@@ -47,7 +47,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.CheckboxRow
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.RadioGroup
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.RadioButtonGroup
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SwitchRow
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -217,13 +217,13 @@ fun InteractiveControlLabelsScreen(
             )
             Spacer(modifier = Modifier.height(8.dp))
             val example8SelectedRadioGroupOption = remember { mutableStateOf(0) }
-            RadioGroup(
+            RadioButtonGroup(
                 groupLabel = stringResource(id = R.string.interactive_control_labels_radio_button_group_label),
                 itemLabels = listOf(
                     stringResource(id = R.string.interactive_control_labels_associated_radio_button_label_1),
                     stringResource(id = R.string.interactive_control_labels_associated_radio_button_label_2)
                 ),
-                current = example8SelectedRadioGroupOption.value,
+                selectedIndex = example8SelectedRadioGroupOption.value,
                 selectHandler = { example8SelectedRadioGroupOption.value = it }
             )
 

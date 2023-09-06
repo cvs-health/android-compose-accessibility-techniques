@@ -123,10 +123,12 @@ fun HomeScreen(
                 onNavigationButtonClicked = onNavigationButtonClicked
             )
             NavigationCard(
-                label = "Radio Group Component",
-                route = ComposeAccessibilityTechniquesRoute.RadioGroupSample,
+                label = stringResource(id = R.string.radio_button_groups_title),
+                route = ComposeAccessibilityTechniquesRoute.RadioButtonGroups,
                 onNavigationButtonClicked = onNavigationButtonClicked
             )
+
+            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }

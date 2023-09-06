@@ -20,7 +20,6 @@ package com.cvshealth.accessibility.apps.composeaccessibilitytechniques
  */
 enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     Home("home"),
-    RadioGroupSample("radioGroupSample"),
     TextAlternatives("textAlternatives"),
     ContentGrouping("contentGrouping"),
     ContentGroupReplacement("contentGroupReplacement"),
@@ -30,4 +29,5 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     KeyboardTypes("keyboardTypes"),
     CustomAccessibilityActions("customAccessibilityActions"),
     AccordionControls("accordionControls"),
+    RadioButtonGroups("radioButtonGroups"),
 }

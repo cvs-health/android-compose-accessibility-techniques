@@ -82,7 +82,7 @@ The key points are:
 
 `Switch` works similarly with `role = Role.Switch`.
 
-`RadioButton` has one additional consideration: the layout enclosing all of the labeling radio button layouts (here, a `Column`) needs `Modifier.selectableGroup()`.
+`RadioButton` requires `Modifier.selectable` on the enclosing `Row` layout, `role = Role.RadioButton`, and the layout enclosing all of the labeling radio button layouts (here, a `Column`) requires `Modifier.selectableGroup()` to impose single-selection semantics.
 
 ```kotlin
 val initialRadioButtonIndex = 0
@@ -107,7 +107,7 @@ Column(modifier = Modifier.selectableGroup()) {
             )
             Text(
                 text = label, 
-                modifier = Modifier.padding(start = 8.dp)
+                modifier = Modifier.padding(start = 4.dp)
             )
         }
     }

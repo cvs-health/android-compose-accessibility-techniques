@@ -154,6 +154,11 @@ class KeyboardTypesTests {
     }
 
     @Test
+    fun verifyEveryHeadingsHasATestTag() {
+        composeTestRule.onNode(hasNoTestTag() and isHeading()).assertDoesNotExist()
+    }
+
+    @Test
     fun verifyExampleTextFieldsHaveDefaultImeAction() {
         composeTestRule
             .onNode(
@@ -253,10 +258,5 @@ class KeyboardTypesTests {
                         hasImeAction(ImeAction.Default)
             )
             .assertExists()
-    }
-
-    @Test
-    fun verifyEveryHeadingsHasATestTag() {
-        composeTestRule.onNode(hasNoTestTag() and isHeading()).assertDoesNotExist()
     }
 }

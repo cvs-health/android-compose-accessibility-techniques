@@ -19,25 +19,17 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.AccordionControlsScreen
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.RadioGroup
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_group_replacement.ContentGroupReplacementScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_grouping.ContentGroupingScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_accessibility_actions.CustomAccessibilityActionsScreen
@@ -46,6 +38,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.home.H
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.InteractiveControlLabelsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_types.KeyboardTypesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.list_semantics.ListSemanticsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.RadioButtonGroupsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.TextAlternativesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -112,39 +105,10 @@ fun ComposeAccessibilityTechniquesNavHost(
         composable(route = ComposeAccessibilityTechniquesRoute.AccordionControls.route) {
             AccordionControlsScreen(onBackPressed = popBackStack)
         }
-        composable(route = ComposeAccessibilityTechniquesRoute.RadioGroupSample.route) {
-            RadioGroupComponent(onBackPressed = popBackStack)
+        composable(route = ComposeAccessibilityTechniquesRoute.RadioButtonGroups.route) {
+            RadioButtonGroupsScreen(onBackPressed = popBackStack)
         }
     }
 }
 
 
-
-@Composable
-fun RadioGroupComponent(
-    onBackPressed: () -> Unit
-) {
-    GenericScaffold(
-        title = "Radio group component",
-        onBackPressed = onBackPressed
-    ) { modifier: Modifier ->
-        val options = listOf( "Banana", "Grape", "Orange")
-        val selectedOption = remember { mutableStateOf(0) }
-        Column(modifier =  modifier.padding(horizontal = 16.dp)) {
-            RadioGroup(
-                groupLabel = "Pick a fruit:",
-                itemLabels = options,
-                current = selectedOption.value,
-                selectHandler = { selectedOption.value = it }
-            )
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun RadioGroupSamplePreview() {
-    ComposeAccessibilityTechniquesTheme() {
-        RadioGroupComponent() {}
-    }
-}

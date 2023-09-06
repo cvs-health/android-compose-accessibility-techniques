@@ -50,32 +50,43 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  *    clickable elements.
  */
 @Composable
-fun RadioGroup(
+fun RadioButtonGroup(
     groupLabel: String,
     itemLabels: List<String>,
-    current: Int,
+    selectedIndex: Int,
     selectHandler: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
         Text(groupLabel)
+        // Key technique 1: Apply Modifier.selectableGroup() to apply single-selection list
+        // semantics at the RadioButton group level.
         Column(modifier = Modifier.selectableGroup()) {
             itemLabels.forEachIndexed { index: Int, label: String ->
                 Row(modifier = Modifier
                     .fillMaxWidth()
+                    // Key technique 2: Apply Modifier.selectable() to handle all RadioButton role
+                    // semantics and click handling at the Row level. This also merges all child
+                    // composable semantics, so the RadioButton and its label are programmatically
+                    // associated.
                     .selectable(
-                        selected = (current == index),
+                        selected = (selectedIndex == index),
                         role = Role.RadioButton,
                         onClick = { selectHandler(index) }
                     ),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
-                        selected = (current == index),
+                        selected = (selectedIndex == index),
+                        // Key technique 3: Only perform onClick handling at the Row level.
                         onClick = null,
+                        // Key technique 4: Without an onClick handler, Compose will no longer
+                        // automatically size the RadioButton to the 48dp x 48dp minimum touch
+                        // target size. Do so manually here, unless there is a design reason for it
+                        // to be smaller.
                         modifier = Modifier.minimumInteractiveComponentSize()
                     )
-                    Text(text = label, modifier = Modifier.padding(start = 8.dp))
+                    Text(text = label, modifier = Modifier.padding(start = 4.dp))
                 }
             }
         }
@@ -85,14 +96,14 @@ fun RadioGroup(
 @Preview(showBackground = true)
 @Composable
 fun RadioGroupPreview() {
-    val options = listOf( "Banana", "Grape", "Orange")
+    val options = listOf("Banana", "Grape", "Orange")
     val selectedOption = remember { mutableStateOf(0) }
     ComposeAccessibilityTechniquesTheme() {
         Column() {
-            RadioGroup(
+            RadioButtonGroup(
                 groupLabel = "Pick a fruit:",
                 itemLabels = options,
-                current = selectedOption.value,
+                selectedIndex = selectedOption.value,
                 selectHandler = { selectedOption.value = it }
             )
         }

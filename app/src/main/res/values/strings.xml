@@ -252,4 +252,16 @@
     <string name="accordion_item_2_3">Correct Accordion example, Item 3</string>
     <string name="accordion_item_2_4">Correct Accordion example, Item 4</string>
 
+    <!-- RadioButton groups -->
+    <string name="radio_button_groups_title">RadioButton groups</string>
+    <string name="radio_button_groups_heading">RadioButton groups require the selectableGroup modifier; RadioButtons require labels</string>
+    <string name="radio_button_groups_description_1">Layout composables which group RadioButton composables require Modifier.selectableGroup(). Individual RadioButton composables require a wrapping layout that subsumes their semantics and provides a control label.</string>
+    <string name="radio_button_groups_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of inaccessible and accessible RadioButton groups.</string>
+    <string name="radio_button_groups_example_1_header">Bad example 1: Inaccessible RadioButton group</string>
+    <string name="radio_button_groups_example_2_header">Good example 2: Accessible RadioButton group</string>
+    <string name="radio_button_groups_group_label">Pick a fruit:</string>
+    <string name="radio_button_groups_option_1">Banana</string>
+    <string name="radio_button_groups_option_2">Grape</string>
+    <string name="radio_button_groups_option_3">Orange</string>
+
 </resources>

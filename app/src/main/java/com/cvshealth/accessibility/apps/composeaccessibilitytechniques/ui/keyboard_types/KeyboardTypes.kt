@@ -119,10 +119,10 @@ private fun BadExample1() {
         text = stringResource(id = R.string.keyboard_types_example_1_header),
         modifier = Modifier.testTag(keyboardTypesExample1HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample1TextFieldTestTag)
             .padding(top = 8.dp)
@@ -159,10 +159,10 @@ private fun BadExample2() {
         text = stringResource(id = R.string.keyboard_types_example_2_header),
         modifier = Modifier.testTag(keyboardTypesExample2HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample2TextFieldTestTag)
             .padding(top = 8.dp)
@@ -198,10 +198,10 @@ private fun GoodExample3() {
         text = stringResource(id = R.string.keyboard_types_example_3_header),
         modifier = Modifier.testTag(keyboardTypesExample3HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample3TextFieldTestTag)
             .padding(top = 8.dp)
@@ -237,10 +237,10 @@ private fun GoodExample4() {
         text = stringResource(id = R.string.keyboard_types_example_4_header),
         modifier = Modifier.testTag(keyboardTypesExample4HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample4TextFieldTestTag)
             .padding(top = 8.dp)
@@ -278,10 +278,10 @@ private fun GoodExample5() {
         text = stringResource(id = R.string.keyboard_types_example_5_header),
         modifier = Modifier.testTag(keyboardTypesExample5HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample5TextFieldTestTag)
             .padding(top = 8.dp)
@@ -319,10 +319,10 @@ private fun GoodExample6() {
         text = stringResource(id = R.string.keyboard_types_example_6_header),
         modifier = Modifier.testTag(keyboardTypesExample6HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample6TextFieldTestTag)
             .padding(top = 8.dp)
@@ -358,10 +358,10 @@ private fun GoodExample7() {
         text = stringResource(id = R.string.keyboard_types_example_7_header),
         modifier = Modifier.testTag(keyboardTypesExample7HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample7TextFieldTestTag)
             .padding(top = 8.dp)
@@ -397,10 +397,10 @@ private fun GoodExample8() {
         text = stringResource(id = R.string.keyboard_types_example_8_header),
         modifier = Modifier.testTag(keyboardTypesExample8HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample8TextFieldTestTag)
             .padding(top = 8.dp)
@@ -439,10 +439,10 @@ private fun GoodExample9() {
         text = stringResource(id = R.string.keyboard_types_example_9_header),
         modifier = Modifier.testTag(keyboardTypesExample9HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample9TextFieldTestTag)
             .padding(top = 8.dp)
@@ -481,10 +481,10 @@ private fun GoodExample10() {
         text = stringResource(id = R.string.keyboard_types_example_10_header),
         modifier = Modifier.testTag(keyboardTypesExample10HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample10TextFieldTestTag)
             .padding(top = 8.dp)
@@ -523,10 +523,10 @@ private fun GoodExample11() {
         text = stringResource(id = R.string.keyboard_types_example_11_header),
         modifier = Modifier.testTag(keyboardTypesExample11HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample11TextFieldTestTag)
             .padding(top = 8.dp)
@@ -562,10 +562,10 @@ private fun GoodExample12() {
         text = stringResource(id = R.string.keyboard_types_example_12_header),
         modifier = Modifier.testTag(keyboardTypesExample12HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample12TextFieldTestTag)
             .padding(top = 8.dp)
@@ -601,10 +601,10 @@ private fun GoodExample13() {
         text = stringResource(id = R.string.keyboard_types_example_13_header),
         modifier = Modifier.testTag(keyboardTypesExample13HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample13TextFieldTestTag)
             .padding(top = 8.dp)
@@ -642,10 +642,10 @@ private fun GoodExample14() {
         text = stringResource(id = R.string.keyboard_types_example_14_header),
         modifier = Modifier.testTag(keyboardTypesExample14HeadingTestTag)
     )
-    val exampleText = remember { mutableStateOf("") }
+    val (exampleText, setExampleText) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
-        value = exampleText.value,
-        onValueChange = { exampleText.value = it },
+        value = exampleText,
+        onValueChange = setExampleText,
         modifier = Modifier
             .testTag(keyboardTypesExample14TextFieldTestTag)
             .padding(top = 8.dp)

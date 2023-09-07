@@ -75,13 +75,11 @@ fun SwitchRow(
 @Composable
 fun SwitchRowPreview() {
     ComposeAccessibilityTechniquesTheme() {
-        val switchState = remember { mutableStateOf(false) }
+        val (switchValue, setSwitchValue) = remember { mutableStateOf(false) }
         SwitchRow(
             text = "Test Switch",
-            checked = switchState.value,
-            toggleHandler = { newState ->
-                switchState.value = newState
-            }
+            checked = switchValue,
+            toggleHandler = setSwitchValue
         )
     }
 }

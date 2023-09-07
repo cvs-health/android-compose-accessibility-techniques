@@ -147,7 +147,7 @@ private fun FauxAccordionHeading(
     val headingIconTint = ErrorRed
     val expanderIconTint = CvsRed
 
-    val isExpanded = rememberSaveable { mutableStateOf(false) }
+    val (isExpanded, setIsExpanded) = rememberSaveable { mutableStateOf(false) }
     Column(
         modifier = modifier.padding(top = 8.dp)
     ) {
@@ -156,12 +156,12 @@ private fun FauxAccordionHeading(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(
-                    onClickLabel = if (isExpanded.value)
+                    onClickLabel = if (isExpanded)
                         stringResource(id = R.string.collapse_button_description)
                     else
                         stringResource(id = R.string.expand_button_description)
                 ) {
-                    isExpanded.value = !isExpanded.value
+                    setIsExpanded(!isExpanded)
                 }
                 .semantics {
                     heading()
@@ -170,7 +170,7 @@ private fun FauxAccordionHeading(
                     //
                     // Another way to do this wrong: fake a stateDescription on the Row instead of
                     // letting the semantic action expand() or collapse() inform the Row's state.
-                    // stateDescription = if (isExpanded.value) "Expanded" else "Collapsed"
+                    // stateDescription = if (isExpanded) "Expanded" else "Collapsed"
                 },
 
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -190,7 +190,7 @@ private fun FauxAccordionHeading(
             )
             Icon(
                 painter = painterResource(
-                    id = if (isExpanded.value)
+                    id = if (isExpanded)
                         R.drawable.ic_minus_fill
                     else
                         R.drawable.ic_plus_fill,
@@ -198,7 +198,7 @@ private fun FauxAccordionHeading(
                 contentDescription = null, // expand/collapsed is a state of the Row
                 // Another way to do this wrong: fake a contentDescription on the icon instead of
                 // letting the semantic action expand() or collapse() inform the Row's state.
-                // contentDescription = if (isExpanded.value)
+                // contentDescription = if (isExpanded)
                 //     stringResource(R.string.collapse_button_description)
                 // else
                 //     stringResource(R.string.expand_button_description),
@@ -206,7 +206,7 @@ private fun FauxAccordionHeading(
                 tint = expanderIconTint
             )
         }
-        if (isExpanded.value) {
+        if (isExpanded) {
             content()
         }
     }

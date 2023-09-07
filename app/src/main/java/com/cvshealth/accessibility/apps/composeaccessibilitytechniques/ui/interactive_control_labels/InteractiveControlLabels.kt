@@ -102,10 +102,10 @@ fun InteractiveControlLabelsScreen(
                 modifier = Modifier.padding(top = 8.dp),
                 fontWeight = FontWeight.Medium
             )
-            val example1Text = remember { mutableStateOf("") }
+            val (example1Text, setExample1Text) = remember { mutableStateOf("") }
             AccessibleTextField(
-                value = example1Text.value,
-                onValueChange = { example1Text.value = it },
+                value = example1Text,
+                onValueChange = setExample1Text,
                 modifier = Modifier
                     .testTag(interactiveControlLabelsExample1ControlTestTag)
                     .fillMaxWidth()
@@ -116,10 +116,10 @@ fun InteractiveControlLabelsScreen(
                 text = stringResource(id = R.string.interactive_control_labels_example_2),
                 modifier = Modifier.testTag(interactiveControlLabelsExample2HeadingTestTag)
             )
-            val example2Text = remember { mutableStateOf("") }
+            val (example2Text, setExample2Text) = remember { mutableStateOf("") }
             AccessibleOutlinedTextField(
-                value = example2Text.value,
-                onValueChange = { example2Text.value = it },
+                value = example2Text,
+                onValueChange = setExample2Text,
                 modifier = Modifier
                     .testTag(interactiveControlLabelsExample2ControlTestTag)
                     .padding(top = 8.dp)
@@ -134,13 +134,11 @@ fun InteractiveControlLabelsScreen(
                 text = stringResource(id = R.string.interactive_control_labels_example_3),
                 modifier = Modifier.testTag(interactiveControlLabelsExample3HeadingTestTag)
             )
-            val example3CheckboxState = remember { mutableStateOf(false) }
+            val (example3CheckboxValue, setExample3CheckboxValue) = remember { mutableStateOf(false) }
             FauxCheckboxRow(
                 text = stringResource(id = R.string.interactive_control_labels_unassociated_checkbox_label),
-                checked = example3CheckboxState.value,
-                toggleHandler = { newState ->
-                    example3CheckboxState.value = newState
-                },
+                checked = example3CheckboxValue,
+                toggleHandler = setExample3CheckboxValue,
                 modifier = Modifier.testTag(interactiveControlLabelsExample3ControlTestTag)
             )
 
@@ -149,13 +147,11 @@ fun InteractiveControlLabelsScreen(
                 text = stringResource(id = R.string.interactive_control_labels_example_4),
                 modifier = Modifier.testTag(interactiveControlLabelsExample4HeadingTestTag)
             )
-            val example4CheckboxState = remember { mutableStateOf(false) }
+            val (example4CheckboxValue, setExample4CheckboxValue) = remember { mutableStateOf(false) }
             CheckboxRow(
                 text = stringResource(id = R.string.interactive_control_labels_associated_checkbox_label),
-                checked = example4CheckboxState.value,
-                toggleHandler = { newState ->
-                    example4CheckboxState.value = newState
-                },
+                checked = example4CheckboxValue,
+                toggleHandler = setExample4CheckboxValue,
                 modifier = Modifier.testTag(interactiveControlLabelsExample4ControlTestTag)
             )
 
@@ -164,13 +160,11 @@ fun InteractiveControlLabelsScreen(
                 text = stringResource(id = R.string.interactive_control_labels_example_5),
                 modifier = Modifier.testTag(interactiveControlLabelsExample5HeadingTestTag)
             )
-            val example5SwitchState = remember { mutableStateOf(false) }
+            val (example5SwitchValue, setExample5SwitchValue) = remember { mutableStateOf(false) }
             FauxSwitchRow(
                 text = stringResource(id = R.string.interactive_control_labels_unassociated_switch_label),
-                checked = example5SwitchState.value,
-                toggleHandler = { newState ->
-                    example5SwitchState.value = newState
-                },
+                checked = example5SwitchValue,
+                toggleHandler = setExample5SwitchValue,
                 modifier = Modifier
                     .testTag(interactiveControlLabelsExample5ControlTestTag)
                     .align(alignment = Alignment.End)
@@ -181,13 +175,11 @@ fun InteractiveControlLabelsScreen(
                 text = stringResource(id = R.string.interactive_control_labels_example_6),
                 modifier = Modifier.testTag(interactiveControlLabelsExample6HeadingTestTag)
             )
-            val example6SwitchState = remember { mutableStateOf(false) }
+            val (example6SwitchValue, setExample6SwitchValue) = remember { mutableStateOf(false) }
             SwitchRow(
                 text = stringResource(id = R.string.interactive_control_labels_associated_switch_label),
-                checked = example6SwitchState.value,
-                toggleHandler = { newState ->
-                    example6SwitchState.value = newState
-                },
+                checked = example6SwitchValue,
+                toggleHandler = setExample6SwitchValue,
                 modifier = Modifier
                     .testTag(interactiveControlLabelsExample6ControlTestTag)
                     .align(alignment = Alignment.End)
@@ -199,15 +191,15 @@ fun InteractiveControlLabelsScreen(
                 modifier = Modifier.testTag(interactiveControlLabelsExample7HeadingTestTag)
             )
             Spacer(modifier = Modifier.height(8.dp))
-            val example7SelectedRadioGroupOption = remember { mutableStateOf(0) }
+            val (example7SelectedRadioGroupOption, setExample7RadioGroupOption) = remember { mutableStateOf(0) }
             FauxRadioGroup(
                 groupLabel = stringResource(id = R.string.interactive_control_labels_radio_button_group_label),
                 itemLabels = listOf(
                     stringResource(id = R.string.interactive_control_labels_unassociated_radio_button_label_1),
                     stringResource(id = R.string.interactive_control_labels_unassociated_radio_button_label_2)
                 ),
-                current = example7SelectedRadioGroupOption.value,
-                selectHandler = { example7SelectedRadioGroupOption.value = it }
+                current = example7SelectedRadioGroupOption,
+                selectHandler = setExample7RadioGroupOption
             )
 
             // Good example 8: RadioButton group with associated field labels, etc.
@@ -216,15 +208,15 @@ fun InteractiveControlLabelsScreen(
                 modifier = Modifier.testTag(interactiveControlLabelsExample8HeadingTestTag)
             )
             Spacer(modifier = Modifier.height(8.dp))
-            val example8SelectedRadioGroupOption = remember { mutableStateOf(0) }
+            val (example8SelectedRadioGroupOption, setExample8RadioGroupOption) = remember { mutableStateOf(0) }
             RadioButtonGroup(
                 groupLabel = stringResource(id = R.string.interactive_control_labels_radio_button_group_label),
                 itemLabels = listOf(
                     stringResource(id = R.string.interactive_control_labels_associated_radio_button_label_1),
                     stringResource(id = R.string.interactive_control_labels_associated_radio_button_label_2)
                 ),
-                selectedIndex = example8SelectedRadioGroupOption.value,
-                selectHandler = { example8SelectedRadioGroupOption.value = it }
+                selectedIndex = example8SelectedRadioGroupOption,
+                selectHandler = setExample8RadioGroupOption
             )
 
             // Good example 9: Button with associated label
@@ -292,13 +284,11 @@ fun FauxCheckboxRow(
 @Composable
 fun FauxCheckboxRowPreview() {
     ComposeAccessibilityTechniquesTheme() {
-        val checkboxState = remember { mutableStateOf(false) }
+        val (checkBoxValue, setCheckboxValue) = remember { mutableStateOf(false) }
         FauxCheckboxRow(
             text = "Test Checkbox",
-            checked = checkboxState.value,
-            toggleHandler = { newState ->
-                checkboxState.value = newState
-            }
+            checked = checkBoxValue,
+            toggleHandler = setCheckboxValue
         )
     }
 }
@@ -339,13 +329,11 @@ fun FauxSwitchRow(
 @Composable
 fun FauxSwitchRowPreview() {
     ComposeAccessibilityTechniquesTheme() {
-        val switchState = remember { mutableStateOf(false) }
+        val (switchValue, setSwitchValue) = remember { mutableStateOf(false) }
         FauxSwitchRow(
             text = "Test Switch",
-            checked = switchState.value,
-            toggleHandler = { newState ->
-                switchState.value = newState
-            }
+            checked = switchValue,
+            toggleHandler = setSwitchValue
         )
     }
 }
@@ -389,13 +377,13 @@ fun FauxRadioGroup(
 @Composable
 fun FauxRadioGroupPreview() {
     val options = listOf( "Banana", "Grape", "Orange")
-    val selectedOption = remember { mutableStateOf(0) }
+    val (selectedOption, setSelectedOption) = remember { mutableStateOf(0) }
     ComposeAccessibilityTechniquesTheme() {
         FauxRadioGroup(
             groupLabel = "Pick a fruit:",
             itemLabels = options,
-            current = selectedOption.value,
-            selectHandler = { selectedOption.value = it }
+            current = selectedOption,
+            selectHandler = setSelectedOption
         )
     }
 }

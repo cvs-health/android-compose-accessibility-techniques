@@ -57,7 +57,7 @@ fun GenericAccordionHeading(
     expanderIconTint: Color = LocalContentColor.current,
     content: @Composable () -> Unit
 ) {
-    val isExpanded = rememberSaveable { mutableStateOf(false) }
+    val (isExpanded, setIsExpanded) = rememberSaveable { mutableStateOf(false) }
     Column(
         modifier = modifier
     ) {
@@ -66,23 +66,23 @@ fun GenericAccordionHeading(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(
-                    onClickLabel = if (isExpanded.value)
+                    onClickLabel = if (isExpanded)
                         stringResource(id = R.string.collapse_button_description)
                     else
                         stringResource(id = R.string.expand_button_description)
                 ) {
-                    isExpanded.value = !isExpanded.value
+                    setIsExpanded(!isExpanded)
                 }
                 .semantics(mergeDescendants = true) {
                     heading()
-                    if (isExpanded.value) {
+                    if (isExpanded) {
                         collapse {
-                            isExpanded.value = false
+                            setIsExpanded(false)
                             return@collapse true
                         }
                     } else {
                         expand {
-                            isExpanded.value = true
+                            setIsExpanded(true)
                             return@expand true
                         }
                     }
@@ -107,7 +107,7 @@ fun GenericAccordionHeading(
             )
             Icon(
                 painter = painterResource(
-                    id = if (isExpanded.value)
+                    id = if (isExpanded)
                         R.drawable.ic_minus_fill
                     else
                         R.drawable.ic_plus_fill,
@@ -117,7 +117,7 @@ fun GenericAccordionHeading(
                 tint = expanderIconTint
             )
         }
-        if (isExpanded.value) {
+        if (isExpanded) {
             content()
         }
     }

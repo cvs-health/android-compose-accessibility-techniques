@@ -75,13 +75,11 @@ fun CheckboxRow(
 @Composable
 fun CheckboxRowPreview() {
     ComposeAccessibilityTechniquesTheme() {
-        val checkboxState = remember { mutableStateOf(false) }
+        val (checkboxValue, setCheckboxValue) = remember { mutableStateOf(false) }
         CheckboxRow(
             text = "Test Checkbox",
-            checked = checkboxState.value,
-            toggleHandler = { newState ->
-                checkboxState.value = newState
-            }
+            checked = checkboxValue,
+            toggleHandler = setCheckboxValue
         )
     }
 }

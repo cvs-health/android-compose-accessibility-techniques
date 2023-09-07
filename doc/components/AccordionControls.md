@@ -6,12 +6,12 @@ Mark a composable as an accordion heading by applying:
 modifier = Modifier.semantics {
     if (isExpanded) {
         collapse {
-            isExpanded = false
+            setIsExpanded(false)
             return@collapse true
         }
     } else {
         expand {
-            isExpanded = true
+            setIsExpanded(true)
             return@expand true
         }
     }
@@ -27,34 +27,34 @@ modifier = Modifier.clickable(
     else
         stringResource("Expand")
 ) {
-    isExpanded.value = !isExpanded
+    setIsExpanded(!isExpanded)
 }
 ```
 
 For example:
 ```
-val isExpanded = rememberSaveable { mutableStateOf(false) }
+val (isExpanded, setIsExpanded) = rememberSaveable { mutableStateOf(false) }
 Column {
      Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(
-                onClickLabel = if (isExpanded.value)
+                onClickLabel = if (isExpanded)
                     stringResource("Collapse")
                 else
                     stringResource("Expand")
             ) {
-                isExpanded.value = !isExpanded.value
+                setIsExpanded(!isExpanded)
             }
             .semantics (mergeDescendants = true) {
-                if (isExpanded.value) {
+                if (isExpanded) {
                     collapse {
-                        isExpanded.value = false
+                        setIsExpanded(false)
                         return@collapse true
                     }
                 } else {
                     expand {
-                        isExpanded.value = true
+                        setIsExpanded(true)
                         return@expand true
                     }
                 }
@@ -70,7 +70,7 @@ Column {
         )
         Icon(
             painter = painterResource(
-                id = if (isExpanded.value)
+                id = if (isExpanded)
                     R.drawable.ic_caret_up // a up-caret icon: ^
                 else
                     R.drawable.ic_caret_right, // a right-caret icon: >
@@ -79,7 +79,7 @@ Column {
             modifier = Modifier.minimumInteractiveComponentSize()
         )
     }
-    if (isExpanded.value) {
+    if (isExpanded) {
         Text("This is a long expanded section text ...")
         Text("This is more expanded section text ...")
         Text("This is even more expanded section text ...")

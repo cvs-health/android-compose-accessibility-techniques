@@ -97,14 +97,14 @@ fun RadioButtonGroup(
 @Composable
 fun RadioGroupPreview() {
     val options = listOf("Banana", "Grape", "Orange")
-    val selectedOption = remember { mutableStateOf(0) }
+    val (selectedOption, setSelectedOption) = remember { mutableStateOf(0) }
     ComposeAccessibilityTechniquesTheme() {
         Column() {
             RadioButtonGroup(
                 groupLabel = "Pick a fruit:",
                 itemLabels = options,
-                selectedIndex = selectedOption.value,
-                selectHandler = { selectedOption.value = it }
+                selectedIndex = selectedOption,
+                selectHandler = setSelectedOption
             )
         }
     }

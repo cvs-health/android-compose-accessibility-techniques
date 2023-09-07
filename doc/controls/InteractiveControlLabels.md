@@ -8,10 +8,10 @@ All interactive controls must have associated labels, as required by WCAG 2 [Suc
 For example:
 
 ```kotlin
-val textState = remember { mutableStateOf("") }
+val (text, setText) = remember { mutableStateOf("") }
 OutlinedTextField(
-    value = textState.value,
-    onValueChange = { textState.value = it },
+    value = text,
+    onValueChange = setText,
     modifier = Modifier.fillMaxWidth(),
     label = {
         Text(text = "TextField label")
@@ -51,20 +51,18 @@ The `Checkbox`, `Switch`, and `RadioButton` composables all require a wrapping l
 For example, a `Checkbox` can be labeled as follows.
 
 ```kotlin
-val checkboxState = remember { mutablestateOf(false) }
+val (checkboxValue, setCheckboxValue) = remember { mutablestateOf(false) }
 Row(
     modifier = modifier
         .toggleable(
-            value = checkboxState.value,
+            value = checkboxValue,
             role = Role.Checkbox,
-            onValueChange = { newState -> 
-                checkboxState.value = newState
-            } 
+            onValueChange = setCheckboxValue
         ),
     verticalAlignment = Alignment.CenterVertically
 ) {
     Checkbox(
-        checked = checkboxState.value,
+        checked = checkboxValue,
         onCheckedChange = null,
         modifier = Modifier.minimumInteractiveComponentSize()
     )
@@ -87,21 +85,21 @@ The key points are:
 ```kotlin
 val initialRadioButtonIndex = 0
 val buttonLabels = listOf("Yes", "No")
-val radioButtonSelectionState = remember { mutableState(initialRadioButtonIndex) }
+val (radioButtonSelection, setRadioButtonSelection) = remember { mutableState(initialRadioButtonIndex) }
 Column(modifier = Modifier.selectableGroup()) {
     buttonLabels.forEachIndexed { index: Int, label: String ->
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .selectable(
-                    selected = (radioButtonSelectionState.value == index),
+                    selected = (radioButtonSelectionState == index),
                     role = Role.RadioButton,
-                    onClick = { radioButtonSelectionState.value = index }
+                    onClick = setRadioButtonSelection
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
             RadioButton(
-                selected = (radioButtonSelectionState.value == index),
+                selected = (radioButtonSelectionState == index),
                 onClick = null,
                 modifier = Modifier.minimumInteractiveComponentSize()
             )

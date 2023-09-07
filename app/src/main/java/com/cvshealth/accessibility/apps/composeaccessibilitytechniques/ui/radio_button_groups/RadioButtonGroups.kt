@@ -66,12 +66,12 @@ fun RadioButtonGroupsScreen(
                 modifier = Modifier.testTag(radioButtonGroupsExample1HeadingTestTag)
             )
             Spacer(modifier = Modifier.height(8.dp))
-            val example1SelectedOption = remember { mutableStateOf(0) }
+            val (example1Selection, setExample1Selection) = remember { mutableStateOf(0) }
             FauxRadioButtonGroup(
                 groupLabel = stringResource(id = R.string.radio_button_groups_group_label),
                 itemLabels = options,
-                current = example1SelectedOption.value,
-                selectHandler = { example1SelectedOption.value = it },
+                selectedIndex = example1Selection,
+                selectHandler = setExample1Selection,
                 modifier = Modifier.testTag(radioButtonGroupsExample1RadioButtonGroupTestTag)
             )
 
@@ -83,13 +83,13 @@ fun RadioButtonGroupsScreen(
             // Important technique: RadioButton group state has been hoisted up to this parent
             // composable. The state value and a state mutator function lambda are passed down to
             // the RadioButtonGroup() composable.
-            val example2SelectedOption = remember { mutableStateOf(0) }
+            val (example2Selection, setExample2Selection) = remember { mutableStateOf(0) }
             // Key accessibility techniques are described in components/RadioButtonGroup.kt.
             RadioButtonGroup(
                 groupLabel = stringResource(id = R.string.radio_button_groups_group_label),
                 itemLabels = options,
-                selectedIndex = example2SelectedOption.value,
-                selectHandler = { example2SelectedOption.value = it },
+                selectedIndex = example2Selection,
+                selectHandler = setExample2Selection,
                 modifier = Modifier.testTag(radioButtonGroupsExample2RadioButtonGroupTestTag)
             )
 
@@ -110,7 +110,7 @@ fun PreviewWithScaffold() {
 fun FauxRadioButtonGroup(
     groupLabel: String,
     itemLabels: List<String>,
-    current: Int,
+    selectedIndex: Int,
     selectHandler: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -132,7 +132,7 @@ fun FauxRadioButtonGroup(
                     // focusable from the Row in assistive technologies like TalkBack and Switch
                     // Access.)
                     RadioButton(
-                        selected = (current == index),
+                        selected = (selectedIndex == index),
                         onClick = { selectHandler(index) }
                     )
                     Text(text = label, modifier = Modifier.padding(start = 8.dp))

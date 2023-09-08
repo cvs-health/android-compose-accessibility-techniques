@@ -29,6 +29,9 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [ ] Custom semantics properties
 - Specific Component Types
     - [x] [Accordion controls](doc/components/AccordionControls.md)
+    - [x] [Checkbox controls](doc/components/CheckboxControls.md)
+    - [x] [RadioButton groups](doc/components/RadioButtonGroups.md)
+    - [x] [Switch controls](doc/components/SwitchControls.md)
     - [ ] Dropdown list controls
     - [ ] Autofill input fields
     - [ ] Links inline with text

@@ -90,8 +90,7 @@ TalkBack will then announce "In list" when entering the list and "Out of list" w
 Notes:
 
 * One downside of the automatic list semantics applied to `LazyColumn` is that not all uses of lazy layouts create visually-presented lists; it is also used for non-list dynamic content and server-driven user interfaces. In those cases, list semantics is inappropriate. 
-
-(Note: The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.)
+* The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.
 
 ----
 

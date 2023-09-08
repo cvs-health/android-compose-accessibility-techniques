@@ -264,4 +264,24 @@
     <string name="radio_button_groups_option_2">Grape</string>
     <string name="radio_button_groups_option_3">Orange</string>
 
+    <!-- Checkbox controls -->
+    <string name="checkbox_controls_title">Checkbox controls</string>
+    <string name="checkbox_controls_heading">Checkbox controls require labels and Modifier.toggleable</string>
+    <string name="checkbox_controls_description_1">Checkbox composables require a wrapping layout that subsumes their semantics (using Modifier.toggleable and Role.Checkbox) and provides a control label.</string>
+    <string name="checkbox_controls_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of inaccessible and accessible Checkbox groups.</string>
+    <string name="checkbox_controls_example_1_header">Bad example 1: Inaccessible Checkbox</string>
+    <string name="checkbox_controls_example_1_label">Faux checkbox</string>
+    <string name="checkbox_controls_example_2_header">Good example 2: Accessible Checkbox</string>
+    <string name="checkbox_controls_example_2_label">Accessible checkbox</string>
+
+    <!-- Switch controls -->
+    <string name="switch_controls_title">Switch controls</string>
+    <string name="switch_controls_heading">Switch controls require labels and Modifier.toggleable</string>
+    <string name="switch_controls_description_1">Switch composables require a wrapping layout that subsumes their semantics (using Modifier.toggleable and Role.Switch) and provides a control label.</string>
+    <string name="switch_controls_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of inaccessible and accessible Switch groups.</string>
+    <string name="switch_controls_example_1_header">Bad example 1: Inaccessible Switch</string>
+    <string name="switch_controls_example_1_label">Faux switch</string>
+    <string name="switch_controls_example_2_header">Good example 2: Accessible Switch</string>
+    <string name="switch_controls_example_2_label">Accessible switch</string>
+
 </resources>

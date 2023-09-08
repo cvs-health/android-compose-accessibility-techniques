@@ -18,6 +18,8 @@ Notes:
 * One complication of heading semantics on Android is that list items in the standard lazy list composables (such as `LazyColumn`) can not fully acts as accessibility headings. List items marked with `heading()` should announce as headings, but heading navigation may or may not work in a lazy list. Logically, this makes a certain sense since not all of the list items are initially known.
 * Never use `android:contentDescription` to append an accessibility property like "Heading" to a `View`. It may sound almost correct in TalkBack, but doesn't work correctly.
 * Native Android apps do not have multiple heading levels. Only mark top-level headings as a heading.
+* The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.
+
 
 ----
 

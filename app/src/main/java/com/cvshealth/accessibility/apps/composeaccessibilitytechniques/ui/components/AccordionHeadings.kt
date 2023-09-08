@@ -48,6 +48,22 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.CvsRed
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.SuccessGreen
 
+/**
+ * GenericAccordionHeading properly labels a Row composable as both an accordion control and a
+ * heading. It contains its own expanded/collapsed state handling.
+ *
+ * GenericAccordionHeading applies the following key techniques:
+ * 1. The Row applies Modifier.clickable() with a state-specific onClickLabel (but without a role).
+ * 2. The Row uses Modifier.semantics to set expand() or collapse() semantic state and actions,
+ *    depending on whether the control is in the collapsed or expanded state. (Heading semantics is
+ *    also applied in this case, but would not be present for all accordion controls.)
+ * 3. A visual state indicator Icon is present, but has a null contentDescription, so all state
+ *    announcement is made by the Row-level expand/collapse semantics. Also, given that the visual
+ *    state indicator Icon is not clickable, appropriate padding is applied manually with
+ *    .minimumInteractiveComponentSize(). (This will vary with the visual design of the accordion
+ *    control.)
+ * 4. Display or reveal the accordion control's content based on its expansion state.
+ */
 @Composable
 fun GenericAccordionHeading(
     text: String,
@@ -65,7 +81,9 @@ fun GenericAccordionHeading(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                // Key technique 1a: Expand/Collapse an accordion control on Row click with clickable().
                 .clickable(
+                    // Key technique 1b: Apply a more specific onClickLabel, based on expansion state.
                     onClickLabel = if (isExpanded)
                         stringResource(id = R.string.collapse_button_description)
                     else
@@ -73,6 +91,7 @@ fun GenericAccordionHeading(
                 ) {
                     setIsExpanded(!isExpanded)
                 }
+                // Key technique 2: Add collapse() or expand() semantics, depending on expansion state.
                 .semantics(mergeDescendants = true) {
                     heading()
                     if (isExpanded) {
@@ -105,6 +124,7 @@ fun GenericAccordionHeading(
                     .padding(start = 16.dp)
                     .weight(1f)
             )
+            // Key technique 3a: Visually indicate expanded/collapsed state (in this case, by an Icon).
             Icon(
                 painter = painterResource(
                     id = if (isExpanded)
@@ -112,11 +132,19 @@ fun GenericAccordionHeading(
                     else
                         R.drawable.ic_plus_fill,
                 ),
-                contentDescription = null, // expand/collapsed is a state of the Row
+                // Key technique 3b: Null the contentDescription on the visual state representation
+                // icon. Expand/collapsed is a state of the Row, not this Icon, and so should be
+                // announced by expand/collapse semantics.
+                contentDescription = null,
+                // Key technique 3c: Properly size the visual state indicator (in this case, as if
+                // it were a clickable icon, although click-handling is performed at the Row level).
                 modifier = Modifier.minimumInteractiveComponentSize(),
                 tint = expanderIconTint
             )
         }
+        // Key technique 4: Control the visibility of the accordion control's content based on
+        // expanded/collapsed state. (Note: Normally the expansion and collapse of an accordion
+        // control would be animated. Animation is omitted here for brevity.)
         if (isExpanded) {
             content()
         }

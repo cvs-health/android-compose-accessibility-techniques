@@ -123,8 +123,18 @@ fun HomeScreen(
                 onNavigationButtonClicked = onNavigationButtonClicked
             )
             NavigationCard(
+                label = stringResource(R.string.checkbox_controls_title),
+                route = ComposeAccessibilityTechniquesRoute.CheckboxControls,
+                onNavigationButtonClicked = onNavigationButtonClicked
+            )
+            NavigationCard(
                 label = stringResource(id = R.string.radio_button_groups_title),
                 route = ComposeAccessibilityTechniquesRoute.RadioButtonGroups,
+                onNavigationButtonClicked = onNavigationButtonClicked
+            )
+            NavigationCard(
+                label = stringResource(R.string.switch_controls_title),
+                route = ComposeAccessibilityTechniquesRoute.SwitchControls,
                 onNavigationButtonClicked = onNavigationButtonClicked
             )
 

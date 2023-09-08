@@ -195,7 +195,7 @@ private fun FauxAccordionHeading(
                     else
                         R.drawable.ic_plus_fill,
                 ),
-                contentDescription = null, // expand/collapsed is a state of the Row
+                contentDescription = null, // expanded/collapsed is a state of the Row, not the Icon
                 // Another way to do this wrong: fake a contentDescription on the icon instead of
                 // letting the semantic action expand() or collapse() inform the Row's state.
                 // contentDescription = if (isExpanded)

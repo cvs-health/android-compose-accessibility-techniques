@@ -29,5 +29,7 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     KeyboardTypes("keyboardTypes"),
     CustomAccessibilityActions("customAccessibilityActions"),
     AccordionControls("accordionControls"),
+    CheckboxControls("checkboxControls"),
     RadioButtonGroups("radioButtonGroups"),
+    SwitchControls("switchControls"),
 }

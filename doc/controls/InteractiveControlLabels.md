@@ -112,6 +112,8 @@ Column(modifier = Modifier.selectableGroup()) {
 }
 ```
 
+(Note: The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.)
+
 ----
 
 Copyright 2023 CVS Health and/or one of its affiliates

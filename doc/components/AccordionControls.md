@@ -90,6 +90,7 @@ Column {
 Notes:
 
 * Never use `contentDescription` or `stateDescription` to described an accordion's state. It may sound almost correct in TalkBack, but doesn't work correctly.
+* The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.
 
 ----
 

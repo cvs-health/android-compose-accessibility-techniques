@@ -20,7 +20,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -30,6 +29,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.AccordionControlsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.checkbox_controls.CheckboxControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_group_replacement.ContentGroupReplacementScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_grouping.ContentGroupingScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_accessibility_actions.CustomAccessibilityActionsScreen
@@ -39,12 +39,12 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.intera
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_types.KeyboardTypesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.list_semantics.ListSemanticsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.RadioButtonGroupsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.SwitchControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.TextAlternativesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -105,8 +105,14 @@ fun ComposeAccessibilityTechniquesNavHost(
         composable(route = ComposeAccessibilityTechniquesRoute.AccordionControls.route) {
             AccordionControlsScreen(onBackPressed = popBackStack)
         }
+        composable(route = ComposeAccessibilityTechniquesRoute.CheckboxControls.route) {
+            CheckboxControlsScreen(onBackPressed = popBackStack)
+        }
         composable(route = ComposeAccessibilityTechniquesRoute.RadioButtonGroups.route) {
             RadioButtonGroupsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.SwitchControls.route) {
+            SwitchControlsScreen(onBackPressed = popBackStack)
         }
     }
 }

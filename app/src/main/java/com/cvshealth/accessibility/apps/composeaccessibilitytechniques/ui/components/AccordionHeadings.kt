@@ -198,3 +198,35 @@ private fun SuccessAccordionHeadingShortPreview() {
         }
     }
 }
+
+@Composable
+fun BasicAccordionHeading(
+    text: String,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    GenericAccordionHeading(
+        text = text,
+        modifier = modifier
+            .padding(top = 8.dp),
+        expanderIconTint = CvsRed
+    ) {
+        content()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun BasicAccordionHeadingShortPreview() {
+    ComposeAccessibilityTechniquesTheme() {
+        BasicAccordionHeading(
+            text = "This is a basic accordion heading"
+        ) {
+            Column {
+                BodyText(textId = R.string.accordion_item_2_1)
+                BodyText(textId = R.string.accordion_item_2_2)
+                BodyText(textId = R.string.accordion_item_2_3)
+            }
+        }
+    }
+}

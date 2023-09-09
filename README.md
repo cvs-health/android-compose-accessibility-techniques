@@ -17,7 +17,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [List semantics](doc/content/ListSemantics.md)
     - [ ] Device orientation and screen sizes
     - [ ] Dark theme
-- Interactive Controls
+- Interactive Behaviors
     - [x] [Input field labels](doc/controls/InteractiveControlLabels.md)
     - [ ] Minimum touch target size
     - [ ] Tap target grouping

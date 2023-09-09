@@ -25,6 +25,9 @@
     <string name="home_heading">Android Compose Accessibility Techniques Demo App</string>
     <string name="home_description">This application demonstrates a variety of accessibility best practices for Jetpack Compose-based UIs, as well as the problems they can address.</string>
     <string name="home_description_2">Use the cards below to pick a topic area and follow the directions on the screen regarding the assistive technology employed in that demonstration.</string>
+    <string name="home_informative_content">Informative Content</string>
+    <string name="home_interactive_behaviors">Interactive Behaviors</string>
+    <string name="home_components">Specific Component Types</string>
 
     <!-- Text alternatives -->
     <string name="text_alternatives_title">Text alternatives</string>

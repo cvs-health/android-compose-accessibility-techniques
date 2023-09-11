@@ -145,46 +145,51 @@ private fun BadExample1(
         modifier = Modifier
             .testTag(customAccessibilityActionsExample1CardTestTag)
             .padding(top = 8.dp)
-            .clickable(
+    ) {
+        // Moving Modifier.clickable from Card to an otherwise unnecessary inner Column to fix
+        // TalkBack reading order issues.
+        Column(
+            modifier = Modifier.clickable(
                 onClickLabel = showDetailsCLickLabel
             ) {
                 handleMessageEvent(CustomActionMessageEvent(CustomActionType.ShowDetails, cardId))
             }
-    ) {
-        // Note: Do not put a testTag() on this composable, because that would introduce an extra
-        // semantics node, making Compose jUnit testing of merged content impossible. While that
-        // would not affect TalkBack's behavior for users, it does affect automated testing.
-        BadExampleTitle(
-            textId = R.string.custom_accessibility_actions_example_1_card_heading,
-            modifier = Modifier.padding(horizontal = 8.dp)
-        )
-        BodyText(
-            textId = R.string.custom_accessibility_actions_example_1_card_description,
-            modifier = Modifier.padding(horizontal = 8.dp)
-        )
-        Row(
-            modifier = Modifier
-                .padding(horizontal = 8.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround
         ) {
-            LikeButton(
-                cardId,
-                modifier = Modifier.testTag(customAccessibilityActionsExample1LikeButtonTestTag),
-                handleMessageEvent
+            // Note: Do not put a testTag() on this composable, because that would introduce an extra
+            // semantics node, making Compose jUnit testing of merged content impossible. While that
+            // would not affect TalkBack's behavior for users, it does affect automated testing.
+            BadExampleTitle(
+                textId = R.string.custom_accessibility_actions_example_1_card_heading,
+                modifier = Modifier.padding(horizontal = 8.dp)
             )
-            ShareButton(
-                cardId,
-                modifier = Modifier.testTag(customAccessibilityActionsExample1ShareButtonTestTag),
-                handleMessageEvent
+            BodyText(
+                textId = R.string.custom_accessibility_actions_example_1_card_description,
+                modifier = Modifier.padding(horizontal = 8.dp)
             )
-            ReportButton(
-                cardId,
-                modifier = Modifier.testTag(customAccessibilityActionsExample1ReportButtonTestTag),
-                handleMessageEvent
-            )
+            Row(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                LikeButton(
+                    cardId,
+                    modifier = Modifier.testTag(customAccessibilityActionsExample1LikeButtonTestTag),
+                    handleMessageEvent
+                )
+                ShareButton(
+                    cardId,
+                    modifier = Modifier.testTag(customAccessibilityActionsExample1ShareButtonTestTag),
+                    handleMessageEvent
+                )
+                ReportButton(
+                    cardId,
+                    modifier = Modifier.testTag(customAccessibilityActionsExample1ReportButtonTestTag),
+                    handleMessageEvent
+                )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
         }
-        Spacer(modifier = Modifier.height(8.dp))
     }
 }
 

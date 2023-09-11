@@ -16,6 +16,7 @@
 package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.test.assertAll
+import androidx.compose.ui.test.hasAnyChild
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasTestTag
@@ -63,10 +64,12 @@ class CustomAccessibilityActionsTests {
 
     @Test
     fun verifyExample1HasExpectedClickActions() {
+        // On the first example card, clickable() is applied to Column within the Card to avoid
+        // TalkBack reading order issues. The test much be modified accordingly.
         composeTestRule.onNode(
             hasTestTag(customAccessibilityActionsExample1CardTestTag)
                     and
-                    hasClickAction()
+                    hasAnyChild(hasClickAction())
         ).assertExists()
         composeTestRule.onNode(
             hasTestTag(customAccessibilityActionsExample1LikeButtonTestTag)

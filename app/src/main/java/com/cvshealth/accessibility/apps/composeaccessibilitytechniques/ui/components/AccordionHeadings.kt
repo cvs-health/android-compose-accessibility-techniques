@@ -68,12 +68,13 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
 fun GenericAccordionHeading(
     text: String,
     modifier: Modifier = Modifier,
+    initiallyExpanded: Boolean = false,
     headingIconPainter: Painter? = null,
     headingIconTint: Color = LocalContentColor.current,
     expanderIconTint: Color = LocalContentColor.current,
     content: @Composable () -> Unit
 ) {
-    val (isExpanded, setIsExpanded) = rememberSaveable { mutableStateOf(false) }
+    val (isExpanded, setIsExpanded) = rememberSaveable { mutableStateOf(initiallyExpanded) }
     Column(
         modifier = modifier
     ) {
@@ -113,16 +114,16 @@ fun GenericAccordionHeading(
                 Icon(
                     painter = headingIconPainter,
                     contentDescription = null,
-                    modifier = Modifier.defaultMinSize(24.dp, minHeight = 24.dp),
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .defaultMinSize(24.dp, minHeight = 24.dp),
                     tint = headingIconTint
                 )
             }
             Text(
                 text,
                 style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier
-                    .padding(start = 16.dp)
-                    .weight(1f)
+                modifier = Modifier.weight(1f)
             )
             // Key technique 3a: Visually indicate expanded/collapsed state (in this case, by an Icon).
             Icon(
@@ -153,10 +154,27 @@ fun GenericAccordionHeading(
 
 @Preview(showBackground = true)
 @Composable
-private fun GenericAccordionHeadingShortPreview() {
+private fun GenericAccordionHeadingCollapsedShortPreview() {
     ComposeAccessibilityTechniquesTheme() {
         GenericAccordionHeading(text = "This is a test accordion") {
-            Column {
+            Column(modifier = Modifier.padding(horizontal = 8.dp)) {
+                BodyText(textId = R.string.accordion_item_2_1)
+                BodyText(textId = R.string.accordion_item_2_2)
+                BodyText(textId = R.string.accordion_item_2_3)
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun GenericAccordionHeadingExpandedShortPreview() {
+    ComposeAccessibilityTechniquesTheme() {
+        GenericAccordionHeading(
+            text = "This is a test accordion",
+            initiallyExpanded = true
+        ) {
+            Column(modifier = Modifier.padding(horizontal = 8.dp)) {
                 BodyText(textId = R.string.accordion_item_2_1)
                 BodyText(textId = R.string.accordion_item_2_2)
                 BodyText(textId = R.string.accordion_item_2_3)
@@ -169,12 +187,14 @@ private fun GenericAccordionHeadingShortPreview() {
 fun SuccessAccordionHeading(
     text: String,
     modifier: Modifier = Modifier,
+    initiallyExpanded: Boolean = false,
     content: @Composable () -> Unit
 ) {
     GenericAccordionHeading(
         text = text,
         modifier = modifier
             .padding(top = 8.dp),
+        initiallyExpanded = initiallyExpanded,
         headingIconPainter = painterResource(id = R.drawable.ic_check_fill),
         headingIconTint = SuccessGreen,
         expanderIconTint = CvsRed
@@ -190,7 +210,7 @@ private fun SuccessAccordionHeadingShortPreview() {
         SuccessAccordionHeading(
             text = "This is a success accordion heading"
         ) {
-            Column {
+            Column(modifier = Modifier.padding(horizontal = 8.dp)) {
                 BodyText(textId = R.string.accordion_item_2_1)
                 BodyText(textId = R.string.accordion_item_2_2)
                 BodyText(textId = R.string.accordion_item_2_3)
@@ -203,12 +223,14 @@ private fun SuccessAccordionHeadingShortPreview() {
 fun BasicAccordionHeading(
     text: String,
     modifier: Modifier = Modifier,
+    initiallyExpanded: Boolean = false,
     content: @Composable () -> Unit
 ) {
     GenericAccordionHeading(
         text = text,
         modifier = modifier
             .padding(top = 8.dp),
+        initiallyExpanded = initiallyExpanded,
         expanderIconTint = CvsRed
     ) {
         content()
@@ -222,7 +244,7 @@ private fun BasicAccordionHeadingShortPreview() {
         BasicAccordionHeading(
             text = "This is a basic accordion heading"
         ) {
-            Column {
+            Column(modifier = Modifier.padding(horizontal = 8.dp)) {
                 BodyText(textId = R.string.accordion_item_2_1)
                 BodyText(textId = R.string.accordion_item_2_2)
                 BodyText(textId = R.string.accordion_item_2_3)

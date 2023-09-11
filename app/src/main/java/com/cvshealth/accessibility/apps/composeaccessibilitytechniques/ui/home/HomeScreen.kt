@@ -80,7 +80,9 @@ fun HomeScreen(
             BodyText(textId = R.string.home_description_2)
             Spacer(modifier = Modifier.height(8.dp))
 
-            BasicAccordionHeading(text = stringResource(id = R.string.home_informative_content)) {
+            BasicAccordionHeading(
+                text = stringResource(id = R.string.home_informative_content)
+            ) {
                 NavigationCard(
                     label = stringResource(R.string.text_alternatives_title),
                     route = ComposeAccessibilityTechniquesRoute.TextAlternatives,
@@ -108,7 +110,9 @@ fun HomeScreen(
                 )
             }
 
-            BasicAccordionHeading(text = stringResource(id = R.string.home_interactive_behaviors)) {
+            BasicAccordionHeading(
+                text = stringResource(id = R.string.home_interactive_behaviors)
+            ) {
                 NavigationCard(
                     label = stringResource(R.string.interactive_control_labels_title),
                     route = ComposeAccessibilityTechniquesRoute.InteractiveControlLabels,
@@ -126,7 +130,9 @@ fun HomeScreen(
                 )
             }
 
-            BasicAccordionHeading(text = stringResource(id = R.string.home_components)) {
+            BasicAccordionHeading(
+                text = stringResource(id = R.string.home_components)
+            ) {
                 NavigationCard(
                     label = stringResource(R.string.accordion_title),
                     route = ComposeAccessibilityTechniquesRoute.AccordionControls,
@@ -175,28 +181,34 @@ private fun NavigationCard(
     OutlinedCard(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 8.dp)
-            .clickable {
-                onNavigationButtonClicked(route)
-            },
+            .padding(top = 8.dp, start = 8.dp),
         border = BorderStroke(2.dp, CardDefaults.outlinedCardBorder().brush)
     ) {
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(start = 8.dp, end = 4.dp, top = 4.dp, bottom = 4.dp)
-                .minimumInteractiveComponentSize(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+        // Moving Modifier.clickable from Card to an otherwise unnecessary inner Column to fix
+        // TalkBack reading order issues.
+        Column(
+            modifier = Modifier
+                .clickable {
+                    onNavigationButtonClicked(route)
+                }
         ) {
-            Text(
-                label,
-                fontWeight = FontWeight.Medium
-            )
-            Icon(
-                painter = painterResource(id = R.drawable.ic_angle_right_outline),
-                contentDescription = null
-            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 8.dp, end = 4.dp, top = 4.dp, bottom = 4.dp)
+                    .minimumInteractiveComponentSize(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    label,
+                    fontWeight = FontWeight.Medium
+                )
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_angle_right_outline),
+                    contentDescription = null
+                )
+            }
         }
     }
 }

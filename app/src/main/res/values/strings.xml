@@ -185,6 +185,22 @@
     <string name="interactive_control_labels_example_9">Good example 9: Button with associated label</string>
     <string name="interactive_control_labels_associated_button_label">Button label</string>
 
+    <!-- UX change announcements -->
+    <string name="ux_change_announcements_title">UX change announcements</string>
+    <string name="ux_change_announcements_heading">Announce all UX changes (with live regions when possible)</string>
+    <string name="ux_change_announcements_description">All UX changes resulting from user action or automatic updates must be announced to accessibility services. Live regions announce changes to their value, including becoming visible, but not when they are hidden. Accessibility announcements can also be made with direct code, but that should be done sparingly.</string>
+    <string name="ux_change_announcements_description_2">Turn on TalkBack and activate the controls below for demonstrations.</string>
+    <string name="ux_change_announcements_example_1">Good example 1: Counter with liveRegion semantics</string>
+    <string name="ux_change_announcements_counter">Counter: %1d</string>
+    <string name="ux_change_announcements_counter2">Counter 2: %1d</string>
+    <string name="ux_change_announcements_increment_counter">Increment counter</string>
+    <string name="ux_change_announcements_reset_counter">Reset counter</string>
+    <string name="ux_change_announcements_example_2">Good example 2: Announcing visibility with liveRegion semantics and announceForAccessibility</string>
+    <string name="ux_change_announcements_example_2_show_text">Show Text</string>
+    <string name="ux_change_announcements_example_2_hide_text">Hide Text</string>
+    <string name="ux_change_announcements_example_2_text">LiveRegion Text shown</string>
+    <string name="ux_change_announcements_example_2_text_hidden">LiveRegion Text hidden</string>
+
     <!-- Keyboard types and options -->
     <string name="keyboard_types_title">Keyboard types and options</string>
     <string name="keyboard_types_heading">Match keyboard type and options to input data</string>

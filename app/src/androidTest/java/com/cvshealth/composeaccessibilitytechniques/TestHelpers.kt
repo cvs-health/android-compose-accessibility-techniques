@@ -16,6 +16,7 @@
 package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
@@ -98,5 +99,18 @@ fun hasNoCustomActions(): SemanticsMatcher =
 fun hasCustomActionLabelled(label: String) : SemanticsMatcher {
     return SemanticsMatcher("CustomActions.label == ${label}") {
         it.config.getOrNull(SemanticsActions.CustomActions)?.map { action -> action.label }?.contains(label) ?: false
+    }
+}
+
+// LiveRegion testing helpers
+fun hasLiveRegion(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.LiveRegion)
+
+fun hasNoLiveRegion(): SemanticsMatcher =
+    SemanticsMatcher.keyNotDefined(SemanticsProperties.LiveRegion)
+
+fun hasLiveRegionMode(mode: LiveRegionMode) : SemanticsMatcher {
+    return SemanticsMatcher("SemanticsProperties.LiveRegion == ${mode}") {
+        mode == it.config.getOrNull(SemanticsProperties.LiveRegion)
     }
 }

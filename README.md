@@ -18,14 +18,14 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [ ] Device orientation and screen sizes
     - [ ] Dark theme
 - Interactive Behaviors
-    - [x] [Input field labels](doc/controls/InteractiveControlLabels.md)
+    - [x] [Input field labels](doc/interactions/InteractiveControlLabels.md)
     - [ ] Minimum touch target size
     - [ ] Tap target grouping
-    - [ ] UX change announcements
-    - [x] [Keyboard types and options](doc/controls/KeyboardTypes.md)
+    - [x] [UX change announcements](doc/interactions/UXChangeAnnouncements.md)
+    - [x] [Keyboard types and options](doc/interactions/KeyboardTypes.md)
     - [ ] Keyboard actions
     - [ ] Custom state descriptions
-    - [x] [Custom accessibility actions](doc/controls/CustomAccessibilityActions.md)
+    - [x] [Custom accessibility actions](doc/interactions/CustomAccessibilityActions.md)
     - [ ] Custom semantics properties
 - Specific Component Types
     - [x] [Accordion controls](doc/components/AccordionControls.md)

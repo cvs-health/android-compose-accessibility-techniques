@@ -38,7 +38,7 @@ Group any separate content labels with their associated text values. For example
 
 * This is an important point: misgrouping or a lack of grouping could read all the table headings, then the table values, without saying what those table values mean. (Which would violate the WCAG [Success Criterion 1.3.2 Meaningful Sequence](https://www.w3.org/TR/WCAG21/#meaningful-sequence) and [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships).)
 
-* Note that associating active controls and their labels requires different techniques. (See [Interactive Control Labels](../controls/InteractiveControlLabels.md) for details.)
+* Note that associating active controls and their labels requires different techniques. (See [Interactive Control Labels](../interactions/InteractiveControlLabels.md) for details.)
 
 * Complex data tables also require different handling. (See [Text Alternatives](../content/TextAlternatives.md) for an overview.)
 

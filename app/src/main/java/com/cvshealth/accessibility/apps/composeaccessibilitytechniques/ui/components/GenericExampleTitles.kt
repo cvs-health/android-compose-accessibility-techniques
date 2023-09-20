@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
@@ -52,6 +53,8 @@ private fun GenericExampleTitle(
     ) {
         Icon(
             painter = painterResource(id = drawableId),
+            // Note: Suppress decorative icon description; caller must convey icon meaning in the
+            // visible text.
             contentDescription = null,
             modifier = Modifier
                 .defaultMinSize(24.dp, minHeight = 24.dp)
@@ -81,6 +84,21 @@ fun GoodExampleTitle(
     )
 }
 
+@Composable
+fun GroupedGoodExampleTitle(
+    @StringRes textId: Int,
+    modifier: Modifier = Modifier
+) {
+    GenericExampleTitle(
+        textId = textId,
+        drawableId = R.drawable.ic_check_fill,
+        modifier = modifier
+            // Note: Group icon and text as a single TalkBack focus
+            .semantics(mergeDescendants = true) { },
+        tint = SuccessGreen
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun GoodExampleTitlePreview() {
@@ -98,6 +116,21 @@ fun BadExampleTitle(
         textId = textId,
         drawableId = R.drawable.ic_close_fill,
         modifier = modifier,
+        tint = ErrorRed
+    )
+}
+
+@Composable
+fun GroupedBadExampleTitle(
+    @StringRes textId: Int,
+    modifier: Modifier = Modifier
+) {
+    GenericExampleTitle(
+        textId = textId,
+        drawableId = R.drawable.ic_close_fill,
+        modifier = modifier
+            // Note: Group icon and text as a single TalkBack focus
+            .semantics(mergeDescendants = true) { },
         tint = ErrorRed
     )
 }

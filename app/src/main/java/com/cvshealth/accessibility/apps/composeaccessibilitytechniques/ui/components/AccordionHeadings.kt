@@ -113,6 +113,8 @@ fun GenericAccordionHeading(
             if (headingIconPainter != null) {
                 Icon(
                     painter = headingIconPainter,
+                    // Note: Suppress decorative icon description; caller must convey icon meaning
+                    // in the visible text.
                     contentDescription = null,
                     modifier = Modifier
                         .padding(end = 16.dp)

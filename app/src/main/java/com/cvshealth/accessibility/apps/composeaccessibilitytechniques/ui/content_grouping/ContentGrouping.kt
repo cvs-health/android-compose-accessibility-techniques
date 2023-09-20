@@ -41,6 +41,8 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleTitle
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GroupedBadExampleTitle
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GroupedGoodExampleTitle
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -134,7 +136,7 @@ private fun BadExample1() {
     // Bad example 1: Ungrouped table
     // Does not organize texts that belongs together into their own layout composables
     // and does not apply Modifier.semantics(mergeDescendants = true).
-    BadExampleTitle(
+    GroupedBadExampleTitle(
         textId = R.string.content_grouping_table_example_1,
         modifier = Modifier.testTag(contentGroupingTableExample1TitleTestTag)
     )
@@ -208,7 +210,7 @@ private fun BadExample2() {
     // Applies Modifier.semantics(mergeDescendants = true), but to improperly grouped texts,
     // so all the headers are read together, and then all the data values are read together.
     // That doesn't associate each header with its data value.
-    BadExampleTitle(
+    GroupedBadExampleTitle(
         textId = R.string.content_grouping_table_example_2,
         modifier = Modifier.testTag(contentGroupingTableExample2TitleTestTag)
     )
@@ -275,7 +277,7 @@ private fun GoodExample3() {
     // Key techniques:
     // 1. Groups headers and data values that belong together into their own layout composables.
     // 2. Applies Modifier.semantics(mergeDescendants = true) to those tight header-value groups.
-    GoodExampleTitle(
+    GroupedGoodExampleTitle(
         textId = R.string.content_grouping_table_example_3,
         modifier = Modifier.testTag(contentGroupingTableExample3TitleTestTag)
     )
@@ -346,7 +348,7 @@ private fun BadExample4() {
             .testTag(contentGroupingCardExample4CardTestTag)
             .padding(top = 8.dp)
     ) {
-        BadExampleTitle(
+        GroupedBadExampleTitle(
             textId = R.string.content_grouping_card1_title,
             modifier = Modifier.padding(start = 8.dp, end = 8.dp)
         )
@@ -399,9 +401,12 @@ private fun GoodExample5() {
             .padding(top = 8.dp)
             .semantics(mergeDescendants = true) { }
     ) {
-        // Note: Do not put a testTag() on this composable, because that would introduce an extra
+        // Note: Do not apply mergeDescendants semantics within the Card; it will create additional
+        // areas of accessibility focus within this larger group.
+        //
+        // Also, do not put a testTag() on this composable, because that would introduce an extra
         // semantics node, making Compose jUnit testing of merged content impossible.
-        // But not that it would not affect TalkBack's behavior for users, only automated testing.
+        // Doing so would not affect TalkBack's behavior for users, only automated testing.
         GoodExampleTitle(
             textId = R.string.content_grouping_card2_title,
             modifier = Modifier.padding(start = 8.dp, end = 8.dp)
@@ -467,6 +472,7 @@ private fun GoodExample6() {
             .testTag(contentGroupingCardExample6CardTestTag)
             .padding(top = 8.dp)
     ) {
+        // Note: GoodExampleTitle used here, because it does not set mergeDescendants=true.
         GoodExampleTitle(
             textId = R.string.content_grouping_card3_title,
             modifier = Modifier.padding(start = 8.dp, end = 8.dp)

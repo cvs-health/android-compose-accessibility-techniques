@@ -76,6 +76,8 @@ private fun GenericExampleHeading(
         if (painter != null) {
             Icon(
                 painter = painter,
+                // Note: Suppress decorative icon description; caller must convey icon meaning
+                // in the visible text.
                 contentDescription = null,
                 modifier = Modifier
                     .defaultMinSize(24.dp, minHeight = 24.dp)

@@ -15,7 +15,6 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_types
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -75,7 +74,6 @@ const val keyboardTypesExample13TextFieldTestTag = "keyboardTypesExample13TextFi
 const val keyboardTypesExample14HeadingTestTag = "keyboardTypesExample14Heading"
 const val keyboardTypesExample14TextFieldTestTag = "keyboardTypesExample14TextField"
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun KeyboardTypesScreen(
     onBackPressed: () -> Unit

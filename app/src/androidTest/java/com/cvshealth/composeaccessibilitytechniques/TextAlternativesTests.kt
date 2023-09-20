@@ -77,6 +77,10 @@ class TextAlternativesTests {
     fun setup() {
         // Navigate from HomeScreen to TextAlternativesScreen.
         composeTestRule
+            .onNodeWithText(composeTestRule.activity.getString(R.string.home_informative_content))
+            .performScrollTo()
+            .performClick()
+        composeTestRule
             .onNodeWithText(composeTestRule.activity.getString(R.string.text_alternatives_title))
             .performScrollTo()
             .performClick()

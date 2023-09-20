@@ -59,6 +59,10 @@ class ListSemanticsTests {
     fun setup() {
         // Navigate from HomeScreen to ListSemanticsScreen.
         composeTestRule
+            .onNodeWithText(composeTestRule.activity.getString(R.string.home_informative_content))
+            .performScrollTo()
+            .performClick()
+        composeTestRule
             .onNodeWithText(composeTestRule.activity.getString(R.string.list_semantics_title))
             .performScrollTo()
             .performClick()

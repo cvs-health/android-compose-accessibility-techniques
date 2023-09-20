@@ -52,6 +52,10 @@ class AccordionControlsTests {
     fun setup() {
         // Navigate from HomeScreen to AccordionScreen.
         composeTestRule
+            .onNodeWithText(composeTestRule.activity.getString(R.string.home_components))
+            .performScrollTo()
+            .performClick()
+        composeTestRule
             .onNodeWithText(composeTestRule.activity.getString(R.string.accordion_title))
             .performScrollTo()
             .performClick()

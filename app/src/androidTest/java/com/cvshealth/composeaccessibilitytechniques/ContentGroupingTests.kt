@@ -65,6 +65,10 @@ class ContentGroupingTests {
     fun setup() {
         // Navigate from HomeScreen to ContentGroupingScreen.
         composeTestRule
+            .onNodeWithText(composeTestRule.activity.getString(R.string.home_informative_content))
+            .performScrollTo()
+            .performClick()
+        composeTestRule
             .onNodeWithText(composeTestRule.activity.getString(R.string.content_grouping_title))
             .performScrollTo()
             .performClick()

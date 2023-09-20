@@ -56,6 +56,10 @@ class ContentGroupReplacementTests {
     fun setup() {
         // Navigate from HomeScreen to ContentGroupReplacementScreen.
         composeTestRule
+            .onNodeWithText(composeTestRule.activity.getString(R.string.home_informative_content))
+            .performScrollTo()
+            .performClick()
+        composeTestRule
             .onNodeWithText(composeTestRule.activity.getString(R.string.content_group_replacement_title))
             .performScrollTo()
             .performClick()

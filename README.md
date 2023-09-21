@@ -23,7 +23,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [ ] Tap target grouping
     - [x] [UX change announcements](doc/interactions/UXChangeAnnouncements.md)
     - [x] [Keyboard types and options](doc/interactions/KeyboardTypes.md)
-    - [ ] Keyboard actions
+    - [x] [Keyboard actions](doc/interactions/KeyboardActions.md)
     - [ ] Custom state descriptions
     - [x] [Custom accessibility actions](doc/interactions/CustomAccessibilityActions.md)
     - [ ] Custom semantics properties
@@ -32,6 +32,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Checkbox controls](doc/components/CheckboxControls.md)
     - [x] [RadioButton groups](doc/components/RadioButtonGroups.md)
     - [x] [Switch controls](doc/components/SwitchControls.md)
+    - [ ] TextField controls
     - [ ] Dropdown list controls
     - [ ] Autofill input fields
     - [ ] Links inline with text

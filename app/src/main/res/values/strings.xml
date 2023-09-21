@@ -235,6 +235,28 @@
     <string name="keyboard_types_example_14_header">Good example 14: Keyboard type for numeric passwords (NumberPassword), plus masking</string>
     <string name="keyboard_types_example_14_label">Password (numeric)</string>
 
+    <!-- Keyboard actions -->
+    <string name="keyboard_actions_title">Keyboard actions</string>
+    <string name="keyboard_actions_heading">Match keyboard actions to input field purpose or position</string>
+    <string name="keyboard_actions_description_1">Text input fields should configure a keyboard action appropriate to their purpose or on-screen position. For example, a search field should have action \"Search\" and an independent messaging field should have action \"Send\". Alternatively, the last text input field on a form should generally have the keyboard action \"Done\" and earlier fields should have the action \"Next\". An inappropriate keyboard action can make data entry harder.</string>
+    <string name="keyboard_actions_description_2">Select each field below for editing, observe the soft keyboard action displayed, and activate that action for its effect.</string>
+    <string name="keyboard_actions_example_1_header">OK example 1: Keyboard action None adds a newline</string>
+    <string name="keyboard_actions_example_1_label">Name</string>
+    <string name="keyboard_actions_example_2_header">Good example 2: Keyboard action Next moves to next field</string>
+    <string name="keyboard_actions_example_2_label">Address</string>
+    <string name="keyboard_actions_example_3_header">Good example 3: Keyboard action Done submits the form</string>
+    <string name="keyboard_actions_example_3_label">Postal code</string>
+    <string name="keyboard_actions_example_3_done_message">Keyboard \"Done\" selected.</string>
+    <string name="keyboard_actions_example_4_header">Good example 4: Keyboard action Send sends a message</string>
+    <string name="keyboard_actions_example_4_label">Message</string>
+    <string name="keyboard_actions_example_4_send_message">Keyboard \"Send\" selected.</string>
+    <string name="keyboard_actions_example_5_header">Good example 5: Keyboard action Search submits a query</string>
+    <string name="keyboard_actions_example_5_label">Search</string>
+    <string name="keyboard_actions_example_5_search_message">Keyboard \"Search\" selected.</string>
+    <string name="keyboard_actions_example_6_header">Good example 6: Keyboard action Go opens a new view</string>
+    <string name="keyboard_actions_example_6_label">Phone</string>
+    <string name="keyboard_actions_example_6_go_message">Keyboard \"Go\" selected for text: %1$s.</string>
+
     <!-- Custom accessibility actions -->
     <string name="custom_accessibility_actions_title">Custom accessibility actions</string>
     <string name="custom_accessibility_actions_heading">Simplify screen reader user experience with custom accessibility actions</string>

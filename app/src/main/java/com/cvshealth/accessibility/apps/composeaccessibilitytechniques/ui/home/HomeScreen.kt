@@ -129,6 +129,11 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
+                    label = stringResource(R.string.keyboard_actions_title),
+                    route = ComposeAccessibilityTechniquesRoute.KeyboardActions,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
                     label = stringResource(R.string.custom_accessibility_actions_title),
                     route = ComposeAccessibilityTechniquesRoute.CustomAccessibilityActions,
                     onNavigationButtonClicked = onNavigationButtonClicked
@@ -186,34 +191,28 @@ private fun NavigationCard(
     OutlinedCard(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 8.dp, start = 8.dp),
+            .padding(top = 8.dp, start = 8.dp)
+            .clickable {
+                onNavigationButtonClicked(route)
+            },
         border = BorderStroke(2.dp, CardDefaults.outlinedCardBorder().brush)
     ) {
-        // Moving Modifier.clickable from Card to an otherwise unnecessary inner Column to fix
-        // TalkBack reading order issues.
-        Column(
+        Row(
             modifier = Modifier
-                .clickable {
-                    onNavigationButtonClicked(route)
-                }
+                .fillMaxWidth()
+                .padding(start = 8.dp, end = 4.dp, top = 4.dp, bottom = 4.dp)
+                .minimumInteractiveComponentSize(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 8.dp, end = 4.dp, top = 4.dp, bottom = 4.dp)
-                    .minimumInteractiveComponentSize(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    label,
-                    fontWeight = FontWeight.Medium
-                )
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_angle_right_outline),
-                    contentDescription = null
-                )
-            }
+            Text(
+                label,
+                fontWeight = FontWeight.Medium
+            )
+            Icon(
+                painter = painterResource(id = R.drawable.ic_angle_right_outline),
+                contentDescription = null
+            )
         }
     }
 }

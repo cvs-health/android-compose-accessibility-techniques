@@ -114,3 +114,10 @@ fun hasLiveRegionMode(mode: LiveRegionMode) : SemanticsMatcher {
         mode == it.config.getOrNull(SemanticsProperties.LiveRegion)
     }
 }
+
+// State Description helpers
+fun hasStateDescription(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.StateDescription)
+
+fun hasNoStateDescription(): SemanticsMatcher =
+    SemanticsMatcher.keyNotDefined(SemanticsProperties.StateDescription)

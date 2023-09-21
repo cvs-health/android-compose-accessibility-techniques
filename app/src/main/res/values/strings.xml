@@ -257,6 +257,25 @@
     <string name="keyboard_actions_example_6_label">Phone</string>
     <string name="keyboard_actions_example_6_go_message">Keyboard \"Go\" selected for text: %1$s.</string>
 
+    <!-- Custom state descriptions -->
+    <string name="custom_state_descriptions_title">Custom state descriptions</string>
+    <string name="custom_state_descriptions_heading">Enhance screen reader user experience by customizing state description labels</string>
+    <string name="custom_state_descriptions_description">How TalkBack describes the state of a control (such as \“Checked\” and \"Unchecked\" for check boxes) can be overridden to be more useful.</string>
+    <string name="custom_state_descriptions_description_2">Turn on TalkBack and then select and toggle the following controls to hear demonstrations.</string>
+    <string name="custom_state_descriptions_description_3">Note: This technique does not work on all platforms and API levels.</string>
+    <string name="custom_state_descriptions_example_1_heading">OK example 1: Checkbox with default state labels</string>
+    <string name="custom_state_descriptions_default_checkbox">Motion detector</string>
+    <string name="custom_state_descriptions_example_2_heading">Good example 2: Checkbox with customized state labels</string>
+    <string name="custom_state_descriptions_customized_checkbox">Motion detector</string>
+    <string name="custom_state_descriptions_checked_label">Activated</string>
+    <string name="custom_state_descriptions_unchecked_label">Deactivated</string>
+    <string name="custom_state_descriptions_example_3_heading">OK example 3: Switch with default state labels</string>
+    <string name="custom_state_descriptions_default_switch">Shields</string>
+    <string name="custom_state_descriptions_example_4_heading">Good example 4: Switch with custom state labels</string>
+    <string name="custom_state_descriptions_customized_switch">Shields</string>
+    <string name="custom_state_descriptions_shields_raised">Raised</string>
+    <string name="custom_state_descriptions_shields_lowered">Lowered</string>
+
     <!-- Custom accessibility actions -->
     <string name="custom_accessibility_actions_title">Custom accessibility actions</string>
     <string name="custom_accessibility_actions_heading">Simplify screen reader user experience with custom accessibility actions</string>

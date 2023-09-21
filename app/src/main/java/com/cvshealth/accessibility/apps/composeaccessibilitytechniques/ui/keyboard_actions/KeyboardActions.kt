@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
  */
-package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui
+package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_actions
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column

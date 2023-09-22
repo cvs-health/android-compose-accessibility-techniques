@@ -28,6 +28,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accessibility_traversal_order.AccessibilityTraversalOrderScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_actions.KeyboardActionsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.AccordionControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.checkbox_controls.CheckboxControlsScreen
@@ -83,6 +84,9 @@ fun ComposeAccessibilityTechniquesNavHost(
         }
         composable(route = ComposeAccessibilityTechniquesRoute.TextAlternatives.route) {
             TextAlternativesScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.AccessibilityTraversalOrder.route) {
+            AccessibilityTraversalOrderScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.ContentGrouping.route) {
             ContentGroupingScreen(onBackPressed = popBackStack)

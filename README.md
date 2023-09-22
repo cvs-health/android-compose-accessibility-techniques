@@ -10,6 +10,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
 ## Topics
 - Informative Content
     - [x] [Text alternatives](doc/content/TextAlternatives.md)
+    - [x] [Accessibility traversal order](doc/content/AccessibilityTraversalOrder.md)
     - [ ] Text resizing and reflow
     - [x] [Content grouping](doc/content/ContentGrouping.md)
     - [x] [Content group replacement](doc/content/ContentGroupReplacement.md)

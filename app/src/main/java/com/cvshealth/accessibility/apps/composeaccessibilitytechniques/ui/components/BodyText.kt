@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
@@ -49,6 +50,34 @@ fun BodyText(
     textAlign: TextAlign? = null
 ) {
     BodyTextNoPadding(
+        textId,
+        modifier.padding(top = 8.dp),
+        textAlign
+    )
+}
+@Composable
+fun BoldBodyTextNoPadding(
+    @StringRes textId: Int,
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign? = null
+) {
+    Text(
+        stringResource(id = textId),
+        modifier = modifier
+            .fillMaxWidth(),
+        fontWeight = FontWeight.Bold,
+        textAlign = textAlign,
+        style = MaterialTheme.typography.bodyMedium
+    )
+}
+
+@Composable
+fun BoldBodyText(
+    @StringRes textId: Int,
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign? = null
+) {
+    BoldBodyTextNoPadding(
         textId,
         modifier.padding(top = 8.dp),
         textAlign

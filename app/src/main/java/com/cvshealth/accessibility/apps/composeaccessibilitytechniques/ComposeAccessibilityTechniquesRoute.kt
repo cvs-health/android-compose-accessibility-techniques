@@ -21,6 +21,7 @@ package com.cvshealth.accessibility.apps.composeaccessibilitytechniques
 enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     Home("home"),
     TextAlternatives("textAlternatives"),
+    AccessibilityTraversalOrder("accessibilityTraversalOrder"),
     ContentGrouping("contentGrouping"),
     ContentGroupReplacement("contentGroupReplacement"),
     HeadingSemantics("headingSemantics"),

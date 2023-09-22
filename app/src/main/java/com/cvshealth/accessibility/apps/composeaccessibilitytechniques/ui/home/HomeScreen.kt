@@ -89,6 +89,11 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
+                    label = stringResource(R.string.accessibility_traversal_order_title),
+                    route = ComposeAccessibilityTechniquesRoute.AccessibilityTraversalOrder,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
                     label = stringResource(R.string.content_grouping_title),
                     route = ComposeAccessibilityTechniquesRoute.ContentGrouping,
                     onNavigationButtonClicked = onNavigationButtonClicked

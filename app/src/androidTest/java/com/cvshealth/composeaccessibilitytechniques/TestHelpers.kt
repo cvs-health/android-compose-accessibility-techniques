@@ -121,3 +121,32 @@ fun hasStateDescription(): SemanticsMatcher =
 
 fun hasNoStateDescription(): SemanticsMatcher =
     SemanticsMatcher.keyNotDefined(SemanticsProperties.StateDescription)
+
+// Traversal Order helpers
+fun hasIsTraversalGroup(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.IsTraversalGroup)
+
+fun isTraversalGroup(): SemanticsMatcher {
+    return SemanticsMatcher("SemanticsProperties.IsTraversalGroup == true") {
+        true == it.config.getOrNull(SemanticsProperties.IsTraversalGroup)
+    }
+}
+
+fun isNotATraversalGroup(): SemanticsMatcher {
+    return SemanticsMatcher("SemanticsProperties.IsTraversalGroup == null or false") {
+        val isTraversalGroupValue = it.config.getOrNull(SemanticsProperties.IsTraversalGroup)
+        return@SemanticsMatcher isTraversalGroupValue == null || isTraversalGroupValue == false
+    }
+}
+
+fun hasTraversalIndex(value: Float): SemanticsMatcher {
+    return SemanticsMatcher("SemanticsProperties.TraversalIndex == {$value}") {
+        value == it.config.getOrNull(SemanticsProperties.TraversalIndex)
+    }
+}
+
+fun hasAnyTraversalIndex(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.TraversalIndex)
+
+fun hasNoTraversalIndex(): SemanticsMatcher =
+    SemanticsMatcher.keyNotDefined(SemanticsProperties.TraversalIndex)

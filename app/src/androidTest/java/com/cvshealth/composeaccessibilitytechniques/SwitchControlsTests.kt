@@ -15,6 +15,7 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.assertIsToggleable
@@ -27,9 +28,9 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.SwitchControlsScreen
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.switchControlsExample1CheckboxTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.switchControlsExample1SwitchTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.switchControlsExample1HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.switchControlsExample2CheckboxTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.switchControlsExample2SwitchTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.switchControlsExample2HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.switchControlsHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -73,7 +74,7 @@ class SwitchControlsTests {
     fun verifyExampleCheckboxControlsHaveNoHeadings() {
         composeTestRule
             .onNode(
-                hasTestTag(switchControlsExample1CheckboxTestTag)
+                hasTestTag(switchControlsExample1SwitchTestTag)
                         and
                         !isHeading()
                         and
@@ -82,7 +83,7 @@ class SwitchControlsTests {
             .assertExists()
         composeTestRule
             .onNode(
-                hasTestTag(switchControlsExample2CheckboxTestTag)
+                hasTestTag(switchControlsExample2SwitchTestTag)
                         and
                         !isHeading()
                         and
@@ -94,55 +95,64 @@ class SwitchControlsTests {
     @Test
     fun verifyBadExample1HasNoText() {
         composeTestRule
-            .onNode(hasTestTag(switchControlsExample1CheckboxTestTag) and !hasText())
+            .onNode(hasTestTag(switchControlsExample1SwitchTestTag) and !hasText())
             .assertExists()
     }
 
     @Test
     fun verifyGoodExample2HasText() {
         composeTestRule
-            .onNode(hasTestTag(switchControlsExample2CheckboxTestTag) and hasText())
+            .onNode(hasTestTag(switchControlsExample2SwitchTestTag) and hasText())
             .assertExists()
     }
 
     @Test
     fun verifyThatBadExample1CheckboxRowIsNotToggleable() {
         composeTestRule
-            .onNode(hasTestTag(switchControlsExample1CheckboxTestTag) and !isToggleable())
+            .onNode(hasTestTag(switchControlsExample1SwitchTestTag) and !isToggleable())
             .assertExists()
     }
 
     @Test
     fun verifyThatGoodExample2CheckboxRowIsToggleable() {
         composeTestRule
-            .onNodeWithTag(switchControlsExample2CheckboxTestTag)
+            .onNodeWithTag(switchControlsExample2SwitchTestTag)
             .assertIsToggleable()
     }
 
     @Test
     fun verifyThatCheckboxRowToggles() {
         composeTestRule
-            .onNodeWithTag(switchControlsExample2CheckboxTestTag)
+            .onNodeWithTag(switchControlsExample2SwitchTestTag)
             .assertIsOff()
         composeTestRule
-            .onNodeWithTag(switchControlsExample2CheckboxTestTag)
+            .onNodeWithTag(switchControlsExample2SwitchTestTag)
             .performScrollTo()
             .performClick()
         composeTestRule
-            .onNodeWithTag(switchControlsExample2CheckboxTestTag)
+            .onNodeWithTag(switchControlsExample2SwitchTestTag)
             .assertIsOn()
         composeTestRule
-            .onNodeWithTag(switchControlsExample2CheckboxTestTag)
+            .onNodeWithTag(switchControlsExample2SwitchTestTag)
             .performClick()
         composeTestRule
-            .onNodeWithTag(switchControlsExample2CheckboxTestTag)
+            .onNodeWithTag(switchControlsExample2SwitchTestTag)
             .assertIsOff()
     }
 
     @Test
-    fun verifyThatFauxSwitchRowIsNotToggleable() {
+    fun verifyThatBadExample1SwitchRowHasNoRole() {
         composeTestRule
-            .onNode(hasTestTag(switchControlsExample1CheckboxTestTag) and !isToggleable())
+            .onNode(hasTestTag(switchControlsExample1SwitchTestTag) and !hasAnyRole())
+            .assertExists()
+    }
+
+    @Test
+    fun verifyThatGoodExample2SwitchRowHasSwitchRole() {
+        composeTestRule
+            .onNode(
+                hasTestTag(switchControlsExample2SwitchTestTag) and hasRole(Role.Switch)
+            )
             .assertExists()
     }
 }

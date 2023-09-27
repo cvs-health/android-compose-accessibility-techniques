@@ -356,6 +356,38 @@
     <string name="checkbox_controls_example_2_header">Good example 2: Accessible Checkbox</string>
     <string name="checkbox_controls_example_2_label">Accessible checkbox</string>
 
+    <!-- ListItem layouts -->
+    <string name="listitem_layouts_title">ListItem layouts</string>
+    <string name="listitem_layouts_heading">Actionable ListItem layouts require a fix</string>
+    <string name="listitem_layouts_description_1">ListItem layouts merge their descendants. This is good, unless the ListItem is clickable, selectable, or toggleable. Then they require a fix using Modifier.clearAndSetSemantics.</string>
+    <string name="listitem_layouts_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of inaccessible and accessible ListItem layouts.</string>
+    <string name="listitem_layouts_example_1_header">Good example 1: Accessible inactive ListItem layout</string>
+    <string name="listitem_layouts_example_1_label">Accessible inactive ListItem</string>
+    <string name="listitem_layouts_example_1_label_2">Announces as a single text.</string>
+    <string name="listitem_layouts_example_2_header">Bad example 2: Inaccessible clickable ListItem layout</string>
+    <string name="listitem_layouts_example_2_label">Inaccessible clickable ListItem</string>
+    <string name="listitem_layouts_example_2_label_2">Announces as an inactive text; although it is clickable.</string>
+    <string name="listitem_layouts_example_2_message">Clicked inaccessible clickable ListItem</string>
+    <string name="listitem_layouts_example_3_header">Good example 3: Accessible clickable ListItem layout</string>
+    <string name="listitem_layouts_example_3_label">Accessible clickable ListItem</string>
+    <string name="listitem_layouts_example_3_label_2">Announces as a single labeled, clickable Button.</string>
+    <string name="listitem_layouts_example_3_content_description">Accessible clickable ListItem. Announces as a single, labeled, clickable Button.</string>
+    <string name="listitem_layouts_example_3_message">Clicked accessible clickable ListItem</string>
+    <string name="listitem_layouts_example_4_header">Bad example 4: Inaccessible selectable ListItem layout</string>
+    <string name="listitem_layouts_example_4_label">Inaccessible selectable ListItem</string>
+    <string name="listitem_layouts_example_4_label_2">Announces as a unlabeled RadioButton. Swipe again to hear the label.</string>
+    <string name="listitem_layouts_example_5_header">Good example 5: Accessible selectable ListItem layout</string>
+    <string name="listitem_layouts_example_5_label">Accessible selectable ListItem</string>
+    <string name="listitem_layouts_example_5_label_2">Announces as a single labeled, selectable radio button.</string>
+    <string name="listitem_layouts_example_5_content_description">Accessible selectable ListItem. Announces as a single, labeled, selectable radio button.</string>
+    <string name="listitem_layouts_example_6_header">Bad example 6: Inaccessible toggleable ListItem layout</string>
+    <string name="listitem_layouts_example_6_label">Inaccessible toggleable ListItem</string>
+    <string name="listitem_layouts_example_6_label_2">Announces as a unlabeled Switch. Swipe again to hear the label.</string>
+    <string name="listitem_layouts_example_7_header">Good example 7: Accessible toggleable ListItem layout</string>
+    <string name="listitem_layouts_example_7_label">Accessible toggleable ListItem</string>
+    <string name="listitem_layouts_example_7_label_2">Announces as a single labeled, toggleable Switch.</string>
+    <string name="listitem_layouts_example_7_content_description">Accessible toggleable ListItem. Announces as a single, labeled, toggleable Switch.</string>
+
     <!-- Switch controls -->
     <string name="switch_controls_title">Switch controls</string>
     <string name="switch_controls_heading">Switch controls require labels and Modifier.toggleable</string>
@@ -365,5 +397,17 @@
     <string name="switch_controls_example_1_label">Faux switch</string>
     <string name="switch_controls_example_2_header">Good example 2: Accessible Switch</string>
     <string name="switch_controls_example_2_label">Accessible switch</string>
+
+    <!-- TextField controls -->
+    <string name="textfield_controls_title">TextField controls</string>
+    <string name="textfield_controls_heading">TextField controls require keyboard trap fix, etc.</string>
+    <string name="textfield_controls_description_1">TextField controls requires a label, Modifier fixes to properly handle keyboard tabbing, any appropriate error handling, and correct keyboard type, options, and actions.</string>
+    <string name="textfield_controls_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of an accessible TextField.</string>
+    <string name="textfield_controls_example_1_header">Good example 1: Accessible required TextField</string>
+    <string name="textfield_controls_example_1_label">Name (required)</string>
+    <string name="textfield_controls_example_1_button">Submit</string>
+    <string name="textfield_controls_example_1_short_error">Name is required. Please supply a non-blank name.</string>
+    <string name="textfield_controls_example_1_long_error">Error: Name is required. Please supply a non-blank name.</string>
+    <string name="textfield_controls_example_1_message">TextField value %1$s submitted.</string>
 
 </resources>

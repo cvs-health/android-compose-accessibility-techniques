@@ -112,6 +112,7 @@ fun verifyThatCheckboxRowToggles() {
 
 Other tests for accessibility semantics are possible and are strongly suggested. The key technique is to test for semantic properties, as well as testing for functionality.
 
+To debug tests, apply the following code in a test function to log the semantics tree: `composeTestRule.onRoot().printToLog("LOG_TAG")`. Alternatively, apply the following code to log the unmerged semantics tree: `composeTestRule.onRoot(useUnmergedTree = true).printToLog("LOG_TAG")`.
 
 ----
 

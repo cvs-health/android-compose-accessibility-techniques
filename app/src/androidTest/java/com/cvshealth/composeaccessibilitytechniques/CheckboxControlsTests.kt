@@ -15,6 +15,7 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.assertIsToggleable
@@ -140,9 +141,19 @@ class CheckboxControlsTests {
     }
 
     @Test
-    fun verifyThatFauxSwitchRowIsNotToggleable() {
+    fun verifyThatBadExample1CheckboxRowHasNoRole() {
         composeTestRule
-            .onNode(hasTestTag(checkboxControlsExample1CheckboxTestTag) and !isToggleable())
+            .onNode(hasTestTag(checkboxControlsExample1CheckboxTestTag) and !hasAnyRole())
             .assertExists()
     }
+
+    @Test
+    fun verifyThatGoodExample2CheckboxRowHasCheckboxRole() {
+        composeTestRule
+            .onNode(
+                hasTestTag(checkboxControlsExample2CheckboxTestTag) and hasRole(Role.Checkbox)
+            )
+            .assertExists()
+    }
+
 }

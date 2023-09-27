@@ -41,9 +41,11 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.home.H
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.InteractiveControlLabelsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_types.KeyboardTypesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.list_semantics.ListSemanticsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.ListItemLayoutsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.RadioButtonGroupsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.SwitchControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.TextAlternativesScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.textfield_controls.TextFieldControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.ux_change_announcements.UxChangeAnnouncementsScreen
 
@@ -124,11 +126,17 @@ fun ComposeAccessibilityTechniquesNavHost(
         composable(route = ComposeAccessibilityTechniquesRoute.CheckboxControls.route) {
             CheckboxControlsScreen(onBackPressed = popBackStack)
         }
+        composable(route = ComposeAccessibilityTechniquesRoute.ListItemLayouts.route) {
+            ListItemLayoutsScreen(onBackPressed = popBackStack)
+        }
         composable(route = ComposeAccessibilityTechniquesRoute.RadioButtonGroups.route) {
             RadioButtonGroupsScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.SwitchControls.route) {
             SwitchControlsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.TextFieldControls.route) {
+            TextFieldControlsScreen(onBackPressed = popBackStack)
         }
     }
 }

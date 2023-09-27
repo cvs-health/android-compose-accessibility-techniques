@@ -49,21 +49,25 @@ import kotlinx.coroutines.launch
 
 private const val FOCUS_DEBOUNCE_TIME = 250L
 
-@OptIn(ExperimentalComposeUiApi::class)
 fun Modifier.nextOnTabAndHandleEnter(
     enterCallback: (() -> Unit)? = null
 ): Modifier {
     return this.composed {
         val focusManager = LocalFocusManager.current
+        // Key technique 2a: Remember the focus state.
         var hasFocus by remember { mutableStateOf(false) }
         val scope = rememberCoroutineScope()
         this@composed
+            // Key techniques 1 & 2b: Debounce focus changes and track the focus state.
             .onFocusChanged { focusState ->
                 scope.launch {
                     delay(FOCUS_DEBOUNCE_TIME)
                     hasFocus = focusState.hasFocus
                 }
             }
+            // Key technique 3: If focus remains on this control, handle Tab, Shift+Tab, and Enter
+            // keys before a keyEvent becomes part of the TextField's text data.
+            // Note that Enter key handling is optional and is hoisted to the caller's context.
             .onPreviewKeyEvent { keyEvent ->
                 if (hasFocus && keyEvent.nativeKeyEvent.keyCode == KEYCODE_TAB) {
                     if (keyEvent.nativeKeyEvent.isShiftPressed) {

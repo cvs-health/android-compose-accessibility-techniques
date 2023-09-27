@@ -164,6 +164,11 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
+                    label = stringResource(R.string.listitem_layouts_title),
+                    route = ComposeAccessibilityTechniquesRoute.ListItemLayouts,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
                     label = stringResource(id = R.string.radio_button_groups_title),
                     route = ComposeAccessibilityTechniquesRoute.RadioButtonGroups,
                     onNavigationButtonClicked = onNavigationButtonClicked
@@ -171,6 +176,11 @@ fun HomeScreen(
                 NavigationCard(
                     label = stringResource(R.string.switch_controls_title),
                     route = ComposeAccessibilityTechniquesRoute.SwitchControls,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
+                    label = stringResource(R.string.textfield_controls_title),
+                    route = ComposeAccessibilityTechniquesRoute.TextFieldControls,
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
             }

@@ -1,5 +1,5 @@
 # Switch Controls
-`Switch` controls require specific construction in order to be accessible. Specifically they must have a wrapping layout to programmatically associate a label and subsume the `Switch`'s role and toggle handling. These techniques support WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships) and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG21/#name-role-value).
+`Switch` controls require specific construction in order to be accessible. Specifically, they must have a wrapping layout to programmatically associate a label and subsume the `Switch`'s role and toggle handling. These techniques support WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships) and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG21/#name-role-value).
 
 The required techniques are:
 

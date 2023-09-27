@@ -31,9 +31,10 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
 - Specific Component Types
     - [x] [Accordion controls](doc/components/AccordionControls.md)
     - [x] [Checkbox controls](doc/components/CheckboxControls.md)
+    - [x] [ListItem layouts](doc/components/ListItemLayouts.md)
     - [x] [RadioButton groups](doc/components/RadioButtonGroups.md)
     - [x] [Switch controls](doc/components/SwitchControls.md)
-    - [ ] TextField controls
+    - [x] [TextField controls](doc/components/TextFieldControls.md)
     - [ ] Dropdown list controls
     - [ ] Autofill input fields
     - [ ] Links inline with text

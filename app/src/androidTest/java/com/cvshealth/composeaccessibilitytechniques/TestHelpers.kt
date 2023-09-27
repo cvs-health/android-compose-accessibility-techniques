@@ -17,6 +17,7 @@ package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
@@ -150,3 +151,37 @@ fun hasAnyTraversalIndex(): SemanticsMatcher =
 
 fun hasNoTraversalIndex(): SemanticsMatcher =
     SemanticsMatcher.keyNotDefined(SemanticsProperties.TraversalIndex)
+
+// Error helpers
+fun isError(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.Error)
+
+fun hasError(value: String): SemanticsMatcher {
+    return SemanticsMatcher("SemanticsProperties.Error == {$value}") {
+        value == it.config.getOrNull(SemanticsProperties.Error)
+    }
+}
+
+// Role helpers
+fun hasAnyRole(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.Role)
+
+fun hasRole(value: Role): SemanticsMatcher {
+    return SemanticsMatcher("SemanticsProperties.Role == {$value}") {
+        value == it.config.getOrNull(SemanticsProperties.Role)
+    }
+}
+
+// SemanticsConfiguration helpers
+
+fun hasClearAndSetSemantics(): SemanticsMatcher {
+    return SemanticsMatcher("SemanticsConfiguration.isClearingSemantics") {
+        it.config.isClearingSemantics
+    }
+}
+
+fun hasMergeSemantics(): SemanticsMatcher {
+    return SemanticsMatcher("SemanticsConfiguration.isMergingSemanticsOfDescendants") {
+        it.config.isMergingSemanticsOfDescendants
+    }
+}

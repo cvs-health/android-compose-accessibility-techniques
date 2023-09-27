@@ -44,9 +44,9 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
 
 const val switchControlsHeadingTestTag = "switchControlsHeading"
 const val switchControlsExample1HeadingTestTag = "switchControlsExample1Heading"
-const val switchControlsExample1CheckboxTestTag = "switchControlsExample1Checkbox"
+const val switchControlsExample1SwitchTestTag = "switchControlsExample1Switch"
 const val switchControlsExample2HeadingTestTag = "switchControlsExample2Heading"
-const val switchControlsExample2CheckboxTestTag = "switchControlsExample2Checkbox"
+const val switchControlsExample2SwitchTestTag = "switchControlsExample2Switch"
 
 @Composable
 fun SwitchControlsScreen(
@@ -79,7 +79,7 @@ fun SwitchControlsScreen(
                 text = stringResource(id = R.string.switch_controls_example_1_label),
                 checked = example1Checked,
                 toggleHandler = setExample1Checked,
-                modifier = Modifier.testTag(switchControlsExample1CheckboxTestTag)
+                modifier = Modifier.testTag(switchControlsExample1SwitchTestTag)
             )
 
             GoodExampleHeading(
@@ -96,7 +96,7 @@ fun SwitchControlsScreen(
                 text = stringResource(id = R.string.switch_controls_example_2_label),
                 checked = example2Checked,
                 toggleHandler = setExample2Checked,
-                modifier = Modifier.testTag(switchControlsExample2CheckboxTestTag)
+                modifier = Modifier.testTag(switchControlsExample2SwitchTestTag)
             )
 
             Spacer(modifier = Modifier.height(8.dp))

@@ -164,6 +164,11 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
+                    label = stringResource(R.string.dropdown_menus_title),
+                    route = ComposeAccessibilityTechniquesRoute.DropdownMenus,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
                     label = stringResource(R.string.listitem_layouts_title),
                     route = ComposeAccessibilityTechniquesRoute.ListItemLayouts,
                     onNavigationButtonClicked = onNavigationButtonClicked

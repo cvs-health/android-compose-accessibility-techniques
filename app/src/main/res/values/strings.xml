@@ -334,18 +334,6 @@
     <string name="accordion_item_2_3">Correct Accordion example, Item 3</string>
     <string name="accordion_item_2_4">Correct Accordion example, Item 4</string>
 
-    <!-- RadioButton groups -->
-    <string name="radio_button_groups_title">RadioButton groups</string>
-    <string name="radio_button_groups_heading">RadioButton groups require the selectableGroup modifier; RadioButtons require labels</string>
-    <string name="radio_button_groups_description_1">Layout composables which group RadioButton composables require Modifier.selectableGroup(). Individual RadioButton composables require a wrapping layout that subsumes their semantics and provides a control label.</string>
-    <string name="radio_button_groups_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of inaccessible and accessible RadioButton groups.</string>
-    <string name="radio_button_groups_example_1_header">Bad example 1: Inaccessible RadioButton group</string>
-    <string name="radio_button_groups_example_2_header">Good example 2: Accessible RadioButton group</string>
-    <string name="radio_button_groups_group_label">Pick a fruit:</string>
-    <string name="radio_button_groups_option_1">Banana</string>
-    <string name="radio_button_groups_option_2">Grape</string>
-    <string name="radio_button_groups_option_3">Orange</string>
-
     <!-- Checkbox controls -->
     <string name="checkbox_controls_title">Checkbox controls</string>
     <string name="checkbox_controls_heading">Checkbox controls require labels and Modifier.toggleable</string>
@@ -355,6 +343,24 @@
     <string name="checkbox_controls_example_1_label">Faux checkbox</string>
     <string name="checkbox_controls_example_2_header">Good example 2: Accessible Checkbox</string>
     <string name="checkbox_controls_example_2_label">Accessible checkbox</string>
+
+    <!-- Dropdown selection menus -->
+    <string name="dropdown_menus_title">Dropdown selection menus</string>
+    <string name="dropdown_menus_heading">Use the Exposed Dropdown Menu pattern</string>
+    <string name="dropdown_menus_description_1">The Exposed Dropdown Menu pattern creates an accessible dropdown selection menu. Custom approaches are less likely to be accessible.</string>
+    <string name="dropdown_menus_description_2">Turn on TalkBack and swipe through this page, activating the list control and making selections. Repeat the process with TalkBack off using Switch Access and/or a physical keyboard.</string>
+    <string name="dropdown_menus_example_1_heading">Good example 1: Non-editable Exposed Dropdown Menu</string>
+    <string name="dropdown_menus_example_1_description">The Exposed Dropdown Menu pattern uses ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem controls to create an accessible dropdown selection menu.</string>
+    <string name="dropdown_menus_example_label">Payment type</string>
+    <string name="dropdown_menus_example_option_1">Cash</string>
+    <string name="dropdown_menus_example_option_2">Check</string>
+    <string name="dropdown_menus_example_option_3">Credit/Debit card</string>
+    <string name="dropdown_menus_example_option_4">Money order</string>
+    <string name="dropdown_menus_example_option_5">Voucher</string>
+    <string name="dropdown_menus_example_option_not_selected">(No payment type selected.)</string>
+    <string name="dropdown_menus_example_2_heading">OK example 2: Editable Exposed Dropdown Menu</string>
+    <string name="dropdown_menus_example_2_description">Editable Exposed Dropdown Menus allow auto-suggest and do not limit input to the content of the list. However, it is challenging to use in TalkBack, requiring window switching to enter and exit the keyboard.</string>
+
 
     <!-- ListItem layouts -->
     <string name="listitem_layouts_title">ListItem layouts</string>
@@ -387,6 +393,18 @@
     <string name="listitem_layouts_example_7_label">Accessible toggleable ListItem</string>
     <string name="listitem_layouts_example_7_label_2">Announces as a single labeled, toggleable Switch.</string>
     <string name="listitem_layouts_example_7_content_description">Accessible toggleable ListItem. Announces as a single, labeled, toggleable Switch.</string>
+
+    <!-- RadioButton groups -->
+    <string name="radio_button_groups_title">RadioButton groups</string>
+    <string name="radio_button_groups_heading">RadioButton groups require the selectableGroup modifier; RadioButtons require labels</string>
+    <string name="radio_button_groups_description_1">Layout composables which group RadioButton composables require Modifier.selectableGroup(). Individual RadioButton composables require a wrapping layout that subsumes their semantics and provides a control label.</string>
+    <string name="radio_button_groups_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of inaccessible and accessible RadioButton groups.</string>
+    <string name="radio_button_groups_example_1_header">Bad example 1: Inaccessible RadioButton group</string>
+    <string name="radio_button_groups_example_2_header">Good example 2: Accessible RadioButton group</string>
+    <string name="radio_button_groups_group_label">Pick a fruit:</string>
+    <string name="radio_button_groups_option_1">Banana</string>
+    <string name="radio_button_groups_option_2">Grape</string>
+    <string name="radio_button_groups_option_3">Orange</string>
 
     <!-- Switch controls -->
     <string name="switch_controls_title">Switch controls</string>

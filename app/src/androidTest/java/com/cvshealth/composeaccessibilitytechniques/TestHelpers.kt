@@ -117,7 +117,7 @@ fun hasLiveRegionMode(mode: LiveRegionMode) : SemanticsMatcher {
 }
 
 // State Description helpers
-fun hasStateDescription(): SemanticsMatcher =
+fun hasSomeStateDescription(): SemanticsMatcher =
     SemanticsMatcher.keyIsDefined(SemanticsProperties.StateDescription)
 
 fun hasNoStateDescription(): SemanticsMatcher =

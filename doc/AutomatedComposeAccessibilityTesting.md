@@ -3,6 +3,8 @@ Automated Compose jUnit UI tests automatically test the application's accessibil
 
 See [testing your Compose layout](https://developer.android.com/jetpack/compose/testing) for Compose jUnit test setup details.
 
+## Sample semantic tests
+
 Useful semantic accessibility tests include:
 
 * Verify that all intended headings are accessibility headings (and that non-heading text are not headings)
@@ -75,9 +77,9 @@ fun verifyThatDecorativeImageHasNoContentDescription() {
 }
 ```
 
-To verify actual application texts, use `createAndroidComposeRule<MainActivity>()`, and retrieve string values with `testRule.activity.getString(R.string.sample_screen_heading)`.
+Note: To verify actual application texts, use `createAndroidComposeRule<MainActivity>()`, and retrieve string values with `testRule.activity.getString(R.string.sample_screen_heading)`.
 
-* Verify that toggleable layouts are toggleable and do toggle:
+* Verify that toggleable layouts are toggleable and do toggle
 
 For example:
 
@@ -110,8 +112,40 @@ fun verifyThatCheckboxRowToggles() {
 }
 ```
 
+## Additional SemanticMatchers
+
+In some cases, no convenient `SemanticMatcher` is supplied by Compose; however, these can be added using helper functions.
+
+* To test for the presence or absence of a specific semantic property, use `SemanticsMatcher.keyIsDefined()` or `SemanticsMatcher.keyNotDefined()` with the specific `SemanticsProperties` key.
+
+For example:
+
+```kotlin
+fun hasLiveRegion(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.LiveRegion)
+
+fun hasNoLiveRegion(): SemanticsMatcher =
+    SemanticsMatcher.keyNotDefined(SemanticsProperties.LiveRegion)
+```
+
+* To test the value of a specific semantic property, retrieve its value using the `getOrNull()` method on a `SemanticsNode.config` property and the specific `SemanticsProperties` key. A `SemanticsMatcher`'s `matcher` lambda provides a `SemanticsNode` that can be used.
+
+For example:
+
+```kotlin
+fun hasLiveRegionMode(mode: LiveRegionMode) : SemanticsMatcher {
+    return SemanticsMatcher("SemanticsProperties.LiveRegion == ${mode}") { semanticsNode ->
+        mode == semanticsNode.config.getOrNull(SemanticsProperties.LiveRegion)
+    }
+}
+```
+
+Note: In some cases, the retrieved semantic property is an object with properties of its own that need further calls to access (not illustrated).
+
+## Summary
 Other tests for accessibility semantics are possible and are strongly suggested. The key technique is to test for semantic properties, as well as testing for functionality.
 
+## Debugging tests
 To debug tests, apply the following code in a test function to log the semantics tree: `composeTestRule.onRoot().printToLog("LOG_TAG")`. Alternatively, apply the following code to log the unmerged semantics tree: `composeTestRule.onRoot(useUnmergedTree = true).printToLog("LOG_TAG")`.
 
 ----

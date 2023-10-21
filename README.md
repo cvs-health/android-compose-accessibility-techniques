@@ -35,7 +35,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [RadioButton groups](doc/components/RadioButtonGroups.md)
     - [x] [Switch controls](doc/components/SwitchControls.md)
     - [x] [TextField controls](doc/components/TextFieldControls.md)
-    - [ ] Dropdown list controls
+    - [x] [Dropdown selection menus](doc/components/DropdownMenus.md)
     - [ ] Autofill input fields
     - [ ] Links inline with text
     - [ ] Dialogs

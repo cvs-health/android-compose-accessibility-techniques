@@ -35,6 +35,7 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     AccordionControls("accordionControls"),
     ListItemLayouts("listItemLayouts"),
     CheckboxControls("checkboxControls"),
+    DropdownMenus("dropdownMenus"),
     RadioButtonGroups("radioButtonGroups"),
     SwitchControls("switchControls"),
     TextFieldControls("textFieldControls"),

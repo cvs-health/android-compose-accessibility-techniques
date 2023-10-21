@@ -77,12 +77,6 @@ fun TextFieldControlsScreen(
             BodyText(textId = R.string.textfield_controls_description_1)
             BodyText(textId = R.string.textfield_controls_description_2)
 
-            // Good example 1: Accessible required TextField
-            GoodExampleHeading(
-                text = stringResource(id = R.string.textfield_controls_example_1_header),
-                modifier = Modifier.testTag(textFieldControlsExample1HeadingTestTag)
-            )
-
             GoodExample1()
         }
     }
@@ -101,6 +95,10 @@ fun PreviewWithScaffold() {
 private fun GoodExample1() {
     // Good example 1: Accessible required TextField
     // Also, illustrates one approach to required TextField error handling.
+    GoodExampleHeading(
+        text = stringResource(id = R.string.textfield_controls_example_1_header),
+        modifier = Modifier.testTag(textFieldControlsExample1HeadingTestTag)
+    )
 
     val (name, setName) = remember { mutableStateOf("") }
     // Note: using external error state avoids marking the (initially empty) Name field as in error

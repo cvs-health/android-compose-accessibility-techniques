@@ -44,6 +44,8 @@ The following `Modifier` extension functions make manually applying list semanti
 /**
  * Add accessibility collection semantics to a Modifier for a layout composable.
  * Used for manually marking visually-presented lists with list semantics.
+ *
+ * @param size the number of rows in the list
  */
 fun Modifier.addListSemantics(size: Int): Modifier = this.semantics { 
     collectionInfo = CollectionInfo(rowCount = size, columnCount = 1)
@@ -57,6 +59,8 @@ fun Modifier.addListSemantics(size: Int): Modifier = this.semantics {
  * same list item.
  *
  * Note: index is zero-based.
+ *
+ * @param index the 0-based list index of this list item
  */
 fun Modifier.addListItemSemantics(index: Int): Modifier = this.semantics(mergeDescendants = true) {
     collectionItemInfo = CollectionItemInfo(

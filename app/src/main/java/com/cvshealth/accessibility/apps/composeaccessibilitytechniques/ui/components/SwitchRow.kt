@@ -45,6 +45,11 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  * 4. Given that the Switch() is no longer clickable, appropriate padding is applied manually
  *    with .minimumInteractiveComponentSize() to replace the automatic padding that Compose adds to
  *    clickable elements.
+ *
+ * @param text label string for the Switch
+ * @param checked the current Switch state
+ * @param toggleHandler sets the current Switch state
+ * @param modifier settings for the wrapping Row
  */
 @Composable
 fun SwitchRow(

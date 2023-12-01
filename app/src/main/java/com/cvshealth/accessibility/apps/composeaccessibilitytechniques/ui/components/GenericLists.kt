@@ -49,6 +49,8 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  *
  * Note that lists are a special case of 2-dimensional collections, so Data Table/Grid Semantics
  * can be applied with the same semantics property.
+ *
+ * @param size the number of rows in the list
  */
 fun Modifier.addListSemantics(size: Int): Modifier = this.semantics {
     collectionInfo = CollectionInfo(rowCount = size, columnCount = 1)
@@ -70,6 +72,8 @@ fun Modifier.addListSemantics(size: Int): Modifier = this.semantics {
  * Also note that lists are a special case of 2-dimensional collections, so Data Table/Grid
  * Semantics can be applied with the same semantics property, including items which span multiple
  * rows and columns.
+ *
+ * @param index the 0-based list index of this list item
  */
 fun Modifier.addListItemSemantics(
     index: Int

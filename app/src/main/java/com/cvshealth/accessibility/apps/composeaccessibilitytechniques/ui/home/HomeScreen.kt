@@ -184,6 +184,11 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
+                    label = stringResource(R.string.tab_rows_title),
+                    route = ComposeAccessibilityTechniquesRoute.TabRows,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
                     label = stringResource(R.string.textfield_controls_title),
                     route = ComposeAccessibilityTechniquesRoute.TextFieldControls,
                     onNavigationButtonClicked = onNavigationButtonClicked

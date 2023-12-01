@@ -19,6 +19,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -51,6 +52,16 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  * 6. When applied as an editable menu, filter the list items based on the text already entered.
  * 7. Wrap the list of menu items in an ExposedDropdownMenu.
  * 8. Hold each menu item in a DropdownMenuItem.
+ *
+ * @param value current value of the dropdown selection menu
+ * @param setValue sets the current value of the dropdown selection menu
+ * @param options list of dropdown selection menu options
+ * @param modifier setting for the ExposedDropdownMenuBox
+ * @param textFieldModifier settings for the internal TextField
+ * @param readOnly disallows typing in the TextField; defaults to true
+ * @param supportingText optional content to display under the TextField, such as an error message
+ * @param isError current error state of the TextView; defaults to false
+ * @param label floating label for the TextView
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,6 +76,8 @@ fun GenericExposedDropdownMenu(
     isError: Boolean = false,
     label: @Composable () -> Unit,
 ) {
+    // Note: Dropdown expansion state is managed locally and not maintained across configuration
+    // changes.
     var isExpanded by remember { mutableStateOf(false) }
     // Key technique 1: Wrap the dropdown menu ensemble in an ExposedDropdownMenuBox.
     ExposedDropdownMenuBox(
@@ -72,7 +85,7 @@ fun GenericExposedDropdownMenu(
         onExpandedChange = { isExpanded = !isExpanded },
         modifier = modifier,
     ) {
-        TextField(
+        OutlinedTextField(
             modifier = textFieldModifier
                 .menuAnchor(), // Key technique 2: Anchor the TextField to the menu box.
             readOnly = readOnly, // Key technique 3a: Set readOnly appropriately.

@@ -248,7 +248,7 @@ fun InteractiveControlLabelsScreenPreview() {
     }
 }
 
-/**
+/*
  * FauxCheckboxRow fails to properly labels a Checkbox composable in the following ways:
  * 1. The Row() does not apply Modifier.toggleable() with role=Role.Checkbox and row-level click
  *    handling.
@@ -262,7 +262,7 @@ fun InteractiveControlLabelsScreenPreview() {
  * automatically by Compose since the Switch is clickable.
  */
 @Composable
-fun FauxCheckboxRow(
+private fun FauxCheckboxRow(
     text: String,
     checked: Boolean,
     toggleHandler: (Boolean) -> Unit,

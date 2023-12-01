@@ -45,6 +45,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.list_s
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.ListItemLayoutsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.RadioButtonGroupsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.SwitchControlsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.tab_rows.TabRowsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.TextAlternativesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.textfield_controls.TextFieldControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -138,6 +139,9 @@ fun ComposeAccessibilityTechniquesNavHost(
         }
         composable(route = ComposeAccessibilityTechniquesRoute.SwitchControls.route) {
             SwitchControlsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.TabRows.route) {
+            TabRowsScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.TextFieldControls.route) {
             TextFieldControlsScreen(onBackPressed = popBackStack)

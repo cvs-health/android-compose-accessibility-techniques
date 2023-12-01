@@ -361,7 +361,6 @@
     <string name="dropdown_menus_example_2_heading">OK example 2: Editable Exposed Dropdown Menu</string>
     <string name="dropdown_menus_example_2_description">Editable Exposed Dropdown Menus allow auto-suggest and do not limit input to the content of the list. However, it is challenging to use in TalkBack, requiring window switching to enter and exit the keyboard.</string>
 
-
     <!-- ListItem layouts -->
     <string name="listitem_layouts_title">ListItem layouts</string>
     <string name="listitem_layouts_heading">Actionable ListItem layouts require a fix</string>
@@ -415,6 +414,27 @@
     <string name="switch_controls_example_1_label">Faux switch</string>
     <string name="switch_controls_example_2_header">Good example 2: Accessible Switch</string>
     <string name="switch_controls_example_2_label">Accessible switch</string>
+
+    <!-- Tab rows -->
+    <string name="tab_rows_title">Tab rows</string>
+    <string name="tab_rows_heading">Fixed tab rows work; scrollable tab rows are problematic</string>
+    <string name="tab_rows_description_1">All tab row composables collect Tab widgets into a single-selection row used to control other page content. Fixed TabRow composables display tabs of equal width. ScrollableTabRow composables allow tabs of different widths and scroll to show additional tabs if necessary.</string>
+    <string name="tab_rows_description_2">Navigate this page using Switch Access and then again using TalkBack for examples of tab accessibility.</string>
+    <string name="tab_rows_example_1_header">Good example 1: Fixed TabRow</string>
+    <string name="tab_rows_example_2_header">OK example 2: ScrollableTabRow</string>
+    <string name="tab_rows_example_2_description">In TalkBack, ScrollableTabRows pose challenges in swiping back from tab content to a scrolled tab row. In Switch Access, ScrollableTabRow scroll regions appear too early in the page traversal order. But those are platform issue that may be resolved in later versions of the relevant libraries.</string>
+    <string name="tab_rows_example_3_header">OK example 3: TabRow with paging content</string>
+    <string name="tab_rows_example_3_description">TabRow tab selection can be coordinated with tab content in a HorizontalPager. In Switch Access, HorizontalPager scroll regions appear too early in the page traversal order. In TalkBack, the tab content announces as being in a vertical pager. Again, these are platform issues.</string>
+    <string name="tab_rows_tab_1">Tab 1</string>
+    <string name="tab_rows_tab_2">Tab 2</string>
+    <string name="tab_rows_tab_3">Tab 3</string>
+    <string name="tab_rows_tab_4">Tab 4</string>
+    <string name="tab_rows_tab_5">Tab 5</string>
+    <string name="tab_rows_tab_1_content">Tab 1 Content</string>
+    <string name="tab_rows_tab_2_content">Tab 2 Content</string>
+    <string name="tab_rows_tab_3_content">Tab 3 Content</string>
+    <string name="tab_rows_tab_4_content">Tab 4 Content</string>
+    <string name="tab_rows_tab_5_content">Tab 5 Content</string>
 
     <!-- TextField controls -->
     <string name="textfield_controls_title">TextField controls</string>

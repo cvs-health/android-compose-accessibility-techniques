@@ -48,6 +48,12 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  * 4. Given that the RadioButton is no longer clickable, appropriate padding is applied manually
  *    with .minimumInteractiveComponentSize() to replace the automatic padding that Compose adds to
  *    clickable elements.
+ *
+ * @param groupLabel label string for the radio button group
+ * @param itemLabels list of radio button label strings
+ * @param selectedIndex the currently selected radio button's 0-based index
+ * @param selectHandler: sets the currently selected radio button, given its index value
+ * @param modifier setting for the wrapping Column
  */
 @Composable
 fun RadioButtonGroup(

@@ -63,6 +63,15 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  *    .minimumInteractiveComponentSize(). (This will vary with the visual design of the accordion
  *    control.)
  * 4. Display or reveal the accordion control's content based on its expansion state.
+ *
+ * @param text the accordion heading text to display
+ * @param modifier settings for the wrapping Column
+ * @param initiallyExpanded whether the accordion first displays expanded or collapsed; default is
+ * collapsed
+ * @param headingIconPainter optional Painter for a leading icon on the accordion heading
+ * @param headingIconTint tint for any leading icon
+ * @param expanderIconTint tint for the expander icon
+ * @param content the accordion body to display when expanded
  */
 @Composable
 fun GenericAccordionHeading(

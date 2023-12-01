@@ -113,7 +113,7 @@ fun PreviewWithScaffold() {
 }
 
 @Composable
-fun FauxCheckboxRow(
+private fun FauxCheckboxRow(
     text: String,
     checked: Boolean,
     toggleHandler: (Boolean) -> Unit,

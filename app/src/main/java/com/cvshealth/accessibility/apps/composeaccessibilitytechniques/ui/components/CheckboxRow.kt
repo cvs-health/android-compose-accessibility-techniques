@@ -45,6 +45,11 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  * 4. Given that the Checkbox() is no longer clickable, appropriate padding is applied manually
  *    with .minimumInteractiveComponentSize() to replace the automatic padding that Compose adds to
  *    clickable elements.
+ *
+ * @param text label for the Checkbox,
+ * @param checked current state of the Checkbox,
+ * @param toggleHandler toggles the current state of the Checkbox,
+ * @param modifier settings for the wrapping Row
  */
 @Composable
 fun CheckboxRow(

@@ -17,6 +17,8 @@ package com.cvshealth.accessibility.apps.composeaccessibilitytechniques
 
 /**
  * Define the allowed route strings for navigation within the app.
+ *
+ * @param route a unique route string
  */
 enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     Home("home"),
@@ -38,5 +40,6 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     DropdownMenus("dropdownMenus"),
     RadioButtonGroups("radioButtonGroups"),
     SwitchControls("switchControls"),
+    TabRows("tabRows"),
     TextFieldControls("textFieldControls"),
 }

@@ -3,7 +3,7 @@ Always create links which are inline with text that announce their name, role, a
 
 The goal is to make TalkBack announce inline links with the "Links available..." action message and display the TalkBack menu's Links menu. Switch Access should allow the entire text block to be selected, then display a modal menu of links. Inline links should also be focusable and selectable from the keyboard.
 
-Two approaches to creating links inline with text are using native Compose components and using a View interop approach. While using View interop is more keyboard accessible at the time of writing, neither approach works well. 
+Two approaches to creating links inline with text are using native Compose components and using a View interop approach. While using View interop is more keyboard accessible at the time of writing, neither approach works well nor is particularly testable. 
 
 Given these accessibility shortcomings, prefer using standalone links to links inline with text at this time.
 
@@ -57,7 +57,8 @@ ClickableText(
 Notes:
 - The hard-coded text shown in these examples are only used for simplicity. _Always_ use externalized string resource references in actual code. However, URL values may be an exceptions, depending on how the site in question handles internationalization.
 - Using `pushUrlAnnotation` does not scale well, and specifically is not particularly internationalizable. (Given that the order of links in a text may change when translated.) One solid approach is to embed link annotations in translation strings and applying reusable parsing code to create the correct `AnnotatedString`.
-- `ClickableText` does not support Dark Theme by default. This can be remediated by setting its `style` parameter so that `color = LocalContentColor.current` is merged into its expected styling (as is done with `Text` unless another color is set). 
+- `ClickableText` does not support Dark Theme by default. This can be remediated by setting its `style` parameter so that `color = LocalContentColor.current` is merged into its expected styling (as is done with `Text` unless another color is set).
+- Automated testing of `ClickableText` is limited, since it appears to surface no semantic properties that distinguish it from `Text`.
 
 
 ## Inline links with View interop (`AndroidView`)
@@ -90,7 +91,9 @@ AndroidView(
 )
 ```
 
-Note: HTML linked text will not display as a link in Compose Preview, but does appear as a link when run in an app. Links using `URLSpan` do display correctly as links in Preview.
+Notes: 
+- HTML linked text will not display as a link in Compose Preview, but does appear as a link when run in an app. Links using `URLSpan` do display correctly as links in Preview.
+- Automated testing of `AndroidView` is limited, since it appears to surface almost no semantic properties at all and its View-based contents are opaque to tests.
 
 
 ----

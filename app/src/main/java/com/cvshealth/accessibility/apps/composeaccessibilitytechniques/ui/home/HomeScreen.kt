@@ -27,8 +27,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
@@ -169,6 +169,11 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
+                    label = stringResource(R.string.inline_links_title),
+                    route = ComposeAccessibilityTechniquesRoute.InlineLinks,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
                     label = stringResource(R.string.listitem_layouts_title),
                     route = ComposeAccessibilityTechniquesRoute.ListItemLayouts,
                     onNavigationButtonClicked = onNavigationButtonClicked
@@ -196,7 +201,7 @@ fun HomeScreen(
             }
 
             Spacer(modifier = Modifier.height(8.dp))
-            Divider()
+            HorizontalDivider()
 
             Spacer(modifier = Modifier.height(8.dp))
         }

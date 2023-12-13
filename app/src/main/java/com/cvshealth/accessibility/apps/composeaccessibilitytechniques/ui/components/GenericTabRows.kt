@@ -31,10 +31,12 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.primaryContainerColor
+import androidx.compose.material3.TabRowDefaults.primaryContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -67,8 +69,8 @@ fun StatelessFixedTabGroup(
     setTabIndex: (Int) -> Unit,
     tabTitles: List<String>,
     modifier: Modifier = Modifier,
-    containerColor: Color = TabRowDefaults.containerColor,
-    contentColor: Color = TabRowDefaults.contentColor,
+    containerColor: Color = primaryContainerColor,
+    contentColor: Color = primaryContentColor,
     content: @Composable (tabIndex: Int) -> Unit
 ) {
     Column {
@@ -134,8 +136,8 @@ fun StatefulFixedTabGroup(
     tabTitles: List<String>,
     modifier: Modifier = Modifier,
     initialTabIndex: Int = 0,
-    containerColor: Color = TabRowDefaults.containerColor,
-    contentColor: Color = TabRowDefaults.contentColor,
+    containerColor: Color = primaryContainerColor,
+    contentColor: Color = primaryContentColor,
     content: @Composable (tabIndex: Int) -> Unit
 ) {
     val (tabIndex, setTabIndex) = rememberSaveable { mutableStateOf(initialTabIndex) }
@@ -188,8 +190,8 @@ fun StatelessScrollableTabGroup(
     setTabIndex: (Int) -> Unit,
     tabTitles: List<String>,
     modifier: Modifier = Modifier,
-    containerColor: Color = TabRowDefaults.containerColor,
-    contentColor: Color = TabRowDefaults.contentColor,
+    containerColor: Color = primaryContainerColor,
+    contentColor: Color = primaryContentColor,
     content: @Composable (tabIndex: Int) -> Unit
 ) {
     Column {
@@ -255,8 +257,8 @@ fun StatefulScrollableTabGroup(
     tabTitles: List<String>,
     modifier: Modifier = Modifier,
     initialTabIndex: Int = 0,
-    containerColor: Color = TabRowDefaults.containerColor,
-    contentColor: Color = TabRowDefaults.contentColor,
+    containerColor: Color = primaryContainerColor,
+    contentColor: Color = primaryContentColor,
     content: @Composable (tabIndex: Int) -> Unit
 ) {
     val (tabIndex, setTabIndex) = rememberSaveable { mutableStateOf(initialTabIndex) }
@@ -318,8 +320,8 @@ fun StatefulScrollableTabGroupPreview() {
 fun FixedPagedTabGroup(
     tabTitles: List<String>,
     modifier: Modifier = Modifier,
-    tabContainerColor: Color = TabRowDefaults.containerColor,
-    tabContentColor: Color = TabRowDefaults.contentColor,
+    tabContainerColor: Color = primaryContainerColor,
+    tabContentColor: Color = primaryContentColor,
     pagerState: PagerState = rememberPagerState {
         tabTitles.size
     },
@@ -333,9 +335,9 @@ fun FixedPagedTabGroup(
     userScrollEnabled: Boolean = true,
     reverseLayout: Boolean = false,
     pageKey: ((index: Int) -> Any)? = null,
-    pageNestedScrollConnection: NestedScrollConnection = PagerDefaults.pageNestedScrollConnection(
-        Orientation.Horizontal
-    ),
+    pageNestedScrollConnection: NestedScrollConnection = remember(pagerState) {
+        PagerDefaults.pageNestedScrollConnection(pagerState, Orientation.Horizontal)
+    },
     pageContent: @Composable PagerScope.(page: Int) -> Unit
 ) {
     // Key technique: HorizontalPager coordinates the TabRow selected tab using rememberPagerState

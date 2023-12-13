@@ -14,7 +14,15 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<resources>
-
-    <style name="Theme.ComposeAccessibilityTechniques" parent="android:Theme.Material.Light.NoActionBar" />
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.ComposeAccessibilityTechniques" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/cvs_red</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/slate_blue</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColorLink">@color/cvs_red</item>
+    </style>
 </resources>

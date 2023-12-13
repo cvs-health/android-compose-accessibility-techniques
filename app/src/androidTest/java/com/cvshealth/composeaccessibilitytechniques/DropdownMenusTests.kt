@@ -15,13 +15,13 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.SemanticsMatcher.Companion.keyIsDefined
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasClickAction
-import androidx.compose.ui.test.hasContentDescriptionExactly
 import androidx.compose.ui.test.hasStateDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasTextExactly
@@ -29,10 +29,8 @@ import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
-import androidx.compose.ui.test.printToLog
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.DropdownMenusScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample1DropdownMenuBoxTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample1DropdownMenuTextFieldTestTag
@@ -110,7 +108,7 @@ class DropdownMenusTests {
                 and
                 hasStateDescription("Collapsed")
                 and
-                hasContentDescriptionExactly("Dropdown menu")
+                hasRole(Role.DropdownList)
             )
     }
 
@@ -139,13 +137,12 @@ class DropdownMenusTests {
                 and
                 hasStateDescription("Collapsed")
                 and
-                hasContentDescriptionExactly("Dropdown menu")
+                hasRole(Role.DropdownList)
             )
     }
 
     @Test
     fun verifyExample2DropdownMenuHasExpectedInitialState() {
-        composeTestRule.onRoot().printToLog("TAG")
         composeTestRule
             .onNodeWithTag(dropdownMenusExample2DropdownMenuTextFieldTestTag)
             .assert(
@@ -155,7 +152,7 @@ class DropdownMenusTests {
                 and
                 hasStateDescription("Collapsed")
                 and
-                hasContentDescriptionExactly("Dropdown menu")
+                hasRole(Role.DropdownList)
             )
     }
 
@@ -184,7 +181,7 @@ class DropdownMenusTests {
                         and
                         hasStateDescription("Collapsed")
                         and
-                        hasContentDescriptionExactly("Dropdown menu")
+                        hasRole(Role.DropdownList)
             )
     }
 

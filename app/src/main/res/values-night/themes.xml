@@ -14,14 +14,16 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
-    <color name="cvs_red">#FFCC0000</color>
-    <color name="cvs_red_dark">#FF930000</color>
-    <color name="slate_blue">#FF455A64</color>
-    <color name="success_green">#FF118738</color>
-    <color name="error_red">#FFDB3321</color>
-    <color name="focus_indicator_outline">#FF000000</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ComposeAccessibilityTechniques" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/cvs_red</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#FF98ABB4</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColorLink">@color/cvs_red</item>
+    </style>
 </resources>

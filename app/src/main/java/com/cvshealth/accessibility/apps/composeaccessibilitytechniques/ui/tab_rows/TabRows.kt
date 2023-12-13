@@ -18,11 +18,12 @@ package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.tab_r
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,7 +45,6 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.StatelessScrollableTabGroup
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
-
 const val tabRowsHeadingTestTag = "tabRowsHeading"
 const val tabRowsExample1HeadingTestTag = "tabRowsExample1Heading"
 const val tabRowsExample1TabRowTestTag = "tabRowsExample1TabRow"
@@ -56,7 +56,7 @@ const val tabRowsExample3HeadingTestTag = "tabRowsExample3Heading"
 const val tabRowsExample3TabRowTestTag = "tabRowsExample3TabRow"
 const val tabRowsExample3TabContentTestTagBase = "tabRowsExample3TabContent"
 const val tabRowsExample3PagerTestTag = "tabRowsExample3Pager"
-const val tabRowsEndSpacerTestTag = "tabRowsEndDivider"
+const val tabRowsEndSpacerTestTag = "tabRowsEndSpacer"
 
 @Composable
 fun TabRowsScreen(
@@ -67,7 +67,6 @@ fun TabRowsScreen(
         onBackPressed = onBackPressed
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
-
 
         val titles = listOf(
             stringResource(id = R.string.tab_rows_tab_1),
@@ -145,8 +144,30 @@ private fun GoodExample1(
     }
 
     Spacer(modifier = Modifier.height(8.dp))
-    Divider()
+    HorizontalDivider()
     Spacer(modifier = Modifier.height(8.dp))
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GoodExample1Preview() {
+    val titles = listOf(
+        stringResource(id = R.string.tab_rows_tab_1),
+        stringResource(id = R.string.tab_rows_tab_2),
+    )
+    val contents = listOf(
+        stringResource(id = R.string.tab_rows_tab_1_content),
+        stringResource(id = R.string.tab_rows_tab_2_content),
+    )
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        ) {
+            GoodExample1(titles, contents)
+        }
+    }
 }
 
 @Composable
@@ -180,8 +201,34 @@ private fun OkExample2(
     }
 
     Spacer(modifier = Modifier.height(8.dp))
-    Divider()
+    HorizontalDivider()
     Spacer(modifier = Modifier.height(8.dp))
+}
+
+@Preview(showBackground = true)
+@Composable
+fun OkExample2Preview() {
+    val titles = listOf(
+        stringResource(id = R.string.tab_rows_tab_1),
+        stringResource(id = R.string.tab_rows_tab_2),
+        stringResource(id = R.string.tab_rows_tab_3),
+        stringResource(id = R.string.tab_rows_tab_4),
+    )
+    val contents = listOf(
+        stringResource(id = R.string.tab_rows_tab_1_content),
+        stringResource(id = R.string.tab_rows_tab_2_content),
+        stringResource(id = R.string.tab_rows_tab_3_content),
+        stringResource(id = R.string.tab_rows_tab_4_content),
+    )
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        ) {
+            OkExample2(titles, contents)
+        }
+    }
 }
 
 @Composable
@@ -216,6 +263,28 @@ private fun OkExample3(
     }
 
     Spacer(modifier = Modifier.height(8.dp))
-    Divider()
+    HorizontalDivider()
+}
+
+@Preview(showBackground = true)
+@Composable
+fun OkExample3Preview() {
+    val titles = listOf(
+        stringResource(id = R.string.tab_rows_tab_1),
+        stringResource(id = R.string.tab_rows_tab_2),
+    )
+    val contents = listOf(
+        stringResource(id = R.string.tab_rows_tab_1_content),
+        stringResource(id = R.string.tab_rows_tab_2_content),
+    )
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        ) {
+            OkExample3(titles, contents)
+        }
+    }
 }
 

@@ -1,11 +1,7 @@
 # ListItem Layouts
-`ListItem` layout composables improve accessibility in their default use case by applying `Modifier.semantics(mergeDescendants=true)` on an inner `Row`. This `Modifier` tweak unifies all text across the ListItem during TalkBack announcement. However, those merge semantics create problems if the ListItem is made actionable with `Modifier.clickable()`, `Modifier.selectable()`, or `Modifier.toggleable()`.
+`ListItem` layout composables are accessible by default. They improve accessibility by applying `Modifier.semantics(mergeDescendants=true)` on an inner `Surface` so all text across the ListItem is unified during TalkBack announcement.
 
-If a `ListItem` is made `clickable`, the item becomes clickable, but is not announced with either the click action or the Button role in TalkBack. This violates WCAG 2 [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG21/#name-role-value).
-
-If a `ListItem` is make `selectable` or `toggleable`, TalkBack presents the `ListItem` in two parts: as an unlabeled, selectable `RadioButton` or toggleable `Switch`, and as a separate inner text block. Double-tapping at either point activates the action, but only activating the outer wrapper will announce any state change. This separation of control and label violates WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships).
-
-Actionable `ListItem` layout composables can be made accessible by using `Modifier.clearAndSetSemantics` to set a `contentDescription` for the `ListItem` as a whole. This fix is fragile, because the `contentDescription` can not use text from the composables passed into the `ListItem`, but will have to be maintained manually. But the other alternative is duplicating all of the `ListItem` code locally and removing the `mergeDescendants` semantics from the inner `Row`.
+If a `ListItem` wraps and labels an actionable control (`Switch`, `Checkbox`, or `RadioButton`), be sure to apply the appropriate action Modifier (`toggleable()`, or `selectable()`) to the `ListItem` as a whole. Or if the `ListItem` itself is to be clickable, apply `Modifier.clickable()`.
 
 ## Example accessible, toggleable `ListItem` layout
 The following example code shows an accessible, toggleable `ListItem` for a "Dark theme" setting:
@@ -16,17 +12,11 @@ ListItem(
     headlineContent = {
         Text("Dark theme")
     },
-    modifier = Modifier
-        .toggleable(
-            value = useDarkTheme,
-            role = Role.Switch,
-            onValueChange = setUseDarkThem
-        )
-        // Key remediation: Override all ListItem semantics, except toggleable() above,
-        // which is applied as a wrapper over the clearAndSetSemantics call.
-        .clearAndSetSemantics {
-            contentDescription = "Dark theme. Forces light text on dark background."
-        },
+    modifier = Modifier.toggleable(
+        value = useDarkTheme,
+        role = Role.Switch,
+        onValueChange = setUseDarkThem
+    ),
     supportingContent = {
         Text("Forces light text on dark background.")
     },
@@ -36,3 +26,20 @@ ListItem(
 )
 ```
 
+(Note: The hard-coded text shown in these examples are only used for simplicity. _Always_ use externalized string resource references in actual code.)
+
+----
+
+Copyright 2023 CVS Health and/or one of its affiliates
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+[http://www.apache.org/licenses/LICENSE-2.0]()
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+See the License for the specific language governing permissions and
+limitations under the License.

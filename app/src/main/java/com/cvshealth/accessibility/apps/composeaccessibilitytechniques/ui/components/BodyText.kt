@@ -55,6 +55,7 @@ fun BodyText(
         textAlign
     )
 }
+
 @Composable
 fun BoldBodyTextNoPadding(
     @StringRes textId: Int,

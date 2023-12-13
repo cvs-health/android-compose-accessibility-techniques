@@ -1,7 +1,21 @@
+/*
+   Copyright 2023 CVS Health and/or one of its affiliates
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ */
 package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.test.hasAnyChild
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescriptionExactly
@@ -21,12 +35,6 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listit
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample3ListItemTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample4HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample4ListItemTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample5HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample5ListItemTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample6HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample6ListItemTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample7HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample7ListItemTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
@@ -62,15 +70,6 @@ class ListItemLayoutsTests {
             .assertExists()
         composeTestRule
             .onNode(hasTestTag(listItemLayoutsExample4HeadingTestTag) and isHeading())
-            .assertExists()
-        composeTestRule
-            .onNode(hasTestTag(listItemLayoutsExample5HeadingTestTag) and isHeading())
-            .assertExists()
-        composeTestRule
-            .onNode(hasTestTag(listItemLayoutsExample6HeadingTestTag) and isHeading())
-            .assertExists()
-        composeTestRule
-            .onNode(hasTestTag(listItemLayoutsExample7HeadingTestTag) and isHeading())
             .assertExists()
     }
 
@@ -112,33 +111,6 @@ class ListItemLayoutsTests {
                         !hasAnyDescendant(isHeading())
             )
             .assertExists()
-        composeTestRule
-            .onNode(
-                hasTestTag(listItemLayoutsExample5ListItemTestTag)
-                        and
-                        !isHeading()
-                        and
-                        !hasAnyDescendant(isHeading())
-            )
-            .assertExists()
-        composeTestRule
-            .onNode(
-                hasTestTag(listItemLayoutsExample6ListItemTestTag)
-                        and
-                        !isHeading()
-                        and
-                        !hasAnyDescendant(isHeading())
-            )
-            .assertExists()
-        composeTestRule
-            .onNode(
-                hasTestTag(listItemLayoutsExample7ListItemTestTag)
-                        and
-                        !isHeading()
-                        and
-                        !hasAnyDescendant(isHeading())
-            )
-            .assertExists()
     }
 
     @Test
@@ -156,13 +128,9 @@ class ListItemLayoutsTests {
                         and
                         isTraversalGroup()
                         and
-                        hasTextExactly()
+                        hasTextExactly("Accessible inactive ListItem", "Announces as a single text.")
                         and
                         hasContentDescriptionExactly()
-                        and
-                        hasAnyChild(
-                            hasTextExactly("Accessible inactive ListItem", "Announces as a single text.")
-                        )
             )
             .assertExists()
     }
@@ -179,13 +147,9 @@ class ListItemLayoutsTests {
                         and
                         hasRole(Role.Button)
                         and
-                        hasTextExactly()
+                        hasTextExactly("Accessible clickable ListItem", "Announces as a single labeled, clickable Button.")
                         and
                         hasContentDescriptionExactly()
-                        and
-                        hasAnyChild(
-                            hasTextExactly("Inaccessible clickable ListItem", "Announces as an inactive text; although it is clickable.")
-                        )
             )
             .assertExists()
     }
@@ -196,13 +160,15 @@ class ListItemLayoutsTests {
             .onNode(
                 hasTestTag(listItemLayoutsExample3ListItemTestTag)
                         and
-                        hasClickAction()
+                        isSelectable()
                         and
-                        hasRole(Role.Button)
+                        isTraversalGroup()
                         and
-                        hasContentDescriptionExactly("Accessible clickable ListItem. Announces as a single, labeled, clickable Button.")
+                        hasRole(Role.RadioButton)
                         and
-                        hasClearAndSetSemantics()
+                        hasTextExactly("Accessible selectable ListItem", "Announces as a single labeled, selectable radio button.")
+                        and
+                        hasContentDescriptionExactly()
             )
             .assertExists()
     }
@@ -213,76 +179,15 @@ class ListItemLayoutsTests {
             .onNode(
                 hasTestTag(listItemLayoutsExample4ListItemTestTag)
                         and
-                        isSelectable()
-                        and
-                        isTraversalGroup()
-                        and
-                        hasRole(Role.RadioButton)
-                        and
-                        hasTextExactly()
-                        and
-                        hasContentDescriptionExactly()
-                        and
-                        hasAnyChild(
-                            hasTextExactly("Inaccessible selectable ListItem", "Announces as a unlabeled RadioButton. Swipe again to hear the label.")
-                        )
-            )
-            .assertExists()
-    }
-
-    @Test
-    fun verifyExample5ListItemHasExpectedSemantics() {
-        composeTestRule
-            .onNode(
-                hasTestTag(listItemLayoutsExample5ListItemTestTag)
-                        and
-                        isSelectable()
-                        and
-                        hasRole(Role.RadioButton)
-                        and
-                        hasContentDescriptionExactly("Accessible selectable ListItem. Announces as a single, labeled, selectable radio button.")
-                        and
-                        hasClearAndSetSemantics()
-            )
-            .assertExists()
-    }
-
-    @Test
-    fun verifyExample6ListItemHasExpectedSemantics() {
-        composeTestRule
-            .onNode(
-                hasTestTag(listItemLayoutsExample6ListItemTestTag)
-                        and
                         isToggleable()
                         and
                         isTraversalGroup()
                         and
                         hasRole(Role.Switch)
                         and
-                        hasTextExactly()
+                        hasTextExactly("Accessible toggleable ListItem", "Announces as a single labeled, toggleable Switch.")
                         and
                         hasContentDescriptionExactly()
-                        and
-                        hasAnyChild(
-                            hasTextExactly("Inaccessible toggleable ListItem", "Announces as a unlabeled Switch. Swipe again to hear the label.")
-                        )
-            )
-            .assertExists()
-    }
-
-    @Test
-    fun verifyExample7ListItemHasExpectedSemantics() {
-        composeTestRule
-            .onNode(
-                hasTestTag(listItemLayoutsExample7ListItemTestTag)
-                        and
-                        isToggleable()
-                        and
-                        hasRole(Role.Switch)
-                        and
-                        hasContentDescriptionExactly("Accessible toggleable ListItem. Announces as a single, labeled, toggleable Switch.")
-                        and
-                        hasClearAndSetSemantics()
             )
             .assertExists()
     }

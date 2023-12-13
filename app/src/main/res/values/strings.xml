@@ -361,37 +361,39 @@
     <string name="dropdown_menus_example_2_heading">OK example 2: Editable Exposed Dropdown Menu</string>
     <string name="dropdown_menus_example_2_description">Editable Exposed Dropdown Menus allow auto-suggest and do not limit input to the content of the list. However, it is challenging to use in TalkBack, requiring window switching to enter and exit the keyboard.</string>
 
+    <!-- Links inline with text -->
+    <string name="inline_links_title">Links inline with text</string>
+    <string name="inline_links_heading">Create inline links differently from standalone links</string>
+    <string name="inline_links_description_1">Links inline with text can be created using AnnotatedString and ClickableText. Links will appear in the TalkBack menu\'s Links dialog.</string>
+    <string name="inline_links_description_2">Turn on TalkBack and navigate the page text for a demonstration. Note the pauses around the inline linked texts. Listen for the \"Links available\" action notifications, tap with 3-fingers to open the TalkBack menu, and select \"Links\" to see a dialog containing the available links. Pick a link to open a browser displaying the linked page.</string>
+    <string name="inline_links_example_1">Problematic example 1: Using AnnotatedString and ClickableText</string>
+    <string name="inline_links_example_1_text">This paragraph is a simple example of inline links using AnnotatedString and ClickableText with fixed link text values.</string>
+    <string name="inline_links_example_1_link_text_1">inline links</string>
+    <string name="inline_links_example_1_link_text_2">AnnotatedString</string>
+    <string name="inline_links_example_1_link_text_3">ClickableText</string>
+    <string name="inline_links_example_1_note">Note: These links work fine with assistive technologies, but they are not keyboard accessible.</string>
+    <string name="inline_links_example_2">OK example 2: Using AndroidView and TextView</string>
+    <string name="inline_links_example_2_text">For best current accessibility, use <a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/viewinterop/package-summary#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a> and <a href="https://github.com/cvs-health/android-view-accessibility-techniques/blob/main/doc/componenttypes/LinksInlineWithText.md">TextView links</a> instead of ClickableText.</string>
+    <string name="inline_links_example_2_note">This paragraph works with assistive technologies. It also works with keyboards, but not well. Navigation arrows are required to select the text and the links within the text.</string>
+
     <!-- ListItem layouts -->
     <string name="listitem_layouts_title">ListItem layouts</string>
-    <string name="listitem_layouts_heading">Actionable ListItem layouts require a fix</string>
-    <string name="listitem_layouts_description_1">ListItem layouts merge their descendants. This is good, unless the ListItem is clickable, selectable, or toggleable. Then they require a fix using Modifier.clearAndSetSemantics.</string>
-    <string name="listitem_layouts_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of inaccessible and accessible ListItem layouts.</string>
+    <string name="listitem_layouts_heading">Standard ListItem layouts are accessible</string>
+    <string name="listitem_layouts_description_1">ListItem layouts merge their descendants.</string>
+    <string name="listitem_layouts_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of ListItem layouts.</string>
     <string name="listitem_layouts_example_1_header">Good example 1: Accessible inactive ListItem layout</string>
     <string name="listitem_layouts_example_1_label">Accessible inactive ListItem</string>
     <string name="listitem_layouts_example_1_label_2">Announces as a single text.</string>
-    <string name="listitem_layouts_example_2_header">Bad example 2: Inaccessible clickable ListItem layout</string>
-    <string name="listitem_layouts_example_2_label">Inaccessible clickable ListItem</string>
-    <string name="listitem_layouts_example_2_label_2">Announces as an inactive text; although it is clickable.</string>
-    <string name="listitem_layouts_example_2_message">Clicked inaccessible clickable ListItem</string>
-    <string name="listitem_layouts_example_3_header">Good example 3: Accessible clickable ListItem layout</string>
-    <string name="listitem_layouts_example_3_label">Accessible clickable ListItem</string>
-    <string name="listitem_layouts_example_3_label_2">Announces as a single labeled, clickable Button.</string>
-    <string name="listitem_layouts_example_3_content_description">Accessible clickable ListItem. Announces as a single, labeled, clickable Button.</string>
-    <string name="listitem_layouts_example_3_message">Clicked accessible clickable ListItem</string>
-    <string name="listitem_layouts_example_4_header">Bad example 4: Inaccessible selectable ListItem layout</string>
-    <string name="listitem_layouts_example_4_label">Inaccessible selectable ListItem</string>
-    <string name="listitem_layouts_example_4_label_2">Announces as a unlabeled RadioButton. Swipe again to hear the label.</string>
-    <string name="listitem_layouts_example_5_header">Good example 5: Accessible selectable ListItem layout</string>
-    <string name="listitem_layouts_example_5_label">Accessible selectable ListItem</string>
-    <string name="listitem_layouts_example_5_label_2">Announces as a single labeled, selectable radio button.</string>
-    <string name="listitem_layouts_example_5_content_description">Accessible selectable ListItem. Announces as a single, labeled, selectable radio button.</string>
-    <string name="listitem_layouts_example_6_header">Bad example 6: Inaccessible toggleable ListItem layout</string>
-    <string name="listitem_layouts_example_6_label">Inaccessible toggleable ListItem</string>
-    <string name="listitem_layouts_example_6_label_2">Announces as a unlabeled Switch. Swipe again to hear the label.</string>
-    <string name="listitem_layouts_example_7_header">Good example 7: Accessible toggleable ListItem layout</string>
-    <string name="listitem_layouts_example_7_label">Accessible toggleable ListItem</string>
-    <string name="listitem_layouts_example_7_label_2">Announces as a single labeled, toggleable Switch.</string>
-    <string name="listitem_layouts_example_7_content_description">Accessible toggleable ListItem. Announces as a single, labeled, toggleable Switch.</string>
+    <string name="listitem_layouts_example_2_header">Good example 2: Accessible clickable ListItem layout</string>
+    <string name="listitem_layouts_example_2_label">Accessible clickable ListItem</string>
+    <string name="listitem_layouts_example_2_label_2">Announces as a single labeled, clickable Button.</string>
+    <string name="listitem_layouts_example_2_message">Clicked accessible clickable ListItem</string>
+    <string name="listitem_layouts_example_3_header">Good example 3: Accessible selectable ListItem layout</string>
+    <string name="listitem_layouts_example_3_label">Accessible selectable ListItem</string>
+    <string name="listitem_layouts_example_3_label_2">Announces as a single labeled, selectable radio button.</string>
+    <string name="listitem_layouts_example_4_header">Good example 4: Accessible toggleable ListItem layout</string>
+    <string name="listitem_layouts_example_4_label">Accessible toggleable ListItem</string>
+    <string name="listitem_layouts_example_4_label_2">Announces as a single labeled, toggleable Switch.</string>
 
     <!-- RadioButton groups -->
     <string name="radio_button_groups_title">RadioButton groups</string>

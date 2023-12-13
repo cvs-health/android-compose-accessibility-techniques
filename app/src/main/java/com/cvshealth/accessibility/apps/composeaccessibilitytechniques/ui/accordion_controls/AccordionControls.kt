@@ -26,7 +26,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -151,7 +151,7 @@ private fun FauxAccordionHeading(
     Column(
         modifier = modifier.padding(top = 8.dp)
     ) {
-        Divider()
+        HorizontalDivider()
         Row(
             modifier = Modifier
                 .fillMaxWidth()

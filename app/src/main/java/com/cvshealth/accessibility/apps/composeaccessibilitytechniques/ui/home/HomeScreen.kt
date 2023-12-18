@@ -179,6 +179,11 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
+                    label = stringResource(R.string.modalbottomsheet_layouts_title),
+                    route = ComposeAccessibilityTechniquesRoute.ModalBottomSheetLayouts,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
                     label = stringResource(id = R.string.radio_button_groups_title),
                     route = ComposeAccessibilityTechniquesRoute.RadioButtonGroups,
                     onNavigationButtonClicked = onNavigationButtonClicked

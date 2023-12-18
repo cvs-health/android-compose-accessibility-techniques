@@ -136,15 +136,18 @@ fun UxChangeAnnouncementsScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 val v = LocalView.current
-                val hiddenMessage = stringResource(id = R.string.ux_change_announcements_example_2_text_hidden)
+                val message = stringResource(
+                    id = if (isTextVisible)
+                        R.string.ux_change_announcements_example_2_text_hidden
+                    else
+                        R.string.ux_change_announcements_example_2_text
+                )
                 Button(
                     onClick = {
                         setIsTextVisible(!isTextVisible)
-                        if (isTextVisible) {
-                            // Key technique 2: Fall back on the View.announceForAccessibility()
-                            // method to make TalkBack announcements only when absolutely necessary.
-                            v.announceForAccessibility(hiddenMessage)
-                        }
+                        // Key technique 2: Fall back on the View.announceForAccessibility()
+                        // method to make TalkBack announcements only when absolutely necessary.
+                        v.announceForAccessibility(message)
                     },
                     modifier = Modifier.testTag(uxChangeAnnouncementsExample2ButtonTestTag)
                 ) {

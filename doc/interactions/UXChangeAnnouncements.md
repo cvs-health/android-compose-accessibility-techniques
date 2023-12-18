@@ -1,7 +1,7 @@
 # UX Change Announcements
 All user experiences changes resulting from user interactions or automatic updates must be announced to accessibility services (such as TalkBack) in order to support the WCAG 2 [Success Criterion 4.1.3 Status Messages](https://www.w3.org/TR/WCAG21/#status-messages). (That said, it is reasonable and acceptable to rate-limit the announcement of automatic updates or they can overwhelm the user.)
 
-There are two key techniques for providing UX change announcements: `accessibilityLiveRegion` and `announceForAccessibility()`.
+There are two key techniques for providing UX change announcements: `liveRegion` semantics and `announceForAccessibility()`.
 
 ## Use the `Modifier.semantics` `liveRegion` property to announce field value changes
 
@@ -12,19 +12,17 @@ However, there is a known issue with `liveRegion` semantics (see https://issuetr
 In the following example, whenever the `counterText` state value is updated, the `Text`'s new value will be announced by accessibility services.
 
 ```
-val counterText = remember{ mutableStateOf("Counter: 0") }
+var counterText by remember{ mutableStateOf("Counter: 0") }
 Text(
-    text = counterText.value,
+    text = counterText,
     modifier = Modifier.semantics {
         liveRegion = LiveRegionMode.Polite
-        contentDescription = counterText.value // required workaround for Google bug
+        contentDescription = counterText // required workaround for Google bug
     }
 )
 ```
 
-Notes:
-* Fields with `accessibilityLiveRegion` active will announce their value when they are made visible (composed), including initial screen construction and on orientation change. This may not be an ideal audio user experience.
-* No announcement is made when widgets are made not composed.
+Note: No announcement is made when widgets are initially composed or when they are no longer composed.
 
 ## Discouraged: Use the `View.announceForAccessibility()` method to announce events from code
 

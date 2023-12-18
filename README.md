@@ -25,22 +25,31 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [UX change announcements](doc/interactions/UXChangeAnnouncements.md)
     - [x] [Keyboard types and options](doc/interactions/KeyboardTypes.md)
     - [x] [Keyboard actions](doc/interactions/KeyboardActions.md)
+    - [ ] Keyboard focus order
+    - [ ] Custom keyboard focus indicators
     - [x] [Custom state descriptions](doc/interactions/CustomStateDescriptions.md)
     - [x] [Custom accessibility actions](doc/interactions/CustomAccessibilityActions.md)
     - [ ] Custom semantics properties
 - Specific Component Types
     - [x] [Accordion controls](doc/components/AccordionControls.md)
-    - [x] [Checkbox controls](doc/components/CheckboxControls.md)
-    - [x] [ListItem layouts](doc/components/ListItemLayouts.md)
-    - [x] [RadioButton groups](doc/components/RadioButtonGroups.md)
-    - [x] [Switch controls](doc/components/SwitchControls.md)
-    - [x] [TextField controls](doc/components/TextFieldControls.md)
-    - [x] [Dropdown selection menus](doc/components/DropdownMenus.md)
     - [ ] Autofill input fields
-    - [ ] Links inline with text
+    - [ ] BottomAppBar layouts
+    - [ ] Button controls
+    - [x] [Checkbox controls](doc/components/CheckboxControls.md)
+    - [ ] Chip controls
     - [ ] Dialogs
-    - [ ] Bottom sheets
-    - [ ] TabBar and Tab controls
+    - [x] [Dropdown selection menus](doc/components/DropdownMenus.md)
+    - [x] [Links inline with text](doc/components/LinksInlineWithText.md)
+    - [x] [ListItem layouts](doc/components/ListItemLayouts.md)
+    - [x] [ModalBottomSheet layouts](doc/components/ModalBottomSheetLayouts.md)
+    - [ ] Progress indicators
+    - [x] [RadioButton groups](doc/components/RadioButtonGroups.md)
+    - [ ] Slider and RangeSlider controls
+    - [x] [Switch controls](doc/components/SwitchControls.md)
+    - [x] [Tab rows](doc/components/TabRows.md)
+    - [x] [TextField controls](doc/components/TextFieldControls.md)
+    - [ ] TopAppBar layouts
+    
 - Other
     - [x] [Compose Semantics automated testing](doc/AutomatedComposeAccessibilityTesting.md)
 

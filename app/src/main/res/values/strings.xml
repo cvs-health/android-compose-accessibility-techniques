@@ -217,11 +217,11 @@
     <string name="ux_change_announcements_counter2">Counter 2: %1d</string>
     <string name="ux_change_announcements_increment_counter">Increment counter</string>
     <string name="ux_change_announcements_reset_counter">Reset counter</string>
-    <string name="ux_change_announcements_example_2">Good example 2: Announcing visibility with liveRegion semantics and announceForAccessibility</string>
+    <string name="ux_change_announcements_example_2">Good example 2: Announcing visibility with announceForAccessibility</string>
     <string name="ux_change_announcements_example_2_show_text">Show Text</string>
     <string name="ux_change_announcements_example_2_hide_text">Hide Text</string>
-    <string name="ux_change_announcements_example_2_text">LiveRegion Text shown</string>
-    <string name="ux_change_announcements_example_2_text_hidden">LiveRegion Text hidden</string>
+    <string name="ux_change_announcements_example_2_text">Text shown</string>
+    <string name="ux_change_announcements_example_2_text_hidden">Text hidden</string>
 
     <!-- Keyboard types and options -->
     <string name="keyboard_types_title">Keyboard types and options</string>
@@ -394,6 +394,48 @@
     <string name="listitem_layouts_example_4_header">Good example 4: Accessible toggleable ListItem layout</string>
     <string name="listitem_layouts_example_4_label">Accessible toggleable ListItem</string>
     <string name="listitem_layouts_example_4_label_2">Announces as a single labeled, toggleable Switch.</string>
+
+    <!-- ModalBottomSheet layouts -->
+    <string name="modalbottomsheet_layouts_title">ModalBottomSheet layouts</string>
+    <string name="modalbottomsheet_layouts_heading">ModalBottomSheet layouts require keyboard fixes</string>
+    <string name="modalbottomsheet_layouts_description_1">ModalBottomSheet layouts are not entirely accessible by default. They require a title, a better grab bar description, bottom padding, and keyboard fixes to avoid issues.</string>
+    <string name="modalbottomsheet_layouts_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of a ModalBottomSheet layout.</string>
+    <string name="modalbottomsheet_layouts_description_3">Also, test using keyboard navigation to see how the Esc key and focus management work.</string>
+    <string name="modalbottomsheet_layouts_example_1_header">Good example 1: ModalBottomSheet selector</string>
+    <string name="modalbottomsheet_layouts_example_1_button_1">Pick a fruit from a half-open bottom sheet</string>
+    <string name="modalbottomsheet_layouts_example_1_button_2">Pick a fruit from a fully-open bottom sheet</string>
+    <string name="modalbottomsheet_layouts_example_1_selected_item">Selected fruit: %1$s</string>
+    <string name="modalbottomsheet_layouts_example_2_header">OK example 2: Paging ModalBottomSheet content</string>
+    <string name="modalbottomsheet_layouts_sheet_title">Pick a fruit</string>
+    <string name="modalbottomsheet_layouts_sheet_drag_handle_description">Pick a fruit bottom sheet drag handle</string>
+    <string name="modalbottomsheet_layouts_item_1">Apple</string>
+    <string name="modalbottomsheet_layouts_item_2">Apricot</string>
+    <string name="modalbottomsheet_layouts_item_3">Banana</string>
+    <string name="modalbottomsheet_layouts_item_4">Blueberry</string>
+    <string name="modalbottomsheet_layouts_item_5">Cherry</string>
+    <string name="modalbottomsheet_layouts_item_6">Date</string>
+    <string name="modalbottomsheet_layouts_item_7">Durian</string>
+    <string name="modalbottomsheet_layouts_item_8">Elderberry</string>
+    <string name="modalbottomsheet_layouts_item_9">Fig</string>
+    <string name="modalbottomsheet_layouts_item_10">Grape</string>
+    <string name="modalbottomsheet_layouts_item_11">Guava</string>
+    <string name="modalbottomsheet_layouts_item_12">Honeydew melon</string>
+    <string name="modalbottomsheet_layouts_item_13">Jackfruit</string>
+    <string name="modalbottomsheet_layouts_item_14">Kiwi</string>
+    <string name="modalbottomsheet_layouts_item_15">Lime</string>
+    <string name="modalbottomsheet_layouts_item_16">Lychee</string>
+    <string name="modalbottomsheet_layouts_item_17">Mango</string>
+    <string name="modalbottomsheet_layouts_item_18">Nectarine</string>
+    <string name="modalbottomsheet_layouts_item_19">Orange</string>
+    <string name="modalbottomsheet_layouts_item_20">Papaya</string>
+    <string name="modalbottomsheet_layouts_item_21">Peach</string>
+    <string name="modalbottomsheet_layouts_item_22">Raspberry</string>
+    <string name="modalbottomsheet_layouts_item_23">Strawberry</string>
+    <string name="modalbottomsheet_layouts_item_24">Tamarind</string>
+    <string name="modalbottomsheet_layouts_item_25">Ugli Fruit</string>
+    <string name="modalbottomsheet_layouts_item_26">Watermelon</string>
+    <string name="modalbottomsheet_layouts_item_27">Xigua</string>
+    <string name="modalbottomsheet_layouts_item_28">Yangmei</string>
 
     <!-- RadioButton groups -->
     <string name="radio_button_groups_title">RadioButton groups</string>

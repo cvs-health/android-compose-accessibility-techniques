@@ -1,7 +1,7 @@
 # RadioButton Groups
 Groups of `RadioButton` controls require specific construction in order to be accessible. Specifically, these techniques support WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships) and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG21/#name-role-value).
 
-The first required technique is that the outer enclosing composable layout be marked with `Modifier.selectableGroup()`. This modifier imposes single-selection list semantics on the `RadioButton` controls within the group.
+The first required technique is that the outer enclosing composable layout be marked with `Modifier.selectableGroup()`. This modifier imposes single-selection list semantics on the `RadioButton` controls within the group and adds list semantics announcements in TalkBack (e.g., "2 of 3") to each `RadioButton`.
 
 For example:
 
@@ -83,7 +83,9 @@ fun RadioButtonGroup(
 }
 ```
 
-(Note: The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.)
+Notes:
+* The `groupLabel` is not read as part of each `RadioButton` in TalkBack. While different from the web, this behavior is expected on Android.
+* The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.
 
 ----
 

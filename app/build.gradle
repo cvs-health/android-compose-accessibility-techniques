@@ -64,9 +64,10 @@ dependencies {
     // TODO: Update to stable Material3 and Material libraries as soon as possible.
     // implementation 'androidx.compose.material3:material3'
     // implementation 'com.google.android.material:material' // included for View interop styling
-    implementation 'androidx.compose.material3:material3:1.2.0-alpha12'
+    implementation 'androidx.compose.material3:material3:1.2.0-beta01'
     implementation 'com.google.android.material:material:1.12.0-alpha02'
 
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
     implementation "androidx.navigation:navigation-compose:2.7.6"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

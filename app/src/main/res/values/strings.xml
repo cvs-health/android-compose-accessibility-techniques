@@ -206,6 +206,7 @@
     <string name="interactive_control_labels_associated_radio_button_label_2">Field label for RadioButton 2</string>
     <string name="interactive_control_labels_example_9">Good example 9: Button with associated label</string>
     <string name="interactive_control_labels_associated_button_label">Button label</string>
+    <string name="interactive_control_labels_associated_button_message">Button pressed</string>
 
     <!-- UX change announcements -->
     <string name="ux_change_announcements_title">UX change announcements</string>
@@ -278,6 +279,28 @@
     <string name="keyboard_actions_example_6_header">Good example 6: Keyboard action Go opens a new view</string>
     <string name="keyboard_actions_example_6_label">Phone</string>
     <string name="keyboard_actions_example_6_go_message">Keyboard \"Go\" selected for text: %1$s.</string>
+
+    <!-- Keyboard focus order -->
+    <string name="keyboard_focus_order_title">Keyboard focus order</string>
+    <string name="keyboard_focus_order_heading">Keyboard focus order must be logical and contain no traps</string>
+    <string name="keyboard_focus_order_description_1">Keyboard focus order defaults to composition tree order (depth-first), but that is not always the focus order that makes sense. Sometimes Modifier.focusRequester and .focusProperties must be used to force a specific focus order. But avoid creating focus traps!</string>
+    <string name="keyboard_focus_order_description_2">Note that accessibility traversal order is set separately from keyboard focus order.</string>
+    <string name="keyboard_focus_order_description_3">Tab through this screen with an external keyboard for demonstrations. Also, step through the screen with TalkBack for comparison.</string>
+    <string name="keyboard_focus_order_example_1_heading">Bad example 1: Controls in an illogical focus order</string>
+    <string name="keyboard_focus_order_example_2_heading">OK example 2: Controls forced into a logical focus order with focusProperties</string>
+    <string name="keyboard_focus_order_example_3_heading">Good example 3: Controls grouped into a logical focus order</string>
+    <string name="keyboard_focus_order_example_group_1">Group 1</string>
+    <string name="keyboard_focus_order_example_group_1_checkbox_a">Checkbox 1a</string>
+    <string name="keyboard_focus_order_example_group_1_checkbox_b">Checkbox 1b</string>
+    <string name="keyboard_focus_order_example_group_2">Group 2</string>
+    <string name="keyboard_focus_order_example_group_2_checkbox_a">Checkbox 2a</string>
+    <string name="keyboard_focus_order_example_group_2_checkbox_b">Checkbox 2b</string>
+    <string name="keyboard_focus_order_example_4_heading">Bad example 4: A keyboard focus trap</string>
+    <string name="keyboard_focus_order_example_4_description">Improperly setting focusProperties next and previous can create a focus order loop. The second button below cannot be reached by tabbing from the first button, nor can the focus loop be escaped by back-tabbing. Use the up or down arrow keys to escape the focus trap.</string>
+    <string name="keyboard_focus_order_example_4_button_1">First button (keyboard focus trap)</string>
+    <string name="keyboard_focus_order_example_4_button_2">Second button (can\'t be reached)</string>
+    <string name="keyboard_focus_order_example_4_buttton_1_message">Example 4 first button clicked.</string>
+    <string name="keyboard_focus_order_example_4_buttton_2_message">Example 4 second button clicked.</string>
 
     <!-- Custom state descriptions -->
     <string name="custom_state_descriptions_title">Custom state descriptions</string>

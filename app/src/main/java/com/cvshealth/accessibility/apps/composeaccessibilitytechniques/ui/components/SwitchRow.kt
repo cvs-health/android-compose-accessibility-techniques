@@ -60,11 +60,13 @@ fun SwitchRow(
 ) {
     Row(
         modifier = modifier
+            .customFocusBorder()
             .toggleable(
                 value = checked,
                 role = Role.Switch,
                 onValueChange = toggleHandler
-            ),
+            )
+            .padding(horizontal = 4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(text = text, modifier = Modifier.padding(end = 8.dp))

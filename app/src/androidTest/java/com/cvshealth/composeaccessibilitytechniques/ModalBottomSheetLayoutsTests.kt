@@ -26,15 +26,11 @@ import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.isHeading
-import androidx.compose.ui.test.isRoot
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
-import androidx.compose.ui.test.printToLog
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.modalbottomsheet_layouts.ModalBottomSheetLayoutsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.modalbottomsheet_layouts.modalBottomSheetLayoutsExample1Button1TestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.modalbottomsheet_layouts.modalBottomSheetLayoutsExample1Button2TestTag
@@ -105,7 +101,6 @@ class ModalBottomSheetLayoutsTests {
 
     @Test
     fun verifyEveryHeadingsHasATestTag() {
-        composeTestRule.onRoot().printToLog("LOG_TAG") // TODO: Remove when done
         composeTestRule.onNode(hasNoTestTag() and isHeading()).assertDoesNotExist()
     }
 
@@ -131,8 +126,6 @@ class ModalBottomSheetLayoutsTests {
             )
             .performScrollTo()
             .performClick()
-
-        composeTestRule.onAllNodes(isRoot()).onLast().printToLog("LOG_TAG") // TODO: Remove when done
 
         // Verify bottom sheet displayed.
         composeTestRule
@@ -211,8 +204,6 @@ class ModalBottomSheetLayoutsTests {
             )
             .performScrollTo()
             .performClick()
-
-        composeTestRule.onAllNodes(isRoot()).onLast().printToLog("LOG_TAG") // TODO: Remove when done
 
         // Verify bottom sheet displayed.
         composeTestRule

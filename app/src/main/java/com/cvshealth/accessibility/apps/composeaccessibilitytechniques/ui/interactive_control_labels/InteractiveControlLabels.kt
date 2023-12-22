@@ -15,6 +15,7 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -34,6 +35,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -50,6 +52,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.RadioButtonGroup
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SwitchRow
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.customFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 const val interactiveControlLabelsHeadingTestTag = "interactiveControlLabelsHeading"
@@ -226,9 +229,15 @@ fun InteractiveControlLabelsScreen(
             )
             Spacer(modifier = Modifier.height(8.dp))
             // Key Technique: Button() composable content is its programmatically-associated label
+            val context = LocalContext.current
+            val buttonMessage = stringResource(id = R.string.interactive_control_labels_associated_button_message)
             Button(
-                onClick = { /*TODO*/ },
-                modifier = Modifier.testTag(interactiveControlLabelsExample9ControlTestTag)
+                onClick = {
+                    Toast.makeText(context, buttonMessage, Toast.LENGTH_LONG).show()
+                },
+                modifier = Modifier
+                    .testTag(interactiveControlLabelsExample9ControlTestTag)
+                    .customFocusBorder()
             ) {
                 Text(
                     text = stringResource(id = R.string.interactive_control_labels_associated_button_label)
@@ -314,7 +323,7 @@ fun FauxSwitchRow(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier.padding(horizontal = 2.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(text = text, modifier = Modifier.padding(end = 8.dp))

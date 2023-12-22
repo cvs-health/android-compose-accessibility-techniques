@@ -60,6 +60,7 @@ fun CheckboxRow(
 ) {
     Row(
         modifier = modifier
+            .customFocusBorder()
             .toggleable(
                 value = checked,
                 role = Role.Checkbox,

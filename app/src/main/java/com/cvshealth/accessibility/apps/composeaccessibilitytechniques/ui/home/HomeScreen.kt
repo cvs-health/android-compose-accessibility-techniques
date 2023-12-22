@@ -49,6 +49,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BasicAccordionHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyTextNoPadding
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.customFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 
@@ -136,6 +137,11 @@ fun HomeScreen(
                 NavigationCard(
                     label = stringResource(R.string.keyboard_actions_title),
                     route = ComposeAccessibilityTechniquesRoute.KeyboardActions,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
+                    label = stringResource(R.string.keyboard_focus_order_title),
+                    route = ComposeAccessibilityTechniquesRoute.KeyboardFocusOrder,
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(

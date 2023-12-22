@@ -25,7 +25,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [UX change announcements](doc/interactions/UXChangeAnnouncements.md)
     - [x] [Keyboard types and options](doc/interactions/KeyboardTypes.md)
     - [x] [Keyboard actions](doc/interactions/KeyboardActions.md)
-    - [ ] Keyboard focus order
+    - [x] [Keyboard focus order](doc/interactions/KeyboardFocusOrder.md)
     - [ ] Custom keyboard focus indicators
     - [x] [Custom state descriptions](doc/interactions/CustomStateDescriptions.md)
     - [x] [Custom accessibility actions](doc/interactions/CustomAccessibilityActions.md)

@@ -71,6 +71,7 @@ fun RadioButtonGroup(
             itemLabels.forEachIndexed { index: Int, label: String ->
                 Row(modifier = Modifier
                     .fillMaxWidth()
+                    .customFocusBorder()
                     // Key technique 2: Apply Modifier.selectable() to handle all RadioButton role
                     // semantics and click handling at the Row level. This also merges all child
                     // composable semantics, so the RadioButton and its label are programmatically

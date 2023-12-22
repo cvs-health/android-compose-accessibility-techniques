@@ -15,16 +15,21 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.input.key.KeyEvent
+import androidx.compose.ui.input.key.NativeKeyEvent
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.assertIsToggleable
 import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.isFocused
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.isToggleable
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performKeyPress
 import androidx.compose.ui.test.performScrollTo
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.InteractiveControlLabelsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample1ControlTestTag
@@ -99,6 +104,57 @@ class InteractiveControlLabelsTests {
     @Test
     fun verifyEveryHeadingsHasATestTag() {
         composeTestRule.onNode(hasNoTestTag() and isHeading()).assertDoesNotExist()
+    }
+
+    /**
+     * verifyTextFieldFocusability - verifies that pressing a TextField focuses on it and that Tab
+     * and Shift-Tab work appropriately.
+     *
+     * While this functionality isn't the point of the screen, it's a good place to demonstrate how
+     * to test this. Because at the time of writing, isFocused() only appears to work on TextFields.
+     */
+    @Test
+    fun verifyTextFieldFocusability() {
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample2ControlTestTag))
+            .assert(!isFocused())
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample2ControlTestTag))
+            .performScrollTo()
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample2ControlTestTag))
+            .assert(isFocused())
+
+        // Back-tab to Example 1 TextField
+        composeTestRule
+            .onNodeWithTag(interactiveControlLabelsExample2ControlTestTag)
+            .performKeyPress(
+                KeyEvent(
+                    NativeKeyEvent(
+                        0,
+                        0,
+                        NativeKeyEvent.ACTION_DOWN,
+                        NativeKeyEvent.KEYCODE_TAB,
+                        0,
+                        NativeKeyEvent.META_SHIFT_ON
+                    )
+                )
+            )
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample1ControlTestTag))
+            .assert(isFocused())
+
+        // Forward-tab to Example 2 TextField
+        composeTestRule
+            .onNodeWithTag(interactiveControlLabelsExample1ControlTestTag)
+            .performScrollTo()
+            .performKeyPress(
+                KeyEvent(NativeKeyEvent(NativeKeyEvent.ACTION_DOWN, NativeKeyEvent.KEYCODE_TAB))
+            )
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample2ControlTestTag))
+            .assert(isFocused())
     }
 
     @Test

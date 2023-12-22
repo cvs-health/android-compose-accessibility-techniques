@@ -294,6 +294,8 @@ fun ModalBottomSheetLayoutsScreen(
                     focusRequester.requestFocus()
                 }
             }
+
+            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }

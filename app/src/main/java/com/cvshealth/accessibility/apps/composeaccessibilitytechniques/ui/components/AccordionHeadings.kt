@@ -91,6 +91,7 @@ fun GenericAccordionHeading(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .customFocusBorder()
                 // Key technique 1a: Expand/Collapse an accordion control on Row click with clickable().
                 .clickable(
                     // Key technique 1b: Apply a more specific onClickLabel, based on expansion state.

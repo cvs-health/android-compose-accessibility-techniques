@@ -12,6 +12,8 @@ There are three techniques for influencing the accessibility traversal order (i.
       * For example, to create a sidebar layout in which a right sidebar is read before the left main column, the enclosing `Row` should set `isTraversalGroup=true`, the left main `Column` should set `traversalIndex = 1f`, and the right sidebar `Column` should set `traversalIndex = 0f`. 
     * Application of overrides like `traversalIndex` tends to be fragile with regard to change over time. Be aware that such layouts will need maintenance and monitoring.
 
+These techniques also set the focus order of active user interface composables when Switch Access is used. 
+
 For example:
 
 ```kotlin

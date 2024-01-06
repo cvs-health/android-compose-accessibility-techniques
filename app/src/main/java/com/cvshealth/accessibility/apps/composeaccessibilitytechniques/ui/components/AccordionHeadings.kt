@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -19,9 +19,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
@@ -91,7 +92,7 @@ fun GenericAccordionHeading(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .customFocusBorder()
+                .visibleFocusBorder()
                 // Key technique 1a: Expand/Collapse an accordion control on Row click with clickable().
                 .clickable(
                     // Key technique 1b: Apply a more specific onClickLabel, based on expansion state.
@@ -127,10 +128,11 @@ fun GenericAccordionHeading(
                     // in the visible text.
                     contentDescription = null,
                     modifier = Modifier
-                        .padding(end = 16.dp)
-                        .defaultMinSize(24.dp, minHeight = 24.dp),
+                        .minimumInteractiveComponentSize(),
                     tint = headingIconTint
                 )
+            } else {
+                Spacer(modifier = Modifier.width(12.dp))
             }
             Text(
                 text,
@@ -169,7 +171,7 @@ fun GenericAccordionHeading(
 private fun GenericAccordionHeadingCollapsedShortPreview() {
     ComposeAccessibilityTechniquesTheme() {
         GenericAccordionHeading(text = "This is a test accordion") {
-            Column(modifier = Modifier.padding(horizontal = 8.dp)) {
+            Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                 BodyText(textId = R.string.accordion_item_2_1)
                 BodyText(textId = R.string.accordion_item_2_2)
                 BodyText(textId = R.string.accordion_item_2_3)
@@ -186,7 +188,7 @@ private fun GenericAccordionHeadingExpandedShortPreview() {
             text = "This is a test accordion",
             initiallyExpanded = true
         ) {
-            Column(modifier = Modifier.padding(horizontal = 8.dp)) {
+            Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                 BodyText(textId = R.string.accordion_item_2_1)
                 BodyText(textId = R.string.accordion_item_2_2)
                 BodyText(textId = R.string.accordion_item_2_3)
@@ -222,7 +224,7 @@ private fun SuccessAccordionHeadingShortPreview() {
         SuccessAccordionHeading(
             text = "This is a success accordion heading"
         ) {
-            Column(modifier = Modifier.padding(horizontal = 8.dp)) {
+            Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                 BodyText(textId = R.string.accordion_item_2_1)
                 BodyText(textId = R.string.accordion_item_2_2)
                 BodyText(textId = R.string.accordion_item_2_3)
@@ -256,7 +258,7 @@ private fun BasicAccordionHeadingShortPreview() {
         BasicAccordionHeading(
             text = "This is a basic accordion heading"
         ) {
-            Column(modifier = Modifier.padding(horizontal = 8.dp)) {
+            Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                 BodyText(textId = R.string.accordion_item_2_1)
                 BodyText(textId = R.string.accordion_item_2_2)
                 BodyText(textId = R.string.accordion_item_2_3)

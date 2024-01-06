@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -49,7 +49,6 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BasicAccordionHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyTextNoPadding
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.customFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 
@@ -145,6 +144,11 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
+                    label = stringResource(R.string.custom_focus_indicators_title),
+                    route = ComposeAccessibilityTechniquesRoute.CustomFocusIndicators,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
                     label = stringResource(R.string.custom_state_descriptions_title),
                     route = ComposeAccessibilityTechniquesRoute.CustomStateDescriptions,
                     onNavigationButtonClicked = onNavigationButtonClicked
@@ -237,7 +241,7 @@ private fun NavigationCard(
     OutlinedCard(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 8.dp, start = 8.dp)
+            .padding(top = 8.dp, start = 12.dp)
             .clickable {
                 onNavigationButtonClicked(route)
             },

@@ -26,7 +26,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Keyboard types and options](doc/interactions/KeyboardTypes.md)
     - [x] [Keyboard actions](doc/interactions/KeyboardActions.md)
     - [x] [Keyboard focus order](doc/interactions/KeyboardFocusOrder.md)
-    - [ ] Custom keyboard focus indicators
+    - [x] [Custom focus indicators](doc/interactions/CustomFocusIndicators.md)
     - [x] [Custom state descriptions](doc/interactions/CustomStateDescriptions.md)
     - [x] [Custom accessibility actions](doc/interactions/CustomAccessibilityActions.md)
     - [ ] Custom semantics properties
@@ -54,9 +54,9 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Compose Semantics automated testing](doc/AutomatedComposeAccessibilityTesting.md)
 
 ## License
-android-compose-accessibility-techniques is licensed under under the Apache License, Version 2.0.  See LICENSE file for more information.
+android-compose-accessibility-techniques is licensed under under the Apache License, Version 2.0.  See [LICENSE](LICENSE) file for more information.
 
-Copyright 2023 CVS Health and/or one of its affiliates
+Copyright 2023-2024 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,6 +46,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 const val uxChangeAnnouncementsHeadingTestTag = "uxChangeAnnouncementsHeading"
@@ -109,13 +109,13 @@ fun UxChangeAnnouncementsScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Button(
+                VisibleFocusBorderButton(
                     onClick = { setCounterValue(counterValue + 1) },
                     modifier = Modifier.testTag(uxChangeAnnouncementsExample1IncrementCounterTestTag)
                 ) {
                     Text(text = stringResource(id = R.string.ux_change_announcements_increment_counter))
                 }
-                Button(
+                VisibleFocusBorderButton(
                     onClick = { setCounterValue(0) },
                     modifier = Modifier.testTag(uxChangeAnnouncementsExample1ResetCounterTestTag)
                 ) {
@@ -142,7 +142,7 @@ fun UxChangeAnnouncementsScreen(
                     else
                         R.string.ux_change_announcements_example_2_text
                 )
-                Button(
+                VisibleFocusBorderButton(
                     onClick = {
                         setIsTextVisible(!isTextVisible)
                         // Key technique 2: Fall back on the View.announceForAccessibility()

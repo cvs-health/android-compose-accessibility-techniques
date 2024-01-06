@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -302,6 +302,39 @@
     <string name="keyboard_focus_order_example_4_buttton_1_message">Example 4 first button clicked.</string>
     <string name="keyboard_focus_order_example_4_buttton_2_message">Example 4 second button clicked.</string>
 
+    <!-- Custom keyboard focus indicators -->
+    <string name="custom_focus_indicators_title">Custom focus indicators</string>
+    <string name="custom_focus_indicators_heading">Increase focus visibility with custom focus indicators</string>
+    <string name="custom_focus_indicators_description_1">By default, Material Design components have low-contrast focus indicators. Focus visibility can be improved using custom focus indicators.</string>
+    <string name="custom_focus_indicators_description_2">Tab through this page with an external keyboard to see default and improved focus indicators.</string>
+    <string name="custom_focus_indicators_description_3">(Note that these techniques have been applied to many controls throughout this app.)</string>
+    <string name="custom_focus_indicators_example_1_heading">Problematic example 1: Default button focus indicator</string>
+    <string name="custom_focus_indicators_example_1_description">Because this button uses the default system focus indicator, it technically conforms with the WCAG 2.2 guidelines regarding focus visibility. However, it provides a poor user experience.</string>
+    <string name="custom_focus_indicators_example_1_button">Default focus indicator</string>
+    <string name="custom_focus_indicators_example_1_message">Activated example 1 button showing default focus indicator.</string>
+    <string name="custom_focus_indicators_example_2_heading">Good example 2: Custom button focus indicator</string>
+    <string name="custom_focus_indicators_example_2_description">This example demonstrates a custom focus indicator implemented using Button\'s border property to improve focus visibility.</string>
+    <string name="custom_focus_indicators_example_2_button">Custom focus indicator</string>
+    <string name="custom_focus_indicators_example_2_message">Activated example 2 button showing custom focus indicator.</string>
+    <string name="custom_focus_indicators_example_3_heading">Problematic example 3: Default icon button focus indicator</string>
+    <string name="custom_focus_indicators_example_3_button_description">Share icon button with default focus indicator</string>
+    <string name="custom_focus_indicators_example_3_message">Activated example 3 Share icon button showing default focus indicator.</string>
+    <string name="custom_focus_indicators_example_4_heading">Good example 4: Custom icon button focus indicator</string>
+    <string name="custom_focus_indicators_example_4_button_description">Share icon button with custom focus indicator</string>
+    <string name="custom_focus_indicators_example_4_message">Activated example 4 Share icon button showing custom focus indicator.</string>
+    <string name="custom_focus_indicators_example_5_heading">Problematic example 5: Default clickable Card focus indicator</string>
+    <string name="custom_focus_indicators_example_5_card_title">Clickable card showing default focus indicator</string>
+    <string name="custom_focus_indicators_example_5_card_description">Tab to this card to see the default OutlinedCard focus indicator.</string>
+    <string name="custom_focus_indicators_example_5_message">Activated example 5 clickable card showing default focus indicator.</string>
+    <string name="custom_focus_indicators_example_6_heading">Good example 6: Custom clickable Card focus indicator</string>
+    <string name="custom_focus_indicators_example_6_card_title">Clickable card showing custom focus indicator.</string>
+    <string name="custom_focus_indicators_example_6_card_description">Tab to this card to see a custom focus indicator implemented using the Modifier.border property.</string>
+    <string name="custom_focus_indicators_example_6_message">Activated example 6 clickable card showing custom focus indicator.</string>
+    <string name="custom_focus_indicators_example_7_heading">Good example 7: Custom Indication focus indicator</string>
+    <string name="custom_focus_indicators_example_7_card_title">Clickable card showing a custom Indication focus indicator.</string>
+    <string name="custom_focus_indicators_example_7_card_description">Tab to this card to see a custom Indication focus indicator.</string>
+    <string name="custom_focus_indicators_example_7_message">Activated example 7 clickable card showing custom Indication focus indicator.</string>
+
     <!-- Custom state descriptions -->
     <string name="custom_state_descriptions_title">Custom state descriptions</string>
     <string name="custom_state_descriptions_heading">Enhance screen reader user experience by customizing state description labels</string>
@@ -489,7 +522,7 @@
     <string name="tab_rows_description_2">Navigate this page using Switch Access and then again using TalkBack for examples of tab accessibility.</string>
     <string name="tab_rows_example_1_header">Good example 1: Fixed TabRow</string>
     <string name="tab_rows_example_2_header">OK example 2: ScrollableTabRow</string>
-    <string name="tab_rows_example_2_description">In TalkBack, ScrollableTabRows pose challenges in swiping back from tab content to a scrolled tab row. In Switch Access, ScrollableTabRow scroll regions appear too early in the page traversal order. But those are platform issue that may be resolved in later versions of the relevant libraries.</string>
+    <string name="tab_rows_example_2_description">In TalkBack, ScrollableTabRows pose challenges in swiping back from tab content to a scrolled tab row. In Switch Access, ScrollableTabRow scroll regions appear too early in the page traversal order. But that is a platform issue that may be resolved in later versions of the relevant libraries.</string>
     <string name="tab_rows_example_3_header">OK example 3: TabRow with paging content</string>
     <string name="tab_rows_example_3_description">TabRow tab selection can be coordinated with tab content in a HorizontalPager. In Switch Access, HorizontalPager scroll regions appear too early in the page traversal order. In TalkBack, the tab content announces as being in a vertical pager. Again, these are platform issues.</string>
     <string name="tab_rows_tab_1">Tab 1</string>

@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -34,8 +34,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -48,6 +46,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 const val listItemLayoutsHeadingTestTag = "listItemLayoutsHeading"
@@ -156,6 +155,7 @@ private fun GoodExample2() {
         },
         modifier = Modifier
             .testTag(listItemLayoutsExample2ListItemTestTag)
+            .visibleFocusBorder()
             .clickable(
                 role = Role.Button,
             ) {
@@ -202,6 +202,7 @@ private fun GoodExample3() {
         },
         modifier = Modifier
             .testTag(listItemLayoutsExample3ListItemTestTag)
+            .visibleFocusBorder()
             .selectable(
                 selected = exampleValue,
                 role = Role.RadioButton,
@@ -250,6 +251,7 @@ private fun GoodExample4() {
         },
         modifier = Modifier
             .testTag(listItemLayoutsExample4ListItemTestTag)
+            .visibleFocusBorder()
             .toggleable(
                 value = exampleValue,
                 role = Role.Switch,

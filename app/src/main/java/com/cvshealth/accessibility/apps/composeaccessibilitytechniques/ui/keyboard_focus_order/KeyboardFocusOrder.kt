@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_focus_order
 
 import android.widget.Toast
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -25,23 +24,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
@@ -57,7 +50,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.customFocusBorder
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 const val keyboardFocusOrderHeadingTestTag = "keyboardFocusOrderHeading"
@@ -478,7 +471,7 @@ private fun BadExample4() {
 
     val context = LocalContext.current
     val button1Message = stringResource(id = R.string.keyboard_focus_order_example_4_buttton_1_message)
-    Button(
+    VisibleFocusBorderButton(
         onClick = {
             Toast.makeText(context, button1Message, Toast.LENGTH_LONG).show()
         },
@@ -493,13 +486,12 @@ private fun BadExample4() {
                 next = button1
                 previous = button1
             }
-            .customFocusBorder()
-    ) {
+        ) {
         Text(text = stringResource(id = R.string.keyboard_focus_order_example_4_button_1))
     }
 
     val button2Message = stringResource(id = R.string.keyboard_focus_order_example_4_buttton_2_message)
-    Button(
+    VisibleFocusBorderButton(
         onClick = {
             Toast.makeText(context, button2Message, Toast.LENGTH_LONG).show()
         },
@@ -507,7 +499,6 @@ private fun BadExample4() {
             .testTag(keyboardFocusOrderExample4Button2TestTag)
             // Key technique: Set a FocusRequester reference on this control.
             .focusRequester(button2)
-            .customFocusBorder()
     ) {
         Text(text = stringResource(id = R.string.keyboard_focus_order_example_4_button_2))
     }

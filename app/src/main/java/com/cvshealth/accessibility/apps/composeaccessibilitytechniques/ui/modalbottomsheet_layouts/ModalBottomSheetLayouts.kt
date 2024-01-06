@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -36,7 +36,6 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -69,6 +68,8 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderButton
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -150,7 +151,7 @@ fun ModalBottomSheetLayoutsScreen(
                 modifier = Modifier.testTag(modalBottomSheetLayoutsExample1HeadingTestTag)
             )
 
-            OutlinedButton(
+            VisibleFocusBorderButton(
                 onClick = {
                     skipPartiallyExpanded = false
                     openBottomSheet = true
@@ -162,7 +163,7 @@ fun ModalBottomSheetLayoutsScreen(
                 Text(text = stringResource(id = R.string.modalbottomsheet_layouts_example_1_button_1))
             }
 
-            OutlinedButton(
+            VisibleFocusBorderButton(
                 onClick = {
                     skipPartiallyExpanded = true
                     openBottomSheet = true
@@ -268,17 +269,19 @@ fun ModalBottomSheetLayoutsScreen(
                                 headlineContent = {
                                     Text(itemName)
                                 },
-                                modifier = Modifier.clickable(role = Role.Button) {
-                                    scope.launch { sheetState.hide() }.invokeOnCompletion {
-                                        if (!sheetState.isVisible) {
-                                            openBottomSheet = false
-                                            // Key technique for liveRegions: update state that
-                                            // affects a liveRegion only after the bottom sheet has
-                                            // been dismissed.
-                                            setSelectedSheetItem(itemName)
+                                modifier = Modifier
+                                    .visibleFocusBorder()
+                                    .clickable(role = Role.Button) {
+                                        scope.launch { sheetState.hide() }.invokeOnCompletion {
+                                            if (!sheetState.isVisible) {
+                                                openBottomSheet = false
+                                                // Key technique for liveRegions: update state that
+                                                // affects a liveRegion only after the bottom sheet has
+                                                // been dismissed.
+                                                setSelectedSheetItem(itemName)
+                                            }
                                         }
                                     }
-                                }
                             )
                             HorizontalDivider()
                         }

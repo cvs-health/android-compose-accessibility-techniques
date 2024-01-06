@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -71,7 +71,7 @@ fun RadioButtonGroup(
             itemLabels.forEachIndexed { index: Int, label: String ->
                 Row(modifier = Modifier
                     .fillMaxWidth()
-                    .customFocusBorder()
+                    .visibleFocusBorder()
                     // Key technique 2: Apply Modifier.selectable() to handle all RadioButton role
                     // semantics and click handling at the Row level. This also merges all child
                     // composable semantics, so the RadioButton and its label are programmatically

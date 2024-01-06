@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RadioButton
@@ -52,7 +51,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.RadioButtonGroup
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SwitchRow
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.customFocusBorder
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 const val interactiveControlLabelsHeadingTestTag = "interactiveControlLabelsHeading"
@@ -231,13 +230,12 @@ fun InteractiveControlLabelsScreen(
             // Key Technique: Button() composable content is its programmatically-associated label
             val context = LocalContext.current
             val buttonMessage = stringResource(id = R.string.interactive_control_labels_associated_button_message)
-            Button(
+            VisibleFocusBorderButton(
                 onClick = {
                     Toast.makeText(context, buttonMessage, Toast.LENGTH_LONG).show()
                 },
                 modifier = Modifier
                     .testTag(interactiveControlLabelsExample9ControlTestTag)
-                    .customFocusBorder()
             ) {
                 Text(
                     text = stringResource(id = R.string.interactive_control_labels_associated_button_label)

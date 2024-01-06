@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.minimumInteractiveComponentSize
@@ -51,6 +50,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderIconButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 const val textAlternativesHeadingTestTag = "textAlternativesHeading"
@@ -343,7 +343,7 @@ private fun BadExample6() {
     )
     val context = LocalContext.current
     val toastText = stringResource(id = R.string.text_alternatives_example_6_message)
-    IconButton(
+    VisibleFocusBorderIconButton(
         onClick = {
             Toast.makeText(context, toastText, Toast.LENGTH_LONG).show()
         },
@@ -379,7 +379,7 @@ private fun BadExample7() {
     // images unless the active composable has text or a contentDescription.
     val context = LocalContext.current
     val toastText = stringResource(id = R.string.text_alternatives_example_7_message)
-    IconButton(
+    VisibleFocusBorderIconButton(
         onClick = {
             Toast.makeText(context, toastText, Toast.LENGTH_LONG).show()
         },
@@ -413,7 +413,7 @@ private fun GoodExample8() {
     // Key technique: Provide a concise contentDescription for all active images.
     val context = LocalContext.current
     val toastText = stringResource(id = R.string.text_alternatives_example_8_message)
-    IconButton(
+    VisibleFocusBorderIconButton(
         onClick = {
             Toast.makeText(context, toastText, Toast.LENGTH_LONG).show()
         },

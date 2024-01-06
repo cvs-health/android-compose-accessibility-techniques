@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -48,6 +47,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SuccessAccordionHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.CvsRed
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ErrorRed
@@ -90,7 +90,7 @@ fun AccordionControlsScreen(
                 text = stringResource(id = R.string.accordion_section_1),
                 modifier = Modifier.testTag(accordionExample1TestTag)
             ) {
-                Column {
+                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                     BodyText(
                         textId = R.string.accordion_item_1_1,
                         modifier = Modifier.testTag(accordionExample1Item1TestTag)
@@ -110,7 +110,7 @@ fun AccordionControlsScreen(
                 text = stringResource(id = R.string.accordion_section_2),
                 modifier = Modifier.testTag(accordionExample2TestTag)
             ) {
-                Column {
+                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                     BodyText(
                         textId = R.string.accordion_item_2_1,
                         modifier = Modifier.testTag(accordionExample2Item1TestTag)
@@ -155,6 +155,7 @@ private fun FauxAccordionHeading(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .visibleFocusBorder()
                 .clickable(
                     onClickLabel = if (isExpanded)
                         stringResource(id = R.string.collapse_button_description)
@@ -179,13 +180,12 @@ private fun FauxAccordionHeading(
             Icon(
                 painter = headingIconPainter,
                 contentDescription = null,
-                modifier = Modifier.defaultMinSize(24.dp, minHeight = 24.dp),
+                modifier = Modifier.minimumInteractiveComponentSize(),
                 tint = headingIconTint
             )
             Text(text,
                 style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier
-                    .padding(start = 16.dp)
                     .weight(1f)
             )
             Icon(

@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -37,13 +37,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BadExampleTitle
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleTitle
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GroupedBadExampleTitle
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GroupedGoodExampleTitle
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleCardFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 
@@ -471,6 +471,7 @@ private fun GoodExample6() {
         modifier = Modifier
             .testTag(contentGroupingCardExample6CardTestTag)
             .padding(top = 8.dp)
+            .visibleCardFocusBorder()
     ) {
         // Note: GoodExampleTitle used here, because it does not set mergeDescendants=true.
         GoodExampleTitle(

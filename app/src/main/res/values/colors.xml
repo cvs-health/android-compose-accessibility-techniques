@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -23,5 +23,5 @@
     <color name="slate_blue">#FF455A64</color>
     <color name="success_green">#FF118738</color>
     <color name="error_red">#FFDB3321</color>
-    <color name="focus_indicator_outline">#FF000000</color>
+    <color name="focus_indicator_outline">@color/black</color>
 </resources>

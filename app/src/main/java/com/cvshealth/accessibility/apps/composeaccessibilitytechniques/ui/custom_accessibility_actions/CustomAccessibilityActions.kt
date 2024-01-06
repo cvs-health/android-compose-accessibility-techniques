@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
@@ -55,6 +54,8 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleTitle
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderIconButton
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleCardFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.CvsRed
 
@@ -145,6 +146,7 @@ private fun BadExample1(
         modifier = Modifier
             .testTag(customAccessibilityActionsExample1CardTestTag)
             .padding(top = 8.dp)
+            .visibleCardFocusBorder()
     ) {
         // Moving Modifier.clickable from Card to an otherwise unnecessary inner Column to fix
         // TalkBack reading order issues.
@@ -231,6 +233,7 @@ private fun GoodExample2(
         modifier = Modifier
             .testTag(customAccessibilityActionsExample2CardTestTag)
             .padding(top = 8.dp)
+            .visibleCardFocusBorder()
             // Tip: If the enclosing layout is clickable, use Modifier.clickable, not the
             // Modifier.semantics onClick() property; otherwise, the layout composable will not be
             // touch-clickable.
@@ -333,6 +336,7 @@ private fun GoodExample3(
         modifier = Modifier
             .testTag(customAccessibilityActionsExample3CardTestTag)
             .padding(top = 8.dp)
+            .visibleCardFocusBorder()
             .clickable(
                 onClickLabel = showDetailsCLickLabel
             ) {
@@ -415,7 +419,7 @@ private fun LikeButton(
     modifier: Modifier = Modifier,
     handleMessageEvent: (CustomActionMessageEvent) -> Unit
 ) {
-    IconButton(
+    VisibleFocusBorderIconButton(
         onClick = {
             handleMessageEvent(CustomActionMessageEvent(CustomActionType.Like, cardId))
         },
@@ -438,7 +442,7 @@ private fun ShareButton(
     modifier: Modifier = Modifier,
     handleMessageEvent: (CustomActionMessageEvent) -> Unit
 ) {
-    IconButton(
+    VisibleFocusBorderIconButton(
         onClick = {
             handleMessageEvent(CustomActionMessageEvent(CustomActionType.Share, cardId))
         },
@@ -461,7 +465,7 @@ private fun ReportButton(
     modifier: Modifier = Modifier,
     handleMessageEvent: (CustomActionMessageEvent) -> Unit
 ) {
-    IconButton(
+    VisibleFocusBorderIconButton(
         onClick = {
             handleMessageEvent(CustomActionMessageEvent(CustomActionType.Report, cardId))
         },

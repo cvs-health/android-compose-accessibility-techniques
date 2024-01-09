@@ -42,6 +42,7 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     InlineLinks("inlineLinks"),
     ListItemLayouts("listItemLayouts"),
     ModalBottomSheetLayouts("modalBottomSheetLayouts"),
+    NavigationBarLayouts("NavigationBarLayouts"),
     RadioButtonGroups("radioButtonGroups"),
     SwitchControls("switchControls"),
     TabRows("tabRows"),

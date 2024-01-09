@@ -36,6 +36,7 @@ fun GenericScaffold(
     title: String,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier,
+    bottomBar: @Composable () -> Unit = {},
     snackbarHost: @Composable () -> Unit = {},
     floatingActionButton: @Composable () -> Unit = {},
     floatingActionButtonPosition: FabPosition = FabPosition.End,
@@ -58,6 +59,7 @@ fun GenericScaffold(
                 }
             )
         },
+        bottomBar = bottomBar,
         snackbarHost = snackbarHost,
         floatingActionButton = floatingActionButton,
         floatingActionButtonPosition = floatingActionButtonPosition

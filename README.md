@@ -42,6 +42,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Links inline with text](doc/components/LinksInlineWithText.md)
     - [x] [ListItem layouts](doc/components/ListItemLayouts.md)
     - [x] [ModalBottomSheet layouts](doc/components/ModalBottomSheetLayouts.md)
+    - [x] [NavigationBar layouts](doc/components/NavigationBarLayouts.md)
     - [ ] Progress indicators
     - [x] [RadioButton groups](doc/components/RadioButtonGroups.md)
     - [ ] Slider and RangeSlider controls

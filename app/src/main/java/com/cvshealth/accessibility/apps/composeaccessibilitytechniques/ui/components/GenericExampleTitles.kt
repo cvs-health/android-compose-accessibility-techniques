@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -40,10 +40,10 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.SuccessGreen
 
 @Composable
-private fun GenericExampleTitle(
+fun GenericExampleTitle(
     @StringRes textId: Int,
-    @DrawableRes drawableId: Int,
     modifier: Modifier = Modifier,
+    @DrawableRes drawableId: Int? = null,
     tint: Color = LocalContentColor.current
 ) {
     Row(
@@ -51,22 +51,24 @@ private fun GenericExampleTitle(
             .padding(top = 8.dp)
             .fillMaxWidth()
     ) {
-        Icon(
-            painter = painterResource(id = drawableId),
-            // Note: Suppress decorative icon description; caller must convey icon meaning in the
-            // visible text.
-            contentDescription = null,
-            modifier = Modifier
-                .defaultMinSize(24.dp, minHeight = 24.dp)
-                .align(Alignment.CenterVertically),
-            tint = tint
-        )
+        if (drawableId != null) {
+            Icon(
+                painter = painterResource(id = drawableId),
+                // Note: Suppress decorative icon description; caller must convey icon meaning in the
+                // visible text.
+                contentDescription = null,
+                modifier = Modifier
+                    .defaultMinSize(24.dp, minHeight = 24.dp)
+                    .align(Alignment.CenterVertically)
+                    .padding(end = 16.dp),
+                tint = tint
+            )
+        }
         Text(
             stringResource(id = textId),
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
-                .padding(start = 16.dp)
         )
     }
 }
@@ -78,8 +80,8 @@ fun GoodExampleTitle(
 ) {
     GenericExampleTitle(
         textId = textId,
-        drawableId = R.drawable.ic_check_fill,
         modifier = modifier,
+        drawableId = R.drawable.ic_check_fill,
         tint = SuccessGreen
     )
 }
@@ -91,10 +93,10 @@ fun GroupedGoodExampleTitle(
 ) {
     GenericExampleTitle(
         textId = textId,
-        drawableId = R.drawable.ic_check_fill,
         modifier = modifier
             // Note: Group icon and text as a single TalkBack focus
             .semantics(mergeDescendants = true) { },
+        drawableId = R.drawable.ic_check_fill,
         tint = SuccessGreen
     )
 }
@@ -114,8 +116,8 @@ fun BadExampleTitle(
 ) {
     GenericExampleTitle(
         textId = textId,
-        drawableId = R.drawable.ic_close_fill,
         modifier = modifier,
+        drawableId = R.drawable.ic_close_fill,
         tint = ErrorRed
     )
 }
@@ -127,10 +129,10 @@ fun GroupedBadExampleTitle(
 ) {
     GenericExampleTitle(
         textId = textId,
-        drawableId = R.drawable.ic_close_fill,
         modifier = modifier
             // Note: Group icon and text as a single TalkBack focus
             .semantics(mergeDescendants = true) { },
+        drawableId = R.drawable.ic_close_fill,
         tint = ErrorRed
     )
 }

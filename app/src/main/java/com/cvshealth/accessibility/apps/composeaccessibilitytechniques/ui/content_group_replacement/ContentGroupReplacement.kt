@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -158,7 +158,7 @@ private fun BadExample1() {
 
 @Preview(showBackground = true)
 @Composable
-private fun PreviewBadExample1() {
+private fun BadExample1Preview() {
     ComposeAccessibilityTechniquesTheme() {
         Column(
             modifier = Modifier
@@ -216,7 +216,7 @@ private fun BadExample2() {
 
 @Preview(showBackground = true)
 @Composable
-private fun PreviewBadExample2() {
+private fun BadExample2Preview() {
     ComposeAccessibilityTechniquesTheme() {
         Column(
             modifier = Modifier
@@ -300,7 +300,7 @@ private fun GoodExample3() {
 
 @Preview(showBackground = true)
 @Composable
-private fun PreviewGoodExample3() {
+private fun GoodExample3Preview() {
     ComposeAccessibilityTechniquesTheme() {
         Column(
             modifier = Modifier
@@ -377,7 +377,7 @@ private fun GoodExample4() {
 
 @Preview(showBackground = true)
 @Composable
-private fun PreviewGoodExample4() {
+private fun GoodExample4Preview() {
     ComposeAccessibilityTechniquesTheme() {
         Column(
             modifier = Modifier

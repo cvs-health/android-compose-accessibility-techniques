@@ -207,6 +207,12 @@
     <string name="interactive_control_labels_example_9">Good example 9: Button with associated label</string>
     <string name="interactive_control_labels_associated_button_label">Button label</string>
     <string name="interactive_control_labels_associated_button_message">Button pressed</string>
+    <string name="interactive_control_labels_example_10">Bad example 10: Slider without associated field label</string>
+    <string name="interactive_control_labels_unassociated_slider_label">Field label not associated with Slider</string>
+    <string name="interactive_control_labels_example_11">OK example 11: Slider with associated field label</string>
+    <string name="interactive_control_labels_example_11_description">Sliders require the use of contentDescription to provide an accessible label. Slider controls cannot be simply associated with a visible text label, so both the visible label text and contentDescription are necessary. The contentDescription must also contain the visible label text.</string>
+    <string name="interactive_control_labels_associated_slider_label">Field label for Slider</string>
+    <string name="interactive_control_labels_associated_slider_content_description">Field label for Slider (contained in contentDescription)</string>
 
     <!-- UX change announcements -->
     <string name="ux_change_announcements_title">UX change announcements</string>

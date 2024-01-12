@@ -44,6 +44,15 @@ fun hasText(): SemanticsMatcher {
     }
 }
 
+fun hasContentDescription(): SemanticsMatcher {
+    return SemanticsMatcher(
+        "${SemanticsProperties.ContentDescription.name} contains non-empty value"
+    ) {
+        it.config.getOrNull(SemanticsProperties.ContentDescription)
+            ?.any { item -> item.isNotBlank() } ?: false
+    }
+}
+
 // Collection testing helpers
 fun hasCollectionInfo(): SemanticsMatcher =
     SemanticsMatcher.keyIsDefined(SemanticsProperties.CollectionInfo)

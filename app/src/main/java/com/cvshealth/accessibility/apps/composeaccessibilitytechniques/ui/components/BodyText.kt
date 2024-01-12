@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -30,16 +30,42 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun BodyTextNoPadding(
-    @StringRes textId: Int,
+    text: String,
     modifier: Modifier = Modifier,
     textAlign: TextAlign? = null
 ) {
     Text(
-        stringResource(id = textId),
+        text,
         modifier = modifier
             .fillMaxWidth(),
         textAlign = textAlign,
         style = MaterialTheme.typography.bodyMedium
+    )
+}
+
+@Composable
+fun BodyTextNoPadding(
+    @StringRes textId: Int,
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign? = null
+) {
+    BodyTextNoPadding(
+        stringResource(id = textId),
+        modifier = modifier,
+        textAlign = textAlign
+    )
+}
+
+@Composable
+fun BodyText(
+    text: String,
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign? = null
+) {
+    BodyTextNoPadding(
+        text,
+        modifier.padding(top = 8.dp),
+        textAlign
     )
 }
 

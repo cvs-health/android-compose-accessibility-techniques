@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -17,11 +17,13 @@ package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.input.key.KeyEvent
 import androidx.compose.ui.input.key.NativeKeyEvent
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.assertIsToggleable
+import androidx.compose.ui.test.hasProgressBarRangeInfo
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isFocused
 import androidx.compose.ui.test.isHeading
@@ -48,6 +50,10 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.intera
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample8HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample9ControlTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample9HeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample10ControlTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample10HeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample11ControlTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample11HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
@@ -98,6 +104,12 @@ class InteractiveControlLabelsTests {
             .assertExists()
         composeTestRule
             .onNode(hasTestTag(interactiveControlLabelsExample9HeadingTestTag) and isHeading())
+            .assertExists()
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample10HeadingTestTag) and isHeading())
+            .assertExists()
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample11HeadingTestTag) and isHeading())
             .assertExists()
     }
 
@@ -171,6 +183,13 @@ class InteractiveControlLabelsTests {
         composeTestRule
             .onNode(hasTestTag(interactiveControlLabelsExample9ControlTestTag) and hasText())
             .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(interactiveControlLabelsExample11ControlTestTag)
+                        and
+                        hasContentDescription()
+            )
+            .assertExists()
     }
 
     @Test
@@ -183,6 +202,15 @@ class InteractiveControlLabelsTests {
             .assertExists()
         composeTestRule
             .onNode(hasTestTag(interactiveControlLabelsExample5ControlTestTag) and !hasText())
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(interactiveControlLabelsExample10ControlTestTag)
+                        and
+                        !hasText()
+                        and
+                        !hasContentDescription()
+            )
             .assertExists()
     }
 
@@ -259,5 +287,27 @@ class InteractiveControlLabelsTests {
         composeTestRule
             .onNodeWithTag(interactiveControlLabelsExample9ControlTestTag)
             .assertHasClickAction()
+    }
+
+    @Test
+    fun verifyThatSlidersHaveExpectedRanges() {
+        composeTestRule
+            .onNode(
+                hasTestTag(interactiveControlLabelsExample10ControlTestTag)
+                        and
+                        hasProgressBarRangeInfo(
+                            ProgressBarRangeInfo(0f,0f..10f, 9)
+                        )
+            )
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(interactiveControlLabelsExample11ControlTestTag)
+                        and
+                        hasProgressBarRangeInfo(
+                            ProgressBarRangeInfo(0f,0f..10f, 9)
+                        )
+            )
+            .assertExists()
     }
 }

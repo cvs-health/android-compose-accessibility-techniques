@@ -15,6 +15,8 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels
 
+import android.view.KeyEvent
+import android.view.KeyEvent.ACTION_UP
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,6 +29,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,9 +37,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,11 +57,13 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.CheckboxRow
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.RadioButtonGroup
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SwitchRow
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
+import kotlin.math.roundToInt
 
 const val interactiveControlLabelsHeadingTestTag = "interactiveControlLabelsHeading"
 const val interactiveControlLabelsExample1HeadingTestTag = "interactiveControlLabelsExample1Heading"
@@ -71,6 +82,10 @@ const val interactiveControlLabelsExample7HeadingTestTag = "interactiveControlLa
 const val interactiveControlLabelsExample8HeadingTestTag = "interactiveControlLabelsExample8Heading"
 const val interactiveControlLabelsExample9HeadingTestTag = "interactiveControlLabelsExample9Heading"
 const val interactiveControlLabelsExample9ControlTestTag = "interactiveControlLabelsExample9Control"
+const val interactiveControlLabelsExample10HeadingTestTag = "interactiveControlLabelsExample10Heading"
+const val interactiveControlLabelsExample10ControlTestTag = "interactiveControlLabelsExample10Control"
+const val interactiveControlLabelsExample11HeadingTestTag = "interactiveControlLabelsExample11Heading"
+const val interactiveControlLabelsExample11ControlTestTag = "interactiveControlLabelsExample11Control"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -241,6 +256,84 @@ fun InteractiveControlLabelsScreen(
                     text = stringResource(id = R.string.interactive_control_labels_associated_button_label)
                 )
             }
+
+            // Bad example 10: Slider without associated field label
+            BadExampleHeading(
+                text = stringResource(id = R.string.interactive_control_labels_example_10),
+                modifier = Modifier.testTag(interactiveControlLabelsExample10HeadingTestTag)
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            val slider1LabelText = stringResource(
+                id = R.string.interactive_control_labels_unassociated_slider_label
+            )
+            BodyText(slider1LabelText)
+            val (slider1Value, setSlider1Value) = remember { mutableStateOf(0.0f) }
+            Slider(
+                value = slider1Value,
+                onValueChange = setSlider1Value,
+                modifier = Modifier
+                    .testTag(interactiveControlLabelsExample10ControlTestTag),
+                valueRange = 0f..10f,
+                steps = 9
+            )
+
+            // OK example 11: Slider with associated field label
+            OkExampleHeading(
+                text = stringResource(id = R.string.interactive_control_labels_example_11),
+                modifier = Modifier.testTag(interactiveControlLabelsExample11HeadingTestTag)
+            )
+            BodyText(textId = R.string.interactive_control_labels_example_11_description)
+            Spacer(modifier = Modifier.height(8.dp))
+
+            BodyText(textId = R.string.interactive_control_labels_associated_slider_label)
+            val (slider2Value, setSlider2Value) = remember { mutableStateOf(0.0f) }
+            val slider2ContentDescription = stringResource(
+                id = R.string.interactive_control_labels_associated_slider_content_description
+            )
+            val range = 0f..10f
+            val steps = 9 // steps between the start and end point (exclusive of both)
+            val increment = (range.endInclusive - range.start) / (steps + 1)
+            Slider(
+                value = slider2Value,
+                onValueChange = setSlider2Value,
+                modifier = Modifier
+                    .testTag(interactiveControlLabelsExample11ControlTestTag)
+                    // Key technique: Allow the left and right arrow keys to adjust the slider value.
+                    .onKeyEvent { keyEvent ->
+                        if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                            when (keyEvent.nativeKeyEvent.keyCode) {
+                                KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                                    setSlider2Value(slider2Value + increment)
+                                    true
+                                }
+                                KeyEvent.KEYCODE_DPAD_LEFT -> {
+                                    setSlider2Value(slider2Value - increment)
+                                    true
+                                }
+                                else -> {
+                                    false
+                                }
+                            }
+                        } else {
+                            false
+                        }
+                    }
+                    .semantics() {
+                        // Key technique: Slider contentDescription must duplicate label text,
+                        // because Slider does not support a text label. (See
+                        // https://issuetracker.google.com/issues/236988201.)
+                        // However, contentDescription can extend the label text.
+                        contentDescription = slider2ContentDescription
+
+                        // stateDescription replaces the default "xx percent" text for a Slider.
+                        stateDescription = slider2Value.roundToInt().toString()
+
+                        // liveRegion announces the Slider's state when its value changes.
+                        liveRegion = LiveRegionMode.Polite
+                    },
+                valueRange = range,
+                steps = steps
+            )
 
             Spacer(modifier = Modifier.height(8.dp))
         }

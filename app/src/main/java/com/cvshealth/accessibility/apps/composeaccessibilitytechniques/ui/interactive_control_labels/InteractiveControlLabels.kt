@@ -298,24 +298,36 @@ fun InteractiveControlLabelsScreen(
                 onValueChange = setSlider2Value,
                 modifier = Modifier
                     .testTag(interactiveControlLabelsExample11ControlTestTag)
-                    // Key technique: Allow the left and right arrow keys to adjust the slider value.
+                    // Key technique: Allow the left and right arrow keys to adjust the slider value
+                    // provided the resulting value is within the slider's range; otherwise, allow
+                    // normal arrow key navigation to apply.
                     .onKeyEvent { keyEvent ->
-                        if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
-                            when (keyEvent.nativeKeyEvent.keyCode) {
-                                KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                                    setSlider2Value(slider2Value + increment)
+                        when (keyEvent.nativeKeyEvent.keyCode) {
+                            KeyEvent.KEYCODE_DPAD_LEFT -> {
+                                // Have to absorb both the DPAD_LEFT key DOWN and UP events, because
+                                // otherwise screen navigation captures key DOWN and the key UP
+                                // event is never received.
+                                if (range.contains(slider2Value - increment)) {
+                                    if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                                        setSlider2Value(slider2Value - increment)
+                                    }
                                     true
-                                }
-                                KeyEvent.KEYCODE_DPAD_LEFT -> {
-                                    setSlider2Value(slider2Value - increment)
-                                    true
-                                }
-                                else -> {
+                                } else {
                                     false
                                 }
                             }
-                        } else {
-                            false
+                            KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                                if (keyEvent.nativeKeyEvent.action == ACTION_UP &&
+                                    range.contains(slider2Value + increment)) {
+                                    setSlider2Value(slider2Value + increment)
+                                    true
+                                } else {
+                                    false
+                                }
+                            }
+                            else -> {
+                                false
+                            }
                         }
                     }
                     .semantics() {

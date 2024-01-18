@@ -5,9 +5,9 @@ The required techniques are:
 
 1. Set the `TextField` `label` property.
 2. Remediate the keyboard trap that makes Tabs part of the `TextField` data:
-  1. Debounce focus changes with `Modifier.onFocusChanged()`.
-  2. Remember the focus state after debouncing.
-  3. Apply `Modifier.onPreviewKeyEvent()` to handle keyboard activity (Tab, Shift+Tab, and Enter), if the field remained focused after debouncing, and before the key event became part of the `TextField` data.
+    1. Debounce focus changes with `Modifier.onFocusChanged()`.
+    2. Remember the focus state after debouncing.
+    3. Apply `Modifier.onPreviewKeyEvent()` to handle keyboard activity (Tab, Shift+Tab, Enter, and Up/Down direction pad keys), if the field remained focused after debouncing, and before the key event became part of the `TextField` data.
 3. Set soft keyboard type and options with the `TextField` `keyboardOptions` property. See [Keyboard Types and Options](../interactions/KeyboardTypes.md) for details.
 4. Set the appropriate soft keyboard actions using the `TextField` `keyboardOptions` `imeAction` property and the `TextField` `keyboardActions` property. See [Keyboard Actions](../interactions/KeyboardActions.md) for details.
 
@@ -40,22 +40,37 @@ fun Modifier.nextOnTabAndHandleEnter(
                     hasFocus = focusState.hasFocus
                 }
             }
-            // Key technique 3: If focus remains on this control, handle Tab, Shift+Tab, and Enter 
-            // keys before a keyEvent becomes part of the TextField's text data.
-            // Note that Enter key handling is optional and is hoisted to the caller's context.
+            // Key technique 3: If focus remains on this control, handle Tab, Shift+Tab, Enter, and 
+            // the Up and Down direction pad keys before a keyEvent becomes part of the TextField's 
+            // text data. (Note that Enter key handling is optional and is hoisted to the caller's 
+            // context.)
             .onPreviewKeyEvent { keyEvent ->
                 if (hasFocus && keyEvent.nativeKeyEvent.keyCode == KEYCODE_TAB) {
-                    if (keyEvent.nativeKeyEvent.isShiftPressed) {
-                        focusManager.moveFocus(FocusDirection.Previous)
-                    } else {
-                        focusManager.moveFocus(FocusDirection.Next)
+                    if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                        if (keyEvent.nativeKeyEvent.isShiftPressed) {
+                            focusManager.moveFocus(FocusDirection.Previous)
+                        } else {
+                            focusManager.moveFocus(FocusDirection.Next)
+                        }
+                    }
+                    true
+                } else if (hasFocus && keyEvent.nativeKeyEvent.keyCode == KEYCODE_DPAD_DOWN) {
+                    if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                        focusManager.moveFocus(FocusDirection.Down)
+                    }
+                    true
+                } else if (hasFocus && keyEvent.nativeKeyEvent.keyCode == KEYCODE_DPAD_UP) {
+                    if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                        focusManager.moveFocus(FocusDirection.Up)
                     }
                     true
                 } else if (
                     enterCallback != null
                     && (keyEvent.key == Key.Enter || keyEvent.key == Key.NumPadEnter)
                 ) {
-                    enterCallback()
+                    if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                        enterCallback()
+                    }
                     true
                 } else {
                     false

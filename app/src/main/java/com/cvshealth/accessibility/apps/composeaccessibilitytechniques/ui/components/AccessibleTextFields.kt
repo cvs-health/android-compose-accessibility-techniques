@@ -15,6 +15,9 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components
 
+import android.view.KeyEvent.ACTION_UP
+import android.view.KeyEvent.KEYCODE_DPAD_DOWN
+import android.view.KeyEvent.KEYCODE_DPAD_UP
 import android.view.KeyEvent.KEYCODE_TAB
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.text.KeyboardActions
@@ -64,22 +67,37 @@ fun Modifier.nextOnTabAndHandleEnter(
                     hasFocus = focusState.hasFocus
                 }
             }
-            // Key technique 3: If focus remains on this control, handle Tab, Shift+Tab, and Enter
-            // keys before a keyEvent becomes part of the TextField's text data.
-            // Note that Enter key handling is optional and is hoisted to the caller's context.
+            // Key technique 3: If focus remains on this control, handle Tab, Shift+Tab, Enter, and
+            // the Up and Down direction pad keys before a keyEvent becomes part of the TextField's
+            // text data. (Note that Enter key handling is optional and is hoisted to the caller's
+            // context.)
             .onPreviewKeyEvent { keyEvent ->
                 if (hasFocus && keyEvent.nativeKeyEvent.keyCode == KEYCODE_TAB) {
-                    if (keyEvent.nativeKeyEvent.isShiftPressed) {
-                        focusManager.moveFocus(FocusDirection.Previous)
-                    } else {
-                        focusManager.moveFocus(FocusDirection.Next)
+                    if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                        if (keyEvent.nativeKeyEvent.isShiftPressed) {
+                            focusManager.moveFocus(FocusDirection.Previous)
+                        } else {
+                            focusManager.moveFocus(FocusDirection.Next)
+                        }
+                    }
+                    true
+                } else if (hasFocus && keyEvent.nativeKeyEvent.keyCode == KEYCODE_DPAD_DOWN) {
+                    if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                        focusManager.moveFocus(FocusDirection.Down)
+                    }
+                    true
+                } else if (hasFocus && keyEvent.nativeKeyEvent.keyCode == KEYCODE_DPAD_UP) {
+                    if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                        focusManager.moveFocus(FocusDirection.Up)
                     }
                     true
                 } else if (
                     enterCallback != null
                     && (keyEvent.key == Key.Enter || keyEvent.key == Key.NumPadEnter)
                 ) {
-                    enterCallback()
+                    if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                        enterCallback()
+                    }
                     true
                 } else {
                     false

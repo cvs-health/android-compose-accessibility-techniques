@@ -166,14 +166,24 @@ class TextFieldControlsTests {
     @Test
     fun verifyPressingEnterWithNoNameSetsErrorAndAddingTextClearsError() {
         composeTestRule
-            .onNodeWithTag(textFieldControlsExample1TextFieldTestTag)
-            .performClick()
-            .performKeyPress(KeyEvent(NativeKeyEvent(android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.KEYCODE_ENTER)))
-        composeTestRule
             .onNode(
                 hasTestTag(textFieldControlsExample1TextFieldTestTag)
                         and
                         hasImeAction(ImeAction.Done)
+                        and
+                        !isError()
+            )
+            .assertExists()
+        composeTestRule
+            .onNodeWithTag(textFieldControlsExample1TextFieldTestTag)
+            .performClick()
+            .performKeyPress(KeyEvent(NativeKeyEvent(android.view.KeyEvent.ACTION_DOWN, android.view.KeyEvent.KEYCODE_ENTER)))
+        composeTestRule
+            .onNodeWithTag(textFieldControlsExample1TextFieldTestTag)
+            .performKeyPress(KeyEvent(NativeKeyEvent(android.view.KeyEvent.ACTION_UP, android.view.KeyEvent.KEYCODE_ENTER)))
+        composeTestRule
+            .onNode(
+                hasTestTag(textFieldControlsExample1TextFieldTestTag)
                         and
                         isError()
             )

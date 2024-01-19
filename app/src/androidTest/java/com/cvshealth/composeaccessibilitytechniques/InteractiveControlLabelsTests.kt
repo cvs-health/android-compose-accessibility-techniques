@@ -162,7 +162,7 @@ class InteractiveControlLabelsTests {
             .onNodeWithTag(interactiveControlLabelsExample1ControlTestTag)
             .performScrollTo()
             .performKeyPress(
-                KeyEvent(NativeKeyEvent(NativeKeyEvent.ACTION_DOWN, NativeKeyEvent.KEYCODE_TAB))
+                KeyEvent(NativeKeyEvent(NativeKeyEvent.ACTION_UP, NativeKeyEvent.KEYCODE_TAB))
             )
         composeTestRule
             .onNode(hasTestTag(interactiveControlLabelsExample2ControlTestTag))

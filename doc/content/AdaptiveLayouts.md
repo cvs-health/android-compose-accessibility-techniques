@@ -1,10 +1,13 @@
 # Adaptive Layouts
 Support both portrait and landscape orientations in accordance with the WCAG 2 [Success Criterion 1.3.4 Orientation](https://www.w3.org/TR/WCAG21/#orientation) and improve the user experience for different display sizes using the following techniques.
 
+## Avoid locking activity `android:screenOrientation`
 In AndroidManifest.xml, avoid setting any `<activity/>` element's `android:screenOrientation` to a value that fixes the orientation. In other words, avoid `portrait`, `landscape`, etc., in favor of `unspecified` (the default), `sensor`, `fullSensor`, `user`, or `fullUser` orientations. (See the [android:screenOrientation](https://developer.android.com/guide/topics/manifest/activity-element.html#screen) documentation for more details.)
 
+## Make all screen layouts scrollable 
 Implement the outermost `Column` of a screen layout with `Modifier.verticalScroll()` so the screen can be displayed in any display space without loss of content. Alternatively, use a scrolling list such as `LazyColumn` instead of an outer `Column`.
 
+## Create adaptive layouts using window size classes
 When appropriate, provide alternative layouts for different display sizes and orientations using the [Window size classes](https://developer.android.com/guide/topics/large-screens/support-different-screen-sizes#window_size_classes) and `WindowSizeClass`. (See [Build adaptive layouts](https://developer.android.com/jetpack/compose/layouts/adaptive) for more details.)
 
 For example, in the controlling `Activity`, determine the current `WindowSizeClass` and pass it (or a summary proxy value) down to the child composables:
@@ -78,10 +81,13 @@ fun AdaptiveLayoutsScreenMediumPreview() {
 }
 ```
 
+## Use orientation configuration sparingly 
 While it is possible to create alternative layouts using `LocalConfiguration.current.orientation`, that technique is fragile, particularly on tablet devices, foldables, and in multi-window modes. That said, orientation configuration may be useful for minor layout adjustments, such as changing padding.
 
+## Material Design adaptive layouts
 Material Design 3 also provides two (currently experimental) adaptive layout composables: [ListDetailPaneScaffold](https://developer.android.com/jetpack/compose/layouts/list-detail) and [NavigationSuiteScaffold](https://developer.android.com/reference/kotlin/androidx/compose/material3/adaptive/navigation/suite/package-summary#NavigationSuiteScaffold(kotlin.Function1,androidx.compose.ui.Modifier,androidx.compose.material3.adaptive.navigation.suite.NavigationSuiteType,androidx.compose.material3.adaptive.navigation.suite.NavigationSuiteColors,androidx.compose.ui.graphics.Color,androidx.compose.ui.graphics.Color,kotlin.Function0)).
 
+## Additional considerations
 Be sure to preserve application state across configurations changes (such as orientation change) using `rememberSaveable()`, a `ViewModel`, or other state management techniques. See [Handle configuration changes](https://developer.android.com/guide/topics/resources/runtime-changes) for more details.
 
 Always test layouts on a variety of devices, orientations, and display modes.

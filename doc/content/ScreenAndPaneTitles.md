@@ -1,0 +1,65 @@
+# Screen and Pane Titles
+All applications screens require titles that communicate the screen's topic or purpose to support the WCAG 2 [Success Criterion 2.4.2 Page Titled](https://www.w3.org/TR/WCAG21/#page-titled).
+
+The screen title should be both visible and announced by screen readers. To the extent reasonable, screen titles should be unique so they communicate the specific screen being displayed. However, this must be balanced against the need for conciseness.
+
+One way to visually display a screen title is using a `TopAppBar` `title`. For example:
+
+```kotlin
+Scaffold(
+    // ...
+    topBar = {
+        TopAppBar(
+            title = {
+                Text("Screen Title Example")
+            },
+            navigationIcon = {
+                IconButton(onClick = { /* Handle Back navigation */ }) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Navigate up"
+                    )
+                }
+            }
+        )
+    },
+    // ...
+) {
+    // Screen content ...
+}
+```
+
+One good way to provide screen reader announcement of screen titles is using the `Modifier.semantics` `paneTitle` property at a high layout level, such as a screen's `Scaffold`.
+
+For example:
+
+```kotlin
+Scaffold(
+    modifier = modifier.semantics {
+        paneTitle = "Screen Title Example"
+    },
+    // ...
+) {
+    // Screen content ...
+}
+```
+
+Significant panes within a screen should also be titled. For example, a navigation drawer or the separate panes in a list-detail layout should each have their own `paneTitle`.
+
+(Note: The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.)
+
+----
+
+Copyright 2024 CVS Health and/or one of its affiliates
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+[http://www.apache.org/licenses/LICENSE-2.0]()
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+See the License for the specific language governing permissions and
+limitations under the License.

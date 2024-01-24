@@ -181,6 +181,29 @@
     <string name="list_semantics_lazyrow_6">LazyRow 6</string>
     <string name="list_semantics_after_list_3">Text after a LazyRow list.</string>
 
+    <!-- Orientation and screen size-based layouts -->
+    <string name="adaptive_layouts_title">Adaptive layouts</string>
+    <string name="adaptive_layouts_heading">Screen layout should adapt to screen size</string>
+    <string name="adaptive_layouts_description_1">All screens are required to reorient in response to device orientation changes. If a layout change should result, this can be done based on either device orientation or on available display space. Layouts that adapt to the available display space are strongly preferred.</string>
+    <string name="adaptive_layouts_description_2">Note how the cards on this screen are laid out. Reorient the device between portrait and landscape mode and observe how the card layouts change. Also try this screen on a larger tablet device.</string>
+    <string name="adaptive_layouts_example_1_heading">OK example 1: Adaptive layout from orientation</string>
+    <string name="adaptive_layouts_example_1_description">In this example, layout is determined by device orientation configuration. However, this setting does not reflect the actual display space available. It is fragile on tablet devices, foldables, and in multi-window modes.</string>
+    <string name="adaptive_layouts_example_2_heading">Good example 2: Adaptive layout using WindowSizeClass</string>
+    <string name="adaptive_layouts_example_2_description">In this example, layout is determined by actual available display space, as abstracted by WindowSizeClass. Layouts with this technique adapt better to more circumstances.</string>
+    <string name="adaptive_layouts_pane_1_title">Card 1</string>
+    <string name="adaptive_layouts_pane_1_description">This is the content of the first card.</string>
+    <string name="adaptive_layouts_pane_2_title">Card 2</string>
+    <string name="adaptive_layouts_pane_2_description">This is the content of the second card.</string>
+    <string name="adaptive_layouts_pane_3_title">Card 3</string>
+    <string name="adaptive_layouts_pane_3_description">This is the content of the third card.</string>
+
+    <!-- Screen and pane titles -->
+    <string name="screen_and_pane_titles_title">Screen and pane titles</string>
+    <string name="screen_and_pane_titles_heading">Screens and panes need titles</string>
+    <string name="screen_and_pane_titles_description_1">All screens and distinct panes within a screen require a unique title to allow users to orient themselves within the app.</string>
+    <string name="screen_and_pane_titles_description_2">Screen titles can be visually presented using a TopAppBar title in the screen\'s Scaffold. Screen and pane titles are announced in screen readers by setting the Modifier.semantics paneTitle property on the appropriate enclosing composable, such as a screen\'s Scaffold.</string>
+    <string name="screen_and_pane_titles_description_3">Note the visible appbar screen title. Turn on TalkBack and navigate to other screens to hear demonstrations of screen title announcement.</string>
+
     <!-- Interactive control labels -->
     <string name="interactive_control_labels_title">Interactive control labels</string>
     <string name="interactive_control_labels_heading">Associate interactive controls programmatically with labels</string>

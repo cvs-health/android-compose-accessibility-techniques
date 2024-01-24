@@ -62,6 +62,11 @@ class CustomFocusIndicatorsTests {
     }
 
     @Test
+    fun verifyScreenHasPaneTitle() {
+        composeTestRule.onNode(hasPaneTitle()).assertExists()
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
         composeTestRule
             .onNode(hasTestTag(customFocusIndicatorsHeadingTestTag) and isHeading())

@@ -27,9 +27,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.paneTitle
+import androidx.compose.ui.semantics.semantics
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 
-
+/**
+ * GenericScaffold -- creates a default screen scaffold, including proper screen title handling.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GenericScaffold(
@@ -43,9 +47,14 @@ fun GenericScaffold(
     content: @Composable (modifier: Modifier) -> Unit
 ) {
     Scaffold(
-        modifier = modifier,
+        // Key technique 1: Use paneTitle semantics to announce the screen title.
+        modifier = modifier.semantics {
+            paneTitle = title
+        },
         topBar = {
             TopAppBar(
+                // Key technique 2: Use TopAppBar and its title parameter to visually display a
+                // screen title.
                 title = {
                     Text(title)
                 },

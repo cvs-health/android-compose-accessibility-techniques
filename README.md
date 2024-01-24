@@ -16,7 +16,8 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Content group replacement](doc/content/ContentGroupReplacement.md)
     - [x] [Heading semantics](doc/content/HeadingSemantics.md)
     - [x] [List semantics](doc/content/ListSemantics.md)
-    - [ ] Device orientation and screen sizes
+    - [x] [Adaptive layouts](doc/content/AdaptiveLayouts.md)
+    - [x] [Screen and pane titles](doc/content/ScreenAndPaneTitles.md)
     - [ ] Dark theme
 - Interactive Behaviors
     - [x] [Input field labels](doc/interactions/InteractiveControlLabels.md)
@@ -40,6 +41,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [ ] Dialogs
     - [x] [Dropdown selection menus](doc/components/DropdownMenus.md)
     - [x] [Links inline with text](doc/components/LinksInlineWithText.md)
+    - [ ] ListDetailPaneLayout
     - [x] [ListItem layouts](doc/components/ListItemLayouts.md)
     - [x] [ModalBottomSheet layouts](doc/components/ModalBottomSheetLayouts.md)
     - [x] [NavigationBar layouts](doc/components/NavigationBarLayouts.md)

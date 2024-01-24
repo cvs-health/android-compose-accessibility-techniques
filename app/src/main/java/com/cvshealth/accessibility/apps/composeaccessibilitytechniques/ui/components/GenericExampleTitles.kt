@@ -41,7 +41,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
 
 @Composable
 fun GenericExampleTitle(
-    @StringRes textId: Int,
+    text: String,
     modifier: Modifier = Modifier,
     @DrawableRes drawableId: Int? = null,
     tint: Color = LocalContentColor.current
@@ -65,13 +65,26 @@ fun GenericExampleTitle(
             )
         }
         Text(
-            stringResource(id = textId),
+            text,
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier
                 .align(Alignment.CenterVertically)
         )
     }
 }
+
+@Composable
+fun GenericExampleTitle(
+    @StringRes textId: Int,
+    modifier: Modifier = Modifier,
+    @DrawableRes drawableId: Int? = null,
+    tint: Color = LocalContentColor.current
+) = GenericExampleTitle(
+    text = stringResource(id = textId),
+    modifier = modifier,
+    drawableId = drawableId,
+    tint = tint
+)
 
 @Composable
 fun GoodExampleTitle(

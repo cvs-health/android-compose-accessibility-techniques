@@ -61,6 +61,11 @@ class NavigationBarLayoutsTests {
     }
 
     @Test
+    fun verifyScreenHasPaneTitle() {
+        composeTestRule.onNode(hasPaneTitle()).assertExists()
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
         composeTestRule
             .onNode(hasTestTag(navigationBarLayoutsHeadingTestTag) and isHeading())

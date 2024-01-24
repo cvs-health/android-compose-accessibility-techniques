@@ -74,6 +74,11 @@ class InteractiveControlLabelsTests {
     }
 
     @Test
+    fun verifyScreenHasPaneTitle() {
+        composeTestRule.onNode(hasPaneTitle()).assertExists()
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
         composeTestRule
             .onNode(hasTestTag(interactiveControlLabelsHeadingTestTag) and isHeading())

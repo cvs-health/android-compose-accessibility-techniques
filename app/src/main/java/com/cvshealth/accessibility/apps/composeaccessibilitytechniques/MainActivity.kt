@@ -22,6 +22,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -31,6 +34,7 @@ import androidx.navigation.compose.rememberNavController
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accessibility_traversal_order.AccessibilityTraversalOrderScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_actions.KeyboardActionsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.AccordionControlsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.adaptive_layouts.AdaptiveLayoutsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.checkbox_controls.CheckboxControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_group_replacement.ContentGroupReplacementScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_grouping.ContentGroupingScreen
@@ -49,6 +53,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listit
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.modalbottomsheet_layouts.ModalBottomSheetLayoutsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.navigationbar_layouts.NavigationBarLayoutsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.RadioButtonGroupsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.screen_and_pane_titles.ScreenAndPaneTitlesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.SwitchControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.tab_rows.TabRowsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.TextAlternativesScreen
@@ -58,9 +63,13 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.ux_cha
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            // Key adaptive layout technique: Calculate the appropriate WindowSizeClass and pass it
+            // down to appropriate child composable functions. (Note the required OptIn annotation.)
+            val windowSizeClass = calculateWindowSizeClass(this)
             ComposeAccessibilityTechniquesTheme() {
                 val navController = rememberNavController()
                 // A surface container using the 'background' color from the theme
@@ -68,7 +77,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ComposeAccessibilityTechniquesNavHost(navController)
+                    ComposeAccessibilityTechniquesNavHost(navController, windowSizeClass)
                 }
             }
         }
@@ -78,6 +87,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ComposeAccessibilityTechniquesNavHost(
     navController: NavHostController,
+    windowSizeClass: WindowSizeClass,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -108,6 +118,12 @@ fun ComposeAccessibilityTechniquesNavHost(
         }
         composable(route = ComposeAccessibilityTechniquesRoute.ListSemantics.route) {
             ListSemanticsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.AdaptiveLayouts.route) {
+            AdaptiveLayoutsScreen(onBackPressed = popBackStack, windowSizeClass = windowSizeClass)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.ScreenAndPaneTitles.route) {
+            ScreenAndPaneTitlesScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.InteractiveControlLabels.route) {
             InteractiveControlLabelsScreen(onBackPressed = popBackStack)

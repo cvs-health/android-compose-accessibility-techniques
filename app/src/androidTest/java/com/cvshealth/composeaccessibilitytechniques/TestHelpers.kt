@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -50,6 +50,22 @@ fun hasContentDescription(): SemanticsMatcher {
     ) {
         it.config.getOrNull(SemanticsProperties.ContentDescription)
             ?.any { item -> item.isNotBlank() } ?: false
+    }
+}
+
+fun hasPaneTitle(): SemanticsMatcher {
+    return SemanticsMatcher(
+        "${SemanticsProperties.PaneTitle.name} contains non-empty value"
+    ) {
+        it.config.getOrNull(SemanticsProperties.PaneTitle)?.isNotBlank() ?: false
+    }
+}
+
+fun hasPaneTitle(title: String): SemanticsMatcher {
+    return SemanticsMatcher(
+        "${SemanticsProperties.PaneTitle.name} equals $title"
+    ) {
+        it.config.getOrNull(SemanticsProperties.PaneTitle)?.equals(title) ?: false
     }
 }
 

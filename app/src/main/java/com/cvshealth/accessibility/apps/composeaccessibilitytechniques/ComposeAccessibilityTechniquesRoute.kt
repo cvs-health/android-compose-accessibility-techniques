@@ -28,6 +28,8 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     ContentGroupReplacement("contentGroupReplacement"),
     HeadingSemantics("headingSemantics"),
     ListSemantics("listSemantics"),
+    AdaptiveLayouts("adaptiveLayouts"),
+    ScreenAndPaneTitles("screenAndPaneTitles"),
     InteractiveControlLabels("interactiveControlLabels"),
     UxChangeAnnouncements("uxChangeAnnouncements"),
     KeyboardTypes("keyboardTypes"),

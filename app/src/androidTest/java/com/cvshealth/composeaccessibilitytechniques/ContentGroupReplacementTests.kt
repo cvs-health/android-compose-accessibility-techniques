@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -63,6 +63,15 @@ class ContentGroupReplacementTests {
             .onNodeWithText(composeTestRule.activity.getString(R.string.content_group_replacement_title))
             .performScrollTo()
             .performClick()
+    }
+
+    @Test
+    fun verifyScreenHasPaneTitle() {
+        composeTestRule.onNode(
+            hasPaneTitle(
+                composeTestRule.activity.getString(R.string.content_group_replacement_title)
+            )
+        ).assertExists()
     }
 
     @Test

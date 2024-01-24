@@ -71,6 +71,11 @@ class TabRowsTests {
     }
 
     @Test
+    fun verifyScreenHasPaneTitle() {
+        composeTestRule.onNode(hasPaneTitle()).assertExists()
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
         composeTestRule
             .onNode(hasTestTag(tabRowsHeadingTestTag) and isHeading())

@@ -63,7 +63,19 @@ To Preview adaptive layouts based on `WindowSizeClass`, set the `@Preview` `widt
 For example:
 
 ```kotlin
-
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+// Preview technique: To preview layouts, set their size with widthDp and heightDp.
+// The following widthDp sets a Medium width.
+@Preview(showBackground = true, widthDp = 600, heightDp = 900)
+@Composable
+fun AdaptiveLayoutsScreenMediumPreview() {
+    ComposeAccessibilityTechniquesTheme() {
+        AdaptiveLayoutsScreen(
+            // Preview technique: Create a WindowSizeClass matching this preview's window.
+            windowSizeClass = WindowSizeClass.calculateFromSize(DpSize(width=600.dp, height=900.dp))
+        )
+    }
+}
 ```
 
 While it is possible to create alternative layouts using `LocalConfiguration.current.orientation`, that technique is fragile, particularly on tablet devices, foldables, and in multi-window modes. That said, orientation configuration may be useful for minor layout adjustments, such as changing padding.

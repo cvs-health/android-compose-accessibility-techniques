@@ -64,8 +64,8 @@ dependencies {
     // TODO: Update to stable Material3 and Material libraries as soon as possible.
     // implementation 'androidx.compose.material3:material3'
     // implementation 'com.google.android.material:material' // included for View interop styling
-    implementation 'androidx.compose.material3:material3:1.2.0-beta02'
-    implementation 'androidx.compose.material3:material3-window-size-class:1.2.0-beta02'
+    implementation 'androidx.compose.material3:material3:1.2.0-rc01'
+    implementation 'androidx.compose.material3:material3-window-size-class:1.2.0-rc01'
     implementation 'com.google.android.material:material:1.12.0-alpha03'  // included for View interop styling
 
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"

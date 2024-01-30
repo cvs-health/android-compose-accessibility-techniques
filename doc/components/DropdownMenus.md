@@ -1,5 +1,7 @@
 # Dropdown Selection Menus
-For now, avoid using the Material Design [Exposed Dropdown Menu pattern](https://m2.material.io/components/menus#exposed-dropdown-menu) on Jetpack Compose screens. Although this pattern creates dropdown menu controls that announce their name, role, and value in accordance with the WCAG 2 [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG21/#name-role-value) and correctly express their relationships according to WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships), as of Compose BOM 2024.01.00, they fail basic keyboard operability requirements, as required by WCAG [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG21/#keyboard). Custom approaches are likely to be less accessible; make sure any dropdown selection menu is operable by all assistive technologies, including the keyboard, and announces the role "Dropdown menu."
+For now, avoid using the Material Design [Exposed Dropdown Menu pattern](https://m2.material.io/components/menus#exposed-dropdown-menu) on Jetpack Compose screens. Although this pattern creates dropdown menu controls that announce their name, role, and value in accordance with the WCAG 2 [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG21/#name-role-value) and correctly express their relationships according to WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships), as of Compose BOM 2024.01.00, they fail basic keyboard operability requirements, as required by WCAG [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG21/#keyboard). 
+
+Custom approaches are likely to be less accessible; make sure any dropdown selection menu is operable by all assistive technologies, including the keyboard, and announces the role "Drop down list."
 
 ## The Compose Exposed Dropdown Menu pattern
 
@@ -69,7 +71,7 @@ ExposedDropdownMenuBox(
 
 One promising approach to accessible dropdown menus is to fall back on using View components, wrapped in an `AndroidView`. 
 
-Unfortunately, this approach fails at present, because of a known Compose-View interop focus issue which prevents the dropdown menu within the AndroidView from receiving focus, even if the AndroidView is made focusable explicitly: see https://issuetracker.google.com/issues/255628260 for details. Once that issue is resolved, this approach can be used.
+Unfortunately, this approach fails at present, because of a known Compose-View interop issue which prevents the dropdown menu within the AndroidView from receiving focus, even if the AndroidView is made focusable explicitly: see https://issuetracker.google.com/issues/255628260 for details. Once that issue is resolved, this approach can be used.
 
 For example, given a file named `layout/view_dropdown_menu.xml` with the following View Exposed Dropdown Menu pattern controls:
 

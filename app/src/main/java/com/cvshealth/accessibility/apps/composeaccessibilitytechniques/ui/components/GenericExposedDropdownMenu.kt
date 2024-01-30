@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components
 
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -22,13 +24,17 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.tooling.preview.Preview
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
+import kotlinx.coroutines.delay
 
 /**
  * GenericExposedDropdownMenu encapsulates the Exposed Dropdown menu pattern for a list of String
@@ -37,8 +43,14 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  * expanded/collapsed state handling.
  *
  * This composable can also be applied either as a fixed, uneditable menu or as an unconstrained,
- * editable text field with a suggested list of values. Note that editable menus pose accessibility
- * challenges for screen reader users and should be applied with caution.
+ * editable text field with a suggested list of values. However, editable menus pose accessibility
+ * challenges for screen reader users as well as being keyboard traps and otherwise keyboard
+ * inaccessible. While values can be typed into the OutlinedTextField with a keyboard, the dropdown
+ * menu does not appear to suggest values (nor would such a list be keyboard selectable).
+ *
+ * Note that non-editable menus are also not keyboard accessible, as of Compose BOM 2024-01-00. No
+ * remediation is known, because key events are only available to the ExposedDropdownMenuBox and the
+ * OutlinedTextField, not to the ExposedDropdownMenu or DropdownMenuItem.
  *
  * GenericExposedDropdownMenu applies the following key techniques:
  * 1. Wrap the entire dropdown menu ensemble in an ExposedDropdownMenuBox.
@@ -73,20 +85,24 @@ fun GenericExposedDropdownMenu(
     readOnly: Boolean = true,
     supportingText: @Composable (() -> Unit)? = null,
     isError: Boolean = false,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
     label: @Composable () -> Unit,
 ) {
     // Note: Dropdown expansion state is managed locally and not maintained across configuration
     // changes.
+    val focusRequester = remember { FocusRequester() }
     var isExpanded by remember { mutableStateOf(false) }
     // Key technique 1: Wrap the dropdown menu ensemble in an ExposedDropdownMenuBox.
     ExposedDropdownMenuBox(
         expanded = isExpanded,
         onExpandedChange = { isExpanded = !isExpanded },
-        modifier = modifier,
+        modifier = modifier
     ) {
         OutlinedTextField(
             modifier = textFieldModifier
-                .menuAnchor(), // Key technique 2: Anchor the TextField to the menu box.
+                // Key technique 2: Anchor the TextField to the menu box.
+                .menuAnchor(),
             readOnly = readOnly, // Key technique 3a: Set readOnly appropriately.
             value = value,
             onValueChange = { newValue ->
@@ -100,6 +116,8 @@ fun GenericExposedDropdownMenu(
             isError = isError, // Optional: Support announcing an error state.
             // Key technique 5: Set the trailing icon to show the expanded/collapsed state.
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded) },
+            keyboardActions = keyboardActions,
+            keyboardOptions = keyboardOptions,
             colors = ExposedDropdownMenuDefaults.textFieldColors(),
         )
 
@@ -115,6 +133,7 @@ fun GenericExposedDropdownMenu(
             ExposedDropdownMenu(
                 expanded = isExpanded,
                 onDismissRequest = { isExpanded = false },
+                modifier = Modifier.focusRequester(focusRequester)
             ) {
                 filteredOptions.forEach { option ->
                     // Key technique 8: Hold each menu item in a DropdownMenuItem.
@@ -124,8 +143,17 @@ fun GenericExposedDropdownMenu(
                             setValue(option)
                             isExpanded = false
                         },
+                        modifier = Modifier.visibleFocusBorder(),
                         contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
                     )
+                }
+            }
+
+            // Key technique: Set keyboard focus onto a newly-opened dropdown menu pop-up.
+            LaunchedEffect(isExpanded) {
+                if (isExpanded) {
+                    delay(500)
+                    focusRequester.requestFocus()
                 }
             }
         }

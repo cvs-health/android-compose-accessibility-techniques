@@ -48,6 +48,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [ ] Progress indicators
     - [x] [RadioButton groups](doc/components/RadioButtonGroups.md)
     - [ ] Slider and RangeSlider controls
+    - [ ] Snackbars
     - [x] [Switch controls](doc/components/SwitchControls.md)
     - [x] [Tab rows](doc/components/TabRows.md)
     - [x] [TextField controls](doc/components/TextFieldControls.md)

@@ -112,6 +112,44 @@ Column(modifier = Modifier.selectableGroup()) {
 }
 ```
 
+
+## Use a visible label text and the `Modifier.semantics` `contentDescription` property to associate a label with a `Slider` or `RangeSlider`
+
+`Slider` and `RangeSlider` composables are labeled by their `contentDescription` semantics property. They must also have a visible label and the text of the visible label must be present in the `contentDescription`.
+
+Notes: 
+- `Slider` composables also require keyboard accessibility remediation, `stateDescription`, and `liveRegion` semantics, but these are not shown below.
+- `RangeSlider` composable are not keyboard accessible, so should be avoided in Compose screens, if possible. 
+    - (Even wrapping a View-based `RangeSlider` in `AndroidView` will fail due to a known keyboard focus issue with View interop. See https://issuetracker.google.com/issues/255628260 for details.)
+
+For example:
+
+```kotlin
+
+// Technique: Provide a visible label
+val labelText = "Rating"
+Text(labelText)
+
+val (ratingValue, setRatingValue) = remember { mutableStateOf(0.0f) }
+val range = 0f..10f
+val steps = 9 // steps between the start and end point (exclusive of both)
+Slider(
+    value = ratingValue,
+    onValueChange = setRatingValue,
+    modifier = Modifier
+        // ... handle keyboard accessibility
+        .semantics {
+            // Technique: Slider contentDescription must duplicate label text, because Slider does 
+            // not support a text label. (See https://issuetracker.google.com/issues/236988201.)
+            // However, contentDescription can extend the label text.
+            contentDescription = labelText
+            // ... handle stateDescription and liveRegion announcement
+        },
+    valueRange = range,
+    steps = steps
+)
+```
+
 (Note: The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.)
 
 ----

@@ -35,8 +35,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdo
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample1DropdownMenuBoxTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample1DropdownMenuTextFieldTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample1HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample2DropdownMenuBoxTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample2DropdownMenuTextFieldTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample2AndroidViewTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample2HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -44,6 +43,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+// Note: Cannot test DropDownMenusScreen, Example 2, because AndroidView is opaque to Compose jUnit
+// UI semantic testing. Only the AndroidView's existence and outward semantics can be verified.
 class DropdownMenusTests {
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -88,7 +89,7 @@ class DropdownMenusTests {
             .assertExists()
         composeTestRule
             .onNode(
-                hasTestTag(dropdownMenusExample2DropdownMenuBoxTestTag)
+                hasTestTag(dropdownMenusExample2AndroidViewTestTag)
                         and
                         !isHeading()
                         and
@@ -143,50 +144,6 @@ class DropdownMenusTests {
                 hasStateDescription("Collapsed")
                 and
                 hasRole(Role.DropdownList)
-            )
-    }
-
-    @Test
-    fun verifyExample2DropdownMenuHasExpectedInitialState() {
-        composeTestRule
-            .onNodeWithTag(dropdownMenusExample2DropdownMenuTextFieldTestTag)
-            .assert(
-        hasTextExactly("Payment type", "")
-                and
-                hasClickAction()
-                and
-                hasStateDescription("Collapsed")
-                and
-                hasRole(Role.DropdownList)
-            )
-    }
-
-    @Test
-    fun verifyExample2DropdownMenuHasExpectedMenuActions() {
-        composeTestRule
-            .onNodeWithTag(dropdownMenusExample2DropdownMenuTextFieldTestTag)
-            .performScrollTo()
-            .performClick()
-
-        composeTestRule
-            .onNodeWithTag(dropdownMenusExample2DropdownMenuTextFieldTestTag)
-            .assert(hasStateDescription("Expanded"))
-
-        composeTestRule
-            .onNodeWithText("Voucher")
-            .assert(
-                hasAnyAncestor(keyIsDefined(SemanticsProperties.IsPopup))
-            )
-            .performClick()
-
-        composeTestRule
-            .onNodeWithTag(dropdownMenusExample2DropdownMenuTextFieldTestTag)
-            .assert(
-                hasTextExactly("Payment type", "Voucher")
-                        and
-                        hasStateDescription("Collapsed")
-                        and
-                        hasRole(Role.DropdownList)
             )
     }
 

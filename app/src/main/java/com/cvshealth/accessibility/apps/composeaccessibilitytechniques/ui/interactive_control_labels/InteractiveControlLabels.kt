@@ -30,6 +30,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -59,6 +60,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ProblematicExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.RadioButtonGroup
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SwitchRow
@@ -80,13 +82,17 @@ const val interactiveControlLabelsExample5ControlTestTag = "interactiveControlLa
 const val interactiveControlLabelsExample6HeadingTestTag = "interactiveControlLabelsExample6Heading"
 const val interactiveControlLabelsExample6ControlTestTag = "interactiveControlLabelsExample6Control"
 const val interactiveControlLabelsExample7HeadingTestTag = "interactiveControlLabelsExample7Heading"
+const val interactiveControlLabelsExample7ControlTestTag = "interactiveControlLabelsExample7Control"
 const val interactiveControlLabelsExample8HeadingTestTag = "interactiveControlLabelsExample8Heading"
+const val interactiveControlLabelsExample8ControlTestTag = "interactiveControlLabelsExample8Control"
 const val interactiveControlLabelsExample9HeadingTestTag = "interactiveControlLabelsExample9Heading"
 const val interactiveControlLabelsExample9ControlTestTag = "interactiveControlLabelsExample9Control"
 const val interactiveControlLabelsExample10HeadingTestTag = "interactiveControlLabelsExample10Heading"
 const val interactiveControlLabelsExample10ControlTestTag = "interactiveControlLabelsExample10Control"
 const val interactiveControlLabelsExample11HeadingTestTag = "interactiveControlLabelsExample11Heading"
 const val interactiveControlLabelsExample11ControlTestTag = "interactiveControlLabelsExample11Control"
+const val interactiveControlLabelsExample12HeadingTestTag = "interactiveControlLabelsExample12Heading"
+const val interactiveControlLabelsExample12ControlTestTag = "interactiveControlLabelsExample12Control"
 
 @Composable
 fun InteractiveControlLabelsScreen(
@@ -131,6 +137,9 @@ fun InteractiveControlLabelsScreen(
             // Slider examples
             BadExample10()
             OkExample11()
+
+            // RangeSlider example
+            ProblematicExample12()
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -364,7 +373,8 @@ private fun BadExample7() {
             stringResource(id = R.string.interactive_control_labels_unassociated_radio_button_label_2)
         ),
         current = example7SelectedRadioGroupOption,
-        selectHandler = setExample7RadioGroupOption
+        selectHandler = setExample7RadioGroupOption,
+        modifier = Modifier.testTag(interactiveControlLabelsExample7ControlTestTag)
     )
 }
 
@@ -402,7 +412,8 @@ private fun GoodExample8() {
             stringResource(id = R.string.interactive_control_labels_associated_radio_button_label_2)
         ),
         selectedIndex = example8SelectedRadioGroupOption,
-        selectHandler = setExample8RadioGroupOption
+        selectHandler = setExample8RadioGroupOption,
+        modifier = Modifier.testTag(interactiveControlLabelsExample8ControlTestTag)
     )
 }
 
@@ -554,7 +565,7 @@ private fun OkExample11() {
                     }
                 }
             }
-            .semantics() {
+            .semantics {
                 // Key technique: Slider contentDescription must duplicate label text,
                 // because Slider does not support a text label. (See
                 // https://issuetracker.google.com/issues/236988201.)
@@ -584,6 +595,65 @@ fun OkExample11Preview() {
                 .fillMaxWidth()
         )  {
             OkExample11()
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProblematicExample12() {
+    // Problematic example 12: RangeSlider with associated field label
+    ProblematicExampleHeading(
+        text = stringResource(id = R.string.interactive_control_labels_example_12),
+        modifier = Modifier.testTag(interactiveControlLabelsExample12HeadingTestTag)
+    )
+    BodyText(textId = R.string.interactive_control_labels_example_12_description)
+    Spacer(modifier = Modifier.height(8.dp))
+
+    BodyText(stringResource(id = R.string.interactive_control_labels_associated_rangeslider_label))
+
+    val range = 0f..10f
+    val steps = 9 // steps between the start and end point (exclusive of both)
+    val (rangeSlider2Value, setRangeSlider2Value) = remember { mutableStateOf(range) }
+    val rangeSlider2ContentDescription = stringResource(
+        id = R.string.interactive_control_labels_associated_slider_content_description
+    )
+    val stateDescriptionText = stringResource(
+        id = R.string.interactive_control_labels_associated_rangeslider_state_description,
+        rangeSlider2Value.start.roundToInt(),
+        rangeSlider2Value.endInclusive.roundToInt()
+    )
+    RangeSlider(
+        value = rangeSlider2Value,
+        onValueChange = setRangeSlider2Value,
+        modifier = Modifier
+            .testTag(interactiveControlLabelsExample12ControlTestTag)
+            .semantics() {
+                // RangeSlider contentDescription must duplicate label text, because
+                // RangeSlider does not support a text label, just as Slider does not.
+                contentDescription = rangeSlider2ContentDescription
+
+                // stateDescription adds the selected range value to a RangeSlider.
+                stateDescription = stateDescriptionText
+
+                // liveRegion announces the RangeSlider's state when its value changes.
+                liveRegion = LiveRegionMode.Polite
+            },
+        steps = steps,
+        valueRange = range
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProblematicExample12Preview() {
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        )  {
+            ProblematicExample12()
         }
     }
 }

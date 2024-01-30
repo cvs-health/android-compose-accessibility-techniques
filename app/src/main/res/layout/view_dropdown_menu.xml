@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2024 CVS Health and/or one of its affiliates
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!-- The key technique in DropDownMenusScreen, Example 2 is the use of a TextInputLayout wrapping an
+     MaterialAutocompleteTextView in what is known as the "Exposed Dropdown Menu" pattern from
+     Material Design for View UI: see https://m2.material.io/components/menus#exposed-dropdown-menu.
+
+     Also, make the MaterialAutocompleteTextView non-editable using android:inputType="none" for a
+     non-editable dropdown. (Note: inputType="none" is deprecated, but required in this situation;
+     hence the tools:ignore="Deprecated" attribute.)
+
+     This approach fails, because of a known Compose-View interop issue:
+     see https://issuetracker.google.com/issues/255628260 for details.
+-->
+<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dropdown_menus_example_2_layout"
+    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:hint="@string/dropdown_menus_example_label"
+    android:textColorHint="#616161">
+
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+        android:id="@+id/dropdown_menus_example_2_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        tools:ignore="Deprecated,LabelFor" />
+
+</com.google.android.material.textfield.TextInputLayout>

@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,8 +15,12 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus
 
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -34,22 +38,23 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidViewBinding
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.databinding.ViewDropdownMenuBinding
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericExposedDropdownMenu
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ProblematicExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 
 const val dropdownMenusHeadingTestTag = "dropdownMenusHeading"
 const val dropdownMenusExample1HeadingTestTag = "dropdownMenusExample1Heading"
 const val dropdownMenusExample1DropdownMenuBoxTestTag = "dropdownMenusExample1DropdownMenuBox"
 const val dropdownMenusExample1DropdownMenuTextFieldTestTag = "dropdownMenusExample1DropdownMenuTextField"
 const val dropdownMenusExample2HeadingTestTag = "dropdownMenusExample2Heading"
-const val dropdownMenusExample2DropdownMenuBoxTestTag = "dropdownMenusExample2DropdownMenuBox"
-const val dropdownMenusExample2DropdownMenuTextFieldTestTag = "dropdownMenusExample2DropdownMenuTextField"
+const val dropdownMenusExample2AndroidViewTestTag = "dropdownMenusExample2AndroidView"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -74,14 +79,14 @@ fun DropdownMenusScreen(
             BodyText(textId = R.string.dropdown_menus_description_1)
             BodyText(textId = R.string.dropdown_menus_description_2)
 
-            // Good example 1: Non-editable Exposed Dropdown Menu
-            GoodExampleHeading(
+            // Problematic example 1: Non-editable Exposed Dropdown Menu
+            ProblematicExampleHeading(
                 text = stringResource(id = R.string.dropdown_menus_example_1_heading),
                 modifier = Modifier.testTag(dropdownMenusExample1HeadingTestTag)
             )
             BodyText(textId = R.string.dropdown_menus_example_1_description)
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             val example1Options = listOf(
                 stringResource(id = R.string.dropdown_menus_example_option_not_selected),
                 stringResource(id = R.string.dropdown_menus_example_option_1),
@@ -90,6 +95,7 @@ fun DropdownMenusScreen(
                 stringResource(id = R.string.dropdown_menus_example_option_4),
                 stringResource(id = R.string.dropdown_menus_example_option_5),
             )
+            // See Key Techniques (and issues) in GenericExposedDropdownMenu.kt.
             var selectedItemText1 by remember { mutableStateOf(example1Options[0]) }
             GenericExposedDropdownMenu(
                 value = selectedItemText1,
@@ -98,16 +104,13 @@ fun DropdownMenusScreen(
                 modifier = Modifier.testTag(dropdownMenusExample1DropdownMenuBoxTestTag),
                 textFieldModifier = Modifier
                     .testTag(dropdownMenusExample1DropdownMenuTextFieldTestTag)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
             ) {
                 Text(stringResource(id = R.string.dropdown_menus_example_label))
             }
 
-            // OK example 2: Editable Exposed Dropdown Menu
-            // Note: Any text can be entered in the input field; its value is not limited to the
-            // contents of the dropdown list. Use in TalkBack is challenging and require use of
-            // TalkBack's Window Reading Mode to switch between the keyboard and app UIs.
-            OkExampleHeading(
+            // Problematic example 2: View non-editable Exposed Dropdown Menu
+            ProblematicExampleHeading(
                 text = stringResource(id = R.string.dropdown_menus_example_2_heading),
                 modifier = Modifier.testTag(dropdownMenusExample2HeadingTestTag)
             )
@@ -122,18 +125,43 @@ fun DropdownMenusScreen(
                 stringResource(id = R.string.dropdown_menus_example_option_5),
             )
             var selectedItemText2 by remember { mutableStateOf("") }
-            GenericExposedDropdownMenu(
-                value = selectedItemText2,
-                setValue = { selectedItemText2 = it },
-                options = example2Options,
-                modifier = Modifier.testTag(dropdownMenusExample2DropdownMenuBoxTestTag),
-                textFieldModifier = Modifier
-                    .testTag(dropdownMenusExample2DropdownMenuTextFieldTestTag)
-                    .fillMaxWidth(),
-                readOnly = false,
+
+            // Key technique: Wrap a View-based Exposed Dropdown Menu pattern control ensemble in an
+            // AndroidView (or in this case, AndroidViewBinding to use XML layout). See also
+            // layout/view_dropdown_menu.xml.
+            //
+            // Note: This approach fails to be keyboard accessible, because of a known Compose-View
+            // interop issue: see https://issuetracker.google.com/issues/255628260 for details.
+            AndroidViewBinding(
+                factory = ViewDropdownMenuBinding::inflate,
+                modifier = Modifier
+                    .testTag(dropdownMenusExample2AndroidViewTestTag)
+                    .fillMaxSize()
+                    .focusable()
             ) {
-                Text(stringResource(id = R.string.dropdown_menus_example_label))
+                val context = this.root.context
+                val autoCompleteAdapter = ArrayAdapter(
+                    context,
+                    R.layout.list_item_dropdown,
+                    example2Options
+                )
+
+                // Apply the adapter to the MaterialAutoCompleteTextView in the TextInputLayout
+                val autoCompleteTextView = (dropdownMenusExample2Layout.editText as? MaterialAutoCompleteTextView)
+                autoCompleteTextView?.setAdapter(autoCompleteAdapter)
+
+                // Set an item click listener on the AutoCompleteTextView
+                autoCompleteTextView?.onItemClickListener =
+                    AdapterView.OnItemClickListener { _, _, position: Int, _ ->
+                        selectedItemText2 = example2Options[position]
+                    }
+                // Note: Do not call autoCompleteTextView.setText(selectedValue) as you would with
+                // Compose; the MaterialAutoCompleteTextView maintains its own state, and setting it
+                // will limit the values displayed in the dropdown menu list.
             }
+
+            // Note: Editable Exposed Dropdown Menus are not demonstrated, because they have
+            // even more accessibility problems than the non-editable version.
 
             Spacer(modifier = Modifier.height(8.dp))
         }

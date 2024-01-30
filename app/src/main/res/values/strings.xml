@@ -236,6 +236,11 @@
     <string name="interactive_control_labels_example_11_description">Sliders require the use of contentDescription to provide an accessible label. Slider controls cannot be simply associated with a visible text label, so both the visible label text and contentDescription are necessary. The contentDescription must also contain the visible label text.</string>
     <string name="interactive_control_labels_associated_slider_label">Field label for Slider</string>
     <string name="interactive_control_labels_associated_slider_content_description">Field label for Slider (contained in contentDescription)</string>
+    <string name="interactive_control_labels_example_12">Problematic example 12: RangeSlider with associated field label</string>
+    <string name="interactive_control_labels_example_12_description">Like Sliders, RangeSliders also require the use of contentDescription to provide an accessible label. However, RangeSliders are not keyboard accessible.</string>
+    <string name="interactive_control_labels_associated_rangeslider_label">Field label for RangeSlider</string>
+    <string name="interactive_control_labels_associated_rangeslider_content_description">Field label for RangeSlider (contained in contentDescription)</string>
+    <string name="interactive_control_labels_associated_rangeslider_state_description">%1$d to %2$d</string>
 
     <!-- UX change announcements -->
     <string name="ux_change_announcements_title">UX change announcements</string>
@@ -431,11 +436,13 @@
 
     <!-- Dropdown selection menus -->
     <string name="dropdown_menus_title">Dropdown selection menus</string>
-    <string name="dropdown_menus_heading">Use the Exposed Dropdown Menu pattern</string>
-    <string name="dropdown_menus_description_1">The Exposed Dropdown Menu pattern creates an accessible dropdown selection menu. Custom approaches are less likely to be accessible.</string>
-    <string name="dropdown_menus_description_2">Turn on TalkBack and swipe through this page, activating the list control and making selections. Repeat the process with TalkBack off using Switch Access and/or a physical keyboard.</string>
-    <string name="dropdown_menus_example_1_heading">Good example 1: Non-editable Exposed Dropdown Menu</string>
-    <string name="dropdown_menus_example_1_description">The Exposed Dropdown Menu pattern uses ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem controls to create an accessible dropdown selection menu.</string>
+    <string name="dropdown_menus_heading">Avoid the Exposed Dropdown Menu pattern for now</string>
+    <string name="dropdown_menus_description_1">The Exposed Dropdown Menu pattern creates a mostly-accessible dropdown selection menu. But as of Compose BOM 2024.01.00, no Compose dropdown control is keyboard accessible, and no remediation is known. Custom dropdown approaches may be even less accessible.</string>
+    <string name="dropdown_menus_description_2">Turn on TalkBack or Switch Access and navigate this page, activating the list controls and making selections. Then repeat the process using a physical keyboard to observe the problems.</string>
+    <string name="dropdown_menus_example_1_heading">Problematic example 1: Non-editable Exposed Dropdown Menu</string>
+    <string name="dropdown_menus_example_1_description">The Exposed Dropdown Menu pattern uses ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem controls to create a dropdown selection menu that is mostly accessible, except for keyboard operation.</string>
+    <string name="dropdown_menus_example_2_heading">Problematic example 2: View non-editable Exposed Dropdown Menu</string>
+    <string name="dropdown_menus_example_2_description">Wrapping the View Exposed Dropdown Menu pattern in AndroidView is also mostly accessible. But it is not keyboard focusable, due to a known Compose/View interoperability issue.</string>
     <string name="dropdown_menus_example_label">Payment type</string>
     <string name="dropdown_menus_example_option_1">Cash</string>
     <string name="dropdown_menus_example_option_2">Check</string>
@@ -443,8 +450,6 @@
     <string name="dropdown_menus_example_option_4">Money order</string>
     <string name="dropdown_menus_example_option_5">Voucher</string>
     <string name="dropdown_menus_example_option_not_selected">(No payment type selected.)</string>
-    <string name="dropdown_menus_example_2_heading">OK example 2: Editable Exposed Dropdown Menu</string>
-    <string name="dropdown_menus_example_2_description">Editable Exposed Dropdown Menus allow auto-suggest and do not limit input to the content of the list. However, it is challenging to use in TalkBack, requiring window switching to enter and exit the keyboard.</string>
 
     <!-- Links inline with text -->
     <string name="inline_links_title">Links inline with text</string>

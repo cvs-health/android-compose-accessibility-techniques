@@ -39,7 +39,8 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Checkbox controls](doc/components/CheckboxControls.md)
     - [ ] Chip controls
     - [ ] Dialogs
-    - [x] [Dropdown selection menus](doc/components/DropdownMenus.md)
+    - [ ] Dropdown selection menus
+    - [x] [Exposed dropdown menus](doc/components/ExposedDropdownMenus.md)
     - [x] [Links inline with text](doc/components/LinksInlineWithText.md)
     - [ ] ListDetailPaneLayout
     - [x] [ListItem layouts](doc/components/ListItemLayouts.md)
@@ -47,7 +48,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [NavigationBar layouts](doc/components/NavigationBarLayouts.md)
     - [ ] Progress indicators
     - [x] [RadioButton groups](doc/components/RadioButtonGroups.md)
-    - [ ] Slider and RangeSlider controls
+    - [x] [Slider and RangeSlider controls](doc/components/SliderAndRangeSliderControls.md)
     - [ ] Snackbars
     - [x] [Switch controls](doc/components/SwitchControls.md)
     - [x] [Tab rows](doc/components/TabRows.md)

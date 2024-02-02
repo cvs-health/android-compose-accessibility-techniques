@@ -31,21 +31,21 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.DropdownMenusScreen
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample1DropdownMenuBoxTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample1DropdownMenuTextFieldTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample1HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample2AndroidViewTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample2HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusHeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.ExposedDropdownMenusScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample1DropdownMenuBoxTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample1DropdownMenuTextFieldTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample1HeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample2AndroidViewTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample2HeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-// Note: Cannot test DropDownMenusScreen, Example 2, because AndroidView is opaque to Compose jUnit
-// UI semantic testing. Only the AndroidView's existence and outward semantics can be verified.
-class DropdownMenusTests {
+// Note: Cannot test ExposedDropDownMenusScreen, Example 2, because AndroidView is opaque to Compose
+// jUnit UI semantic testing. Only the AndroidView's existence and outward semantics can be verified.
+class ExposedDropdownMenusTests {
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -53,7 +53,7 @@ class DropdownMenusTests {
     fun setup() {
         composeTestRule.setContent {
             ComposeAccessibilityTechniquesTheme() {
-                DropdownMenusScreen { }
+                ExposedDropdownMenusScreen { }
             }
         }
     }
@@ -66,13 +66,13 @@ class DropdownMenusTests {
     @Test
     fun verifyHeadingsAreHeadings() {
         composeTestRule
-            .onNode(hasTestTag(dropdownMenusHeadingTestTag) and isHeading())
+            .onNode(hasTestTag(exposedDropdownMenusHeadingTestTag) and isHeading())
             .assertExists()
         composeTestRule
-            .onNode(hasTestTag(dropdownMenusExample1HeadingTestTag) and isHeading())
+            .onNode(hasTestTag(exposedDropdownMenusExample1HeadingTestTag) and isHeading())
             .assertExists()
         composeTestRule
-            .onNode(hasTestTag(dropdownMenusExample2HeadingTestTag) and isHeading())
+            .onNode(hasTestTag(exposedDropdownMenusExample2HeadingTestTag) and isHeading())
             .assertExists()
     }
 
@@ -80,7 +80,7 @@ class DropdownMenusTests {
     fun verifyExampleListItemsAreNotHeadings() {
         composeTestRule
             .onNode(
-                hasTestTag(dropdownMenusExample1DropdownMenuBoxTestTag)
+                hasTestTag(exposedDropdownMenusExample1DropdownMenuBoxTestTag)
                         and
                         !isHeading()
                         and
@@ -89,7 +89,7 @@ class DropdownMenusTests {
             .assertExists()
         composeTestRule
             .onNode(
-                hasTestTag(dropdownMenusExample2AndroidViewTestTag)
+                hasTestTag(exposedDropdownMenusExample2AndroidViewTestTag)
                         and
                         !isHeading()
                         and
@@ -104,9 +104,9 @@ class DropdownMenusTests {
     }
 
     @Test
-    fun verifyExample1DropdownMenuHasExpectedInitialState() {
+    fun verifyExample1ExposedDropdownMenuHasExpectedInitialState() {
         composeTestRule
-            .onNodeWithTag(dropdownMenusExample1DropdownMenuTextFieldTestTag)
+            .onNodeWithTag(exposedDropdownMenusExample1DropdownMenuTextFieldTestTag)
             .assert(
                 hasTextExactly("Payment type", "(No payment type selected.)")
                 and
@@ -119,14 +119,14 @@ class DropdownMenusTests {
     }
 
     @Test
-    fun verifyExample1DropdownMenuHasExpectedMenuActions() {
+    fun verifyExample1ExposedDropdownMenuHasExpectedMenuActions() {
         composeTestRule
-            .onNodeWithTag(dropdownMenusExample1DropdownMenuTextFieldTestTag)
+            .onNodeWithTag(exposedDropdownMenusExample1DropdownMenuTextFieldTestTag)
             .performScrollTo()
             .performClick()
 
         composeTestRule
-            .onNodeWithTag(dropdownMenusExample1DropdownMenuTextFieldTestTag)
+            .onNodeWithTag(exposedDropdownMenusExample1DropdownMenuTextFieldTestTag)
             .assert(hasStateDescription("Expanded"))
 
         composeTestRule
@@ -137,7 +137,7 @@ class DropdownMenusTests {
             .performClick()
 
         composeTestRule
-            .onNodeWithTag(dropdownMenusExample1DropdownMenuTextFieldTestTag)
+            .onNodeWithTag(exposedDropdownMenusExample1DropdownMenuTextFieldTestTag)
             .assert(
                 hasTextExactly("Payment type", "Check")
                 and

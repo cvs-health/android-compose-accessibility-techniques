@@ -15,9 +15,10 @@
    limitations under the License.
 -->
 
-<!-- The key technique in DropDownMenusScreen, Example 2 is the use of a TextInputLayout wrapping an
-     MaterialAutocompleteTextView in what is known as the "Exposed Dropdown Menu" pattern from
-     Material Design for View UI: see https://m2.material.io/components/menus#exposed-dropdown-menu.
+<!-- The key technique in ExposedDropDownMenusScreen, Example 2 is the use of a TextInputLayout
+     wrapping a MaterialAutocompleteTextView in what is known as the "Exposed Dropdown Menu" pattern
+     from Material Design for View UI: see
+     https://m2.material.io/components/menus#exposed-dropdown-menu.
 
      Also, make the MaterialAutocompleteTextView non-editable using android:inputType="none" for a
      non-editable dropdown. (Note: inputType="none" is deprecated, but required in this situation;
@@ -28,16 +29,16 @@
 -->
 <com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/dropdown_menus_example_2_layout"
+    android:id="@+id/exposed_dropdown_menus_example_2_layout"
     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    android:hint="@string/dropdown_menus_example_label"
+    android:hint="@string/exposed_dropdown_menus_example_label"
     android:textColorHint="#616161">
 
     <com.google.android.material.textfield.MaterialAutoCompleteTextView
-        android:id="@+id/dropdown_menus_example_2_text_view"
+        android:id="@+id/exposed_dropdown_menus_example_2_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="none"

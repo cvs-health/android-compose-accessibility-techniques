@@ -37,7 +37,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -190,8 +189,8 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
-                    label = stringResource(R.string.dropdown_menus_title),
-                    route = ComposeAccessibilityTechniquesRoute.DropdownMenus,
+                    label = stringResource(R.string.exposed_dropdown_menus_title),
+                    route = ComposeAccessibilityTechniquesRoute.ExposedDropdownMenus,
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
@@ -217,6 +216,11 @@ fun HomeScreen(
                 NavigationCard(
                     label = stringResource(id = R.string.radio_button_groups_title),
                     route = ComposeAccessibilityTechniquesRoute.RadioButtonGroups,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
+                    label = stringResource(R.string.slider_controls_title),
+                    route = ComposeAccessibilityTechniquesRoute.SliderControls,
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(

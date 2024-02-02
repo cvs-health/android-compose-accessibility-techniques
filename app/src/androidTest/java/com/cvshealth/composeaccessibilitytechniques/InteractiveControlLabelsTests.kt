@@ -447,6 +447,7 @@ class InteractiveControlLabelsTests {
 
     @Test
     fun verifyThatRangeSliderHasExpectedRanges() {
+        // Test Example 12, Range start thumb value
         composeTestRule
             .onNode(
                 hasParent(hasTestTag(interactiveControlLabelsExample12ControlTestTag))
@@ -458,6 +459,8 @@ class InteractiveControlLabelsTests {
                         )
             )
             .assertExists()
+
+        // Test Example 12, Range end thumb value
         composeTestRule
             .onNode(
                 hasParent(hasTestTag(interactiveControlLabelsExample12ControlTestTag))

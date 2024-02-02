@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
  */
-package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus
+package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus
 
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -40,7 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidViewBinding
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.databinding.ViewDropdownMenuBinding
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.databinding.ViewExposedDropdownMenuBinding
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericExposedDropdownMenu
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
@@ -49,20 +49,22 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 
-const val dropdownMenusHeadingTestTag = "dropdownMenusHeading"
-const val dropdownMenusExample1HeadingTestTag = "dropdownMenusExample1Heading"
-const val dropdownMenusExample1DropdownMenuBoxTestTag = "dropdownMenusExample1DropdownMenuBox"
-const val dropdownMenusExample1DropdownMenuTextFieldTestTag = "dropdownMenusExample1DropdownMenuTextField"
-const val dropdownMenusExample2HeadingTestTag = "dropdownMenusExample2Heading"
-const val dropdownMenusExample2AndroidViewTestTag = "dropdownMenusExample2AndroidView"
+const val exposedDropdownMenusHeadingTestTag = "exposedDropdownMenusHeading"
+const val exposedDropdownMenusExample1HeadingTestTag = "exposedDropdownMenusExample1Heading"
+const val exposedDropdownMenusExample1DropdownMenuBoxTestTag =
+    "exposedDropdownMenusExample1DropdownMenuBox"
+const val exposedDropdownMenusExample1DropdownMenuTextFieldTestTag =
+    "exposedDropdownMenusExample1DropdownMenuTextField"
+const val exposedDropdownMenusExample2HeadingTestTag = "exposedDropdownMenusExample2Heading"
+const val exposedDropdownMenusExample2AndroidViewTestTag = "exposedDropdownMenusExample2AndroidView"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropdownMenusScreen(
+fun ExposedDropdownMenusScreen(
     onBackPressed: () -> Unit
 ) {
     GenericScaffold(
-        title = stringResource(id = R.string.dropdown_menus_title),
+        title = stringResource(id = R.string.exposed_dropdown_menus_title),
         onBackPressed = onBackPressed
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
@@ -73,27 +75,27 @@ fun DropdownMenusScreen(
                 .verticalScroll(scrollState)
         ) {
             SimpleHeading(
-                text = stringResource(id = R.string.dropdown_menus_heading),
-                modifier = Modifier.testTag(dropdownMenusHeadingTestTag)
+                text = stringResource(id = R.string.exposed_dropdown_menus_heading),
+                modifier = Modifier.testTag(exposedDropdownMenusHeadingTestTag)
             )
-            BodyText(textId = R.string.dropdown_menus_description_1)
-            BodyText(textId = R.string.dropdown_menus_description_2)
+            BodyText(textId = R.string.exposed_dropdown_menus_description_1)
+            BodyText(textId = R.string.exposed_dropdown_menus_description_2)
 
             // Problematic example 1: Non-editable Exposed Dropdown Menu
             ProblematicExampleHeading(
-                text = stringResource(id = R.string.dropdown_menus_example_1_heading),
-                modifier = Modifier.testTag(dropdownMenusExample1HeadingTestTag)
+                text = stringResource(id = R.string.exposed_dropdown_menus_example_1_heading),
+                modifier = Modifier.testTag(exposedDropdownMenusExample1HeadingTestTag)
             )
-            BodyText(textId = R.string.dropdown_menus_example_1_description)
+            BodyText(textId = R.string.exposed_dropdown_menus_example_1_description)
             Spacer(modifier = Modifier.height(8.dp))
 
             val example1Options = listOf(
-                stringResource(id = R.string.dropdown_menus_example_option_not_selected),
-                stringResource(id = R.string.dropdown_menus_example_option_1),
-                stringResource(id = R.string.dropdown_menus_example_option_2),
-                stringResource(id = R.string.dropdown_menus_example_option_3),
-                stringResource(id = R.string.dropdown_menus_example_option_4),
-                stringResource(id = R.string.dropdown_menus_example_option_5),
+                stringResource(id = R.string.exposed_dropdown_menus_example_option_not_selected),
+                stringResource(id = R.string.exposed_dropdown_menus_example_option_1),
+                stringResource(id = R.string.exposed_dropdown_menus_example_option_2),
+                stringResource(id = R.string.exposed_dropdown_menus_example_option_3),
+                stringResource(id = R.string.exposed_dropdown_menus_example_option_4),
+                stringResource(id = R.string.exposed_dropdown_menus_example_option_5),
             )
             // See Key Techniques (and issues) in GenericExposedDropdownMenu.kt.
             var selectedItemText1 by remember { mutableStateOf(example1Options[0]) }
@@ -101,41 +103,41 @@ fun DropdownMenusScreen(
                 value = selectedItemText1,
                 setValue = { selectedItemText1 = it },
                 options = example1Options,
-                modifier = Modifier.testTag(dropdownMenusExample1DropdownMenuBoxTestTag),
+                modifier = Modifier.testTag(exposedDropdownMenusExample1DropdownMenuBoxTestTag),
                 textFieldModifier = Modifier
-                    .testTag(dropdownMenusExample1DropdownMenuTextFieldTestTag)
+                    .testTag(exposedDropdownMenusExample1DropdownMenuTextFieldTestTag)
                     .fillMaxWidth(),
             ) {
-                Text(stringResource(id = R.string.dropdown_menus_example_label))
+                Text(stringResource(id = R.string.exposed_dropdown_menus_example_label))
             }
 
             // Problematic example 2: View non-editable Exposed Dropdown Menu
             ProblematicExampleHeading(
-                text = stringResource(id = R.string.dropdown_menus_example_2_heading),
-                modifier = Modifier.testTag(dropdownMenusExample2HeadingTestTag)
+                text = stringResource(id = R.string.exposed_dropdown_menus_example_2_heading),
+                modifier = Modifier.testTag(exposedDropdownMenusExample2HeadingTestTag)
             )
-            BodyText(textId = R.string.dropdown_menus_example_2_description)
+            BodyText(textId = R.string.exposed_dropdown_menus_example_2_description)
             Spacer(modifier = Modifier.height(8.dp))
 
             val example2Options = listOf(
-                stringResource(id = R.string.dropdown_menus_example_option_1),
-                stringResource(id = R.string.dropdown_menus_example_option_2),
-                stringResource(id = R.string.dropdown_menus_example_option_3),
-                stringResource(id = R.string.dropdown_menus_example_option_4),
-                stringResource(id = R.string.dropdown_menus_example_option_5),
+                stringResource(id = R.string.exposed_dropdown_menus_example_option_1),
+                stringResource(id = R.string.exposed_dropdown_menus_example_option_2),
+                stringResource(id = R.string.exposed_dropdown_menus_example_option_3),
+                stringResource(id = R.string.exposed_dropdown_menus_example_option_4),
+                stringResource(id = R.string.exposed_dropdown_menus_example_option_5),
             )
             var selectedItemText2 by remember { mutableStateOf("") }
 
             // Key technique: Wrap a View-based Exposed Dropdown Menu pattern control ensemble in an
             // AndroidView (or in this case, AndroidViewBinding to use XML layout). See also
-            // layout/view_dropdown_menu.xml.
+            // layout/view_exposed_dropdown_menu.xml.
             //
             // Note: This approach fails to be keyboard accessible, because of a known Compose-View
             // interop issue: see https://issuetracker.google.com/issues/255628260 for details.
             AndroidViewBinding(
-                factory = ViewDropdownMenuBinding::inflate,
+                factory = ViewExposedDropdownMenuBinding::inflate,
                 modifier = Modifier
-                    .testTag(dropdownMenusExample2AndroidViewTestTag)
+                    .testTag(exposedDropdownMenusExample2AndroidViewTestTag)
                     .fillMaxSize()
                     .focusable()
             ) {
@@ -147,7 +149,8 @@ fun DropdownMenusScreen(
                 )
 
                 // Apply the adapter to the MaterialAutoCompleteTextView in the TextInputLayout
-                val autoCompleteTextView = (dropdownMenusExample2Layout.editText as? MaterialAutoCompleteTextView)
+                val autoCompleteTextView =
+                    (exposedDropdownMenusExample2Layout.editText as? MaterialAutoCompleteTextView)
                 autoCompleteTextView?.setAdapter(autoCompleteAdapter)
 
                 // Set an item click listener on the AutoCompleteTextView
@@ -172,6 +175,6 @@ fun DropdownMenusScreen(
 @Composable
 fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
-        DropdownMenusScreen {}
+        ExposedDropdownMenusScreen {}
     }
 }

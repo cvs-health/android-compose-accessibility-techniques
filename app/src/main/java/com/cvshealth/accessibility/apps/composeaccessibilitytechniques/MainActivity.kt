@@ -41,7 +41,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.conten
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_accessibility_actions.CustomAccessibilityActionsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_focus_indicators.CustomFocusIndicatorsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_state_descriptions.CustomStateDescriptionsScreen
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.DropdownMenusScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.ExposedDropdownMenusScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.heading_semantics.HeadingSemanticsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.home.HomeScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.inline_links.InlineLinksScreen
@@ -54,6 +54,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.modalb
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.navigationbar_layouts.NavigationBarLayoutsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.RadioButtonGroupsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.screen_and_pane_titles.ScreenAndPaneTitlesScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider_controls.SliderControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.SwitchControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.tab_rows.TabRowsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.TextAlternativesScreen
@@ -155,8 +156,8 @@ fun ComposeAccessibilityTechniquesNavHost(
         composable(route = ComposeAccessibilityTechniquesRoute.CheckboxControls.route) {
             CheckboxControlsScreen(onBackPressed = popBackStack)
         }
-        composable(route = ComposeAccessibilityTechniquesRoute.DropdownMenus.route) {
-            DropdownMenusScreen(onBackPressed = popBackStack)
+        composable(route = ComposeAccessibilityTechniquesRoute.ExposedDropdownMenus.route) {
+            ExposedDropdownMenusScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.InlineLinks.route) {
             InlineLinksScreen(onBackPressed = popBackStack)
@@ -172,6 +173,9 @@ fun ComposeAccessibilityTechniquesNavHost(
         }
         composable(route = ComposeAccessibilityTechniquesRoute.RadioButtonGroups.route) {
             RadioButtonGroupsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.SliderControls.route) {
+            SliderControlsScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.SwitchControls.route) {
             SwitchControlsScreen(onBackPressed = popBackStack)

@@ -89,7 +89,6 @@
     <string name="accessibility_traversal_order_example_3_description">TalkBack reads each of this example\'s Sidebar text before its Main text, because isTraversalGroup collects them and traversalIndex orders the Sidebar first. Note that the enclosing Row must also set isTraversalGroup to limit the effect of traversalIndex to only its enclosed Columns.</string>
     <string name="accessibility_traversal_order_example_3_afterword">This is text following the two-column region.</string>
 
-
     <!-- Content grouping -->
     <string name="content_grouping_title">Content grouping</string>
     <string name="content_grouping_heading">Some content should be grouped for screen readers</string>
@@ -434,22 +433,22 @@
     <string name="checkbox_controls_example_2_header">Good example 2: Accessible Checkbox</string>
     <string name="checkbox_controls_example_2_label">Accessible checkbox</string>
 
-    <!-- Dropdown selection menus -->
-    <string name="dropdown_menus_title">Dropdown selection menus</string>
-    <string name="dropdown_menus_heading">Avoid the Exposed Dropdown Menu pattern for now</string>
-    <string name="dropdown_menus_description_1">The Exposed Dropdown Menu pattern creates a mostly-accessible dropdown selection menu. But as of Compose BOM 2024.01.00, no Compose dropdown control is keyboard accessible, and no remediation is known. Custom dropdown approaches may be even less accessible.</string>
-    <string name="dropdown_menus_description_2">Turn on TalkBack or Switch Access and navigate this page, activating the list controls and making selections. Then repeat the process using a physical keyboard to observe the problems.</string>
-    <string name="dropdown_menus_example_1_heading">Problematic example 1: Non-editable Exposed Dropdown Menu</string>
-    <string name="dropdown_menus_example_1_description">The Exposed Dropdown Menu pattern uses ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem controls to create a dropdown selection menu that is mostly accessible, except for keyboard operation.</string>
-    <string name="dropdown_menus_example_2_heading">Problematic example 2: View non-editable Exposed Dropdown Menu</string>
-    <string name="dropdown_menus_example_2_description">Wrapping the View Exposed Dropdown Menu pattern in AndroidView is also mostly accessible. But it is not keyboard focusable, due to a known Compose/View interoperability issue.</string>
-    <string name="dropdown_menus_example_label">Payment type</string>
-    <string name="dropdown_menus_example_option_1">Cash</string>
-    <string name="dropdown_menus_example_option_2">Check</string>
-    <string name="dropdown_menus_example_option_3">Credit/Debit card</string>
-    <string name="dropdown_menus_example_option_4">Money order</string>
-    <string name="dropdown_menus_example_option_5">Voucher</string>
-    <string name="dropdown_menus_example_option_not_selected">(No payment type selected.)</string>
+    <!-- Exposed dropdown selection menus -->
+    <string name="exposed_dropdown_menus_title">Exposed dropdown menus</string>
+    <string name="exposed_dropdown_menus_heading">Avoid the Exposed Dropdown Menu pattern for now</string>
+    <string name="exposed_dropdown_menus_description_1">The Exposed Dropdown Menu pattern creates a mostly-accessible dropdown selection menu. But as of Compose BOM 2024.01.00, no Compose dropdown control is keyboard accessible, and no remediation is known. Custom dropdown approaches may be even less accessible.</string>
+    <string name="exposed_dropdown_menus_description_2">Turn on TalkBack or Switch Access and navigate this page, activating the list controls and making selections. Then repeat the process using a physical keyboard to observe the problems.</string>
+    <string name="exposed_dropdown_menus_example_1_heading">Problematic example 1: Non-editable Exposed Dropdown Menu</string>
+    <string name="exposed_dropdown_menus_example_1_description">The Exposed Dropdown Menu pattern uses ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem controls to create a dropdown selection menu that is mostly accessible, except for keyboard operation.</string>
+    <string name="exposed_dropdown_menus_example_2_heading">Problematic example 2: View-based non-editable Exposed Dropdown Menu</string>
+    <string name="exposed_dropdown_menus_example_2_description">Wrapping the View Exposed Dropdown Menu pattern in AndroidView is also mostly accessible. But it is not keyboard focusable, due to a known Compose/View interoperability issue.</string>
+    <string name="exposed_dropdown_menus_example_label">Payment type</string>
+    <string name="exposed_dropdown_menus_example_option_1">Cash</string>
+    <string name="exposed_dropdown_menus_example_option_2">Check</string>
+    <string name="exposed_dropdown_menus_example_option_3">Credit/Debit card</string>
+    <string name="exposed_dropdown_menus_example_option_4">Money order</string>
+    <string name="exposed_dropdown_menus_example_option_5">Voucher</string>
+    <string name="exposed_dropdown_menus_example_option_not_selected">(No payment type selected.)</string>
 
     <!-- Links inline with text -->
     <string name="inline_links_title">Links inline with text</string>
@@ -555,6 +554,29 @@
     <string name="radio_button_groups_option_1">Banana</string>
     <string name="radio_button_groups_option_2">Grape</string>
     <string name="radio_button_groups_option_3">Orange</string>
+
+    <!-- Slider and RangeSlider controls -->
+    <string name="slider_controls_title">Slider and RangeSlider controls</string>
+    <string name="slider_controls_heading">Slider and RangeSlider require remediation</string>
+    <string name="slider_controls_description_1">Slider controls can be made completely accessible with specific remediation for labeling, state announcement, and keyboard operation. RangeSlider requires similar remediation for TalkBack, but no remediation for its keyboard accessibility issues is known at this time.</string>
+    <string name="slider_controls_description_2">Turn on TalkBack or Switch Access, navigate the page, and activate the controls for demonstrations of Slider and RangeSlider controls. Note that the RangeSlider control is not keyboard accessible.</string>
+    <string name="slider_controls_example_1_header">Bad example 1: Unremediated Slider control</string>
+    <string name="slider_controls_example_1_description">Without remediation, a Slider will not announce its label or state properly in TalkBack.</string>
+    <string name="slider_controls_example_1_label">Rating</string>
+    <string name="slider_controls_example_2_header">Good example 2: Remediated Slider control</string>
+    <string name="slider_controls_example_2_description">Sliders require the use of contentDescription to provide an accessible label. Applying stateDescription and liveRegion semantics are required for proper state announcements in TalkBack. Key handling remediation is required for keyboard accessibility.</string>
+    <string name="slider_controls_example_2_label">Rating</string>
+    <string name="slider_controls_example_2_content_description">Rating</string>
+    <string name="slider_controls_example_3_header">Problematic example 3: Remediated RangeSlider is not keyboard accessible</string>
+    <string name="slider_controls_example_3_description">Like Sliders, RangeSliders require contentDescription to provide an accessible label and require semantics changes to provide good state announcements in TalkBack. However, no remediation for its keyboard accessibility issues is currently known.</string>
+    <string name="slider_controls_example_3_label">Rating filter range</string>
+    <string name="slider_controls_example_3_content_description">Rating filter range</string>
+    <string name="slider_controls_example_3_state_description">%1$d to %2$d</string>
+    <string name="slider_controls_example_4_header">Problematic example 4: View RangeSlider is not keyboard accessible</string>
+    <string name="slider_controls_example_4_description">A View RangeSlider wrapped in AndroidView cannot be focused using a keyboard, because of a known Compose/View interoperability issue.</string>
+    <string name="slider_controls_example_4_label">Rating filter range</string>
+    <string name="slider_controls_example_4_content_description">Rating filter range</string>
+    <string name="slider_controls_example_4_selected_range">Include ratings from %1$d to %2$d</string>
 
     <!-- Switch controls -->
     <string name="switch_controls_title">Switch controls</string>

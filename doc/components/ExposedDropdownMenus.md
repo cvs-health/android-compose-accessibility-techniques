@@ -1,4 +1,4 @@
-# Dropdown Selection Menus
+# Exposed Dropdown Selection Menus
 For now, avoid using the Material Design [Exposed Dropdown Menu pattern](https://m2.material.io/components/menus#exposed-dropdown-menu) on Jetpack Compose screens. Although this pattern creates dropdown menu controls that announce their name, role, and value in accordance with the WCAG 2 [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG21/#name-role-value) and correctly express their relationships according to WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships), as of Compose BOM 2024.01.00, they fail basic keyboard operability requirements, as required by WCAG [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG21/#keyboard). 
 
 Custom approaches are likely to be less accessible; make sure any dropdown selection menu is operable by all assistive technologies, including the keyboard, and announces the role "Drop down list."
@@ -132,7 +132,7 @@ AndroidViewBinding(
 
 ----
 
-Copyright 2023 CVS Health and/or one of its affiliates
+Copyright 2023-2024 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

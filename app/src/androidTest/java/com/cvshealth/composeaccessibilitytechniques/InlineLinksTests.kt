@@ -35,7 +35,7 @@ import org.junit.Test
  *
  *  Key technique: There is no semantic information to distinguish the ClickableText in Example 1
  *  from a normal Text, except the test tag inlineLinksExample1TextWithLinksTestTag. Likewise,
- *  there is no semantic information to distinguish the AndroidView in Example 2 expect its test
+ *  there is no semantic information to distinguish the AndroidView in Example 2 except its test
  *  tag. Therefore, no further semantic tests are possible.
  */
 class InlineLinksTests {

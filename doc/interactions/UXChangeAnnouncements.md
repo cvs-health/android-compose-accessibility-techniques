@@ -37,11 +37,49 @@ v.announceForAccessibility("Loading completed.")
 
 This approach to announcements is strongly discouraged, and is only described for completeness. Do not use it unless it is _essential_.
 
+## AlertDialog announcements
+
+A final option for announcing content is to put it into a `BasicAlertDialog` as the first composable, because that content is automatically announced when the dialog is displayed. 
+
+This approach works particularly well for waiting indicators, which would otherwise require a `View.announceForAccessibility()` call on start. Also, `AlertDialog` automatically prevents all underlying screen content from being accessed, so custom lock-out mechanisms for the waiting state are not required.
+
+For example:
+
+```kotlin
+// Button to launch the waiting indicator dialog
+var isWaitingDialogVisible by remember { mutableStateOf(false) }
+Button(
+    onClick = { isWaitingDialogVisible = true }
+) {
+    Text("Show waiting indicator in AlertDialog")
+}
+
+// Display the waiting indicator dialog.
+if (isWaitingDialogVisible) {
+    BasicAlertDialog(
+        onDismissRequest = { isWaitingDialogVisible = false }
+    ) {
+        Surface(
+            // ...
+        ) {
+            CircularProgressIndicator(
+                modifier = Modifier.semantics {
+                    contentDescription = "Waiting..."
+                }
+            )
+        }
+    }
+}
+
+// Close the waiting indicator dialog when the process involved in completed.
+// Also, use View.announceForAccessibility() to signal the end of the waiting period.
+```
+
 (Note: The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.)
 
 ----
 
-Copyright 2023 CVS Health and/or one of its affiliates
+Copyright 2023-2024 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

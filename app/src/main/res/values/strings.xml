@@ -246,16 +246,22 @@
     <string name="ux_change_announcements_heading">Announce all UX changes (with live regions when possible)</string>
     <string name="ux_change_announcements_description">All UX changes resulting from user action or automatic updates must be announced to accessibility services. Live regions announce changes to their value, including becoming visible, but not when they are hidden. Accessibility announcements can also be made with direct code, but that should be done sparingly.</string>
     <string name="ux_change_announcements_description_2">Turn on TalkBack and activate the controls below for demonstrations.</string>
-    <string name="ux_change_announcements_example_1">Good example 1: Counter with liveRegion semantics</string>
+    <string name="ux_change_announcements_example_1_header">Good example 1: Counter with liveRegion semantics</string>
     <string name="ux_change_announcements_counter">Counter: %1d</string>
     <string name="ux_change_announcements_counter2">Counter 2: %1d</string>
     <string name="ux_change_announcements_increment_counter">Increment counter</string>
     <string name="ux_change_announcements_reset_counter">Reset counter</string>
-    <string name="ux_change_announcements_example_2">Good example 2: Announcing visibility with announceForAccessibility</string>
+    <string name="ux_change_announcements_example_2_header">Good example 2: Announcing visibility with announceForAccessibility</string>
     <string name="ux_change_announcements_example_2_show_text">Show Text</string>
     <string name="ux_change_announcements_example_2_hide_text">Hide Text</string>
     <string name="ux_change_announcements_example_2_text">Text shown</string>
     <string name="ux_change_announcements_example_2_text_hidden">Text hidden</string>
+    <string name="ux_change_announcements_example_3_header">Good example 3: Waiting indicator with announceForAccessibility</string>
+    <string name="ux_change_announcements_example_3_show_waiting_indicator">Show waiting indicator for 15 seconds</string>
+    <string name="ux_change_announcements_waiting">Waiting…</string>
+    <string name="ux_change_announcements_waiting_completed">Waiting completed</string>
+    <string name="ux_change_announcements_example_4_header">Good example 4: Waiting indicator in AlertDialog</string>
+    <string name="ux_change_announcements_example_4_show_waiting_indicator">Show wait dialog for 15 seconds</string>
 
     <!-- Keyboard types and options -->
     <string name="keyboard_types_title">Keyboard types and options</string>

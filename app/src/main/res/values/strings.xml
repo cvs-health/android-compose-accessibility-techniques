@@ -128,7 +128,7 @@
     <string name="content_group_replacement_rating_group_heading">Bad example 2: Rating with content grouped</string>
     <string name="content_group_replacement_rating_group_note">Note how the LinearProgressIndicator is announced separately in TalkBack, despite the Row\'s merge semantics.</string>
     <string name="content_group_replacement_rating_group_replaced_heading">Good example 3: Rating with grouped content replaced with invisibleToUser()</string>
-    <string name="content_group_replacement_rating_group_overridden_heading">Good example 4: Rating with grouped content replaced with mergeAndSetSemantics</string>
+    <string name="content_group_replacement_rating_group_overridden_heading">Good example 4: Rating with grouped content replaced with clearAndSetSemantics</string>
     <string name="content_group_replacement_rating_label">Rating: </string>
     <string name="content_group_replacement_rating_text">%1$s / %2$s</string>
     <string name="content_group_replacement_reviews">Reviews: %1$d</string>

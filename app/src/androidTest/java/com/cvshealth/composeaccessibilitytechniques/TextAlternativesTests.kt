@@ -580,7 +580,7 @@ class TextAlternativesTests {
         // The current test on the unmerged tree works around that problem by looking for a node
         // with the expected text and verifying that it is invisibleToUser.
         //
-        // Testing would be simpler for the mergeAndReplaceSemantics{} technique: just use
+        // Testing would be simpler for the clearAndSetSemantics{} technique: just use
         // hasTextExactly() with no argument on the merged semantics tree.
         composeTestRule
             .onNode(

@@ -314,7 +314,7 @@ private fun GoodExample3Preview() {
 
 @Composable
 private fun GoodExample4() {
-    // Good example 4: Rating with grouped content replaced with mergeAndSetSemantics
+    // Good example 4: Rating with grouped content replaced with clearAndSetSemantics
 
     // Key technique: Modifier.clearAndSetSemantics { contentDescription = ... } both removes
     // all semantics from the Row and its children from the accessibility node tree and replaces

@@ -623,7 +623,8 @@
     <string name="textfield_controls_description_1">TextField controls requires a label, Modifier fixes to properly handle keyboard tabbing, any appropriate error handling, and correct keyboard type, options, and actions.</string>
     <string name="textfield_controls_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of an accessible TextField.</string>
     <string name="textfield_controls_example_1_header">Good example 1: Accessible required TextField</string>
-    <string name="textfield_controls_example_1_label">Name (required)</string>
+    <string name="textfield_controls_example_1_label">Name</string>
+    <string name="textfield_controls_example_1_supporting_text">A non-blank name is required.</string>
     <string name="textfield_controls_example_1_button">Submit</string>
     <string name="textfield_controls_example_1_short_error">Name is required. Please supply a non-blank name.</string>
     <string name="textfield_controls_example_1_long_error">Error: Name is required. Please supply a non-blank name.</string>

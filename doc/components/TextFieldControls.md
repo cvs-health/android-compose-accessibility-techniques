@@ -18,7 +18,7 @@ In addition, appropriate error handling must be added to any `TextField` in supp
 * Displaying a visual error text using the Material Design 3 `TextField` `supportingText` property (or a secondary `Text` field for Material Design 2 apps). (This error text may need to be hidden from accessibility services so it does not duplicate the announcement made by error semantics.)
 * Displaying a visual error icon using the `TextField` `leadingIcon` or `trailingIcon` property.
 
-Note also that `TextField` presently announces an additional message, "Error: Invalid input", whenever isError is true. This message cannot presently by suppressed. See the Jetpack Compose source code for CommonDecorationBox() for details.
+Finally, brief instructions can be presented using the Material Design 3 `TextField` `supportingText` property (or in a separate, preceding `Text` field for Material Design 2 apps).
 
 ## Keyboard Trap Remediation
 The following `Modifier` extension function encapsulates all of the keyboard trap remediations:
@@ -103,18 +103,23 @@ OutlinedTextField(
         },
     // Key technique: Label the TextField.
     label = {
-        Text("Phone (required)")
+        Text("Phone")
     },
-    // Error technique: Display a visual error message using supportingText.
+    // Use supportingText for instructions and error message display.
     supportingText = {
-        // Because the Modifier.semantics error property is set, the supportingText must be hidden 
-        // from accessibility services (with invisibleToUser() semantics) to prevent a duplicate 
-        // announcement.
         if (isError) {
+           // Error technique: Display a visual error message using supportingText.
+           // Because the Modifier.semantics error property is set, the supportingText must be hidden 
+           // from accessibility services (with invisibleToUser() semantics) to prevent a duplicate 
+           // announcement.
             Text(
                 text = "Error: Phone number required. Enter a phone number.",
                 modifier = Modifier.semantics { invisibleToUser() }
             )
+        } else {
+            // Optional instruction technique: Display brief instructions using supportingText when 
+            // field is not in error.
+            Text("A non-empty phone number is required.")
         }
     },
     // Error technique: Signal display of the error state by the TextField.

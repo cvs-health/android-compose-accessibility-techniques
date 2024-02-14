@@ -107,8 +107,6 @@ private fun GoodExample1() {
     val context = LocalContext.current
     val shortErrorMessage =
         if (isError) stringResource(id = R.string.textfield_controls_example_1_short_error) else ""
-    val longErrorMessage =
-        if (isError) stringResource(id = R.string.textfield_controls_example_1_long_error) else ""
 
     // Key technique 1: Apply fixes for keyboard Tab handling; see AccessibleTextFields.kt for
     // details.
@@ -139,18 +137,21 @@ private fun GoodExample1() {
             Text(text = stringResource(id = R.string.textfield_controls_example_1_label))
         },
         supportingText = {
-            // Note: Display a visual error message using supportingText. In this case, the
-            // text should begin with "Error: " to indicate the type of message shown.
-            //
-            // Also, because the Modifier.semantics error property is set, the
-            // supportingText must be hidden from accessibility services (with
-            // invisibleToUser() semantics) to prevent duplicate announcements.
-            // This is hacky, but improves the audio-semantic user experience.
             if (isError) {
+                // Note: Display a visual error message using supportingText. In this case, the
+                // text should begin with "Error: " to indicate the type of message shown.
+                //
+                // Also, because the Modifier.semantics error property is set, the
+                // supportingText must be hidden from accessibility services (with
+                // invisibleToUser() semantics) to prevent duplicate announcements.
+                // This is hacky, but improves the audio-semantic user experience.
                 Text(
-                    text = longErrorMessage,
+                    text = stringResource(id = R.string.textfield_controls_example_1_long_error),
                     modifier = Modifier.semantics { invisibleToUser() }
                 )
+            } else {
+                // Optionally display instructions in the supportingText when field is not in error.
+                Text(stringResource(id = R.string.textfield_controls_example_1_supporting_text))
             }
         },
         // Note: Signal display of the error state by the TextField.

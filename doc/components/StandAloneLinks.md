@@ -128,6 +128,8 @@ TextButton(
 ) {
     Text(
         text = "Read about Jetpack Compose Accessibility",
+        // Use weight() without fill to keep the icon visible when the text wraps at large text size
+        modifier = Modifier.weight(1f, fill = false),
         textDecoration = TextDecoration.Underline
     )
     Spacer(Modifier.width(8.dp))

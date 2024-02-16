@@ -123,7 +123,7 @@ fun hasNoCustomActions(): SemanticsMatcher =
     SemanticsMatcher.keyNotDefined(SemanticsActions.CustomActions)
 
 fun hasCustomActionLabelled(label: String) : SemanticsMatcher {
-    return SemanticsMatcher("CustomActions.label == ${label}") {
+    return SemanticsMatcher("CustomActions.label contains ${label}") {
         it.config.getOrNull(SemanticsActions.CustomActions)?.map { action -> action.label }?.contains(label) ?: false
     }
 }
@@ -208,5 +208,18 @@ fun hasClearAndSetSemantics(): SemanticsMatcher {
 fun hasMergeSemantics(): SemanticsMatcher {
     return SemanticsMatcher("SemanticsConfiguration.isMergingSemanticsOfDescendants") {
         it.config.isMergingSemanticsOfDescendants
+    }
+}
+
+// OnClick helpers
+fun hasClickActionLabel() : SemanticsMatcher {
+    return SemanticsMatcher("OnClick.label exists") {
+        it.config.getOrNull(SemanticsActions.OnClick)?.label != null
+    }
+}
+
+fun hasClickActionLabelled(label: String) : SemanticsMatcher {
+    return SemanticsMatcher("OnClick.label contains ${label}") {
+        it.config.getOrNull(SemanticsActions.OnClick)?.label?.contains(label) ?: false
     }
 }

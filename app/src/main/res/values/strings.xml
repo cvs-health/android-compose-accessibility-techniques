@@ -19,6 +19,7 @@
     <string name="navigate_up">Navigate up</string>
     <string name="collapse_button_description">Collapse</string>
     <string name="expand_button_description">Expand</string>
+    <string name="standalone_link_on_click_label">open in browser</string>
 
     <!-- HomeScreen -->
     <string name="home_title">Home</string>
@@ -467,9 +468,9 @@
     <string name="inline_links_example_1_link_text_2">AnnotatedString</string>
     <string name="inline_links_example_1_link_text_3">ClickableText</string>
     <string name="inline_links_example_1_note">Note: These links work fine with assistive technologies, but they are not keyboard accessible.</string>
-    <string name="inline_links_example_2">OK example 2: Using AndroidView and TextView</string>
+    <string name="inline_links_example_2">Problematic example 2: Using AndroidView and TextView</string>
     <string name="inline_links_example_2_text">For best current accessibility, use <a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/viewinterop/package-summary#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a> and <a href="https://github.com/cvs-health/android-view-accessibility-techniques/blob/main/doc/componenttypes/LinksInlineWithText.md">TextView links</a> instead of ClickableText.</string>
-    <string name="inline_links_example_2_note">This paragraph works with assistive technologies. It also works with keyboards, but not well. Navigation arrows are required to select the text and the links within the text.</string>
+    <string name="inline_links_example_2_note">This paragraph works with assistive technologies. It may work with keyboards, except for a known AndroidView focus issue, but not well. Presently, navigation arrows are required to select the text and the links within the text.</string>
 
     <!-- ListItem layouts -->
     <string name="listitem_layouts_title">ListItem layouts</string>
@@ -583,6 +584,22 @@
     <string name="slider_controls_example_4_label">Rating filter range</string>
     <string name="slider_controls_example_4_content_description">Rating filter range</string>
     <string name="slider_controls_example_4_selected_range">Include ratings from %1$d to %2$d</string>
+
+    <!-- Stand-alone links -->
+    <string name="standalone_links_title">Stand-alone links</string>
+    <string name="standalone_links_heading">Stand-alone links need onClickLabel, etc.</string>
+    <string name="standalone_links_description_1">Android has no \"link\" role to distinguish links from buttons or other clickable elements. But there are things that need to be done to make a stand-alone link understandable to users.</string>
+    <string name="standalone_links_description_2">Turn on TalkBack, navigate the page, and activate the links for demonstrations of more and less accessible stand-alone links.</string>
+    <string name="standalone_links_example_1_header">Bad example 1: Indistinguishable text link</string>
+    <string name="standalone_links_example_1_text">Nothing indicates that this text is a link, nor does the text describe where the link goes. This link fails multiple accessibility guidelines.</string>
+    <string name="standalone_links_example_2_header">Good example 2: Accessible Stand-alone link text</string>
+    <string name="standalone_links_example_2_description">To create an accessible stand-alone link, describe the link destination, use distinctive link styling, and apply onClickLabel to indicate that the click action will open a browser window. Using \"call to action\" wording is also a good practice.</string>
+    <string name="standalone_links_example_2_text">Read about Jetpack Compose Accessibility</string>
+    <string name="standalone_links_example_3_header">Good example 3: Accessible stand-alone link with icon</string>
+    <string name="standalone_links_example_3_text">Read about Jetpack Compose Accessibility</string>
+    <string name="standalone_links_example_4_header">Good example 4: Accessible stand-alone link TextButton</string>
+    <string name="standalone_links_example_4_text">Read about Jetpack Compose Accessibility</string>
+    <string name="standalone_links_example_4_icon_description">Opens in browser</string>
 
     <!-- Switch controls -->
     <string name="switch_controls_title">Switch controls</string>

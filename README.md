@@ -50,6 +50,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [RadioButton groups](doc/components/RadioButtonGroups.md)
     - [x] [Slider and RangeSlider controls](doc/components/SliderAndRangeSliderControls.md)
     - [ ] Snackbars
+    - [ ] [Stand-alone links](doc/components/StandAloneLinks.md)
     - [x] [Switch controls](doc/components/SwitchControls.md)
     - [x] [Tab rows](doc/components/TabRows.md)
     - [x] [TextField controls](doc/components/TextFieldControls.md)

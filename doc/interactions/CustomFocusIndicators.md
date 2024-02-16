@@ -48,6 +48,35 @@ Notes:
 - But sure to make the border distinguished by more than hue to avoid a failure of WCAG [Success Criterion 1.4.1 Use of Color](https://www.w3.org/TR/WCAG21/#use-of-color). In the example above, this is done by making the border only appear visible in the focused state. 
 - See also [React to focus](https://developer.android.com/jetpack/compose/touch-input/focus/react-to-focus).
 
+This technique can also be encapsulated into a reusable `Modifier` extension function:
+
+```kotlin
+@Composable
+fun Modifier.visibleFocusBorder(): Modifier {
+    var borderColor by remember {
+        mutableStateOf(Color.Transparent)
+    }
+    val focusIndicatorColor = colorResource(id = R.color.focus_indicator_outline)
+    return this
+        .onFocusChanged {
+            borderColor = if (it.isFocused) focusIndicatorColor else Color.Transparent
+        }
+        .border(2.dp, borderColor, shape = RoundedCornerShape(4.dp))
+}
+```
+
+Such a Modifier extension function simplifies the application of a custom focus border to a composable. For example, the earlier example `Text` would become:
+```kotlin
+Text(
+    text = "Show terms and conditions",
+    modifier = Modifier
+        .visibleFocusBorder()
+        .clickable(role = Role.Button) {
+          // Show terms & conditions...
+        },
+)
+```
+
 ## Apply `Button`'s `border` property with a focus-state-based color
 
 To apply a custom focus indicator to a `Button` composable, use its `border` property instead of `Modifier.border()`. Otherwise, the same steps apply.

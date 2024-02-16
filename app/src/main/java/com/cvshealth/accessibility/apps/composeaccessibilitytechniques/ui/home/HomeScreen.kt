@@ -224,6 +224,11 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
+                    label = stringResource(R.string.standalone_links_title),
+                    route = ComposeAccessibilityTechniquesRoute.StandAloneLinks,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
                     label = stringResource(R.string.switch_controls_title),
                     route = ComposeAccessibilityTechniquesRoute.SwitchControls,
                     onNavigationButtonClicked = onNavigationButtonClicked

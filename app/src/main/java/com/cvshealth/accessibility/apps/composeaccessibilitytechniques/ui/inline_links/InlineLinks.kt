@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -44,7 +44,6 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ProblematicExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -79,7 +78,7 @@ fun InlineLinksScreen(
             BodyText(textId = R.string.inline_links_description_2)
 
             ProblematicExample1()
-            OkExample2()
+            ProblematicExample2()
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -177,9 +176,9 @@ fun ProblematicExample1Preview() {
 }
 
 @Composable
-private fun OkExample2() {
-    // OK example 2: Using AndroidView and TextView
-    OkExampleHeading(
+private fun ProblematicExample2() {
+    // Problematic example 2: Using AndroidView and TextView
+    ProblematicExampleHeading(
         text = stringResource(id = R.string.inline_links_example_2),
         modifier = Modifier.testTag(inlineLinksExample2HeadingTestTag)
     )
@@ -210,7 +209,7 @@ fun OkExample2Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            OkExample2()
+            ProblematicExample2()
         }
     }
 }

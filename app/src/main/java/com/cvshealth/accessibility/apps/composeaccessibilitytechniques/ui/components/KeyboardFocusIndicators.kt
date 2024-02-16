@@ -36,6 +36,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.OutlinedIconButton
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
@@ -167,6 +168,74 @@ fun VisibleFocusBorderButton(
     )
 }
 
+/**
+ * VisibleFocusBorderTextButton - creates a standard TextButton with a visible custom keyboard focus
+ * indicator border, unless an overriding BorderStroke is provided.
+ *
+ * @param onClick called when this button is clicked
+ * @param modifier the [Modifier] to be applied to this button
+ * @param enabled controls the enabled state of this button. When `false`, this component will not
+ * respond to user input, and it will appear visually disabled and disabled to accessibility
+ * services.
+ * @param shape defines the shape of this button's container, border (when [border] is not null),
+ * and shadow (when using [elevation])
+ * @param colors [ButtonColors] that will be used to resolve the colors for this button in different
+ * states. See [ButtonDefaults.buttonColors].
+ * @param elevation [ButtonElevation] used to resolve the elevation for this button in different
+ * states. This controls the size of the shadow below the button. Additionally, when the container
+ * color is [ColorScheme.surface], this controls the amount of primary color applied as an overlay.
+ * See [ButtonElevation.shadowElevation] and [ButtonElevation.tonalElevation].
+ * @param border overrides the default custom focus indicator border drawn around the container of
+ * this button. If [border] is provided, [interactionSource] is likely also required for focus
+ * coordination; otherwise, [Interaction]s can be tracked locally.
+ * @param contentPadding the spacing values to apply internally between the container and the
+ * content
+ * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
+ * for this button. You can create and pass in your own `remember`ed instance to observe
+ * [Interaction]s and customize the appearance / behavior of this button in different states.
+ */
+@Composable
+fun VisibleFocusBorderTextButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    shape: Shape = ButtonDefaults.textShape,
+    colors: ButtonColors = ButtonDefaults.textButtonColors(),
+    elevation: ButtonElevation? = null,
+    border: BorderStroke? = null,
+    contentPadding: PaddingValues = ButtonDefaults.TextButtonContentPadding,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable RowScope.() -> Unit
+) {
+    // Key technique: Apply the appropriate focus outline color for dark and light themes.
+    // This color must also contrast with the fill color used in either theme.
+    val focusIndicatorColor = colorResource(id = R.color.focus_indicator_outline)
+    // Key technique: Remember focused state using border color.
+    // Use a transparent border color for the unfocused state.
+    var buttonBorderColor by remember {
+        mutableStateOf(Color.Transparent)
+    }
+    TextButton(
+        onClick = onClick,
+        modifier = modifier
+            // Key technique: Track focus state change.
+            .onFocusChanged {
+                buttonBorderColor = if (it.isFocused) focusIndicatorColor else Color.Transparent
+            },
+        enabled = enabled,
+        shape = shape,
+        colors = colors,
+        elevation = elevation,
+        // Key technique: Provide a border that is visible in the focused state.
+        border = border ?: BorderStroke(
+            width = 2.dp,
+            color = buttonBorderColor
+        ),
+        contentPadding = contentPadding,
+        interactionSource = interactionSource,
+        content = content
+    )
+}
 
 /**
  * VisibleFocusBorderIconButton - creates a standard IconButton with a visible custom keyboard focus

@@ -232,12 +232,16 @@ private fun GoodExample4() {
     ) {
         Text(
             text = stringResource(id = R.string.standalone_links_example_4_text),
+            // Key technique: Use weight() without fill to keep the icon visible when the text
+            // wraps at large text size.
+            modifier = Modifier.weight(1f, fill = false),
             textDecoration = TextDecoration.Underline
         )
         Spacer(Modifier.width(8.dp))
         Icon(
             painter = painterResource(id = R.drawable.ic_external_link_outline),
-            // Alternative to onClickLabel. Merged with button text into one announcement.
+            // Key technique: Alternative to onClickLabel. Merged with button text into one
+            // announcement.
             contentDescription = stringResource(id = R.string.standalone_links_example_4_icon_description),
             tint = MaterialTheme.colorScheme.primary
         )

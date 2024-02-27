@@ -306,7 +306,7 @@ fun UxChangeAnnouncementsScreen(
                             modifier = Modifier
                                 .wrapContentWidth()
                                 .wrapContentHeight(),
-                            shape = MaterialTheme.shapes.large,
+                            shape = MaterialTheme.shapes.extraLarge,
                             tonalElevation = AlertDialogDefaults.TonalElevation
                         ) {
                             CircularProgressIndicator(
@@ -314,6 +314,7 @@ fun UxChangeAnnouncementsScreen(
                                     .semantics {
                                         contentDescription = waitingMessage
                                     }
+                                    .padding(24.dp)
                                     .sizeIn(minWidth = 48.dp, minHeight = 48.dp)
                             )
                         }

@@ -142,11 +142,20 @@ fun hasLiveRegionMode(mode: LiveRegionMode) : SemanticsMatcher {
 
 Note: In some cases, the retrieved semantic property is an object with properties of its own that need further calls to access (not illustrated).
 
+## Adjusting time in tests
+By default, Compose jUnit UI tests automatically advance time to the next frame after performing an action. That is generally all that is necessary, but to test transient effects, manually advancing the test time can be helpful.
+
+To do that, use `composeTestRule.mainClock.advanceTimeBy()`. 
+
+An example of this technique is used in [PopupMessageTests.kt](../app/src/androidTest/java/com/cvshealth/composeaccessibilitytechniques/PopupMessagesTests.kt) to verify that defined-duration `Snackbar`s disappear after their established time.
+
 ## Summary
 Other tests for accessibility semantics are possible and are strongly suggested. The key technique is to test for semantic properties, as well as testing for functionality.
 
 ## Debugging tests
 To debug tests, apply the following code in a test function to log the semantics tree: `composeTestRule.onRoot().printToLog("LOG_TAG")`. Alternatively, apply the following code to log the unmerged semantics tree: `composeTestRule.onRoot(useUnmergedTree = true).printToLog("LOG_TAG")`.
+
+If that code fails because of multiple root nodes (such as when pop-up dialogs appear), apply something like this instead: `composeTestRule.onAllNodes(isRoot()).onLast().printToLog("LOG_TAG")`
 
 ----
 

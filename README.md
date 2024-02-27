@@ -46,11 +46,10 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [ListItem layouts](doc/components/ListItemLayouts.md)
     - [x] [ModalBottomSheet layouts](doc/components/ModalBottomSheetLayouts.md)
     - [x] [NavigationBar layouts](doc/components/NavigationBarLayouts.md)
-    - [ ] Progress indicators
+    - [x] [Pop-up messages (Toast, SnackBar, and AlertDialog controls)](doc/components/PopupMessages.md)
     - [x] [RadioButton groups](doc/components/RadioButtonGroups.md)
     - [x] [Slider and RangeSlider controls](doc/components/SliderAndRangeSliderControls.md)
-    - [ ] Snackbars
-    - [ ] [Stand-alone links](doc/components/StandAloneLinks.md)
+    - [x] [Stand-alone links](doc/components/StandAloneLinks.md)
     - [x] [Switch controls](doc/components/SwitchControls.md)
     - [x] [Tab rows](doc/components/TabRows.md)
     - [x] [TextField controls](doc/components/TextFieldControls.md)

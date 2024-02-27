@@ -38,6 +38,8 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.radioButtonGroupsExample1RadioButtonGroupTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.radioButtonGroupsExample2HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.radioButtonGroupsExample2RadioButtonGroupTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.radioButtonGroupsExample3HeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.radioButtonGroupsExample3RadioButtonGroupTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.radioButtonGroupsHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
@@ -73,6 +75,9 @@ class RadioButtonGroupsTests {
         composeTestRule
             .onNode(hasTestTag(radioButtonGroupsExample2HeadingTestTag) and isHeading())
             .assertExists()
+        composeTestRule
+            .onNode(hasTestTag(radioButtonGroupsExample3HeadingTestTag) and isHeading())
+            .assertExists()
     }
 
     @Test
@@ -95,6 +100,15 @@ class RadioButtonGroupsTests {
                         !hasAnyDescendant(isHeading())
             )
             .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(radioButtonGroupsExample3RadioButtonGroupTestTag)
+                        and
+                        !isHeading()
+                        and
+                        !hasAnyDescendant(isHeading())
+            )
+            .assertExists()
     }
 
     @Test
@@ -104,6 +118,15 @@ class RadioButtonGroupsTests {
 
     @Test
     fun verifyExample1HasExpectedProperties() {
+        // No element has selectableGroup semantics.
+        composeTestRule
+            .onNode(
+                hasAnyAncestor(hasTestTag(radioButtonGroupsExample1RadioButtonGroupTestTag))
+                        and
+                        hasSelectableGroup()
+            )
+            .assertDoesNotExist()
+
         // Text labels are not associated with the RadioButton role.
         composeTestRule
             .onNode(
@@ -147,6 +170,16 @@ class RadioButtonGroupsTests {
 
     @Test
     fun verifyExample2HasExpectedProperties() {
+        // No element has selectableGroup semantics.
+        composeTestRule
+            .onNode(
+                hasAnyAncestor(hasTestTag(radioButtonGroupsExample2RadioButtonGroupTestTag))
+                        and
+                        hasSelectableGroup()
+            )
+            .assertDoesNotExist()
+
+        // Labels are associated with RadioButton controls.
         composeTestRule
             .onNode(
                 hasAnyAncestor(hasTestTag(radioButtonGroupsExample2RadioButtonGroupTestTag))
@@ -211,6 +244,88 @@ class RadioButtonGroupsTests {
         composeTestRule
             .onNode(
                 hasAnyAncestor(hasTestTag(radioButtonGroupsExample2RadioButtonGroupTestTag))
+                        and
+                        hasText("Orange")
+            )
+            .assertIsSelected()
+    }
+
+    @Test
+    fun verifyExample3HasExpectedProperties() {
+        // Group has has selectableGroup semantics.
+        composeTestRule
+            .onNode(
+                hasAnyAncestor(hasTestTag(radioButtonGroupsExample3RadioButtonGroupTestTag))
+                        and
+                        hasSelectableGroup()
+            )
+            .assertExists()
+
+        // Controls have associated text labels.
+        composeTestRule
+            .onNode(
+                hasAnyAncestor(hasTestTag(radioButtonGroupsExample3RadioButtonGroupTestTag))
+                        and
+                        hasText("Banana")
+                        and
+                        expectValue(SemanticsProperties.Role, Role.RadioButton)
+            )
+            .assertIsSelected()
+        composeTestRule
+            .onNode(
+                hasAnyAncestor(hasTestTag(radioButtonGroupsExample3RadioButtonGroupTestTag))
+                        and
+                        hasText("Grape")
+                        and
+                        expectValue(SemanticsProperties.Role, Role.RadioButton)
+            )
+            .assertIsSelectable()
+            .assertIsNotSelected()
+        composeTestRule
+            .onNode(
+                hasAnyAncestor(hasTestTag(radioButtonGroupsExample3RadioButtonGroupTestTag))
+                        and
+                        hasText("Orange")
+                        and
+                        isNotSelected()
+                        and
+                        isSelectable()
+                        and
+                        hasClickAction()
+                        and
+                        expectValue(SemanticsProperties.Role, Role.RadioButton)
+            )
+            .assertExists()
+
+        // Click Orange RadioButton and verify that it is selected and Banana is not selected.
+        composeTestRule
+            .onNode(
+                hasAnyAncestor(hasTestTag(radioButtonGroupsExample3RadioButtonGroupTestTag))
+                        and
+                        hasText("Orange")
+                        and
+                        isSelectable()
+                        and
+                        hasClickAction()
+                        and
+                        expectValue(SemanticsProperties.Role, Role.RadioButton)
+            )
+            .performScrollTo()
+            .performClick()
+        composeTestRule
+            .onNode(
+                hasAnyAncestor(hasTestTag(radioButtonGroupsExample3RadioButtonGroupTestTag))
+                        and
+                        hasText("Banana")
+                        and
+                        isNotSelected()
+                        and
+                        isSelectable()
+            )
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasAnyAncestor(hasTestTag(radioButtonGroupsExample3RadioButtonGroupTestTag))
                         and
                         hasText("Orange")
             )

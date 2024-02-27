@@ -54,7 +54,6 @@ const val inlineLinksExample1TextWithLinksTestTag = "inlineLinksExample1TextWith
 const val inlineLinksExample2HeadingTestTag = "inlineLinksExample2Heading"
 const val inlineLinksExample2TextWithLinksTestTag = "inlineLinksExample2TextWithLinks"
 
-@OptIn(ExperimentalTextApi::class)
 @Composable
 fun InlineLinksScreen(
     onBackPressed: () -> Unit
@@ -202,7 +201,7 @@ private fun ProblematicExample2() {
 
 @Preview(showBackground = true)
 @Composable
-fun OkExample2Preview() {
+fun ProblematicExample2Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

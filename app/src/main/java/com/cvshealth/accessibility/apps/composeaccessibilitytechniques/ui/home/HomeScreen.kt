@@ -214,6 +214,11 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
+                    label = stringResource(R.string.popup_messages_title),
+                    route = ComposeAccessibilityTechniquesRoute.PopupMessages,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
                     label = stringResource(id = R.string.radio_button_groups_title),
                     route = ComposeAccessibilityTechniquesRoute.RadioButtonGroups,
                     onNavigationButtonClicked = onNavigationButtonClicked

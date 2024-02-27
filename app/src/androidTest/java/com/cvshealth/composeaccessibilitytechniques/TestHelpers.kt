@@ -223,3 +223,14 @@ fun hasClickActionLabelled(label: String) : SemanticsMatcher {
         it.config.getOrNull(SemanticsActions.OnClick)?.label?.contains(label) ?: false
     }
 }
+
+// Dismiss action testing helpers
+fun hasDismissAction(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsActions.Dismiss)
+
+fun hasNoDismissAction(): SemanticsMatcher =
+    SemanticsMatcher.keyNotDefined(SemanticsActions.Dismiss)
+
+// RadioButton helpers
+fun hasSelectableGroup(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.SelectableGroup)

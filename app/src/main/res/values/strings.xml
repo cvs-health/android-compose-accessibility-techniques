@@ -440,6 +440,24 @@
     <string name="checkbox_controls_example_2_header">Good example 2: Accessible Checkbox</string>
     <string name="checkbox_controls_example_2_label">Accessible checkbox</string>
 
+    <!-- Dropdown selection menus -->
+    <string name="dropdown_menus_title">Dropdown menus</string>
+    <string name="dropdown_menus_heading">Dropdown menus can be improved</string>
+    <string name="dropdown_menus_description_1">The stock Dropdown Menu pattern creates a mostly-accessible dropdown selection menu. But they are challenging to close without making a selection unless improved. Custom dropdown approaches may be even less accessible.</string>
+    <string name="dropdown_menus_description_2">Turn on TalkBack, Switch Access, or use a physical keyboard, and navigate this page, activating the dropdown menu controls and making selections.</string>
+    <string name="dropdown_menus_example_1_heading">Problematic example 1: ListItem with stock DropdownMenu</string>
+    <string name="dropdown_menus_example_1_listitem_heading">ListItem with stock DropdownMenu</string>
+    <string name="dropdown_menus_example_2_heading">Good example 2: ListItem with accessible DropdownMenu</string>
+    <string name="dropdown_menus_example_2_description">An accessible DropdownMenu has a Close menu item, assumes keyboard focus automatically, and closes when the Esc key is pressed.</string>
+    <string name="dropdown_menus_example_2_listitem_heading">ListItem with accessible DropdownMenu</string>
+    <string name="dropdown_menus_example_menu_content_description">Show dropdown menu</string>
+    <string name="dropdown_menus_example_menu_item_1">Menu item 1</string>
+    <string name="dropdown_menus_example_menu_item_1_message">Selected menu item 1.</string>
+    <string name="dropdown_menus_example_menu_item_2">Menu item 2</string>
+    <string name="dropdown_menus_example_menu_item_2_message">Selected menu item 2.</string>
+    <string name="dropdown_menus_example_menu_close_item">Close menu</string>
+    <string name="dropdown_menus_example_menu_close_message">Menu closed.</string>
+
     <!-- Exposed dropdown selection menus -->
     <string name="exposed_dropdown_menus_title">Exposed dropdown menus</string>
     <string name="exposed_dropdown_menus_heading">Avoid the Exposed Dropdown Menu pattern for now</string>

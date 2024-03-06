@@ -30,7 +30,6 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Custom focus indicators](doc/interactions/CustomFocusIndicators.md)
     - [x] [Custom state descriptions](doc/interactions/CustomStateDescriptions.md)
     - [x] [Custom accessibility actions](doc/interactions/CustomAccessibilityActions.md)
-    - [ ] Custom semantics properties
 - Specific Component Types
     - [x] [Accordion controls](doc/components/AccordionControls.md)
     - [ ] Autofill input fields
@@ -38,8 +37,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [ ] Button controls
     - [x] [Checkbox controls](doc/components/CheckboxControls.md)
     - [ ] Chip controls
-    - [ ] Dialogs
-    - [ ] Dropdown selection menus
+    - [x] [Dropdown menus](doc/components/DropdownMenus.md)
     - [x] [Exposed dropdown menus](doc/components/ExposedDropdownMenus.md)
     - [x] [Links inline with text](doc/components/LinksInlineWithText.md)
     - [ ] ListDetailPaneLayout

@@ -40,6 +40,7 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     CustomAccessibilityActions("customAccessibilityActions"),
     AccordionControls("accordionControls"),
     CheckboxControls("checkboxControls"),
+    DropdownMenus("dropdownMenus"),
     ExposedDropdownMenus("exposedDropdownMenus"),
     InlineLinks("inlineLinks"),
     ListItemLayouts("listItemLayouts"),

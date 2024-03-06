@@ -36,11 +36,10 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [ ] BottomAppBar layouts
     - [ ] Button controls
     - [x] [Checkbox controls](doc/components/CheckboxControls.md)
-    - [ ] Chip controls
     - [x] [Dropdown menus](doc/components/DropdownMenus.md)
     - [x] [Exposed dropdown menus](doc/components/ExposedDropdownMenus.md)
     - [x] [Links inline with text](doc/components/LinksInlineWithText.md)
-    - [ ] ListDetailPaneLayout
+    - [ ] ListDetailPaneScaffold
     - [x] [ListItem layouts](doc/components/ListItemLayouts.md)
     - [x] [ModalBottomSheet layouts](doc/components/ModalBottomSheetLayouts.md)
     - [x] [NavigationBar layouts](doc/components/NavigationBarLayouts.md)

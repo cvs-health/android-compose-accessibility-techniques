@@ -31,6 +31,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -44,6 +45,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.AccessibleOutlinedTextField
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.AutofilledOutlinedTextField
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
@@ -108,6 +110,7 @@ private fun PreviewWithScaffold() {
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun OkExample1() {
     // OK example 1: Keyboard action None adds a newline
@@ -116,9 +119,10 @@ private fun OkExample1() {
         modifier = Modifier.testTag(keyboardActionsExample1HeadingTestTag)
     )
     val (exampleText, setExampleText) = remember { mutableStateOf("") }
-    AccessibleOutlinedTextField(
+    AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
+        autofillType = AutofillType.PersonFullName,
         modifier = Modifier
             .testTag(keyboardActionsExample1TextFieldTestTag)
             .padding(top = 8.dp)
@@ -152,6 +156,7 @@ private fun OkExample1Preview() {
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun GoodExample2() {
     // Good example 2: Keyboard action Next moves to next field
@@ -161,9 +166,10 @@ private fun GoodExample2() {
     )
     val (exampleText, setExampleText) = remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
-    AccessibleOutlinedTextField(
+    AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
+        autofillType = AutofillType.PostalAddress,
         modifier = Modifier
             .testTag(keyboardActionsExample2TextFieldTestTag)
             .padding(top = 8.dp)
@@ -215,9 +221,10 @@ private fun GoodExample3() {
     val context = LocalContext.current
     val doneMessage = stringResource(id = R.string.keyboard_actions_example_3_done_message)
 
-    AccessibleOutlinedTextField(
+    AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
+        autofillType = AutofillType.PostalCode,
         modifier = Modifier
             .testTag(keyboardActionsExample3TextFieldTestTag)
             .padding(top = 8.dp)
@@ -376,9 +383,10 @@ private fun GoodExample6() {
     val context = LocalContext.current
     val goMessage = stringResource(id = R.string.keyboard_actions_example_6_go_message, exampleText)
 
-    AccessibleOutlinedTextField(
+    AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
+        autofillType = AutofillType.PhoneNumberNational,
         modifier = Modifier
             .testTag(keyboardActionsExample6TextFieldTestTag)
             .padding(top = 8.dp)

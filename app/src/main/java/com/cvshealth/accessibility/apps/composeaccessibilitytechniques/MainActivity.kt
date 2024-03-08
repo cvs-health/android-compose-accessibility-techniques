@@ -35,6 +35,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.access
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_actions.KeyboardActionsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.AccordionControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.adaptive_layouts.AdaptiveLayoutsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.autofill_controls.AutofillControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.checkbox_controls.CheckboxControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_group_replacement.ContentGroupReplacementScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_grouping.ContentGroupingScreen
@@ -155,6 +156,9 @@ fun ComposeAccessibilityTechniquesNavHost(
         }
         composable(route = ComposeAccessibilityTechniquesRoute.AccordionControls.route) {
             AccordionControlsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.AutofillControls.route) {
+            AutofillControlsScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.CheckboxControls.route) {
             CheckboxControlsScreen(onBackPressed = popBackStack)

@@ -32,7 +32,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Custom accessibility actions](doc/interactions/CustomAccessibilityActions.md)
 - Specific Component Types
     - [x] [Accordion controls](doc/components/AccordionControls.md)
-    - [ ] Autofill input fields
+    - [x] [Autofill controls](doc/components/AutofillControls.md)
     - [ ] BottomAppBar layouts
     - [ ] Button controls
     - [x] [Checkbox controls](doc/components/CheckboxControls.md)

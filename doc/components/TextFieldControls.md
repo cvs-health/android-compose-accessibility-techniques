@@ -10,6 +10,7 @@ The required techniques are:
     3. Apply `Modifier.onPreviewKeyEvent()` to handle keyboard activity (Tab, Shift+Tab, Enter, and Up/Down direction pad keys), if the field remained focused after debouncing, and before the key event became part of the `TextField` data.
 3. Set soft keyboard type and options with the `TextField` `keyboardOptions` property. See [Keyboard Types and Options](../interactions/KeyboardTypes.md) for details.
 4. Set the appropriate soft keyboard actions using the `TextField` `keyboardOptions` `imeAction` property and the `TextField` `keyboardActions` property. See [Keyboard Actions](../interactions/KeyboardActions.md) for details.
+5. Apply autofill with appropriate `AutofillType`(s) to the `TextField`, if the data to be entered is supported by autofill. See [Autofill Controls](../components/AutofillControls.md) for details.
 
 In addition, appropriate error handling must be added to any `TextField` in support of WCAG 2 [Success Criterion 3.3.1 Error Identification](https://www.w3.org/TR/WCAG21/#error-identification). Error handling techniques include:
 
@@ -82,15 +83,15 @@ fun Modifier.nextOnTabAndHandleEnter(
 
 ## Example `TextField`
 
-The following code presents a `TextField` for entering a required phone number:
+The following code presents a `TextField` for entering a required website address (URI):
 
 ```kotlin
-val (phoneNumber, setPhoneNumber) = remember { mutableStateOf("") }
-val isError = phoneNumber.isBlank()
+val (uri, setUri) = remember { mutableStateOf("") }
+val isError = uri.isBlank()
 
 OutlinedTextField(
-    value = phoneNumber,
-    onValueChange = setPhoneNumber,
+    value = uri,
+    onValueChange = setUri,
     // Key technique: Handle keyboard trap with Modifier.nextOnTabAndHandleEnter().
     modifier = Modifier
         .nextOnTabAndHandleEnter()
@@ -99,11 +100,11 @@ OutlinedTextField(
         .semantics {
             // Error technique: Announce errors. TalkBack prepends the text "Error: " to the
             // announcements, so use a different error string than the supportingText.
-            if (isError) error("Phone number required. Enter a phone number.")
+            if (isError) error("Website URI is required. Enter a web site address.")
         },
     // Key technique: Label the TextField.
     label = {
-        Text("Phone")
+        Text("Website URI")
     },
     // Use supportingText for instructions and error message display.
     supportingText = {
@@ -113,20 +114,20 @@ OutlinedTextField(
            // from accessibility services (with invisibleToUser() semantics) to prevent a duplicate 
            // announcement.
             Text(
-                text = "Error: Phone number required. Enter a phone number.",
+                text = "Error: Website URI is required. Enter a web site address.",
                 modifier = Modifier.semantics { invisibleToUser() }
             )
         } else {
             // Optional instruction technique: Display brief instructions using supportingText when 
             // field is not in error.
-            Text("A non-empty phone number is required.")
+            Text("A non-empty URI is required.")
         }
     },
     // Error technique: Signal display of the error state by the TextField.
     isError = isError,
-    // Key technique: use KeyboardType.Phone to enter phone numbers.
+    // Key technique: use KeyboardType.Uri to enter web site addresses.
     keyboardOptions = KeyboardOptions.Default.copy(
-        keyboardType = KeyboardType.Phone
+        keyboardType = KeyboardType.Uri
     )
 )
 ```

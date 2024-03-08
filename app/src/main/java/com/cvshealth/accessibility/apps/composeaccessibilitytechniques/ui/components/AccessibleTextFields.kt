@@ -35,7 +35,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.AutofillNode
+import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.composed
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.onFocusChanged
@@ -43,6 +46,10 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalAutofill
+import androidx.compose.ui.platform.LocalAutofillTree
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
@@ -211,3 +218,81 @@ fun AccessibleOutlinedTextField(
     shape,
     colors
 )
+
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@Composable
+fun AutofilledOutlinedTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    autofillType: AutofillType,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    readOnly: Boolean = false,
+    textStyle: TextStyle = LocalTextStyle.current,
+    label: @Composable (() -> Unit)? = null,
+    placeholder: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    prefix: @Composable (() -> Unit)? = null,
+    suffix: @Composable (() -> Unit)? = null,
+    supportingText: @Composable (() -> Unit)? = null,
+    isError: Boolean = false,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    singleLine: Boolean = false,
+    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
+    minLines: Int = 1,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    shape: Shape = OutlinedTextFieldDefaults.shape,
+    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
+    onEnterHandler: (() -> Unit)? = null
+) {
+    // Key technique: Create an AutofillNode with AutofillType(s) and state setter lambda. Connect
+    // it to the LocalAutofillTree.
+    val autofillNode = AutofillNode(listOf(autofillType), onFill = onValueChange)
+    LocalAutofillTree.current += autofillNode
+
+    // Define access to LocalAutofill for later use in a non-composable context.
+    val currentLocalAutofill = LocalAutofill.current
+
+    OutlinedTextField(
+        value,
+        onValueChange,
+        modifier = modifier
+            // Handle keyboard trap and (optional) keyboard Enter processing.
+            .nextOnTabAndHandleEnter(onEnterHandler)
+            // Key technique: on focus change, request autofill data or cancel existing request.
+            .onFocusChanged { focusState ->
+                currentLocalAutofill?.run {
+                    if (focusState.isFocused) {
+                        requestAutofillForNode(autofillNode)
+                    } else {
+                        cancelAutofillForNode(autofillNode)
+                    }
+                }
+            }
+            // Key technique: Set the autofillNode bounding box for pop-up positioning.
+            .onGloballyPositioned { autofillNode.boundingBox = it.boundsInWindow() },
+        enabled,
+        readOnly,
+        textStyle,
+        label,
+        placeholder,
+        leadingIcon,
+        trailingIcon,
+        prefix,
+        suffix,
+        supportingText,
+        isError,
+        visualTransformation,
+        keyboardOptions,
+        keyboardActions,
+        singleLine,
+        maxLines,
+        minLines,
+        interactionSource,
+        shape,
+        colors
+    )
+}

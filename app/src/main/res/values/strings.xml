@@ -414,6 +414,18 @@
     <string name="custom_accessibility_actions_share_event">Selected to share card example #%1$d</string>
     <string name="custom_accessibility_actions_report_event">Selected to report card example #%1$d as inappropriate</string>
 
+    <!-- Autofill controls -->
+    <string name="autofill_title">Autofill controls</string>
+    <string name="autofill_heading">Autofill is required where applicable</string>
+    <string name="autofill_description_1">Whenever possible, a TextField should support autofill suggestions in order to reduce redundant data entry. Provided that an autofill service with the appropriate data has been configured for your device, autofill suggestions will appear as pop-ups in some assistive technologies or on the virtual keyboard. They are not available from a physical keyboard.</string>
+    <string name="autofill_description_2">Select to edit the input fields below and autofill suggestions should appear for the good example fields.</string>
+    <string name="autofill_example_1_heading">Bad example 1: Non-autofilled name and email TextFields</string>
+    <string name="autofill_example_1_label_1">Full name</string>
+    <string name="autofill_example_1_label_2">Email</string>
+    <string name="autofill_example_2_heading">Good example 2: Auto-filled name and email TextFields</string>
+    <string name="autofill_example_2_label_1">Full name</string>
+    <string name="autofill_example_2_label_2">Email</string>
+
     <!-- Accordion controls -->
     <string name="accordion_title">Accordion controls</string>
     <string name="accordion_heading">Accordion controls require an expand or collapse semantics property</string>
@@ -461,7 +473,7 @@
     <!-- Exposed dropdown selection menus -->
     <string name="exposed_dropdown_menus_title">Exposed dropdown menus</string>
     <string name="exposed_dropdown_menus_heading">Avoid the Exposed Dropdown Menu pattern for now</string>
-    <string name="exposed_dropdown_menus_description_1">The Exposed Dropdown Menu pattern creates a mostly-accessible dropdown selection menu. But as of Compose BOM 2024.01.00, no Compose dropdown control is keyboard accessible, and no remediation is known. Custom dropdown approaches may be even less accessible.</string>
+    <string name="exposed_dropdown_menus_description_1">The Exposed Dropdown Menu pattern creates a mostly-accessible dropdown selection menu. But as of Compose BOM 2024.02.01, no Compose dropdown control is keyboard accessible, and no remediation is known. Custom dropdown approaches may be even less accessible.</string>
     <string name="exposed_dropdown_menus_description_2">Turn on TalkBack or Switch Access and navigate this page, activating the list controls and making selections. Then repeat the process using a physical keyboard to observe the problems.</string>
     <string name="exposed_dropdown_menus_example_1_heading">Problematic example 1: Non-editable Exposed Dropdown Menu</string>
     <string name="exposed_dropdown_menus_example_1_description">The Exposed Dropdown Menu pattern uses ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem controls to create a dropdown selection menu that is mostly accessible, except for keyboard operation.</string>
@@ -702,7 +714,7 @@
     <!-- TextField controls -->
     <string name="textfield_controls_title">TextField controls</string>
     <string name="textfield_controls_heading">TextField controls require keyboard trap fix, etc.</string>
-    <string name="textfield_controls_description_1">TextField controls requires a label, Modifier fixes to properly handle keyboard tabbing, any appropriate error handling, and correct keyboard type, options, and actions.</string>
+    <string name="textfield_controls_description_1">TextField controls requires a label, Modifier fixes to properly handle keyboard tabbing, any appropriate error handling, any appropriate autofill, and correct keyboard type, options, and actions.</string>
     <string name="textfield_controls_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of an accessible TextField.</string>
     <string name="textfield_controls_example_1_header">Good example 1: Accessible required TextField</string>
     <string name="textfield_controls_example_1_label">Name</string>

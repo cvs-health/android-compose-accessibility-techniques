@@ -27,7 +27,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -37,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.AccessibleOutlinedTextField
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.AutofilledOutlinedTextField
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BadExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
@@ -203,6 +206,7 @@ private fun BadExample2Preview() {
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun GoodExample3() {
     // Good example 3: Keyboard type for phone number (Phone)
@@ -211,9 +215,10 @@ private fun GoodExample3() {
         modifier = Modifier.testTag(keyboardTypesExample3HeadingTestTag)
     )
     val (exampleText, setExampleText) = remember { mutableStateOf("") }
-    AccessibleOutlinedTextField(
+    AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
+        autofillType = AutofillType.PhoneNumberNational,
         modifier = Modifier
             .testTag(keyboardTypesExample3TextFieldTestTag)
             .padding(top = 8.dp)
@@ -402,6 +407,7 @@ private fun GoodExample7Preview() {
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun GoodExample8() {
     // Good example 8: Keyboard options for word-capitalized text (e.g., names)
@@ -410,9 +416,10 @@ private fun GoodExample8() {
         modifier = Modifier.testTag(keyboardTypesExample8HeadingTestTag)
     )
     val (exampleText, setExampleText) = remember { mutableStateOf("") }
-    AccessibleOutlinedTextField(
+    AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
+        autofillType = AutofillType.PersonFullName,
         modifier = Modifier
             .testTag(keyboardTypesExample8TextFieldTestTag)
             .padding(top = 8.dp)
@@ -528,6 +535,7 @@ private fun GoodExample10Preview() {
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun GoodExample11() {
     // Good example 11: Keyboard type for email (Email)
@@ -536,9 +544,10 @@ private fun GoodExample11() {
         modifier = Modifier.testTag(keyboardTypesExample11HeadingTestTag)
     )
     val (exampleText, setExampleText) = remember { mutableStateOf("") }
-    AccessibleOutlinedTextField(
+    AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
+        autofillType = AutofillType.EmailAddress,
         modifier = Modifier
             .testTag(keyboardTypesExample11TextFieldTestTag)
             .padding(top = 8.dp)
@@ -606,6 +615,7 @@ private fun GoodExample12Preview() {
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun GoodExample13() {
     // Good example 13: Keyboard options for text passwords (Password)
@@ -614,9 +624,10 @@ private fun GoodExample13() {
         modifier = Modifier.testTag(keyboardTypesExample13HeadingTestTag)
     )
     val (exampleText, setExampleText) = remember { mutableStateOf("") }
-    AccessibleOutlinedTextField(
+    AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
+        autofillType = AutofillType.Password,
         modifier = Modifier
             .testTag(keyboardTypesExample13TextFieldTestTag)
             .padding(top = 8.dp)

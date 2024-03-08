@@ -184,6 +184,11 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
+                    label = stringResource(R.string.autofill_title),
+                    route = ComposeAccessibilityTechniquesRoute.AutofillControls,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
                     label = stringResource(R.string.checkbox_controls_title),
                     route = ComposeAccessibilityTechniquesRoute.CheckboxControls,
                     onNavigationButtonClicked = onNavigationButtonClicked

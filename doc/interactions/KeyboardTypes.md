@@ -24,7 +24,7 @@ Notes:
 * For some devices and configurations, different keyboard types will display the same soft keyboard.
 * Adding `android:windowSoftInputMode="adjustResize"` to the `<activity>` element in AndroidManifest.xml can help fit both screen content and the soft keyboard on-screen at the same time.
 * Setting `KeyboardType.Password` or `KeyboardType.NumberPassword` does not supply input field masking; they only control the soft keyboard. Add `visualTransformation = PasswordVisualTransformation()` to a `TextField` for masking.
-* The other part of supporting [Success Criterion 1.3.5 Identify Input Purpose](https://www.w3.org/TR/WCAG21/#identify-input-purpose) involves applying the [androidx.compose.ui.autofill](https://developer.android.com/reference/kotlin/androidx/compose/ui/autofill/package-summary) API where possible. 
+* The other part of supporting [Success Criterion 1.3.5 Identify Input Purpose](https://www.w3.org/TR/WCAG21/#identify-input-purpose) involves using [Autofill Controls](../components/AutofillControls.md) techniques where possible. 
 * It is also necessary to handle the keyboard trap in default `TextField` composables to avoid issues with WCAG 2 [Success Criterion 2.1.2 No Keyboard Trap](https://www.w3.org/TR/WCAG21/#no-keyboard-trap).
 * The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.
 

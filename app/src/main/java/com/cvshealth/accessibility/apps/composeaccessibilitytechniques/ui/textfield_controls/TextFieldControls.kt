@@ -30,6 +30,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -41,7 +42,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.AccessibleOutlinedTextField
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.AutofilledOutlinedTextField
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
@@ -108,9 +109,9 @@ private fun GoodExample1() {
     val shortErrorMessage =
         if (isError) stringResource(id = R.string.textfield_controls_example_1_short_error) else ""
 
-    // Key technique 1: Apply fixes for keyboard Tab handling; see AccessibleTextFields.kt for
-    // details.
-    AccessibleOutlinedTextField(
+    // Key techniques 2 and 5a: Apply fixes for keyboard Tab handling and Autofill; see
+    // AccessibleTextFields.kt for details.
+    AutofilledOutlinedTextField(
         value = name,
         onValueChange = { newName ->
             // Note: Clear any error message as soon as the field has a value. Set the error
@@ -120,6 +121,8 @@ private fun GoodExample1() {
             }
             setName(newName)
         },
+        // Key technique 5b: Designate the AutofillType when necessary.
+        autofillType = AutofillType.PersonFullName,
         modifier = Modifier
             .testTag(textFieldControlsExample1TextFieldTestTag)
             .padding(top = 8.dp)
@@ -133,6 +136,7 @@ private fun GoodExample1() {
                 // CommonDecorationBox() for details.
                 if (isError) error(shortErrorMessage)
             },
+        // Key technique 1: Label the TextField.
         label = {
             Text(text = stringResource(id = R.string.textfield_controls_example_1_label))
         },
@@ -169,7 +173,7 @@ private fun GoodExample1() {
             }
         )
     ) {
-        // Key technique 5: To handle the Enter key as Done, supply an onEnterHandler that
+        // Key technique 2c: To handle the Enter key as Done, supply an onEnterHandler that
         // does the same things as the onDone and button onClick handler. See
         // AccessibleTextFields.kt for how this parameter is added to the TextField.
         onFormSubmit(context, name, setIsError)

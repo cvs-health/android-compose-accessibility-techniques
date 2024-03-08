@@ -5,9 +5,13 @@ Two approaches to auto-filling input field values are to connect `TextField` dat
 
 ## Connect `TextField` data to an Autofill Service
 
-Text input fields can be autofilled by connecting their underlying state data to an `AutofillNode`, and requesting that autofill information be populated when the fields each receive focus. By doing so, any installed Autofill Service can provide suggested data values to those fields. See [Autofill Overview](https://developer.android.com/reference/kotlin/androidx/compose/ui/autofill/package-summary) (especially [AutofillType](https://developer.android.com/reference/kotlin/androidx/compose/ui/autofill/AutofillType)), the [ExplicitAutofillTypesDemo.kt](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui/integration-tests/ui-demos/src/main/java/androidx/compose/ui/demos/autofill/ExplicitAutofillTypesDemo.kt) sample code for details. Also, read the View UI framework document [Optimize your app for autofill](https://developer.android.com/guide/topics/text/autofill-optimize) for background.
+Text input fields can be autofilled by connecting their underlying state data to an `AutofillNode`, and requesting that autofill information be populated when the fields each receive focus. By doing so, any installed Autofill Service can provide suggested data values to those fields. 
 
+* See [Autofill Overview](https://developer.android.com/reference/kotlin/androidx/compose/ui/autofill/package-summary) (especially [AutofillType](https://developer.android.com/reference/kotlin/androidx/compose/ui/autofill/AutofillType)) and the [ExplicitAutofillTypesDemo.kt](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui/integration-tests/ui-demos/src/main/java/androidx/compose/ui/demos/autofill/ExplicitAutofillTypesDemo.kt) sample code for details. 
+    * Also, read the View UI framework document [Optimize your app for autofill](https://developer.android.com/guide/topics/text/autofill-optimize) for background on the Android autofill framework and Autofill Services.
 * This approach, and supplying [Keyboard Types](../interactions/KeyboardTypes.md), are necessary to fulfill [Success Criterion 1.3.5 Identify Input Purpose](https://www.w3.org/TR/WCAG21/#identify-input-purpose) on Android.
+
+For example:
 
 ```kotlin
 @Composable
@@ -19,6 +23,7 @@ fun AutofilledEmailTextField(
     // the LocalAutofillTree.  
     val autofillNode = AutofillNode(listOf(AutofillType.EmailAddress), onFill = setEmail)
     LocalAutofillTree.current += autofillNode
+    
     // Define access to LocalAutofill for later use in a non-composable context.
     val localAutofill = LocalAutofill.current
 
@@ -39,8 +44,9 @@ fun AutofilledEmailTextField(
             }
             // Technique: Set the autofillNode bounding box for pop-up positioning.
             .onGloballyPositioned { autofillNode.boundingBox = it.boundsInWindow() },
+        // Always label TextFields...
         label = { Text("Email")},
-        // Technique: use KeyboardType.Email to enter email addresses.
+        // Use KeyboardType.Email to enter email addresses.
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = KeyboardType.Email,
             imeAction = ImeAction.Next

@@ -36,7 +36,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ErrorRed
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.SuccessGreen
 
 @Composable
@@ -131,7 +130,7 @@ fun BadExampleTitle(
         textId = textId,
         modifier = modifier,
         drawableId = R.drawable.ic_close_fill,
-        tint = ErrorRed
+        tint = MaterialTheme.colorScheme.error
     )
 }
 
@@ -146,7 +145,7 @@ fun GroupedBadExampleTitle(
             // Note: Group icon and text as a single TalkBack focus
             .semantics(mergeDescendants = true) { },
         drawableId = R.drawable.ic_close_fill,
-        tint = ErrorRed
+        tint = MaterialTheme.colorScheme.error
     )
 }
 

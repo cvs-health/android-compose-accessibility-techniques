@@ -15,13 +15,70 @@
    limitations under the License.
 -->
 <resources>
+    <color name="seed">#CC0000</color>
+    <color name="md_theme_light_primary">#C00000</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#FFDAD4</color>
+    <color name="md_theme_light_onPrimaryContainer">#410000</color>
+    <color name="md_theme_light_secondary">#775651</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#FFDAD4</color>
+    <color name="md_theme_light_onSecondaryContainer">#2C1512</color>
+    <color name="md_theme_light_tertiary">#705C2E</color>
+    <color name="md_theme_light_onTertiary">#FFFFFF</color>
+    <color name="md_theme_light_tertiaryContainer">#FBDFA6</color>
+    <color name="md_theme_light_onTertiaryContainer">#251A00</color>
+    <color name="md_theme_light_error">#BA1A1A</color>
+    <color name="md_theme_light_errorContainer">#FFDAD6</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_onErrorContainer">#410002</color>
+    <color name="md_theme_light_background">#FFFBFF</color>
+    <color name="md_theme_light_onBackground">#201A19</color>
+    <color name="md_theme_light_surface">#FFFBFF</color>
+    <color name="md_theme_light_onSurface">#201A19</color>
+    <color name="md_theme_light_surfaceVariant">#F5DDDA</color>
+    <color name="md_theme_light_onSurfaceVariant">#534341</color>
+    <color name="md_theme_light_outline">#857370</color>
+    <color name="md_theme_light_inverseOnSurface">#FBEEEC</color>
+    <color name="md_theme_light_inverseSurface">#362F2E</color>
+    <color name="md_theme_light_inversePrimary">#FFB4A8</color>
+    <color name="md_theme_light_shadow">#000000</color>
+    <color name="md_theme_light_surfaceTint">#C00000</color>
+    <color name="md_theme_light_outlineVariant">#D8C2BE</color>
+    <color name="md_theme_light_scrim">#000000</color>
+    <color name="md_theme_dark_primary">#FFB4A8</color>
+    <color name="md_theme_dark_onPrimary">#690000</color>
+    <color name="md_theme_dark_primaryContainer">#930000</color>
+    <color name="md_theme_dark_onPrimaryContainer">#FFDAD4</color>
+    <color name="md_theme_dark_secondary">#E7BDB6</color>
+    <color name="md_theme_dark_onSecondary">#442925</color>
+    <color name="md_theme_dark_secondaryContainer">#5D3F3B</color>
+    <color name="md_theme_dark_onSecondaryContainer">#FFDAD4</color>
+    <color name="md_theme_dark_tertiary">#DEC48C</color>
+    <color name="md_theme_dark_onTertiary">#3E2E04</color>
+    <color name="md_theme_dark_tertiaryContainer">#564419</color>
+    <color name="md_theme_dark_onTertiaryContainer">#FBDFA6</color>
+    <color name="md_theme_dark_error">#FFB4AB</color>
+    <color name="md_theme_dark_errorContainer">#93000A</color>
+    <color name="md_theme_dark_onError">#690005</color>
+    <color name="md_theme_dark_onErrorContainer">#FFDAD6</color>
+    <color name="md_theme_dark_background">#201A19</color>
+    <color name="md_theme_dark_onBackground">#EDE0DD</color>
+    <color name="md_theme_dark_surface">#201A19</color>
+    <color name="md_theme_dark_onSurface">#EDE0DD</color>
+    <color name="md_theme_dark_surfaceVariant">#534341</color>
+    <color name="md_theme_dark_onSurfaceVariant">#D8C2BE</color>
+    <color name="md_theme_dark_outline">#A08C89</color>
+    <color name="md_theme_dark_inverseOnSurface">#201A19</color>
+    <color name="md_theme_dark_inverseSurface">#EDE0DD</color>
+    <color name="md_theme_dark_inversePrimary">#C00000</color>
+    <color name="md_theme_dark_shadow">#000000</color>
+    <color name="md_theme_dark_surfaceTint">#FFB4A8</color>
+    <color name="md_theme_dark_outlineVariant">#534341</color>
+    <color name="md_theme_dark_scrim">#000000</color>
+
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
-    <color name="cvs_red">#FFCC0000</color>
-    <color name="cvs_red_dark">#FF930000</color>
-    <color name="slate_blue">#FF455A64</color>
-    <color name="success_green">#FF118738</color>
-    <color name="error_red">#FFDB3321</color>
     <color name="focus_indicator_outline">@color/black</color>
 </resources>

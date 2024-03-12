@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -35,7 +35,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ErrorRed
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.SuccessGreen
 
 @Composable
@@ -140,7 +139,7 @@ fun ProblematicExampleHeading(text: String, modifier: Modifier = Modifier) {
         modifier = modifier
             .padding(top = 8.dp),
         painter = painterResource(id = R.drawable.ic_circle_filled),
-        tint = ErrorRed
+        tint = MaterialTheme.colorScheme.error
     )
 }
 
@@ -160,7 +159,7 @@ fun BadExampleHeading(text: String, modifier: Modifier = Modifier) {
         modifier = modifier
             .padding(top = 8.dp),
         painter = painterResource(id = R.drawable.ic_close_fill),
-        tint = ErrorRed
+        tint = MaterialTheme.colorScheme.error
     )
 }
 

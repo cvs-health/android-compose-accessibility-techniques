@@ -46,7 +46,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.CvsRed
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.SuccessGreen
 
 /**
@@ -211,7 +210,7 @@ fun SuccessAccordionHeading(
         initiallyExpanded = initiallyExpanded,
         headingIconPainter = painterResource(id = R.drawable.ic_check_fill),
         headingIconTint = SuccessGreen,
-        expanderIconTint = CvsRed
+        expanderIconTint = MaterialTheme.colorScheme.primary
     ) {
         content()
     }
@@ -245,7 +244,7 @@ fun BasicAccordionHeading(
         modifier = modifier
             .padding(top = 8.dp),
         initiallyExpanded = initiallyExpanded,
-        expanderIconTint = CvsRed
+        expanderIconTint = MaterialTheme.colorScheme.primary
     ) {
         content()
     }

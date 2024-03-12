@@ -13,8 +13,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
  */
-package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.screen_and_pane_titles
+package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dark_and_light_themes
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -32,18 +33,22 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
-const val screenAndPaneTitlesHeadingTestTag = "screenAndPaneTitlesHeading"
+const val darkAndLightThemesHeadingTestTag = "darkAndLightThemesHeading"
 
 /**
- * ScreenAndPaneTitlesScreen -- describes screen and pane title techniques and how to observe them.
- * Actual screen title techniques are found in GenericScaffold code.
+ * DarkAndLightThemesScreen -- describes Dark and Light Theme support techniques and how to observe
+ * them. Actual theme color techniques are found in Color.kt, Theme.kt, and MainActivity.kt. (Also
+ * see the special coding required for custom Indication classes in CustomFocusIndicators.kt and
+ * KeyboardFocusIndicators.kt.)
+ *
+ * Note also the techniques of setting uiMode to control theme in Previews that are shown below.
  */
 @Composable
-fun ScreenAndPaneTitlesScreen(
+fun DarkAndLightThemesScreen(
     onBackPressed: () -> Unit
 ) {
     GenericScaffold(
-        title = stringResource(id = R.string.screen_and_pane_titles_title),
+        title = stringResource(id = R.string.dark_theme_title),
         onBackPressed = onBackPressed
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
@@ -54,21 +59,51 @@ fun ScreenAndPaneTitlesScreen(
                 .fillMaxWidth()
         ) {
             SimpleHeading(
-                text = stringResource(id = R.string.screen_and_pane_titles_heading),
-                modifier = Modifier.testTag(screenAndPaneTitlesHeadingTestTag)
+                text = stringResource(id = R.string.dark_theme_heading),
+                modifier = Modifier.testTag(darkAndLightThemesHeadingTestTag)
             )
-            BodyText(textId = R.string.screen_and_pane_titles_description_1)
-            BodyText(textId = R.string.screen_and_pane_titles_description_2)
-            BodyText(textId = R.string.screen_and_pane_titles_description_3)
+            BodyText(textId = R.string.dark_theme_description_1)
+            BodyText(textId = R.string.dark_theme_description_2)
+            BodyText(textId = R.string.dark_theme_description_3)
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ScreenAndPaneTitlesScreenPreview() {
+fun DarkThemeScreenDefaultThemePreview() {
     ComposeAccessibilityTechniquesTheme() {
-        ScreenAndPaneTitlesScreen(
+        DarkAndLightThemesScreen(
+            onBackPressed = {}
+        )
+    }
+}
+
+// Key technique: Set @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES) to preview a composable in
+// Dark Theme without regard to system settings.
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+fun DarkThemeScreenDarkThemePreview() {
+    ComposeAccessibilityTechniquesTheme() {
+        DarkAndLightThemesScreen(
+            onBackPressed = {}
+        )
+    }
+}
+
+// Key technique: Set @Preview(uiMode = Configuration.UI_MODE_NIGHT_NO) to preview a composable in
+// Light Theme without regard to system settings.
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
+@Composable
+fun DarkThemeScreenLightThemePreview() {
+    ComposeAccessibilityTechniquesTheme() {
+        DarkAndLightThemesScreen(
             onBackPressed = {}
         )
     }

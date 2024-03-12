@@ -51,7 +51,6 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusIndication
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleCardFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.CvsRed
 
 const val customFocusIndicatorsHeadingTestTag = "customFocusIndicatorsHeading"
 const val customFocusIndicatorsExample1HeadingTestTag = "customFocusIndicatorsExample1Heading"
@@ -217,7 +216,7 @@ private fun ProblematicExample3() {
             contentDescription = stringResource(
                 id = R.string.custom_focus_indicators_example_3_button_description
             ),
-            tint = CvsRed
+            tint = MaterialTheme.colorScheme.primary,
         )
     }
 
@@ -261,7 +260,7 @@ private fun GoodExample4() {
             contentDescription = stringResource(
                 id = R.string.custom_focus_indicators_example_4_button_description
             ),
-            tint = CvsRed
+            tint = MaterialTheme.colorScheme.primary,
         )
     }
 
@@ -403,10 +402,13 @@ private fun GoodExample7() {
             .padding(top = 8.dp)
             // Key technique: Use Modifier.indication() to associate the interactionSource and an
             // additional indication factory class instance. OutlinedCard internals will still apply
-            // the default ripple indication.
+            // the default ripple indication. Since Indication instances do not have access to
+            // Compose theme colors, the appropriate Dark or Light theme color must be passed in.
             .indication(
                 interactionSource = interactionSource,
-                indication = VisibleFocusIndication()
+                indication = VisibleFocusIndication(
+                    themedIndicationColor = MaterialTheme.colorScheme.primary
+                )
             ),
         // Key technique: Provide a common interactionSource to both clickable Card and indication.
         interactionSource = interactionSource

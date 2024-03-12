@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
@@ -57,7 +58,6 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderIconButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleCardFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.CvsRed
 
 const val customAccessibilityActionsHeadingTestTag = "customAccessibilityActionsHeading"
 const val customAccessibilityActionsExample1CardTestTag = "customAccessibilityActionsExample1Card"
@@ -430,7 +430,7 @@ private fun LikeButton(
             contentDescription = stringResource(
                 id = R.string.custom_accessibility_actions_example_like_button
             ),
-            tint = CvsRed
+            tint = MaterialTheme.colorScheme.primary
         )
     }
 }
@@ -453,7 +453,7 @@ private fun ShareButton(
             contentDescription = stringResource(
                 id = R.string.custom_accessibility_actions_example_share_button
             ),
-            tint = CvsRed
+            tint = MaterialTheme.colorScheme.primary
         )
     }
 }
@@ -476,7 +476,7 @@ private fun ReportButton(
             contentDescription = stringResource(
                 id = R.string.custom_accessibility_actions_example_report_button
             ),
-            tint = CvsRed
+            tint = MaterialTheme.colorScheme.primary
         )
     }
 }

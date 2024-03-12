@@ -53,7 +53,6 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.CvsRed
 
 /**
  * visibleFocusBorder - a Modifier extension that applies a highly-visible custom keyboard focus
@@ -307,37 +306,50 @@ fun VisibleFocusBorderIconButton(
  * Modifier.indication().
  *
  * [Indication]s provide low-level drawing control to indicate state, so they have a lot of power
- * and flexibility, but at the cost of considerable complexity. For simple use cases (like this
- * one), prefer applying state-dependant border or background properties where possible.
+ * and flexibility, but at the cost of considerable complexity. They also cannot directly access
+ * Material Theme information, so the appropriate Dark or Light theme color much be passed in from
+ * the calling site.
+ *
+ * For simple use cases (like this one), prefer applying state-dependant border or background
+ * properties where possible.
+ *
+ * @param themedIndicationColor Theme-based color used to draw this [Indication]
  */
-class VisibleFocusIndication : Indication {
+class VisibleFocusIndication(
+    val themedIndicationColor: Color
+) : Indication {
     @Composable
     override fun rememberUpdatedInstance(interactionSource: InteractionSource): IndicationInstance {
         // Key technique: collect the focus start and end Interactions on this composable's
         // InteractionSource as a State<Boolean> holding the current focus state value.
         val isFocusedState = interactionSource.collectIsFocusedAsState()
         return remember(interactionSource) {
+            // Key technique: Pass the given theme-based color into the IndicationInstance.
             // Key technique: Pass the collected focus State holder (not it's current state value!)
             // into the IndicationInstance that will perform the focus-state-based drawing. That way
             // the IndicationInstance can retrieve the current focus state at time of drawing.
-            VisibleFocusIndicationInstance(isFocusedState)
+            VisibleFocusIndicationInstance(themedIndicationColor, isFocusedState)
         }
     }
 }
 
 /**
  * VisibleFocusIndicationInstance performs state-based rendering of a composable. Specifically, it
- * draws a red rounded rectangle over a focused composable.
+ * draws a rounded rectangle over a focused composable using a theme-appropriate color.
  *
+ * @param themedIndicationColor Theme-based color used to draw the focus indicator
  * @param isFocusedState a State holder indicating if this composable is focused or not
  */
-private class VisibleFocusIndicationInstance(isFocusedState: State<Boolean>) : IndicationInstance {
+private class VisibleFocusIndicationInstance(
+    val themedIndicationColor: Color,
+    isFocusedState: State<Boolean>
+) : IndicationInstance {
     private val isFocused by isFocusedState
     override fun ContentDrawScope.drawIndication() {
         drawContent()
         if (isFocused) {
             drawRoundRect(
-                color = CvsRed,
+                color = themedIndicationColor,
                 size = size,
                 cornerRadius = CornerRadius(12.dp.toPx(), 12.dp.toPx()),
                 style = Stroke(width = 2.dp.toPx()),

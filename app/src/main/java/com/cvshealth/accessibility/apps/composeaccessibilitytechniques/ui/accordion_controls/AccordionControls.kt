@@ -49,8 +49,6 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SuccessAccordionHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.CvsRed
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ErrorRed
 
 const val accordionHeadingTestTag = "accordionHeading"
 const val accordionExample1TestTag = "accordionExample1Wrapper"
@@ -144,8 +142,8 @@ private fun FauxAccordionHeading(
     content: @Composable () -> Unit
 ) {
     val headingIconPainter = painterResource(id = R.drawable.ic_close_fill)
-    val headingIconTint = ErrorRed
-    val expanderIconTint = CvsRed
+    val headingIconTint = MaterialTheme.colorScheme.error
+    val expanderIconTint = MaterialTheme.colorScheme.primary
 
     val (isExpanded, setIsExpanded) = rememberSaveable { mutableStateOf(false) }
     Column(

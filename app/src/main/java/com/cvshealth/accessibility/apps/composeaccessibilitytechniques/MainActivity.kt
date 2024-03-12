@@ -42,6 +42,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.conten
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_accessibility_actions.CustomAccessibilityActionsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_focus_indicators.CustomFocusIndicatorsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_state_descriptions.CustomStateDescriptionsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dark_and_light_themes.DarkAndLightThemesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.DropdownMenusScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.ExposedDropdownMenusScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.heading_semantics.HeadingSemanticsScreen
@@ -75,7 +76,9 @@ class MainActivity : ComponentActivity() {
             // Key adaptive layout technique: Calculate the appropriate WindowSizeClass and pass it
             // down to appropriate child composable functions. (Note the required OptIn annotation.)
             val windowSizeClass = calculateWindowSizeClass(this)
-            ComposeAccessibilityTechniquesTheme() {
+
+            // Key theming technique: Wrap all app content in the app's theme.
+            ComposeAccessibilityTechniquesTheme {
                 val navController = rememberNavController()
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -126,6 +129,9 @@ fun ComposeAccessibilityTechniquesNavHost(
         }
         composable(route = ComposeAccessibilityTechniquesRoute.AdaptiveLayouts.route) {
             AdaptiveLayoutsScreen(onBackPressed = popBackStack, windowSizeClass = windowSizeClass)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.DarkAndLightThemes.route) {
+            DarkAndLightThemesScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.ScreenAndPaneTitles.route) {
             ScreenAndPaneTitlesScreen(onBackPressed = popBackStack)

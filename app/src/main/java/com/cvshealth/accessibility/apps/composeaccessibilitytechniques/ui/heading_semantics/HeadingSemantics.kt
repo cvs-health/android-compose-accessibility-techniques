@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -44,7 +44,6 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ErrorRed
 
 const val headingSemanticsHeadingTestTag = "headingSemanticsHeading"
 const val headingSemanticsLargeTextFauxHeading = "headingSemanticsLargeTextFauxHeading"
@@ -112,7 +111,7 @@ private fun LargeTextFauxHeading(
             modifier = Modifier
                 .defaultMinSize(24.dp, minHeight = 24.dp)
                 .align(Alignment.CenterVertically),
-            tint = ErrorRed
+            tint = MaterialTheme.colorScheme.error
         )
         Text(text,
             style = MaterialTheme.typography.headlineSmall,
@@ -146,7 +145,7 @@ private fun ContentDescriptionFauxHeading(
             modifier = Modifier
                 .defaultMinSize(24.dp, minHeight = 24.dp)
                 .align(Alignment.CenterVertically),
-            tint = ErrorRed
+            tint = MaterialTheme.colorScheme.error
         )
         Text(text,
             style = MaterialTheme.typography.headlineSmall,

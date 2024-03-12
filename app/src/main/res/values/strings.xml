@@ -20,6 +20,7 @@
     <string name="collapse_button_description">Collapse</string>
     <string name="expand_button_description">Expand</string>
     <string name="standalone_link_on_click_label">open in browser</string>
+    <string name="textfield_clear_button_description">Clear</string>
 
     <!-- HomeScreen -->
     <string name="home_title">Home</string>
@@ -181,7 +182,7 @@
     <string name="list_semantics_lazyrow_6">LazyRow 6</string>
     <string name="list_semantics_after_list_3">Text after a LazyRow list.</string>
 
-    <!-- Orientation and screen size-based layouts -->
+    <!-- Adaptive layouts -->
     <string name="adaptive_layouts_title">Adaptive layouts</string>
     <string name="adaptive_layouts_heading">Screen layout should adapt to screen size</string>
     <string name="adaptive_layouts_description_1">All screens are required to reorient in response to device orientation changes. If a layout change should result, this can be done based on either device orientation or on available display space. Layouts that adapt to the available display space are strongly preferred.</string>
@@ -196,6 +197,13 @@
     <string name="adaptive_layouts_pane_2_description">This is the content of the second card.</string>
     <string name="adaptive_layouts_pane_3_title">Card 3</string>
     <string name="adaptive_layouts_pane_3_description">This is the content of the third card.</string>
+
+    <!-- Dark and light themes -->
+    <string name="dark_theme_title">Dark and Light themes</string>
+    <string name="dark_theme_heading">Support both Dark and Light themes</string>
+    <string name="dark_theme_description_1">Different users and situations require different screen display colors. Some users are light-sensitive and require Dark Theme at all times; others require Light Theme to see text clearly. Similarly, many users may prefer Dark Theme in a dark setting and Light Theme in a bright setting. Supporting both themes with sufficiently contrasting colors is important.</string>
+    <string name="dark_theme_description_2">Color values are set in Color.kt. The application\'s theme is defined in Theme.kt and is conditional on the system dark theme setting. This theme is used to wrap all displays in MainActivity.kt.</string>
+    <string name="dark_theme_description_3">In the device Settings app, select Display, then toggle the Dark theme switch. Return to this app and note the color changes.</string>
 
     <!-- Screen and pane titles -->
     <string name="screen_and_pane_titles_title">Screen and pane titles</string>

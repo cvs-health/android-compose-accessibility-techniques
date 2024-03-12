@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ import android.view.KeyEvent.KEYCODE_TAB
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -51,8 +53,10 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalAutofill
 import androidx.compose.ui.platform.LocalAutofillTree
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -113,7 +117,6 @@ fun Modifier.nextOnTabAndHandleEnter(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AccessibleTextField(
     value: String,
@@ -166,7 +169,6 @@ fun AccessibleTextField(
     colors
 )
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AccessibleOutlinedTextField(
     value: String,
@@ -219,7 +221,7 @@ fun AccessibleOutlinedTextField(
     colors
 )
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun AutofilledOutlinedTextField(
     value: String,
@@ -296,3 +298,77 @@ fun AutofilledOutlinedTextField(
         colors
     )
 }
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+fun AutofilledClearableOutlinedTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    autofillType: AutofillType,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    readOnly: Boolean = false,
+    textStyle: TextStyle = LocalTextStyle.current,
+    label: @Composable (() -> Unit)? = null,
+    placeholder: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    prefix: @Composable (() -> Unit)? = null,
+    suffix: @Composable (() -> Unit)? = null,
+    supportingText: @Composable (() -> Unit)? = null,
+    isError: Boolean = false,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    singleLine: Boolean = false,
+    maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
+    minLines: Int = 1,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    shape: Shape = OutlinedTextFieldDefaults.shape,
+    colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
+    onEnterHandler: (() -> Unit)? = null
+) =  AutofilledOutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        autofillType = autofillType,
+        modifier = modifier,
+        enabled = enabled,
+        readOnly = readOnly,
+        textStyle = textStyle,
+        label = label,
+        placeholder = placeholder,
+        leadingIcon = leadingIcon,
+        trailingIcon = {
+            if (trailingIcon != null)
+                trailingIcon()
+            else {
+                // Key technique: If using trailingIcon as an active control, assume it has a highly
+                // visible focus indicator.
+                VisibleFocusBorderIconButton(
+                    onClick = {
+                        // Clear the text value.
+                        onValueChange("")
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Clear,
+                        contentDescription = stringResource(id = R.string.textfield_clear_button_description),
+                    )
+                }
+            }
+        },
+        prefix = prefix,
+        suffix = suffix,
+        supportingText = supportingText,
+        isError = isError,
+        visualTransformation = visualTransformation,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        singleLine = singleLine,
+        maxLines = maxLines,
+        minLines = minLines,
+        interactionSource = interactionSource,
+        shape = shape,
+        colors = colors,
+        onEnterHandler = onEnterHandler
+    )

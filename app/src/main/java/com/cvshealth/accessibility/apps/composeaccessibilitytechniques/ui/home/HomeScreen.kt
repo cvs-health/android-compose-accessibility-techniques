@@ -50,6 +50,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BasicAccordionHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyTextNoPadding
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleCardFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 
@@ -121,6 +122,11 @@ fun HomeScreen(
                 NavigationCard(
                     label = stringResource(R.string.adaptive_layouts_title),
                     route = ComposeAccessibilityTechniquesRoute.AdaptiveLayouts,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
+                    label = stringResource(R.string.dark_theme_title),
+                    route = ComposeAccessibilityTechniquesRoute.DarkAndLightThemes,
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
@@ -287,6 +293,7 @@ private fun NavigationCard(
         modifier = modifier
             .fillMaxWidth()
             .padding(top = 8.dp, start = 12.dp)
+            .visibleCardFocusBorder()
             .clickable {
                 onNavigationButtonClicked(route)
             },

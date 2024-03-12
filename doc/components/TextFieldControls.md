@@ -12,14 +12,16 @@ The required techniques are:
 4. Set the appropriate soft keyboard actions using the `TextField` `keyboardOptions` `imeAction` property and the `TextField` `keyboardActions` property. See [Keyboard Actions](../interactions/KeyboardActions.md) for details.
 5. Apply autofill with appropriate `AutofillType`(s) to the `TextField`, if the data to be entered is supported by autofill. See [Autofill Controls](../components/AutofillControls.md) for details.
 
-In addition, appropriate error handling must be added to any `TextField` in support of WCAG 2 [Success Criterion 3.3.1 Error Identification](https://www.w3.org/TR/WCAG21/#error-identification). Error handling techniques include:
+Appropriate error handling must be added to any `TextField` in support of WCAG 2 [Success Criterion 3.3.1 Error Identification](https://www.w3.org/TR/WCAG21/#error-identification). Error handling techniques include:
 
 * Setting the `TextField` `isError` property when the field's value is in error.
 * Declaring a semantic error text using the `Modifier.semantics` `error()` property.
 * Displaying a visual error text using the Material Design 3 `TextField` `supportingText` property (or a secondary `Text` field for Material Design 2 apps). (This error text may need to be hidden from accessibility services so it does not duplicate the announcement made by error semantics.)
 * Displaying a visual error icon using the `TextField` `leadingIcon` or `trailingIcon` property.
 
-Finally, brief instructions can be presented using the Material Design 3 `TextField` `supportingText` property (or in a separate, preceding `Text` field for Material Design 2 apps).
+Brief instructions can be presented using the Material Design 3 `TextField` `supportingText` property (or in a separate, preceding `Text` field for Material Design 2 apps).
+
+If a `leadingIcon` or `trailingIcon` is used an active control, for example to clear the `TextField`'s value or to perform a search, assure that this icon receives a sufficiently visible keyboard focus indicator. (Not shown below.)
 
 ## Keyboard Trap Remediation
 The following `Modifier` extension function encapsulates all of the keyboard trap remediations:

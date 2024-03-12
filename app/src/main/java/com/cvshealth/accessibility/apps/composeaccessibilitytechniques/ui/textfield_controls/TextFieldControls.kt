@@ -42,7 +42,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.AutofilledOutlinedTextField
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.AutofilledClearableOutlinedTextField
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
@@ -111,7 +111,7 @@ private fun GoodExample1() {
 
     // Key techniques 2 and 5a: Apply fixes for keyboard Tab handling and Autofill; see
     // AccessibleTextFields.kt for details.
-    AutofilledOutlinedTextField(
+    AutofilledClearableOutlinedTextField(
         value = name,
         onValueChange = { newName ->
             // Note: Clear any error message as soon as the field has a value. Set the error

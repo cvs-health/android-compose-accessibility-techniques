@@ -63,11 +63,10 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ProblematicExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SnackbarLauncher
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderIconButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 const val dropdownMenusHeadingTestTag = "dropdownMenusHeading"
 const val dropdownMenusExample1HeadingTestTag = "dropdownMenusExample1Heading"
@@ -89,12 +88,12 @@ fun DropdownMenusScreen(
     onBackPressed: () -> Unit
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
-    val coroutineScope = rememberCoroutineScope()
+    val snackbarLauncher = SnackbarLauncher(rememberCoroutineScope(), snackbarHostState)
 
     GenericScaffold(
         title = stringResource(id = R.string.dropdown_menus_title),
         onBackPressed = onBackPressed,
-        snackbarHost = { SnackbarHost(snackbarHostState) },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
 
@@ -110,8 +109,8 @@ fun DropdownMenusScreen(
             BodyText(textId = R.string.dropdown_menus_description_1)
             BodyText(textId = R.string.dropdown_menus_description_2)
 
-            ProblematicExample1(coroutineScope, snackbarHostState)
-            GoodExample2(coroutineScope, snackbarHostState)
+            ProblematicExample1(snackbarLauncher)
+            GoodExample2(snackbarLauncher)
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -128,8 +127,7 @@ fun PreviewWithScaffold() {
 
 @Composable
 private fun ProblematicExample1(
-    coroutineScope: CoroutineScope,
-    snackbarHostState: SnackbarHostState
+    snackbarLauncher: SnackbarLauncher?
 ) {
     // Problematic example 1: ListItem with stock DropdownMenu
     // The challenge is closing the menu without making a selection.
@@ -182,11 +180,7 @@ private fun ProblematicExample1(
                         },
                         onClick = {
                             isMenuExpanded = false
-                            showSnackbarMessage(
-                                coroutineScope = coroutineScope,
-                                snackbarHostState = snackbarHostState,
-                                message = menuItem1Message
-                            )
+                            snackbarLauncher?.show(menuItem1Message)
                         },
                         modifier = Modifier.testTag(dropdownMenusExample1MenuItem1TestTag)
                     )
@@ -196,11 +190,7 @@ private fun ProblematicExample1(
                         },
                         onClick = {
                             isMenuExpanded = false
-                            showSnackbarMessage(
-                                coroutineScope = coroutineScope,
-                                snackbarHostState = snackbarHostState,
-                                message = menuItem2Message
-                            )
+                            snackbarLauncher?.show(menuItem2Message)
                         },
                         modifier = Modifier.testTag(dropdownMenusExample1MenuItem2TestTag)
                     )
@@ -217,23 +207,20 @@ private fun ProblematicExample1(
 @Preview(showBackground = true)
 @Composable
 fun ProblematicExample1Preview() {
-    val snackbarHostState = remember { SnackbarHostState() }
-    val coroutineScope = rememberCoroutineScope()
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            ProblematicExample1(coroutineScope, snackbarHostState)
+            ProblematicExample1(snackbarLauncher = null)
         }
     }
 }
 
 @Composable
 private fun GoodExample2(
-    coroutineScope: CoroutineScope,
-    snackbarHostState: SnackbarHostState
+    snackbarLauncher: SnackbarLauncher?
 ) {
     // Good example 2: ListItem with accessible DropdownMenu
     // To close the menu, use the Close X menu item or the Escape key.
@@ -299,9 +286,7 @@ private fun GoodExample2(
                         .onKeyEvent { keyEvent ->
                             if (keyEvent.nativeKeyEvent.keyCode == KeyEvent.KEYCODE_ESCAPE) {
                                 isMenuExpanded = false
-                                showSnackbarMessage(
-                                    coroutineScope = coroutineScope,
-                                    snackbarHostState = snackbarHostState,
+                                snackbarLauncher?.show(
                                     message = menuCloseMessage,
                                     withDismissAction = false,
                                     duration = SnackbarDuration.Short
@@ -319,11 +304,7 @@ private fun GoodExample2(
                         },
                         onClick = {
                             isMenuExpanded = false
-                            showSnackbarMessage(
-                                coroutineScope = coroutineScope,
-                                snackbarHostState = snackbarHostState,
-                                message = menuItem1Message
-                            )
+                            snackbarLauncher?.show(menuItem1Message)
                         },
                         modifier = Modifier.testTag(dropdownMenusExample2MenuItem1TestTag)
                     )
@@ -334,11 +315,7 @@ private fun GoodExample2(
                         },
                         onClick = {
                             isMenuExpanded = false
-                            showSnackbarMessage(
-                                coroutineScope = coroutineScope,
-                                snackbarHostState = snackbarHostState,
-                                message = menuItem2Message
-                            )
+                            snackbarLauncher?.show(menuItem2Message)
                         },
                         modifier = Modifier.testTag(dropdownMenusExample2MenuItem2TestTag)
                     )
@@ -354,9 +331,7 @@ private fun GoodExample2(
                         },
                         onClick = {
                             isMenuExpanded = false
-                            showSnackbarMessage(
-                                coroutineScope = coroutineScope,
-                                snackbarHostState = snackbarHostState,
+                            snackbarLauncher?.show(
                                 message = menuCloseMessage,
                                 withDismissAction = false,
                                 duration = SnackbarDuration.Short
@@ -390,31 +365,13 @@ private fun GoodExample2(
 @Preview(showBackground = true)
 @Composable
 fun GoodExample2Preview() {
-    val snackbarHostState = remember { SnackbarHostState() }
-    val coroutineScope = rememberCoroutineScope()
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-           GoodExample2(coroutineScope, snackbarHostState)
+           GoodExample2(snackbarLauncher = null)
         }
-    }
-}
-
-fun showSnackbarMessage(
-    coroutineScope: CoroutineScope,
-    snackbarHostState: SnackbarHostState,
-    message: String,
-    withDismissAction: Boolean = true,
-    duration: SnackbarDuration = SnackbarDuration.Long
-) {
-    coroutineScope.launch {
-        snackbarHostState.showSnackbar(
-            message = message,
-            withDismissAction = withDismissAction,
-            duration = duration
-        )
     }
 }

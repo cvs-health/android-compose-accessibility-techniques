@@ -67,8 +67,10 @@ fun Modifier.nextOnTabAndHandleEnter(
 ): Modifier {
     return this.composed {
         val focusManager = LocalFocusManager.current
-        // Key technique 2a: Remember the focus state.
+        // Key technique 2a: Remember the focus state. hasFocus tracks focus on this composable
+        // and all its children; isFocus tracks focus on this composable itself, not its children.
         var hasFocus by remember { mutableStateOf(false) }
+        var isFocused by remember { mutableStateOf(false) }
         val scope = rememberCoroutineScope()
         this@composed
             // Key techniques 1 & 2b: Debounce focus changes and track the focus state.
@@ -76,6 +78,7 @@ fun Modifier.nextOnTabAndHandleEnter(
                 scope.launch {
                     delay(FOCUS_DEBOUNCE_TIME)
                     hasFocus = focusState.hasFocus
+                    isFocused = focusState.isFocused
                 }
             }
             // Key technique 3: If focus remains on this control, handle Tab, Shift+Tab, Enter, and
@@ -103,7 +106,12 @@ fun Modifier.nextOnTabAndHandleEnter(
                     }
                     true
                 } else if (
-                    enterCallback != null
+                    // Key technique 4: Use isFocused here, so that if focus is on a child
+                    // composable, such as a trailing icon button, the child's own keyboard handling
+                    // will not get overridden. (Note that the keyboard navigation handling above
+                    // does apply to all child composables.)
+                    isFocused
+                    && enterCallback != null
                     && (keyEvent.key == Key.Enter || keyEvent.key == Key.NumPadEnter)
                 ) {
                     if (keyEvent.nativeKeyEvent.action == ACTION_UP) {

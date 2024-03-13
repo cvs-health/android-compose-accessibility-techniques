@@ -15,7 +15,6 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives
 
-import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
@@ -28,13 +27,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -50,6 +52,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SnackbarLauncher
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderIconButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -96,9 +99,13 @@ const val textAlternativesExample13GroupedDecorativeIconsAndTextTestTag = "textA
 fun TextAlternativesScreen(
     onBackPressed: () -> Unit
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarLauncher = SnackbarLauncher(rememberCoroutineScope(), snackbarHostState)
+
     GenericScaffold(
         title = stringResource(id = R.string.text_alternatives_title),
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
         Column(
@@ -113,9 +120,9 @@ fun TextAlternativesScreen(
             GoodExample3()
             GoodExample4()
             GoodExample5()
-            BadExample6()
-            BadExample7()
-            GoodExample8()
+            BadExample6(snackbarLauncher)
+            BadExample7(snackbarLauncher)
+            GoodExample8(snackbarLauncher)
             BadExample9()
             BadExample10()
             GoodExample11()
@@ -335,17 +342,18 @@ private fun GoodExample5Preview() {
 }
 
 @Composable
-private fun BadExample6() {
+private fun BadExample6(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Bad example 6: A 'Share' icon button with an empty text alternative
     BadExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_6_heading),
         modifier = Modifier.testTag(textAlternativesExample6HeadingTestTag)
     )
-    val context = LocalContext.current
-    val toastText = stringResource(id = R.string.text_alternatives_example_6_message)
+    val popupMessage = stringResource(id = R.string.text_alternatives_example_6_message)
     VisibleFocusBorderIconButton(
         onClick = {
-            Toast.makeText(context, toastText, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(popupMessage)
         },
         modifier = Modifier
             .testTag(textAlternativesExample6IconButtonTestTag)
@@ -363,12 +371,14 @@ private fun BadExample6() {
 @Composable
 private fun BadExample6Preview() {
     PreviewWrapper {
-        BadExample6()
+        BadExample6(snackbarLauncher = null)
     }
 }
 
 @Composable
-private fun BadExample7() {
+private fun BadExample7(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Bad example 7: A 'Share' icon button with a null text alternative
     BadExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_7_heading),
@@ -377,11 +387,10 @@ private fun BadExample7() {
     
     // Note: Do not use Icon(..., contentDescription = null) to mark active (e.g., button)
     // images unless the active composable has text or a contentDescription.
-    val context = LocalContext.current
-    val toastText = stringResource(id = R.string.text_alternatives_example_7_message)
+    val popupMessage = stringResource(id = R.string.text_alternatives_example_7_message)
     VisibleFocusBorderIconButton(
         onClick = {
-            Toast.makeText(context, toastText, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(popupMessage)
         },
         modifier = Modifier
             .testTag(textAlternativesExample7IconButtonTestTag)
@@ -398,12 +407,14 @@ private fun BadExample7() {
 @Composable
 private fun BadExample7Preview() {
     PreviewWrapper {
-        BadExample7()
+        BadExample7(snackbarLauncher = null)
     }
 }
 
 @Composable
-private fun GoodExample8() {
+private fun GoodExample8(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 8: A 'Share' icon button with a text alternative
     GoodExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_8_heading),
@@ -411,11 +422,10 @@ private fun GoodExample8() {
     )
 
     // Key technique: Provide a concise contentDescription for all active images.
-    val context = LocalContext.current
-    val toastText = stringResource(id = R.string.text_alternatives_example_8_message)
+    val popupMessage = stringResource(id = R.string.text_alternatives_example_8_message)
     VisibleFocusBorderIconButton(
         onClick = {
-            Toast.makeText(context, toastText, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(popupMessage)
         },
         modifier = Modifier
             .testTag(textAlternativesExample8IconButtonTestTag)
@@ -432,7 +442,7 @@ private fun GoodExample8() {
 @Composable
 private fun GoodExample8Preview() {
     PreviewWrapper {
-        GoodExample8()
+        GoodExample8(snackbarLauncher = null)
     }
 }
 

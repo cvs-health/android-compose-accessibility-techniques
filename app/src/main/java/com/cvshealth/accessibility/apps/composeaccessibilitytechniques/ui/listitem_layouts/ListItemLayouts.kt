@@ -15,7 +15,6 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts
 
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -29,13 +28,15 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -46,6 +47,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SnackbarLauncher
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -63,9 +65,13 @@ const val listItemLayoutsExample4ListItemTestTag = "listItemLayoutsExample4ListI
 fun ListItemLayoutsScreen(
     onBackPressed: () -> Unit
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarLauncher = SnackbarLauncher(rememberCoroutineScope(), snackbarHostState)
+
     GenericScaffold(
         title = stringResource(id = R.string.listitem_layouts_title),
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
 
@@ -82,7 +88,7 @@ fun ListItemLayoutsScreen(
             BodyText(textId = R.string.listitem_layouts_description_2)
 
             GoodExample1()
-            GoodExample2()
+            GoodExample2(snackbarLauncher)
             GoodExample3()
             GoodExample4()
 
@@ -138,7 +144,9 @@ fun GoodExample1Preview() {
 }
 
 @Composable
-private fun GoodExample2() {
+private fun GoodExample2(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 2: Accessible clickable ListItem layout
     GoodExampleHeading(
         text = stringResource(id = R.string.listitem_layouts_example_2_header),
@@ -148,7 +156,7 @@ private fun GoodExample2() {
     Spacer(modifier = Modifier.height(8.dp))
     HorizontalDivider()
 
-    val context = LocalContext.current
+    val listItemMessage = stringResource(id = R.string.listitem_layouts_example_2_message)
     ListItem(
         headlineContent = {
             Text(stringResource(id = R.string.listitem_layouts_example_2_label))
@@ -159,8 +167,7 @@ private fun GoodExample2() {
             .clickable(
                 role = Role.Button,
             ) {
-                val message = context.getString(R.string.listitem_layouts_example_2_message)
-                Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+                snackbarLauncher?.show(listItemMessage)
             },
         supportingContent = {
             Text(stringResource(id = R.string.listitem_layouts_example_2_label_2))
@@ -179,7 +186,7 @@ fun GoodExample2Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample2()
+            GoodExample2(snackbarLauncher = null)
         }
     }
 }

@@ -16,7 +16,6 @@
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_accessibility_actions
 
 import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,10 +29,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -55,6 +58,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleTitle
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SnackbarLauncher
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderIconButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleCardFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -73,21 +77,19 @@ fun CustomAccessibilityActionsScreen(
 ) {
     val viewModel = viewModel<CustomAccessibilityActionsViewModel>()
     val viewState: CustomActionScreenState by viewModel.customActionScreenState.collectAsStateWithLifecycle()
+    val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarLauncher = SnackbarLauncher(rememberCoroutineScope(), snackbarHostState)
     val context = LocalContext.current
 
-    // Launch Toast(s) for activated buttons. Normally would also change the display state of those
+    // Launch Snackbar(s) for activated buttons. Normally would also change the display state of those
     // buttons in the composables below and/or navigate to prompts for additional information.
     // Instead state is cleared to catch next button activation.
-    //
-    // Note: Toasts are used instead of Snackbars to keep the code simpler and due to accessibility
-    // considerations. While Toasts are worse for accessibility in many ways, currently Compose
-    // Snackbars have a very bad TalkBack experience with regard to focus order, modal state, etc.
     if (viewState.cardStates.any { (_, cardState) -> cardState.actionsActivated.isNotEmpty() }) {
         LaunchedEffect(viewState) {
             viewState.cardStates.forEach { cardId, cardState ->
                 cardState.actionsActivated.forEach { actionType ->
                     val messageEvent = CustomActionMessageEvent(actionType, cardId)
-                    displayMessageEvent(context, messageEvent)
+                    displayMessageEvent(context, snackbarLauncher, messageEvent)
                 }
             }
             viewModel.clearMessageEvents()
@@ -96,7 +98,8 @@ fun CustomAccessibilityActionsScreen(
 
     GenericScaffold(
         title = stringResource(id = R.string.custom_accessibility_actions_title),
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
         Column(
@@ -483,6 +486,7 @@ private fun ReportButton(
 
 private fun displayMessageEvent(
     context: Context,
+    snackbarLauncher: SnackbarLauncher,
     messageEvent: CustomActionMessageEvent
 ) {
     val messageId = when (messageEvent.actionType) {
@@ -492,5 +496,5 @@ private fun displayMessageEvent(
         CustomActionType.Report -> R.string.custom_accessibility_actions_report_event
     }
     val message = context.getString(messageId, messageEvent.cardId)
-    Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    snackbarLauncher.show(message)
 }

@@ -15,7 +15,6 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_grouping
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,9 +26,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
@@ -43,6 +45,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GroupedBadExampleTitle
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GroupedGoodExampleTitle
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SnackbarLauncher
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleCardFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -78,9 +81,13 @@ const val contentGroupingCardExample6CardTestTag = "contentGroupingCardExample6C
 fun ContentGroupingScreen(
     onBackPressed: () -> Unit
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarLauncher = SnackbarLauncher(rememberCoroutineScope(), snackbarHostState)
+
     GenericScaffold(
         title = stringResource(id = R.string.content_grouping_title),
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
         Column(
@@ -116,7 +123,7 @@ fun ContentGroupingScreen(
             )
             BadExample4()
             GoodExample5()
-            GoodExample6()
+            GoodExample6(snackbarLauncher)
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -451,10 +458,11 @@ private fun PreviewGoodExample5() {
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun GoodExample6() {
+private fun GoodExample6(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 6: Another card with grouped content
-    val context = LocalContext.current
-    val toastText = stringResource(
+    val popupMessage = stringResource(
         id = R.string.content_grouping_card3_message
     )
 
@@ -466,7 +474,7 @@ private fun GoodExample6() {
     // mergeDescendants=true semantics.
     OutlinedCard(
         onClick = {
-            Toast.makeText(context, toastText, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(popupMessage)
         },
         modifier = Modifier
             .testTag(contentGroupingCardExample6CardTestTag)
@@ -511,7 +519,7 @@ private fun PreviewGoodExample6() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample6()
+            GoodExample6(snackbarLauncher = null)
         }
     }
 }

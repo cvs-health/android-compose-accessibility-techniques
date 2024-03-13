@@ -107,7 +107,7 @@ fun PopupMessagesScreen(
         title = stringResource(id = R.string.popup_messages_title),
         onBackPressed = onBackPressed,
         // Key technique 1b: For Snackbars, pass a SnackbarHost to the Scaffold.
-        snackbarHost = { SnackbarHost(snackbarHostState) },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
 

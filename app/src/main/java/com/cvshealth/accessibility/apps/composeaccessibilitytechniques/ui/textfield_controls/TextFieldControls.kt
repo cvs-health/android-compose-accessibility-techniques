@@ -15,8 +15,6 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.textfield_controls
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,14 +22,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.AutofillType
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.error
@@ -47,6 +47,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SnackbarLauncher
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -60,9 +61,13 @@ const val textFieldControlsExample1ButtonTestTag = "textFieldControlsExample1But
 fun TextFieldControlsScreen(
     onBackPressed: () -> Unit
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarLauncher = SnackbarLauncher(rememberCoroutineScope(), snackbarHostState)
+
     GenericScaffold(
         title = stringResource(id = R.string.textfield_controls_title),
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
 
@@ -78,7 +83,7 @@ fun TextFieldControlsScreen(
             BodyText(textId = R.string.textfield_controls_description_1)
             BodyText(textId = R.string.textfield_controls_description_2)
 
-            GoodExample1()
+            GoodExample1(snackbarLauncher)
         }
     }
 }
@@ -93,7 +98,9 @@ fun PreviewWithScaffold() {
 
 @Composable
 @OptIn(ExperimentalComposeUiApi::class)
-private fun GoodExample1() {
+private fun GoodExample1(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 1: Accessible required TextField
     // Also, illustrates one approach to required TextField error handling.
     GoodExampleHeading(
@@ -102,10 +109,10 @@ private fun GoodExample1() {
     )
 
     val (name, setName) = remember { mutableStateOf("") }
+    val submitMessage = stringResource(id = R.string.textfield_controls_example_1_message, name)
     // Note: using external error state avoids marking the (initially empty) Name field as in error
     // until a submit occurs. Setting TextField.isError via a boolean expression would be simpler.
     val (isError, setIsError) = remember { mutableStateOf(false) }
-    val context = LocalContext.current
     val shortErrorMessage =
         if (isError) stringResource(id = R.string.textfield_controls_example_1_short_error) else ""
 
@@ -169,19 +176,19 @@ private fun GoodExample1() {
             onDone = {
                 // Key technique 4: Supply an onDone handler that does the same things as
                 // the button onClick handler.
-                onFormSubmit(context, name, setIsError)
+                onFormSubmit(snackbarLauncher, name, submitMessage, setIsError)
             }
         )
     ) {
         // Key technique 2c: To handle the Enter key as Done, supply an onEnterHandler that
         // does the same things as the onDone and button onClick handler. See
         // AccessibleTextFields.kt for how this parameter is added to the TextField.
-        onFormSubmit(context, name, setIsError)
+        onFormSubmit(snackbarLauncher, name, submitMessage, setIsError)
     }
 
     VisibleFocusBorderButton(
         onClick = {
-            onFormSubmit(context, name, setIsError)
+            onFormSubmit(snackbarLauncher, name, submitMessage, setIsError)
         },
         modifier = Modifier.testTag(textFieldControlsExample1ButtonTestTag)
     ) {
@@ -189,12 +196,16 @@ private fun GoodExample1() {
     }
 }
 
-private fun onFormSubmit(context: Context, name: String, setIsError: (Boolean) -> Unit) {
+private fun onFormSubmit(
+    snackbarLauncher: SnackbarLauncher?,
+    name: String,
+    message: String,
+    setIsError: (Boolean) -> Unit
+) {
     // Note: Typically, the ViewModel would be invoked here to validate and submit the form data.
     setIsError(name.isBlank())
     if (name.isNotBlank()) {
-        val message = context.getString(R.string.textfield_controls_example_1_message, name)
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        snackbarLauncher?.show(message)
     }
 }
 
@@ -207,7 +218,7 @@ fun GoodExample1Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample1()
+            GoodExample1(snackbarLauncher = null)
         }
     }
 }

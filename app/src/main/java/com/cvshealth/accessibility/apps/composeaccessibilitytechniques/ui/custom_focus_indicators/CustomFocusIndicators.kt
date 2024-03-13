@@ -15,7 +15,6 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_focus_indicators
 
-import android.widget.Toast
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
@@ -30,11 +29,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -46,6 +47,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ProblematicExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SnackbarLauncher
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderIconButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusIndication
@@ -73,9 +75,13 @@ const val customFocusIndicatorsExample7CardTestTag = "customFocusIndicatorsExamp
 fun CustomFocusIndicatorsScreen(
     onBackPressed: () -> Unit
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarLauncher = SnackbarLauncher(rememberCoroutineScope(), snackbarHostState)
+
     GenericScaffold(
         title = stringResource(id = R.string.custom_focus_indicators_title),
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
 
@@ -92,13 +98,13 @@ fun CustomFocusIndicatorsScreen(
             BodyText(textId = R.string.custom_focus_indicators_description_2)
             BodyText(textId = R.string.custom_focus_indicators_description_3)
 
-            ProblematicExample1()
-            GoodExample2()
-            ProblematicExample3()
-            GoodExample4()
-            ProblematicExample5()
-            GoodExample6()
-            GoodExample7()
+            ProblematicExample1(snackbarLauncher)
+            GoodExample2(snackbarLauncher)
+            ProblematicExample3(snackbarLauncher)
+            GoodExample4(snackbarLauncher)
+            ProblematicExample5(snackbarLauncher)
+            GoodExample6(snackbarLauncher)
+            GoodExample7(snackbarLauncher)
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -114,7 +120,9 @@ private fun PreviewWithScaffold() {
 }
 
 @Composable
-private fun ProblematicExample1() {
+private fun ProblematicExample1(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Problematic example 1: Default button focus indicator
     ProblematicExampleHeading(
         text = stringResource(id = R.string.custom_focus_indicators_example_1_heading),
@@ -123,11 +131,10 @@ private fun ProblematicExample1() {
 
     BodyText(textId = R.string.custom_focus_indicators_example_1_description)
 
-    val context = LocalContext.current
     val buttonMessage = stringResource(id = R.string.custom_focus_indicators_example_1_message)
     Button(
         onClick = {
-            Toast.makeText(context, buttonMessage, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(buttonMessage)
         },
         modifier = Modifier
             .testTag(customFocusIndicatorsExample1ButtonTestTag)
@@ -148,13 +155,15 @@ private fun ProblematicExample1Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            ProblematicExample1()
+            ProblematicExample1(snackbarLauncher = null)
         }
     }
 }
 
 @Composable
-private fun GoodExample2() {
+private fun GoodExample2(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 2: Custom button focus indicator
     GoodExampleHeading(
         text = stringResource(id = R.string.custom_focus_indicators_example_2_heading),
@@ -163,11 +172,10 @@ private fun GoodExample2() {
 
     BodyText(textId = R.string.custom_focus_indicators_example_2_description)
 
-    val context = LocalContext.current
     val buttonMessage = stringResource(id = R.string.custom_focus_indicators_example_2_message)
     VisibleFocusBorderButton(
         onClick = {
-            Toast.makeText(context, buttonMessage, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(buttonMessage)
         },
         modifier = Modifier
             .testTag(customFocusIndicatorsExample2ButtonTestTag)
@@ -188,24 +196,25 @@ private fun GoodExample2Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample2()
+            GoodExample2(snackbarLauncher = null)
         }
     }
 }
 
 @Composable
-private fun ProblematicExample3() {
+private fun ProblematicExample3(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Problematic example 3: Default icon button focus indicator
     ProblematicExampleHeading(
         text = stringResource(id = R.string.custom_focus_indicators_example_3_heading),
         modifier = Modifier.testTag(customFocusIndicatorsExample3HeadingTestTag)
     )
 
-    val context = LocalContext.current
     val buttonMessage = stringResource(id = R.string.custom_focus_indicators_example_3_message)
     IconButton(
         onClick = {
-            Toast.makeText(context, buttonMessage, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(buttonMessage)
         },
         modifier = Modifier
             .testTag(customFocusIndicatorsExample3ButtonTestTag)
@@ -232,24 +241,25 @@ private fun ProblematicExample3Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            ProblematicExample3()
+            ProblematicExample3(snackbarLauncher = null)
         }
     }
 }
 
 @Composable
-private fun GoodExample4() {
+private fun GoodExample4(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 4: Custom icon button focus indicator
     GoodExampleHeading(
         text = stringResource(id = R.string.custom_focus_indicators_example_4_heading),
         modifier = Modifier.testTag(customFocusIndicatorsExample4HeadingTestTag)
     )
 
-    val context = LocalContext.current
     val buttonMessage = stringResource(id = R.string.custom_focus_indicators_example_4_message)
     VisibleFocusBorderIconButton(
         onClick = {
-            Toast.makeText(context, buttonMessage, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(buttonMessage)
         },
         modifier = Modifier
             .testTag(customFocusIndicatorsExample4ButtonTestTag)
@@ -276,24 +286,25 @@ private fun GoodExample4Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample4()
+            GoodExample4(snackbarLauncher = null)
         }
     }
 }
 
 @Composable
-private fun ProblematicExample5() {
+private fun ProblematicExample5(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Problematic example 5: Default clickable Card focus indicator
     ProblematicExampleHeading(
         text = stringResource(id = R.string.custom_focus_indicators_example_5_heading),
         modifier = Modifier.testTag(customFocusIndicatorsExample5HeadingTestTag)
     )
 
-    val context = LocalContext.current
     val cardClickMessage = stringResource(id = R.string.custom_focus_indicators_example_5_message)
     OutlinedCard(
         onClick = {
-            Toast.makeText(context, cardClickMessage, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(cardClickMessage)
         },
         modifier = Modifier
             .testTag(customFocusIndicatorsExample5CardTestTag)
@@ -325,24 +336,25 @@ private fun ProblematicExample5Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            ProblematicExample5()
+            ProblematicExample5(snackbarLauncher = null)
         }
     }
 }
 
 @Composable
-private fun GoodExample6() {
+private fun GoodExample6(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 6: Custom clickable Card focus indicator
     GoodExampleHeading(
         text = stringResource(id = R.string.custom_focus_indicators_example_6_heading),
         modifier = Modifier.testTag(customFocusIndicatorsExample6HeadingTestTag)
     )
 
-    val context = LocalContext.current
     val cardClickMessage = stringResource(id = R.string.custom_focus_indicators_example_6_message)
     OutlinedCard(
         onClick = {
-            Toast.makeText(context, cardClickMessage, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(cardClickMessage)
         },
         modifier = Modifier
             .testTag(customFocusIndicatorsExample6CardTestTag)
@@ -375,27 +387,28 @@ private fun GoodExample6Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample6()
+            GoodExample6(snackbarLauncher = null)
         }
     }
 }
 
 @Composable
-private fun GoodExample7() {
+private fun GoodExample7(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 7: Custom Indication focus indicator
     GoodExampleHeading(
         text = stringResource(id = R.string.custom_focus_indicators_example_7_heading),
         modifier = Modifier.testTag(customFocusIndicatorsExample7HeadingTestTag)
     )
 
-    val context = LocalContext.current
     val cardClickMessage = stringResource(id = R.string.custom_focus_indicators_example_7_message)
     // Key technique: Hoist the interactionSource to the parent composable, so it can be shared
     // between all of the properties in this composable function call.
     val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
     OutlinedCard(
         onClick = {
-            Toast.makeText(context, cardClickMessage, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(cardClickMessage)
         },
         modifier = Modifier
             .testTag(customFocusIndicatorsExample7CardTestTag)
@@ -439,7 +452,7 @@ private fun GoodExample7Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample7()
+            GoodExample7(snackbarLauncher = null)
         }
     }
 }

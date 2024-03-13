@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_actions
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,15 +24,17 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.testTag
@@ -51,6 +52,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SnackbarLauncher
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 const val keyboardActionsHeadingTestTag = "keyboardActionsHeading"
@@ -72,9 +74,13 @@ const val keyboardActionsExample6TextFieldTestTag = "keyboardActionsExample6Text
 fun KeyboardActionsScreen(
     onBackPressed: () -> Unit
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarLauncher = SnackbarLauncher(rememberCoroutineScope(), snackbarHostState)
+
     GenericScaffold(
         title = stringResource(id = R.string.keyboard_actions_title),
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
         Column(
@@ -92,10 +98,10 @@ fun KeyboardActionsScreen(
 
             OkExample1()
             GoodExample2()
-            GoodExample3()
-            GoodExample4()
-            GoodExample5()
-            GoodExample6()
+            GoodExample3(snackbarLauncher)
+            GoodExample4(snackbarLauncher)
+            GoodExample5(snackbarLauncher)
+            GoodExample6(snackbarLauncher)
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -209,7 +215,9 @@ private fun GoodExample2Preview() {
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-private fun GoodExample3() {
+private fun GoodExample3(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 3: Keyboard action Done submits the form
     GoodExampleHeading(
         text = stringResource(id = R.string.keyboard_actions_example_3_header),
@@ -218,7 +226,6 @@ private fun GoodExample3() {
 
     val (exampleText, setExampleText) = remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
-    val context = LocalContext.current
     val doneMessage = stringResource(id = R.string.keyboard_actions_example_3_done_message)
 
     AutofilledOutlinedTextField(
@@ -241,7 +248,7 @@ private fun GoodExample3() {
             onDone = {
                 keyboardController?.hide()
                 // Note: Typically, the ViewModel would be invoked here to submit the form data.
-                Toast.makeText(context, doneMessage, Toast.LENGTH_LONG).show()
+                snackbarLauncher?.show(doneMessage)
             }
         )
     )
@@ -256,14 +263,16 @@ private fun GoodExample3Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample3()
+            GoodExample3(snackbarLauncher = null)
         }
     }
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-private fun GoodExample4() {
+private fun GoodExample4(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 4: Keyboard action Send sends a message
     GoodExampleHeading(
         text = stringResource(id = R.string.keyboard_actions_example_4_header),
@@ -272,7 +281,6 @@ private fun GoodExample4() {
 
     val (exampleText, setExampleText) = remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
-    val context = LocalContext.current
     val sendMessage = stringResource(id = R.string.keyboard_actions_example_4_send_message)
 
     AccessibleOutlinedTextField(
@@ -294,7 +302,7 @@ private fun GoodExample4() {
             onSend = {
                 keyboardController?.hide()
                 // Note: Typically, the ViewModel would be invoked here to send the field/form data.
-                Toast.makeText(context, sendMessage, Toast.LENGTH_LONG).show()
+                snackbarLauncher?.show(sendMessage)
             }
         )
     )
@@ -309,14 +317,16 @@ private fun GoodExample4Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample4()
+            GoodExample4(snackbarLauncher = null)
         }
     }
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-private fun GoodExample5() {
+private fun GoodExample5(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 5: Keyboard action Search submits a query
     GoodExampleHeading(
         text = stringResource(id = R.string.keyboard_actions_example_5_header),
@@ -325,7 +335,6 @@ private fun GoodExample5() {
 
     val (exampleText, setExampleText) = remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
-    val context = LocalContext.current
     val searchMessage = stringResource(id = R.string.keyboard_actions_example_5_search_message)
 
     AccessibleOutlinedTextField(
@@ -347,7 +356,7 @@ private fun GoodExample5() {
             onSearch = {
                 keyboardController?.hide()
                 // Note: Typically, the ViewModel would be invoked here to submit the field/form data.
-                Toast.makeText(context, searchMessage, Toast.LENGTH_LONG).show()
+                snackbarLauncher?.show(searchMessage)
             }
         )
     )
@@ -362,14 +371,16 @@ private fun GoodExample5Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample5()
+            GoodExample5(snackbarLauncher = null)
         }
     }
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-private fun GoodExample6() {
+private fun GoodExample6(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 6: Keyboard action Go opens a new view
     // In this case, the Go soft key pops up a message containing a phone number (and would
     // ordinarily dial that number). Other common uses include URL input fields that open a browser.
@@ -380,7 +391,6 @@ private fun GoodExample6() {
 
     val (exampleText, setExampleText) = remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
-    val context = LocalContext.current
     val goMessage = stringResource(id = R.string.keyboard_actions_example_6_go_message, exampleText)
 
     AutofilledOutlinedTextField(
@@ -403,7 +413,7 @@ private fun GoodExample6() {
             onGo = {
                 keyboardController?.hide()
                 // Note: Typically, the ViewModel would be invoked here to submit the field/form data.
-                Toast.makeText(context, goMessage, Toast.LENGTH_LONG).show()
+                snackbarLauncher?.show(goMessage)
             }
         )
     )
@@ -418,7 +428,7 @@ private fun GoodExample6Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample6()
+            GoodExample6(snackbarLauncher = null)
         }
     }
 }

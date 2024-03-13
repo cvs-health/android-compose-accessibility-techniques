@@ -17,7 +17,6 @@ package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.inter
 
 import android.view.KeyEvent
 import android.view.KeyEvent.ACTION_UP
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
@@ -32,15 +31,17 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.onKeyEvent
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
@@ -63,6 +64,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ProblematicExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.RadioButtonGroup
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SnackbarLauncher
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SwitchRow
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -98,9 +100,13 @@ const val interactiveControlLabelsExample12ControlTestTag = "interactiveControlL
 fun InteractiveControlLabelsScreen(
     onBackPressed: () -> Unit
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarLauncher = SnackbarLauncher(rememberCoroutineScope(), snackbarHostState)
+
     GenericScaffold(
         title = stringResource(id = R.string.interactive_control_labels_title),
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
         Column(
@@ -132,7 +138,7 @@ fun InteractiveControlLabelsScreen(
             GoodExample8()
 
             // Button example
-            GoodExample9()
+            GoodExample9(snackbarLauncher)
 
             // Slider examples
             BadExample10()
@@ -432,7 +438,9 @@ fun GoodExample8Preview() {
 }
 
 @Composable
-private fun GoodExample9() {
+private fun GoodExample9(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Good example 9: Button with associated label
     GoodExampleHeading(
         text = stringResource(id = R.string.interactive_control_labels_example_9),
@@ -440,12 +448,11 @@ private fun GoodExample9() {
     )
     Spacer(modifier = Modifier.height(8.dp))
     // Key Technique: Button() composable content is its programmatically-associated label
-    val context = LocalContext.current
     val buttonMessage =
         stringResource(id = R.string.interactive_control_labels_associated_button_message)
     VisibleFocusBorderButton(
         onClick = {
-            Toast.makeText(context, buttonMessage, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(buttonMessage)
         },
         modifier = Modifier
             .testTag(interactiveControlLabelsExample9ControlTestTag)
@@ -465,7 +472,7 @@ fun GoodExample9Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         )  {
-            GoodExample9()
+            GoodExample9(snackbarLauncher = null)
         }
     }
 }

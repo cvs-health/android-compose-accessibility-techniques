@@ -15,7 +15,6 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_focus_order
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,16 +23,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.isTraversalGroup
@@ -50,6 +51,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SnackbarLauncher
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -81,9 +83,13 @@ const val keyboardFocusOrderExample4Button2TestTag = "keyboardFocusOrderExample4
 fun KeyboardFocusOrderScreen(
     onBackPressed: () -> Unit
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarLauncher = SnackbarLauncher(rememberCoroutineScope(), snackbarHostState)
+
     GenericScaffold(
         title = stringResource(id = R.string.keyboard_focus_order_title),
-        onBackPressed = onBackPressed
+        onBackPressed = onBackPressed,
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
 
@@ -103,7 +109,7 @@ fun KeyboardFocusOrderScreen(
             BadExample1()
             OkExample2()
             GoodExample3()
-            BadExample4()
+            BadExample4(snackbarLauncher)
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -455,7 +461,9 @@ fun GoodExample3Preview() {
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-private fun BadExample4() {
+private fun BadExample4(
+    snackbarLauncher: SnackbarLauncher?
+) {
     // Bad example 4: A keyboard focus trap
     BadExampleHeading(
         text = stringResource(id = R.string.keyboard_focus_order_example_4_heading),
@@ -469,11 +477,10 @@ private fun BadExample4() {
     // Key technique: Create FocusRequester references for all relevant controls.
     val (button1, button2) = remember { FocusRequester.createRefs() }
 
-    val context = LocalContext.current
     val button1Message = stringResource(id = R.string.keyboard_focus_order_example_4_buttton_1_message)
     VisibleFocusBorderButton(
         onClick = {
-            Toast.makeText(context, button1Message, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(button1Message)
         },
         modifier = Modifier
             .testTag(keyboardFocusOrderExample4Button1TestTag)
@@ -493,7 +500,7 @@ private fun BadExample4() {
     val button2Message = stringResource(id = R.string.keyboard_focus_order_example_4_buttton_2_message)
     VisibleFocusBorderButton(
         onClick = {
-            Toast.makeText(context, button2Message, Toast.LENGTH_LONG).show()
+            snackbarLauncher?.show(button2Message)
         },
         modifier = Modifier
             .testTag(keyboardFocusOrderExample4Button2TestTag)
@@ -513,7 +520,7 @@ fun BadExample4Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            BadExample4()
+            BadExample4(snackbarLauncher = null)
         }
     }
 }

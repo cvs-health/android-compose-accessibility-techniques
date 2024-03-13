@@ -17,8 +17,8 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Heading semantics](doc/content/HeadingSemantics.md)
     - [x] [List semantics](doc/content/ListSemantics.md)
     - [x] [Adaptive layouts](doc/content/AdaptiveLayouts.md)
+    - [x] [Dark and Light themes](doc/content/DarkAndLightThemes.md)
     - [x] [Screen and pane titles](doc/content/ScreenAndPaneTitles.md)
-    - [ ] Dark theme
 - Interactive Behaviors
     - [x] [Input field labels](doc/interactions/InteractiveControlLabels.md)
     - [ ] Minimum touch target size

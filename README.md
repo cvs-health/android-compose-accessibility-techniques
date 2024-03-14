@@ -55,6 +55,11 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
 - Other
     - [x] [Compose Semantics automated testing](doc/AutomatedComposeAccessibilityTesting.md)
 
+## Contributor Guide
+
+1. Before contributing to this CVS Health sponsored project, you will need to sign the associated [Contributor License Agreement (TBD)]().
+2. See the [contributing](CONTRIBUTING.md) page.
+
 ## License
 android-compose-accessibility-techniques is licensed under under the Apache License, Version 2.0.  See [LICENSE](LICENSE) file for more information.
 

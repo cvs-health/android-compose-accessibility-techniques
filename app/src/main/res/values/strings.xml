@@ -486,7 +486,7 @@
     <string name="exposed_dropdown_menus_example_1_heading">Problematic example 1: Non-editable Exposed Dropdown Menu</string>
     <string name="exposed_dropdown_menus_example_1_description">The Exposed Dropdown Menu pattern uses ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem controls to create a dropdown selection menu that is mostly accessible, except for keyboard operation.</string>
     <string name="exposed_dropdown_menus_example_2_heading">Problematic example 2: View-based non-editable Exposed Dropdown Menu</string>
-    <string name="exposed_dropdown_menus_example_2_description">Wrapping the View Exposed Dropdown Menu pattern in AndroidView is also mostly accessible. But it is not keyboard focusable, due to a known Compose/View interoperability issue.</string>
+    <string name="exposed_dropdown_menus_example_2_description">Wrapping the View Exposed Dropdown Menu pattern in AndroidView is also mostly accessible. But it is not keyboard accessible, due to Compose/View interoperability issues.</string>
     <string name="exposed_dropdown_menus_example_label">Payment type</string>
     <string name="exposed_dropdown_menus_example_option_1">Cash</string>
     <string name="exposed_dropdown_menus_example_option_2">Check</string>
@@ -508,7 +508,7 @@
     <string name="inline_links_example_1_note">Note: These links work fine with assistive technologies, but they are not keyboard accessible.</string>
     <string name="inline_links_example_2">Problematic example 2: Using AndroidView and TextView</string>
     <string name="inline_links_example_2_text">For best current accessibility, use <a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/viewinterop/package-summary#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a> and <a href="https://github.com/cvs-health/android-view-accessibility-techniques/blob/main/doc/componenttypes/LinksInlineWithText.md">TextView links</a> instead of ClickableText.</string>
-    <string name="inline_links_example_2_note">This paragraph works with assistive technologies. It may work with keyboards, except for a known AndroidView focus issue, but not well. Presently, navigation arrows are required to select the text and the links within the text.</string>
+    <string name="inline_links_example_2_note">This paragraph works with assistive technologies. It is not keyboard accessible, due to Compose/View interoperability issues. If it did work, navigation arrow keys would focus on the links within the focused text block.</string>
 
     <!-- ListItem layouts -->
     <string name="listitem_layouts_title">ListItem layouts</string>
@@ -665,7 +665,7 @@
     <string name="slider_controls_example_3_content_description">Rating filter range</string>
     <string name="slider_controls_example_3_state_description">%1$d to %2$d</string>
     <string name="slider_controls_example_4_header">Problematic example 4: View RangeSlider is not keyboard accessible</string>
-    <string name="slider_controls_example_4_description">A View RangeSlider wrapped in AndroidView cannot be focused using a keyboard, because of a known Compose/View interoperability issue.</string>
+    <string name="slider_controls_example_4_description">A View RangeSlider wrapped in AndroidView is not keyboard accessible, because of Compose/View interoperability issues.</string>
     <string name="slider_controls_example_4_label">Rating filter range</string>
     <string name="slider_controls_example_4_content_description">Rating filter range</string>
     <string name="slider_controls_example_4_selected_range">Include ratings from %1$d to %2$d</string>

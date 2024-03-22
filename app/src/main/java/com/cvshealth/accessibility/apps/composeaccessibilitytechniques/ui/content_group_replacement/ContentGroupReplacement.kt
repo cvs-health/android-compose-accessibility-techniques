@@ -131,11 +131,11 @@ private fun BadExample1() {
                 modifier = Modifier.testTag(contentGroupReplacementExample1RatingLabelTestTag)
             )
             LinearProgressIndicator(
-                progress = contentGroupReplacementExamplesRating / contentGroupReplacementExamplesMaxRating,
+                progress = { contentGroupReplacementExamplesRating / contentGroupReplacementExamplesMaxRating },
                 modifier = Modifier
                     .testTag(contentGroupReplacementExample1ProgressBarTestTag)
                     .width(80.dp)
-                    .padding(start = 8.dp, end = 8.dp)
+                    .padding(start = 8.dp, end = 8.dp),
             )
             Text(
                 text = stringResource(
@@ -191,10 +191,10 @@ private fun BadExample2() {
         ) {
             Text(text = stringResource(id = R.string.content_group_replacement_rating_label))
             LinearProgressIndicator(
-                progress = contentGroupReplacementExamplesRating / contentGroupReplacementExamplesMaxRating,
+                progress = { contentGroupReplacementExamplesRating / contentGroupReplacementExamplesMaxRating },
                 modifier = Modifier
                     .width(80.dp)
-                    .padding(start = 8.dp, end = 8.dp)
+                    .padding(start = 8.dp, end = 8.dp),
             )
             Text(
                 text = stringResource(
@@ -273,12 +273,12 @@ private fun GoodExample3() {
         ) {
             Text(text = stringResource(id = R.string.content_group_replacement_rating_label))
             LinearProgressIndicator(
-                progress = contentGroupReplacementExamplesRating / contentGroupReplacementExamplesMaxRating,
+                progress = { contentGroupReplacementExamplesRating / contentGroupReplacementExamplesMaxRating },
                 modifier = Modifier
                     .width(80.dp)
                     .padding(start = 8.dp, end = 8.dp)
                     // Note that LinearProgressIndicator has to be made invisible too.
-                    .semantics { invisibleToUser() }
+                    .semantics { invisibleToUser() },
             )
             Text(
                 text = stringResource(
@@ -353,10 +353,10 @@ private fun GoodExample4() {
         ) {
             Text(text = stringResource(id = R.string.content_group_replacement_rating_label))
             LinearProgressIndicator(
-                progress = contentGroupReplacementExamplesRating / contentGroupReplacementExamplesMaxRating,
+                progress = { contentGroupReplacementExamplesRating / contentGroupReplacementExamplesMaxRating },
                 modifier = Modifier
                     .width(80.dp)
-                    .padding(start = 8.dp, end = 8.dp)
+                    .padding(start = 8.dp, end = 8.dp),
             )
             Text(
                 text = stringResource(

@@ -21,7 +21,7 @@ Row(
         modifier = Modifier.semantics { invisibleToUser() }
     )
     LinearProgressIndicator(
-        progress = rating / maxRating,
+        progress = { rating / maxRating },
         modifier = Modifier
             .padding(start = 8.dp, end = 8.dp)
             .semantics { invisibleToUser() }
@@ -54,7 +54,7 @@ Row(
 ) {
     Text(text = "Rating:")
     LinearProgressIndicator(
-        progress = rating / maxRating,
+        progress = { rating / maxRating },
         modifier = Modifier.padding(start = 8.dp, end = 8.dp)
     )
     Text(text = "${rating} / ${maxRating}") // "3.4 / 5"

@@ -37,6 +37,7 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     KeyboardActions("keyboardActions"),
     KeyboardFocusOrder("keyboardFocusOrder"),
     CustomFocusIndicators("customFocusIndicators"),
+    CustomClickLabels("customClickLabels"),
     CustomStateDescriptions("customStateDescriptions"),
     CustomAccessibilityActions("customAccessibilityActions"),
     AccordionControls("accordionControls"),

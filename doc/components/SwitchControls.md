@@ -31,6 +31,7 @@ Row(
 ```
 
 Notes:
+
 * The techniques for `Checkbox` and `Switch` are identical, except for the Role assigned (and layout considerations).
 * Applying `Modifier.toggleable` to the `Row` automatically merges the child descendants' semantics so the `Row` is read as a unit in TalkBack.
 * Nulling the `Switch`'s `onCheckedChange` handling removes its automatic sizing, which should generally be restored a sizing modifier as shown.

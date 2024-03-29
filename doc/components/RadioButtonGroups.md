@@ -42,6 +42,7 @@ Row(modifier = Modifier
 ```
 
 Notes:
+
 * Applying `Modifier.selectable` to the `Row` automatically merges the child descendants' semantics so the `Row` is read as a unit in TalkBack.
 * Nulling the `RadioButton`'s `onClick` handling removes its automatic sizing, which should generally be restored a sizing modifier as shown.
 
@@ -84,6 +85,7 @@ fun RadioButtonGroup(
 ```
 
 Notes:
+
 * The `groupLabel` is not read as part of each `RadioButton` in TalkBack. While different from the web, this behavior is expected on Android.
 * The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.
 

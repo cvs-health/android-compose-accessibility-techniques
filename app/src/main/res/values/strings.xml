@@ -30,6 +30,7 @@
     <string name="home_informative_content">Informative Content</string>
     <string name="home_interactive_behaviors">Interactive Behaviors</string>
     <string name="home_components">Specific Component Types</string>
+    <string name="home_navigation_click_label">see details</string>
 
     <!-- Text alternatives -->
     <string name="text_alternatives_title">Text alternatives</string>
@@ -383,6 +384,25 @@
     <string name="custom_focus_indicators_example_7_card_description">Tab to this card to see a custom Indication focus indicator.</string>
     <string name="custom_focus_indicators_example_7_message">Activated example 7 clickable card showing custom Indication focus indicator.</string>
 
+    <!-- Custom click labels -->
+    <string name="custom_click_labels_title">Custom click labels</string>
+    <string name="custom_click_labels_heading">Enhance screen reader user experience by customizing click action labels</string>
+    <string name="custom_click_labels_description_1">How TalkBack describes the click or long-click action of a control can be partially overridden to be more useful. For example, \"Double-tap to activate\" can be changed to \"Double-tap to show details\".</string>
+    <string name="custom_click_labels_description_2">Unfortunately, these techniques cannot be applied to Material Design buttons at this time.</string>
+    <string name="custom_click_labels_description_3">Turn on TalkBack and navigate the screen below for demonstrations on custom click labels.</string>
+    <string name="custom_click_labels_description_4">Also, note that the clickable cards do not announce the \"Button\" role. These cards are still accessible, because on Android the click action provides role information.</string>
+    <string name="custom_click_labels_example_1_heading">OK example 1: Default click action label</string>
+    <string name="custom_click_labels_example_1_label">Default click action label</string>
+    <string name="custom_click_labels_example_1_message">Selected to activate Default click action label card.</string>
+    <string name="custom_click_labels_example_2_heading">Good example 2: Customized click action label</string>
+    <string name="custom_click_labels_example_2_label">Customized click action label</string>
+    <string name="custom_click_labels_example_2_custom_click_label">show details</string>
+    <string name="custom_click_labels_example_2_message">Selected to show details of Customized click action label card.</string>
+    <string name="custom_click_labels_example_3_heading">Good example 3: Customized button click action label</string>
+    <string name="custom_click_labels_example_3_label">Demonstrate a Snackbar</string>
+    <string name="custom_click_labels_example_3_custom_click_label">display a pop-up message</string>
+    <string name="custom_click_labels_example_3_message">Selected a button with customized click action label.</string>
+
     <!-- Custom state descriptions -->
     <string name="custom_state_descriptions_title">Custom state descriptions</string>
     <string name="custom_state_descriptions_heading">Enhance screen reader user experience by customizing state description labels</string>
@@ -677,14 +697,13 @@
     <string name="standalone_links_description_2">Turn on TalkBack, navigate the page, and activate the links for demonstrations of more and less accessible stand-alone links.</string>
     <string name="standalone_links_example_1_header">Bad example 1: Indistinguishable text link</string>
     <string name="standalone_links_example_1_text">Nothing indicates that this text is a link, nor does the text describe where the link goes. This link fails multiple accessibility guidelines.</string>
-    <string name="standalone_links_example_2_header">Good example 2: Accessible Stand-alone link text</string>
+    <string name="standalone_links_example_2_header">Good example 2: Accessible stand-alone link text</string>
     <string name="standalone_links_example_2_description">To create an accessible stand-alone link, describe the link destination, use distinctive link styling, and apply onClickLabel to indicate that the click action will open a browser window. Using \"call to action\" wording is also a good practice.</string>
     <string name="standalone_links_example_2_text">Read about Jetpack Compose Accessibility</string>
     <string name="standalone_links_example_3_header">Good example 3: Accessible stand-alone link with icon</string>
     <string name="standalone_links_example_3_text">Read about Jetpack Compose Accessibility</string>
-    <string name="standalone_links_example_4_header">Good example 4: Accessible stand-alone link TextButton</string>
+    <string name="standalone_links_example_4_header">Good example 4: Stand-alone link TextButton with semantic onClickLabel</string>
     <string name="standalone_links_example_4_text">Read about Jetpack Compose Accessibility</string>
-    <string name="standalone_links_example_4_icon_description">Opens in browser</string>
 
     <!-- Switch controls -->
     <string name="switch_controls_title">Switch controls</string>

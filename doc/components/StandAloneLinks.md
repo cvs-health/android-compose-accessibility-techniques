@@ -1,12 +1,14 @@
 # Stand-alone Links
 
 Stand-alone links (links not embedded in blocks of text) require specific construction in order to be accessible. Specific techniques are required to address each of the follow WCAG 2 success criteria:
+
 * [Success Criterion 2.4.4 Link Purpose (In Context)](https://www.w3.org/TR/WCAG22/#link-purpose-in-context)
 * [Success Criterion 1.4.1 Use of Color](https://www.w3.org/TR/WCAG22/#use-of-color)
 * [Success Criterion 2.5.8 Target Size (Minimum)](https://www.w3.org/TR/WCAG22/#target-size-minimum)
 * [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value)
 
 The following techniques are important to make stand-alone links accessible:
+
 * Link text must convey its purpose
 * Link text style must be sufficiently distinct from other text
 * Links must be large enough to tap easily
@@ -17,6 +19,7 @@ The following techniques are important to make stand-alone links accessible:
 One of the simplest things necessary is for a stand-alone link's text to convey where that link goes.
 
 A bad example of link text would be:
+
 ```kotlin
 Text(
     text = "Is this a link?",
@@ -25,6 +28,7 @@ Text(
 ```
 
 An example of link text that clearly indicates the link's purpose would be:
+
 ```kotlin
 Text(
     text = "Read about Jetpack Compose Accessibility",
@@ -56,6 +60,7 @@ As with all interactive components, stand-alone links need a sufficient tap size
 The Material Design 3 extension function `Modifier.minimumInteractiveComponentSize()` makes appropriate link sizing easy. For best effect, apply this sizing before `Modifier.clickable`. (And for Material Design 2 apps, apply `Modifier.sizeIn(48.dp, 48.dp)` instead.)
 
 For example:
+
 ```kotlin
 Text(
     text = "Read about Jetpack Compose Accessibility",
@@ -111,11 +116,11 @@ Row(
 }
 ```
 
-## Alternative approach using `TextButton`
+## `TextButton` stand-alone links
 
-Alternative approaches to stand-alone links include the use of `Button` or `TextButton` for a stand-alone link. In this case, the "Button" role becomes a proxy for the non-existent "link" role.  
+An alternative approach to stand-alone links is to use `Button` or `TextButton` for a stand-alone link. In this case, the "Button" role becomes a proxy for the non-existent "link" role.  
 
-However, `Button` composables do not presently directly support onClickLabel. (And when `Modifier.clickable()` is added to a `Button` to customize the click label in TalkBack, keyboard accessibility is affected, because the `Button` will be focusable twice.) Instead, add a `contentDescription` to the external link icon.
+However, `Button` composables do not directly support `onClickLabel`. Instead, use `Modifier.semantics` and its `onClick()` method's `label` property to customize the click label in TalkBack.
 
 For example:
 
@@ -123,7 +128,17 @@ For example:
 val uriHandler = LocalUriHandler.current
 TextButton(
     onClick = {
+        // Activated by touchscreen and keyboard
         uriHandler.openUri(COMPOSE_ACCESSIBILITY_URL)
+    },
+    modifier = Modifier.semantics {
+        onClick(
+            label = "open in browser"
+        ) {
+            // Activated by assistive technologies
+            uriHandler.openUri(COMPOSE_ACCESSIBILITY_URL)
+            true
+        }
     }
 ) {
     Text(
@@ -135,8 +150,7 @@ TextButton(
     Spacer(Modifier.width(8.dp))
     Icon(
         painter = painterResource(id = R.drawable.ic_external_link_outline),
-        // Alternative to setting onClickLabel. Merged with button text into one TalkBack announcement.
-        contentDescription = "Opens in browser",
+        contentDescription = null, // information is already conveyed in semantics onClick label
         tint = MaterialTheme.colorScheme.primary
     )
 }

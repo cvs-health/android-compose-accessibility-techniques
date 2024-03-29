@@ -4,6 +4,7 @@ Top-level heading text must be marked as an accessibility heading. This supports
 Mark a composable as an accessibility heading by applying `Modifier.semantics { heading() }`. 
 
 For example:
+
 ```
 Text("This is a heading",
     style = MaterialTheme.typography.headlineSmall,

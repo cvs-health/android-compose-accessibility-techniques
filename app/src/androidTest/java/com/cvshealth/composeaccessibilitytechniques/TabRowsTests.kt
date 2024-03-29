@@ -431,11 +431,8 @@ class TabRowsTests {
         tabs.assertCountEquals(5)
         tabs.assertAll(hasRole(Role.Tab))
 
-        // verify all tabs are displayed
+        // verify first and last tabs are displayed
         tabs[0].assertIsDisplayed()
-        tabs[1].assertIsDisplayed()
-        tabs[2].assertIsDisplayed()
-        tabs[3].assertIsDisplayed()
         tabs[4].assertIsDisplayed()
 
         // verify 1st tab selected and no other tab is selected

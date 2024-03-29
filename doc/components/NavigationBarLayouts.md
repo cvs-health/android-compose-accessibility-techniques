@@ -7,6 +7,7 @@ These standard controls announce their name, role, and value in accordance with 
 `NavigationBar` layouts operate like `TabRow` composables and are fully accessible by default. (`NavigationBarItems` even announce in TalkBack as "Tab".)
 
 Take the following steps to implement a `NavigationBar`:
+
 - Create a `NavHostController` with `rememberNavController()`.
 - Remember which navigation bar item is selected (and preserve that value across configuration changes).
 - In the `Scaffold` `bottomBar`, compose a `NavigationBar` and populate its content with `NavigationBarItem`s.
@@ -24,6 +25,7 @@ Take the following steps to implement a `NavigationBar`:
 - In the `Scaffold` `content`, compose a `NavHost`, tie it to the remembered `NavHostController` and define a `composable` for each navigation bar item by route string.
 
 For example:
+
 ```kotlin
 // Controls navigation by associating the NavigationBar with a NavHost. Perform navigation in each
 // NavigationBarItems' onClick method by calling pageNavController.navigate() with a route string.

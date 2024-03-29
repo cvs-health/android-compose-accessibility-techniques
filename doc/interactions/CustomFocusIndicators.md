@@ -66,6 +66,7 @@ fun Modifier.visibleFocusBorder(): Modifier {
 ```
 
 Such a Modifier extension function simplifies the application of a custom focus border to a composable. For example, the earlier example `Text` would become:
+
 ```kotlin
 Text(
     text = "Show terms and conditions",

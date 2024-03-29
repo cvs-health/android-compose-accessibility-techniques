@@ -21,6 +21,7 @@ OutlinedTextField(
 The `keyboardOptions` property can either be set by copying the `KeyboardOptions.Default` object (with adjusted properties) or by creating a new object using the `KeyboardOptions()` constructor.
 
 Notes:
+
 * For some devices and configurations, different keyboard types will display the same soft keyboard.
 * Adding `android:windowSoftInputMode="adjustResize"` to the `<activity>` element in AndroidManifest.xml can help fit both screen content and the soft keyboard on-screen at the same time.
 * Setting `KeyboardType.Password` or `KeyboardType.NumberPassword` does not supply input field masking; they only control the soft keyboard. Add `visualTransformation = PasswordVisualTransformation()` to a `TextField` for masking.

@@ -91,7 +91,7 @@ fun StandAloneLinksScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         StandAloneLinksScreen {}
     }
@@ -123,7 +123,7 @@ private fun BadExample1() {
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample1Preview() {
+private fun BadExample1Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -144,6 +144,7 @@ private fun GoodExample2() {
         text = stringResource(id = R.string.standalone_links_example_2_header),
         modifier = Modifier.testTag(standaloneLinksExample2HeadingTestTag)
     )
+    BodyText(textId = R.string.standalone_links_example_2_description)
 
     GenericStandAloneLink(
         text = stringResource(id = R.string.standalone_links_example_2_text),
@@ -156,7 +157,7 @@ private fun GoodExample2() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample2Preview() {
+private fun GoodExample2Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -188,7 +189,7 @@ private fun GoodExample3() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample3Preview() {
+private fun GoodExample3Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -202,14 +203,11 @@ fun GoodExample3Preview() {
 
 @Composable
 private fun GoodExample4() {
-    // OK example 4: Accessible stand-alone link button
+    // Good example 4: Stand-alone link TextButton with semantic onClickLabel
     val uriHandler = LocalUriHandler.current
     val goToComposeAccessibility = {
         uriHandler.openUri(COMPOSE_ACCESSIBILITY_URL)
     }
-    // Optional (see below):
-    // val genericLinkOnClickLabel =
-    //     stringResource(id = R.string.standalone_links_generic_on_click_label)
 
     GoodExampleHeading(
         text = stringResource(id = R.string.standalone_links_example_4_header),
@@ -217,18 +215,13 @@ private fun GoodExample4() {
     )
     Spacer(modifier = Modifier.height(8.dp))
 
+    // onClickLabel semantics are handled by VisibleFocusBorderTextButton.
+    // Key technique: Apply Modifier.semantics { onClick( label = ..., onClick = ...) } in addition
+    // to the Button onClick parameter, instead of Modifier.clickable().
     VisibleFocusBorderTextButton(
-        onClick = goToComposeAccessibility, // activates in touch mode
-        modifier = Modifier
-            .testTag(standaloneLinksExample4LinkButtonTestTag)
-            // Optional: Customizes TalkBack click action announcement, but at the cost of adding a
-            // second keyboard tab stop on the same button (with different focus highlighting).
-            // Note that the same lambda is passed to both the button and Modifier.clickable()
-            // onClick parameters.
-            // .clickable(
-            //     onClickLabel = genericLinkOnClickLabel,
-            //     onClick = goToComposeAccessibility // activates in Assistive Technologies
-            // )
+        onClick = goToComposeAccessibility,
+        modifier = Modifier.testTag(standaloneLinksExample4LinkButtonTestTag),
+        onClickLabel = stringResource(id = R.string.standalone_link_on_click_label)
     ) {
         Text(
             text = stringResource(id = R.string.standalone_links_example_4_text),
@@ -240,9 +233,7 @@ private fun GoodExample4() {
         Spacer(Modifier.width(8.dp))
         Icon(
             painter = painterResource(id = R.drawable.ic_external_link_outline),
-            // Key technique: Alternative to onClickLabel. Merged with button text into one
-            // announcement.
-            contentDescription = stringResource(id = R.string.standalone_links_example_4_icon_description),
+            contentDescription = null,
             tint = MaterialTheme.colorScheme.primary
         )
     }
@@ -250,7 +241,7 @@ private fun GoodExample4() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample4Preview() {
+private fun GoodExample4Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

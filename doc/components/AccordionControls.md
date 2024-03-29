@@ -2,6 +2,7 @@
 Accordion controls cause sections of a screen to expand, revealing additional content, or to collapse, concealing that content. To make accordion controls conform to the WCAG 2 [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG21/#name-role-value), it is necessary for such controls to be marked with the `Modifier.semantics` property `expand()` (if collapsed) and `collapse()` (if expanded). Only by declaring those semantics properties is the expanded or collapsed state of an accordion control surfaced to the Android Accessibility API.
 
 Mark a composable as an accordion heading by applying: 
+
 ```kotlin
 modifier = Modifier.semantics {
     if (isExpanded) {
@@ -32,6 +33,7 @@ modifier = Modifier.clickable(
 ```
 
 For example:
+
 ```
 val (isExpanded, setIsExpanded) = rememberSaveable { mutableStateOf(false) }
 Column {

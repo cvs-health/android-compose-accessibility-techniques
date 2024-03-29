@@ -40,6 +40,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.checkb
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_group_replacement.ContentGroupReplacementScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_grouping.ContentGroupingScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_accessibility_actions.CustomAccessibilityActionsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_click_labels.CustomClickLabelsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_focus_indicators.CustomFocusIndicatorsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_state_descriptions.CustomStateDescriptionsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dark_and_light_themes.DarkAndLightThemesScreen
@@ -153,6 +154,9 @@ fun ComposeAccessibilityTechniquesNavHost(
         }
         composable(route = ComposeAccessibilityTechniquesRoute.CustomFocusIndicators.route) {
             CustomFocusIndicatorsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.CustomClickLabels.route) {
+            CustomClickLabelsScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.CustomStateDescriptions.route) {
             CustomStateDescriptionsScreen(onBackPressed = popBackStack)

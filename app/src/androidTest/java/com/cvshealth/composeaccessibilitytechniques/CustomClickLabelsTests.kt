@@ -15,32 +15,33 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.createComposeRule
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.StandAloneLinksScreen
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample1HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample1LinkTextTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample2HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample2LinkTextTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample3HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample3LinkTextTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample4HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample4LinkButtonTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksHeadingTestTag
+import androidx.compose.ui.test.onNodeWithTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_click_labels.CustomClickLabelsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_click_labels.customClickLabelsExample1CardTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_click_labels.customClickLabelsExample1HeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_click_labels.customClickLabelsExample2CardTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_click_labels.customClickLabelsExample2HeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_click_labels.customClickLabelsExample3ButtonTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_click_labels.customClickLabelsExample3HeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_click_labels.customClickLabelsHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
 /**
- *  StandAloneLinksTests - test StandAloneLinksScreen semantics to the extent possible.
+ *  CustomClickLabelsTests - test StandAloneLinksScreen semantics to the extent possible.
  *
  *  Key technique: Test for onClickLabel existence and value. See TestHelpers.kt for details.
  */
-class StandAloneLinksTests {
+class CustomClickLabelsTests {
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -48,7 +49,7 @@ class StandAloneLinksTests {
     fun setup() {
         composeTestRule.setContent {
             ComposeAccessibilityTechniquesTheme() {
-                StandAloneLinksScreen { }
+                CustomClickLabelsScreen { }
             }
         }
     }
@@ -61,19 +62,16 @@ class StandAloneLinksTests {
     @Test
     fun verifyHeadingsAreHeadings() {
         composeTestRule
-            .onNode(hasTestTag(standaloneLinksHeadingTestTag) and isHeading())
+            .onNode(hasTestTag(customClickLabelsHeadingTestTag) and isHeading())
             .assertExists()
         composeTestRule
-            .onNode(hasTestTag(standaloneLinksExample1HeadingTestTag) and isHeading())
+            .onNode(hasTestTag(customClickLabelsExample1HeadingTestTag) and isHeading())
             .assertExists()
         composeTestRule
-            .onNode(hasTestTag(standaloneLinksExample2HeadingTestTag) and isHeading())
+            .onNode(hasTestTag(customClickLabelsExample2HeadingTestTag) and isHeading())
             .assertExists()
         composeTestRule
-            .onNode(hasTestTag(standaloneLinksExample3HeadingTestTag) and isHeading())
-            .assertExists()
-        composeTestRule
-            .onNode(hasTestTag(standaloneLinksExample4HeadingTestTag) and isHeading())
+            .onNode(hasTestTag(customClickLabelsExample3HeadingTestTag) and isHeading())
             .assertExists()
     }
 
@@ -81,7 +79,7 @@ class StandAloneLinksTests {
     fun verifyExampleListItemsAreNotHeadings() {
         composeTestRule
             .onNode(
-                hasTestTag(standaloneLinksExample1LinkTextTestTag)
+                hasTestTag(customClickLabelsExample1CardTestTag)
                         and
                         !isHeading()
                         and
@@ -90,7 +88,7 @@ class StandAloneLinksTests {
             .assertExists()
         composeTestRule
             .onNode(
-                hasTestTag(standaloneLinksExample2LinkTextTestTag)
+                hasTestTag(customClickLabelsExample2CardTestTag)
                         and
                         !isHeading()
                         and
@@ -99,16 +97,7 @@ class StandAloneLinksTests {
             .assertExists()
         composeTestRule
             .onNode(
-                hasTestTag(standaloneLinksExample3LinkTextTestTag)
-                        and
-                        !isHeading()
-                        and
-                        !hasAnyDescendant(isHeading())
-            )
-            .assertExists()
-        composeTestRule
-            .onNode(
-                hasTestTag(standaloneLinksExample4LinkButtonTestTag)
+                hasTestTag(customClickLabelsExample3ButtonTestTag)
                         and
                         !isHeading()
                         and
@@ -125,12 +114,11 @@ class StandAloneLinksTests {
     @Test
     fun verifyExample1LinkTextHasExpectedSemantics() {
         composeTestRule
+            .onNodeWithTag(customClickLabelsExample1CardTestTag)
+            .assertHasClickAction()
+        composeTestRule
             .onNode(
-                hasTestTag(standaloneLinksExample1LinkTextTestTag)
-                        and
-                        hasClickAction()
-                        and
-                        !hasClickActionLabel()
+                hasTestTag(customClickLabelsExample1CardTestTag) and hasClickAction() and !hasClickActionLabel()
             )
             .assertExists()
     }
@@ -139,38 +127,28 @@ class StandAloneLinksTests {
     fun verifyExample2LinkTextHasExpectedSemantics() {
         composeTestRule
             .onNode(
-                hasTestTag(standaloneLinksExample2LinkTextTestTag)
+                hasTestTag(customClickLabelsExample2CardTestTag)
                         and
                         hasClickAction()
                         and
-                        hasClickActionLabelled("open in browser")
+                        hasClickActionLabelled("show details")
             )
             .assertExists()
     }
 
     @Test
-    fun verifyExample3LinkTextHasExpectedSemantics() {
+    fun verifyExample3ButtonHasExpectedSemantics() {
         composeTestRule
             .onNode(
-                hasTestTag(standaloneLinksExample3LinkTextTestTag)
+                hasTestTag(customClickLabelsExample3ButtonTestTag)
                         and
                         hasClickAction()
                         and
-                        hasClickActionLabelled("open in browser")
+                        hasRole(Role.Button)
+                        and
+                        hasClickActionLabelled("display a pop-up message")
             )
             .assertExists()
     }
 
-    @Test
-    fun verifyExample4LinkTextHasExpectedSemantics() {
-        composeTestRule
-            .onNode(
-                hasTestTag(standaloneLinksExample4LinkButtonTestTag)
-                        and
-                        hasClickAction()
-                        and
-                        hasClickActionLabelled("open in browser")
-            )
-            .assertExists()
-    }
 }

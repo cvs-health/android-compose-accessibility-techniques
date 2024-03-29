@@ -31,6 +31,7 @@ Row(
 This `Checkbox` will announce its state in TalkBack as "Activated" or "Deactivated" instead of "Checked" and "Not checked".
 
 Notes:
+
 * Customizing `stateDescription` may not work successfully on all Android platforms; `ViewCompat.setStateDescription()` certainly does not. However, if `stateDescription` does not work, the standard state description text is announced. So attempting to improve the user experience by customizing the state description does no harm.
 * The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code. 
   * When strings are externalized, the conditional code determining the localized state description value should be moved outside of the `Modifier.semantics` block so `stringResource()` can be called in a Composable context. 

@@ -71,7 +71,7 @@ ExposedDropdownMenuBox(
 
 One promising approach to accessible dropdown menus is to fall back on using View components, wrapped in an `AndroidView`. 
 
-Unfortunately, this approach fails at present, because of a known Compose-View interop issue which prevents the dropdown menu within the AndroidView from receiving focus, even if the AndroidView is made focusable explicitly: see https://issuetracker.google.com/issues/255628260 for details. Once that issue is resolved, this approach can be used.
+Unfortunately, this approach fails at present, because of Compose-View interop issues which prevent the dropdown menu within the AndroidView from receiving focus and keyboard events, even if the AndroidView is made focusable explicitly: see https://issuetracker.google.com/issues/255628260 for one example. 
 
 For example, given a file named `layout/view_dropdown_menu.xml` with the following View Exposed Dropdown Menu pattern controls:
 

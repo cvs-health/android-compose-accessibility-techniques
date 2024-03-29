@@ -170,6 +170,11 @@ fun HomeScreen(
                     onNavigationButtonClicked = onNavigationButtonClicked
                 )
                 NavigationCard(
+                    label = stringResource(R.string.custom_click_labels_title),
+                    route = ComposeAccessibilityTechniquesRoute.CustomClickLabels,
+                    onNavigationButtonClicked = onNavigationButtonClicked
+                )
+                NavigationCard(
                     label = stringResource(R.string.custom_state_descriptions_title),
                     route = ComposeAccessibilityTechniquesRoute.CustomStateDescriptions,
                     onNavigationButtonClicked = onNavigationButtonClicked
@@ -294,7 +299,9 @@ private fun NavigationCard(
             .fillMaxWidth()
             .padding(top = 8.dp, start = 12.dp)
             .visibleCardFocusBorder()
-            .clickable {
+            .clickable(
+                onClickLabel = stringResource(id = R.string.home_navigation_click_label)
+            ) {
                 onNavigationButtonClicked(route)
             },
         border = BorderStroke(2.dp, CardDefaults.outlinedCardBorder().brush)

@@ -11,7 +11,6 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
 - Informative Content
     - [x] [Text alternatives](doc/content/TextAlternatives.md)
     - [x] [Accessibility traversal order](doc/content/AccessibilityTraversalOrder.md)
-    - [ ] Text resizing and reflow
     - [x] [Content grouping](doc/content/ContentGrouping.md)
     - [x] [Content group replacement](doc/content/ContentGroupReplacement.md)
     - [x] [Heading semantics](doc/content/HeadingSemantics.md)
@@ -21,25 +20,21 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Screen and pane titles](doc/content/ScreenAndPaneTitles.md)
 - Interactive Behaviors
     - [x] [Input field labels](doc/interactions/InteractiveControlLabels.md)
-    - [ ] Minimum touch target size
-    - [ ] Tap target grouping
     - [x] [UX change announcements](doc/interactions/UXChangeAnnouncements.md)
     - [x] [Keyboard types and options](doc/interactions/KeyboardTypes.md)
     - [x] [Keyboard actions](doc/interactions/KeyboardActions.md)
     - [x] [Keyboard focus order](doc/interactions/KeyboardFocusOrder.md)
     - [x] [Custom focus indicators](doc/interactions/CustomFocusIndicators.md)
+    - [x] [Custom click labels](doc/interactions/CustomClickLabels.md)
     - [x] [Custom state descriptions](doc/interactions/CustomStateDescriptions.md)
     - [x] [Custom accessibility actions](doc/interactions/CustomAccessibilityActions.md)
 - Specific Component Types
     - [x] [Accordion controls](doc/components/AccordionControls.md)
     - [x] [Autofill controls](doc/components/AutofillControls.md)
-    - [ ] BottomAppBar layouts
-    - [ ] Button controls
     - [x] [Checkbox controls](doc/components/CheckboxControls.md)
     - [x] [Dropdown menus](doc/components/DropdownMenus.md)
     - [x] [Exposed dropdown menus](doc/components/ExposedDropdownMenus.md)
     - [x] [Links inline with text](doc/components/LinksInlineWithText.md)
-    - [ ] ListDetailPaneScaffold
     - [x] [ListItem layouts](doc/components/ListItemLayouts.md)
     - [x] [ModalBottomSheet layouts](doc/components/ModalBottomSheetLayouts.md)
     - [x] [NavigationBar layouts](doc/components/NavigationBarLayouts.md)
@@ -50,7 +45,6 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Switch controls](doc/components/SwitchControls.md)
     - [x] [Tab rows](doc/components/TabRows.md)
     - [x] [TextField controls](doc/components/TextFieldControls.md)
-    - [ ] TopAppBar layouts
     
 - Other
     - [x] [Compose Semantics automated testing](doc/AutomatedComposeAccessibilityTesting.md)

@@ -2,6 +2,7 @@
 `ModalBottomSheet` layouts require specific construction in order to be accessible. Specifically, these techniques support WCAG 2 [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG21/#keyboard), among others.
 
 The following additions are needed to make a `ModalBottomSheet` accessible:
+
 - Apply `Modifier.onKeyEvent` to capture any use of the escape (Esc) key and close the bottom sheet.
     - Note that a suspend function call in a coroutine scope is used to hide the bottom sheet asynchronously. 
 - Limit the size of half-opened bottom sheets with `fillMaxHeight(0.5f)` so that no part of their content is off-screen.
@@ -104,7 +105,7 @@ LaunchedEffect(openBottomSheet) {
 
 ----
 
-Copyright 2023 CVS Health and/or one of its affiliates
+Copyright 2023-2024 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

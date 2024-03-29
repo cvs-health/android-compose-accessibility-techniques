@@ -73,6 +73,7 @@ If focus order cannot be correctly sequenced using layout, as can be the case wi
 * If required, override the consideration of whether an element is on-screen using `Modifier.focusGroup()`.
 
 Notes:
+
 * This approach will likely also require the use of `isTraversalGroup` and `traversalIndex` for accessibility focus and reading order.
 * Care must be taken never to create a focus loop by pointing `next` to the same element or to an element that is earlier in the focus order (or pointing `previous` to the same element or one later in the focus order).
 * See [Change focus traversal order](https://developer.android.com/jetpack/compose/touch-input/focus/change-focus-traversal-order) and [Change focus behavior](https://developer.android.com/jetpack/compose/touch-input/focus/change-focus-behavior) for more details.
@@ -144,6 +145,7 @@ ConstraintLayout(
 ```
 
 Notes: 
+
 * At the time of writing, keyboard focus is only testable for TextFields with jUnit Compose UI tests.
 * The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.
 

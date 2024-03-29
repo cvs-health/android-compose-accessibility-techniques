@@ -73,6 +73,7 @@ Column {
 The contents of tabs can be collected into a Pager, generally a `HorizontalPager`, that coordinates the displayed content page with the `TabRow` selected `Tab`. This is done by holding the tab selection state in the pager state, created with `rememberPagerState()`, retrieving the selected tab index from the `PagerState.currentPage` property, and setting a new page index by calling `PagerStatepagerState.animateScrollToPage()` in a coroutine context.
 
 At present `ScrollableTabRow` use presents two challenges to accessibility:
+
 1. Switch Access puts early focus on any visible `HorizontalPager`, because it is scrollable, even if it is lower on the page than other focusable widgets.
 2. TalkBack announces the content as a "Page" belonging to a "vertical pager," even though the pager is actually horizontal.
 

@@ -55,6 +55,7 @@ ClickableText(
 ```
 
 Notes:
+
 - The hard-coded text shown in these examples are only used for simplicity. _Always_ use externalized string resource references in actual code. However, URL values may be an exceptions, depending on how the site in question handles internationalization.
 - Using `pushUrlAnnotation` does not scale well, and specifically is not particularly internationalizable. (Given that the order of links in a text may change when translated.) One solid approach is to embed link annotations in translation strings and applying reusable parsing code to create the correct `AnnotatedString`.
 - `ClickableText` does not support Dark Theme by default. This can be remediated by setting its `style` parameter so that `color = LocalContentColor.current` is merged into its expected styling (as is done with `Text` unless another color is set).

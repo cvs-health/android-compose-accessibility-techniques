@@ -74,6 +74,7 @@ Row(
 ```
 
 The key points are:
+
 1. Set `Modifier.toggleable` on the enclosing `Row` layout with the checkbox state handling and `role = Role.Checkbox`. (Applying the click handler here automatically merges the child descendants' semantics.)
 2. In the `Checkbox`, set `onCheckedChange = null`.
 3. Appropriately size the `Checkbox` using `Modifier.minimumInteractiveComponentSize()` (Material 3) or `Modifier.defaultMinSize()` (Material 2), because nulling `onCheckedChange` will remove Compose's automatic tap target padding.  
@@ -118,6 +119,7 @@ Column(modifier = Modifier.selectableGroup()) {
 `Slider` and `RangeSlider` composables are labeled by their `contentDescription` semantics property. They must also have a visible label and the text of the visible label must be present in the `contentDescription`.
 
 Notes: 
+
 - `Slider` composables also require keyboard accessibility remediation, `stateDescription`, and `liveRegion` semantics, but these are not shown below.
 - `RangeSlider` composable are not keyboard accessible, so should be avoided in Compose screens, if possible. 
     - (Even wrapping a View-based `RangeSlider` in `AndroidView` will fail due to a known keyboard focus issue with View interop. See https://issuetracker.google.com/issues/255628260 for details.)

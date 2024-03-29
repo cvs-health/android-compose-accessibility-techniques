@@ -51,6 +51,8 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.semantics.onClick
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 
@@ -123,6 +125,7 @@ fun Modifier.visibleCardFocusBorder(): Modifier {
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
  * for this button. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this button in different states.
+ * @param onClickLabel semantic / accessibility label for the [onClick] action
  */
 @Composable
 fun VisibleFocusBorderButton(
@@ -135,6 +138,7 @@ fun VisibleFocusBorderButton(
     border: BorderStroke? = null,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClickLabel: String? = null,
     content: @Composable RowScope.() -> Unit
 ) {
     // Key technique: Apply the appropriate focus outline color for dark and light themes.
@@ -146,11 +150,26 @@ fun VisibleFocusBorderButton(
         mutableStateOf(Color.Transparent)
     }
     Button(
-        onClick = onClick,
+        onClick = onClick, // activates in touch mode or via keyboard
         modifier = modifier
             // Key technique: Track focus state change.
             .onFocusChanged {
                 buttonBorderColor = if (it.isFocused) focusIndicatorColor else Color.Transparent
+            }
+            .semantics {
+                // Key onClickLabel technique: Add a custom onClickLabel to Buttons using semantics,
+                // not Modifier.clickable, because the later would add a second tab stop for the
+                // Button (with different focus highlighting).
+                if (onClickLabel != null) {
+                    onClick(label = onClickLabel) { // activates in Assistive Technologies
+                        // Note that the same onClick() handler is used both here and for the
+                        // onClick parameter above, but here the lambda must return a Boolean
+                        // indicating whether the action was successfully handled. This is only
+                        // presumed to be true here.
+                        onClick.invoke()
+                        true
+                    }
+                }
             },
         enabled = enabled,
         shape = shape,
@@ -192,6 +211,7 @@ fun VisibleFocusBorderButton(
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
  * for this button. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this button in different states.
+ * @param onClickLabel semantic / accessibility label for the [onClick] action
  */
 @Composable
 fun VisibleFocusBorderTextButton(
@@ -204,6 +224,7 @@ fun VisibleFocusBorderTextButton(
     border: BorderStroke? = null,
     contentPadding: PaddingValues = ButtonDefaults.TextButtonContentPadding,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClickLabel: String? = null,
     content: @Composable RowScope.() -> Unit
 ) {
     // Key technique: Apply the appropriate focus outline color for dark and light themes.
@@ -215,11 +236,26 @@ fun VisibleFocusBorderTextButton(
         mutableStateOf(Color.Transparent)
     }
     TextButton(
-        onClick = onClick,
+        onClick = onClick, // activates in touch mode or via keyboard
         modifier = modifier
             // Key technique: Track focus state change.
             .onFocusChanged {
                 buttonBorderColor = if (it.isFocused) focusIndicatorColor else Color.Transparent
+            }
+            .semantics {
+                // Key onClickLabel technique: Add a custom onClickLabel to Buttons using semantics,
+                // not Modifier.clickable, because the later would add a second tab stop for the
+                // Button (with different focus highlighting).
+                if (onClickLabel != null) {
+                    onClick(label = onClickLabel) { // activates in Assistive Technologies
+                        // Note that the same onClick() handler is used both here and for the
+                        // onClick parameter above, but here the lambda must return a Boolean
+                        // indicating whether the action was successfully handled. This is only
+                        // presumed to be true here.
+                        onClick.invoke()
+                        true
+                    }
+                }
             },
         enabled = enabled,
         shape = shape,
@@ -255,6 +291,7 @@ fun VisibleFocusBorderTextButton(
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
  * for this icon button. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
+ * @param onClickLabel semantic / accessibility label for the [onClick] action
  * @param content the content of this icon button, typically an [Icon]
  */
 @Composable
@@ -266,6 +303,7 @@ fun VisibleFocusBorderIconButton(
     colors: IconButtonColors = IconButtonDefaults.outlinedIconButtonColors(),
     border: BorderStroke? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClickLabel: String? = null,
     content: @Composable () -> Unit
 ) {
     // Key technique: Apply the appropriate focus outline color for dark and light themes.
@@ -281,11 +319,26 @@ fun VisibleFocusBorderIconButton(
     // Key technique: Use an OutlinedIconButton, even though when unfocused, the button will appear
     // as if it has no outline.
     OutlinedIconButton(
-        onClick = onClick,
+        onClick = onClick, // activates in touch mode or via keyboard
         modifier = modifier
             // Key technique: Track focus state change.
             .onFocusChanged {
                 buttonBorderColor = if (it.isFocused) focusIndicatorColor else Color.Transparent
+            }
+            .semantics {
+                // Key onClickLabel technique: Add a custom onClickLabel to Buttons using semantics,
+                // not Modifier.clickable, because the later would add a second tab stop for the
+                // Button (with different focus highlighting).
+                if (onClickLabel != null) {
+                    onClick(label = onClickLabel) { // activates in Assistive Technologies
+                        // Note that the same onClick() handler is used both here and for the
+                        // onClick parameter above, but here the lambda must return a Boolean
+                        // indicating whether the action was successfully handled. This is only
+                        // presumed to be true here.
+                        onClick.invoke()
+                        true
+                    }
+                }
             },
         enabled = enabled,
         shape = shape,

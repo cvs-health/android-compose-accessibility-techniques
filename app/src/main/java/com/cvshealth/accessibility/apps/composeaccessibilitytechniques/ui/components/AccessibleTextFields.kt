@@ -581,7 +581,8 @@ fun AutofilledClearableOutlinedTextField(
                     onClick = {
                         // Clear the text value.
                         onValueChange("")
-                    }
+                    },
+                    enabled = value.isNotEmpty()
                 ) {
                     Icon(
                         imageVector = Icons.Default.Clear,

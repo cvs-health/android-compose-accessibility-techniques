@@ -1,9 +1,13 @@
 # Screen and Pane Titles
 All applications screens require titles that communicate the screen's topic or purpose to support the WCAG [Success Criterion 2.4.2 Page Titled](https://www.w3.org/TR/WCAG22/#page-titled).
 
-The screen title should be both visible and announced by screen readers. To the extent reasonable, screen titles should be unique so they communicate the specific screen being displayed. However, this must be balanced against the need for conciseness.
+The screen title should be both visible and announced by screen readers when it is given focus. Screen titles must be descriptive so they communicate the specific screen being displayed. 
 
-One way to visually display a screen title is using a `TopAppBar` `title`. For example:
+To the extent reasonable, screen titles should also be unique. However, this must be balanced against the need for conciseness.
+
+One way to visually display a screen title is using a `TopAppBar` `title`. Note that `TopAppBar` titles have fixed vertical space, so title text display is often limited to a single line. TalkBack will still announce the full title text.
+
+For example:
 
 ```kotlin
 Scaffold(
@@ -11,7 +15,7 @@ Scaffold(
     topBar = {
         TopAppBar(
             title = {
-                Text("Screen Title Example")
+                Text("Screen Title Example", overflow = TextOverflow.Ellipsis, maxLines = 1)
             },
             navigationIcon = {
                 IconButton(onClick = { /* Handle Back navigation */ }) {

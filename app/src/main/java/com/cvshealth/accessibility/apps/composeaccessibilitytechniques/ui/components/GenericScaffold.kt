@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextOverflow
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 
 /**
@@ -65,7 +66,7 @@ fun GenericScaffold(
                 // Key technique 2: Use TopAppBar and its title parameter to visually display a
                 // screen title.
                 title = {
-                    Text(title)
+                    Text(title, overflow = TextOverflow.Ellipsis, maxLines = 1)
                 },
                 navigationIcon = {
                     VisibleFocusBorderIconButton(onClick = onBackPressed) {

@@ -64,6 +64,7 @@ fun ScreenAndPaneTitlesScreen(
             BodyText(textId = R.string.screen_and_pane_titles_description_1)
             BodyText(textId = R.string.screen_and_pane_titles_description_2)
             BodyText(textId = R.string.screen_and_pane_titles_description_3)
+            BodyText(textId = R.string.screen_and_pane_titles_description_4)
         }
     }
 }

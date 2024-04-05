@@ -212,9 +212,10 @@
     <!-- Screen and pane titles -->
     <string name="screen_and_pane_titles_title">Screen and pane titles</string>
     <string name="screen_and_pane_titles_heading">Screens and panes need titles</string>
-    <string name="screen_and_pane_titles_description_1">All screens and distinct panes within a screen require a unique title to allow users to orient themselves within the app.</string>
-    <string name="screen_and_pane_titles_description_2">Screen titles can be visually presented using a TopAppBar title in the screen\'s Scaffold. Screen and pane titles are announced in screen readers by setting the Modifier.semantics paneTitle property on the appropriate enclosing composable, such as a screen\'s Scaffold.</string>
-    <string name="screen_and_pane_titles_description_3">Note the visible appbar screen title. Turn on TalkBack and navigate to other screens to hear demonstrations of screen title announcement.</string>
+    <string name="screen_and_pane_titles_description_1">All screens and distinct panes within a screen require a descriptive title to allow users to orient themselves within the app.</string>
+    <string name="screen_and_pane_titles_description_2">Screen titles can be visually presented using a TopAppBar title in the screen\'s Scaffold. Note that TopAppBar titles may be visually limited to a single line.</string>
+    <string name="screen_and_pane_titles_description_3">Screen and pane titles are announced in screen readers by setting the Modifier.semantics paneTitle property on the appropriate enclosing composable, such as a screen\'s Scaffold.</string>
+    <string name="screen_and_pane_titles_description_4">Note the visible appbar screen title. Turn on TalkBack and navigate to other screens to hear demonstrations of screen title announcement.</string>
 
     <!-- Interactive control labels -->
     <string name="interactive_control_labels_title">Interactive control labels</string>

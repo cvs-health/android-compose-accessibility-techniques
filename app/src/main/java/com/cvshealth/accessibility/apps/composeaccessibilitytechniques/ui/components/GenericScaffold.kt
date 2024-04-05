@@ -32,7 +32,16 @@ import androidx.compose.ui.semantics.semantics
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 
 /**
- * GenericScaffold -- creates a default screen scaffold, including proper screen title handling.
+ * Creates a default screen [Scaffold], including proper screen title handling.
+ *
+ * @param title screen title string
+ * @param onBackPressed callback for [TopAppBar] "Navigate Up" button
+ * @param modifier optional [Modifier] for [Scaffold]
+ * @param bottomBar optional bottom app bar composable
+ * @param snackbarHost optional snackbar host composable
+ * @param floatingActionButton optional FloatingActionButton composable
+ * @param floatingActionButtonPosition optional [FabPosition] for the FloatingActionButton
+ * @param content the [Scaffold] content composable
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

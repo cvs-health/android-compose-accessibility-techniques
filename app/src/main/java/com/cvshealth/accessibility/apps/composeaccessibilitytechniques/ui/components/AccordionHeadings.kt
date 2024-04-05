@@ -49,8 +49,8 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.SuccessGreen
 
 /**
- * GenericAccordionHeading properly labels a Row composable as both an accordion control and a
- * heading. It contains its own expanded/collapsed state handling.
+ * Properly labels a [Row] composable as both an accordion control and a heading. It contains its
+ * own expanded/collapsed state handling.
  *
  * GenericAccordionHeading applies the following key techniques:
  * 1. The Row applies Modifier.clickable() with a state-specific onClickLabel (but without a role).
@@ -65,12 +65,12 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  * 4. Display or reveal the accordion control's content based on its expansion state.
  *
  * @param text the accordion heading text to display
- * @param modifier settings for the wrapping Column
+ * @param modifier optional [Modifier] for the wrapping [Column]
  * @param initiallyExpanded whether the accordion first displays expanded or collapsed; default is
- * collapsed
- * @param headingIconPainter optional Painter for a leading icon on the accordion heading
- * @param headingIconTint tint for any leading icon
- * @param expanderIconTint tint for the expander icon
+ * collapsed (false)
+ * @param headingIconPainter optional [Painter] for a leading [Icon] on the accordion heading
+ * @param headingIconTint tint for any leading [Icon]
+ * @param expanderIconTint tint for the expander [Icon]
  * @param content the accordion body to display when expanded
  */
 @Composable
@@ -168,7 +168,7 @@ fun GenericAccordionHeading(
 @Preview(showBackground = true)
 @Composable
 private fun GenericAccordionHeadingCollapsedShortPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         GenericAccordionHeading(text = "This is a test accordion") {
             Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                 BodyText(textId = R.string.accordion_item_2_1)
@@ -182,7 +182,7 @@ private fun GenericAccordionHeadingCollapsedShortPreview() {
 @Preview(showBackground = true)
 @Composable
 private fun GenericAccordionHeadingExpandedShortPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         GenericAccordionHeading(
             text = "This is a test accordion",
             initiallyExpanded = true
@@ -196,6 +196,15 @@ private fun GenericAccordionHeadingExpandedShortPreview() {
     }
 }
 
+/**
+ * A [GenericAccordionHeading] specialized with an icon indicating success.
+ *
+ * @param text the accordion heading text to display
+ * @param modifier optional [Modifier] for the [GenericAccordionHeading]
+ * @param initiallyExpanded whether the accordion first displays expanded or collapsed; default is
+ * collapsed (false)
+ * @param content the accordion body to display when expanded
+ */
 @Composable
 fun SuccessAccordionHeading(
     text: String,
@@ -219,7 +228,7 @@ fun SuccessAccordionHeading(
 @Preview(showBackground = true)
 @Composable
 private fun SuccessAccordionHeadingShortPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         SuccessAccordionHeading(
             text = "This is a success accordion heading"
         ) {
@@ -232,6 +241,16 @@ private fun SuccessAccordionHeadingShortPreview() {
     }
 }
 
+
+/**
+ * A [GenericAccordionHeading] without a leading icon.
+ *
+ * @param text the accordion heading text to display
+ * @param modifier optional [Modifier] for the [GenericAccordionHeading]
+ * @param initiallyExpanded whether the accordion first displays expanded or collapsed; default is
+ * collapsed (false)
+ * @param content the accordion body to display when expanded
+ */
 @Composable
 fun BasicAccordionHeading(
     text: String,
@@ -253,7 +272,7 @@ fun BasicAccordionHeading(
 @Preview(showBackground = true)
 @Composable
 private fun BasicAccordionHeadingShortPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         BasicAccordionHeading(
             text = "This is a basic accordion heading"
         ) {

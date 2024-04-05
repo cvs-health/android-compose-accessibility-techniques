@@ -39,7 +39,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -74,6 +74,13 @@ const val navigationBarLayoutsExample3HeadingTestTag = "navigationBarLayoutsExam
 const val navigationBarLayoutsExample3NavigationBarTestTag = "navigationBarLayoutsExample3NavigationBar"
 const val navigationBarLayoutsExample3NavigationHostTestTag = "navigationBarLayoutsExample3NavigationHost"
 
+/**
+ * Demonstrate accessibility techniques for [NavigationBar] layouts.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun NavigationBarLayoutsScreen(
     onBackPressed: () -> Unit
@@ -111,7 +118,7 @@ fun NavigationBarLayoutsScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewWithScaffold() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         NavigationBarLayoutsScreen {}
     }
 }
@@ -156,7 +163,7 @@ private val navigationBarItemsData = listOf(
 )
 
 @Composable
-fun BadExample1() {
+private fun BadExample1() {
     // Bad example 1: NavigationBar layout with limited text lines
 
     val exampleNavController = rememberNavController()
@@ -188,7 +195,7 @@ fun BadExample1() {
 
     // Key technique: Track the currently selected NavigationBarItem by index.
     var selectedItemIndex by rememberSaveable {
-        mutableStateOf(0)
+        mutableIntStateOf(0)
     }
 
     NavigationBar(
@@ -196,7 +203,7 @@ fun BadExample1() {
             .testTag(navigationBarLayoutsExample1NavigationBarTestTag)
             .padding(top = 8.dp)
     ) {
-        navigationBarItemsData.forEachIndexed() { index, navigationItemData ->
+        navigationBarItemsData.forEachIndexed { index, navigationItemData ->
             NavigationBarItem(
                 selected = selectedItemIndex == index,
                 onClick = {
@@ -240,7 +247,7 @@ fun BadExample1() {
 @Preview(showBackground = true)
 @Composable
 private fun BadExample1Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -252,7 +259,7 @@ private fun BadExample1Preview() {
 }
 
 @Composable
-fun GoodExample2() {
+private fun GoodExample2() {
     // Good example 2: NavigationBar layout with text reflow
 
     val exampleNavController = rememberNavController()
@@ -284,7 +291,7 @@ fun GoodExample2() {
 
     // Key technique: Track the currently selected NavigationBarItem by index.
     var selectedItemIndex by rememberSaveable {
-        mutableStateOf(0)
+        mutableIntStateOf(0)
     }
 
     NavigationBar(
@@ -292,7 +299,7 @@ fun GoodExample2() {
             .testTag(navigationBarLayoutsExample2NavigationBarTestTag)
             .padding(top = 8.dp)
     ) {
-        navigationBarItemsData.forEachIndexed() { index, navigationItemData ->
+        navigationBarItemsData.forEachIndexed { index, navigationItemData ->
             NavigationBarItem(
                 selected = selectedItemIndex == index,
                 onClick = {
@@ -327,7 +334,7 @@ fun GoodExample2() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample2Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -339,7 +346,7 @@ private fun GoodExample2Preview() {
 }
 
 @Composable
-fun OkExample3() {
+private fun OkExample3() {
     // OK example 3: NavigationBar layout with only selected item labeled
 
     val exampleNavController = rememberNavController()
@@ -371,7 +378,7 @@ fun OkExample3() {
 
     // Key technique: Track the currently selected NavigationBarItem by index.
     var selectedItemIndex by rememberSaveable {
-        mutableStateOf(0)
+        mutableIntStateOf(0)
     }
 
     NavigationBar(
@@ -379,7 +386,7 @@ fun OkExample3() {
             .testTag(navigationBarLayoutsExample3NavigationBarTestTag)
             .padding(top = 8.dp)
     ) {
-        navigationBarItemsData.forEachIndexed() { index, navigationItemData ->
+        navigationBarItemsData.forEachIndexed { index, navigationItemData ->
             NavigationBarItem(
                 selected = selectedItemIndex == index,
                 onClick = {
@@ -418,7 +425,7 @@ fun OkExample3() {
 @Preview(showBackground = true)
 @Composable
 private fun OkExample3Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)

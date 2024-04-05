@@ -42,6 +42,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -94,7 +95,14 @@ const val popupMessagesExample7ButtonTestTag = "popupMessagesExample7Button"
 const val popupMessagesExample7MessageTextTestTag = "popupMessagesExample7MessageText"
 const val popupMessagesExample7MessageTextButtonTestTag = "popupMessagesExample7MessageTextButton"
 
-
+/**
+ * Demonstrate accessibility techniques for pop-up message controls, such as [Toast], Snackbar, and
+ * [BasicAlertDialog].
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun PopupMessagesScreen(
     onBackPressed: () -> Unit
@@ -146,7 +154,7 @@ fun PopupMessagesScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         PopupMessagesScreen {}
     }
@@ -181,7 +189,7 @@ private fun OkExample1() {
 
 @Preview(showBackground = true)
 @Composable
-fun OkExample1Preview() {
+private fun OkExample1Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -228,7 +236,7 @@ private fun OkExample2(
 
 @Preview(showBackground = true)
 @Composable
-fun OkExample2Preview() {
+private fun OkExample2Preview() {
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
     ComposeAccessibilityTechniquesTheme {
@@ -282,7 +290,7 @@ private fun OkExample3(
 
 @Preview(showBackground = true)
 @Composable
-fun OkExample3Preview() {
+private fun OkExample3Preview() {
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
     ComposeAccessibilityTechniquesTheme {
@@ -346,7 +354,7 @@ private fun BadExample4(
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample4Preview() {
+private fun BadExample4Preview() {
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
     ComposeAccessibilityTechniquesTheme {
@@ -401,7 +409,7 @@ private fun BadExample5(
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample5Preview() {
+private fun BadExample5Preview() {
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
     ComposeAccessibilityTechniquesTheme {
@@ -548,7 +556,7 @@ private fun Example6ShowMoreDialog(
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample6Preview() {
+private fun GoodExample6Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -563,7 +571,7 @@ fun GoodExample6Preview() {
 @Composable
 private fun GoodExample7() {
     // Good example 7: On-screen text messages and buttons
-    var counterValue by remember { mutableStateOf(0) }
+    var counterValue by remember { mutableIntStateOf(0) }
 
     GoodExampleHeading(
         text = stringResource(id = R.string.popup_messages_example_7_header),
@@ -618,7 +626,7 @@ private fun GoodExample7() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample7Preview() {
+private fun GoodExample7Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

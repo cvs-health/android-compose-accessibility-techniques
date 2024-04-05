@@ -16,6 +16,8 @@
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_accessibility_actions
 
 import android.content.Context
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -71,6 +73,13 @@ const val customAccessibilityActionsExample1ReportButtonTestTag = "customAccessi
 const val customAccessibilityActionsExample2CardTestTag = "customAccessibilityActionsExample2Card"
 const val customAccessibilityActionsExample3CardTestTag = "customAccessibilityActionsExample3Card"
 
+/**
+ * Demonstrate techniques for adding custom accessibility actions.
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun CustomAccessibilityActionsScreen(
     onBackPressed: () -> Unit
@@ -86,7 +95,7 @@ fun CustomAccessibilityActionsScreen(
     // Instead state is cleared to catch next button activation.
     if (viewState.cardStates.any { (_, cardState) -> cardState.actionsActivated.isNotEmpty() }) {
         LaunchedEffect(viewState) {
-            viewState.cardStates.forEach { cardId, cardState ->
+            viewState.cardStates.forEach { (cardId, cardState) ->
                 cardState.actionsActivated.forEach { actionType ->
                     val messageEvent = CustomActionMessageEvent(actionType, cardId)
                     displayMessageEvent(context, snackbarLauncher, messageEvent)
@@ -131,7 +140,7 @@ fun CustomAccessibilityActionsScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewWithScaffold() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         CustomAccessibilityActionsScreen {}
     }
 }
@@ -201,7 +210,7 @@ private fun BadExample1(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewBadExample1() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -305,7 +314,7 @@ private fun GoodExample2(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewGoodExample2() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -404,7 +413,7 @@ private fun GoodExample3(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewGoodExample3() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -415,75 +424,119 @@ private fun PreviewGoodExample3() {
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
+/**
+ * Display a generic action icon button for a post.
+ *
+ * Applies a visible focus border and minimumInteractiveComponentSize to the icon button, and sets a
+ * contentDescription to the button's icon for accessibility.
+ *
+ * @param customActionType the [CustomActionType] to be triggered by this button
+ * @param cardId the id number of the post to trigger the action on
+ * @param iconId the drawable resource identifier for the button's icon
+ * @param contentDescriptionId the string resource identifier for the button's icon's contentDescription
+ * @param modifier optional [Modifier] for the icon button
+ * @param handleMessageEvent message event handler function to be called when the button is clicked
+ */
+@Composable
+private fun GenericActionButton(
+    customActionType: CustomActionType,
+    cardId: Int,
+    @DrawableRes iconId: Int,
+    @StringRes contentDescriptionId: Int,
+    modifier: Modifier = Modifier,
+    handleMessageEvent: (CustomActionMessageEvent) -> Unit
+) {
+    VisibleFocusBorderIconButton(
+        onClick = {
+            handleMessageEvent(CustomActionMessageEvent(customActionType, cardId))
+        },
+        modifier = modifier.minimumInteractiveComponentSize()
+    ) {
+        Icon(
+            painter = painterResource(iconId),
+            contentDescription = stringResource(contentDescriptionId),
+            tint = MaterialTheme.colorScheme.primary
+        )
+    }
+}
+
+/**
+ * Display a button to like a post.
+ *
+ * @param cardId the id number of the post
+ * @param modifier optional [Modifier] for the icon button
+ * @param handleMessageEvent message event handler function to be called when the button is clicked
+ */
 @Composable
 private fun LikeButton(
     cardId: Int,
     modifier: Modifier = Modifier,
     handleMessageEvent: (CustomActionMessageEvent) -> Unit
 ) {
-    VisibleFocusBorderIconButton(
-        onClick = {
-            handleMessageEvent(CustomActionMessageEvent(CustomActionType.Like, cardId))
-        },
-        modifier = modifier.minimumInteractiveComponentSize()
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_plus_fill),
-            contentDescription = stringResource(
-                id = R.string.custom_accessibility_actions_example_like_button
-            ),
-            tint = MaterialTheme.colorScheme.primary
-        )
-    }
+    GenericActionButton(
+        customActionType = CustomActionType.Like,
+        cardId = cardId,
+        iconId = R.drawable.ic_plus_fill,
+        contentDescriptionId = R.string.custom_accessibility_actions_example_like_button,
+        modifier = modifier,
+        handleMessageEvent = handleMessageEvent
+    )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
+/**
+ * Display a button to share a post.
+ *
+ * @param cardId the id number of the post
+ * @param modifier optional [Modifier] for the icon button
+ * @param handleMessageEvent message event handler function to be called when the button is clicked
+ */
 @Composable
 private fun ShareButton(
     cardId: Int,
     modifier: Modifier = Modifier,
     handleMessageEvent: (CustomActionMessageEvent) -> Unit
 ) {
-    VisibleFocusBorderIconButton(
-        onClick = {
-            handleMessageEvent(CustomActionMessageEvent(CustomActionType.Share, cardId))
-        },
-        modifier = modifier.minimumInteractiveComponentSize()
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_share_fill),
-            contentDescription = stringResource(
-                id = R.string.custom_accessibility_actions_example_share_button
-            ),
-            tint = MaterialTheme.colorScheme.primary
-        )
-    }
+    GenericActionButton(
+        customActionType = CustomActionType.Share,
+        cardId = cardId,
+        iconId = R.drawable.ic_share_fill,
+        contentDescriptionId = R.string.custom_accessibility_actions_example_share_button,
+        modifier = modifier,
+        handleMessageEvent = handleMessageEvent
+    )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
+/**
+ * Display a button to report a post as inappropriate.
+ *
+ * @param cardId the id number of the post
+ * @param modifier optional [Modifier] for the icon button
+ * @param handleMessageEvent message event handler function to be called when the button is clicked
+ */
 @Composable
 private fun ReportButton(
     cardId: Int,
     modifier: Modifier = Modifier,
     handleMessageEvent: (CustomActionMessageEvent) -> Unit
 ) {
-    VisibleFocusBorderIconButton(
-        onClick = {
-            handleMessageEvent(CustomActionMessageEvent(CustomActionType.Report, cardId))
-        },
-        modifier = modifier.minimumInteractiveComponentSize()
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_minus_fill),
-            contentDescription = stringResource(
-                id = R.string.custom_accessibility_actions_example_report_button
-            ),
-            tint = MaterialTheme.colorScheme.primary
-        )
-    }
+    GenericActionButton(
+        customActionType = CustomActionType.Report,
+        cardId = cardId,
+        iconId = R.drawable.ic_minus_fill,
+        contentDescriptionId = R.string.custom_accessibility_actions_example_report_button,
+        modifier = modifier,
+        handleMessageEvent = handleMessageEvent
+    )
 }
 
+/**
+ * Displays a Snackbar with the appropriate message string for the [CustomActionMessageEvent]
+ * emitted by the [CustomAccessibilityActionsViewModel].
+ *
+ * @param context the [Context] necessary to retrieve string resource values
+ * @param snackbarLauncher a [SnackbarLauncher] that encapsulates data necessary to show a Snackbar
+ * @param messageEvent the [CustomActionMessageEvent] to be announced
+ */
 private fun displayMessageEvent(
     context: Context,
     snackbarLauncher: SnackbarLauncher,

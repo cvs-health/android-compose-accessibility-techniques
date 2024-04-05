@@ -53,7 +53,17 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleCardFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
-
+/**
+ * Display the Home screen, containing expandable accordion sections for accessibility topic areas
+ * and cards which navigate to each specific accessibility topic.
+ *
+ * Defines this screen's title, [Scaffold], [TopAppBar], and content. Does not use the
+ * GenericScaffold component, because this screen has no "Navigate Up" button.
+ *
+ * @param modifier an optional [Modifier] for the screen [Scaffold]
+ * @param onNavigationButtonClicked navigates to the screen specified by a
+ * [ComposeAccessibilityTechniquesRoute]; see MainActivity.kt for details
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -281,12 +291,23 @@ fun HomeScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview() {
-    ComposeAccessibilityTechniquesTheme() {
-        HomeScreen() {}
+private fun HomeScreenPreview() {
+    ComposeAccessibilityTechniquesTheme {
+        HomeScreen {}
     }
 }
 
+/**
+ * Display an [OutlinedCard] with label and '>' icon that navigates to a specific route in the app.
+ * Applies a visible card border and an onClickLabel to enhance accessibility.
+ *
+ * @param label the card label string indicating the screen the card will navigate to
+ * @param route the [ComposeAccessibilityTechniquesRoute] enum indicating the screen the card will
+ * navigate to
+ * @param modifier an optional [Modifier] for the card
+ * @param onNavigationButtonClicked a function which performs navigation to the screen for a given
+ * [ComposeAccessibilityTechniquesRoute], adding the screen to the navigation backstack
+ */
 @Composable
 private fun NavigationCard(
     label: String,
@@ -328,8 +349,8 @@ private fun NavigationCard(
 
 @Preview(showBackground = true)
 @Composable
-fun NavigationCardPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun NavigationCardPreview() {
+    ComposeAccessibilityTechniquesTheme {
         NavigationCard(
             label = "Home",
             route = ComposeAccessibilityTechniquesRoute.Home,

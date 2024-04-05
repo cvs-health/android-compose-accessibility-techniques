@@ -22,10 +22,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.Slider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -61,6 +61,14 @@ const val sliderControlsExample3ControlTestTag = "sliderControlsExample3Control"
 const val sliderControlsExample4HeadingTestTag = "sliderControlsExample4Heading"
 const val sliderControlsExample4ControlTestTag = "sliderControlsExample4Control"
 
+/**
+ * Demonstrate accessibility techniques for [Slider] controls in conformance with WCAG
+ * [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships) and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value).
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun SliderControlsScreen(
     onBackPressed: () -> Unit
@@ -98,9 +106,9 @@ fun SliderControlsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun InteractiveControlLabelsScreenPreview() {
-    ComposeAccessibilityTechniquesTheme() {
-        SliderControlsScreen() {}
+private fun InteractiveControlLabelsScreenPreview() {
+    ComposeAccessibilityTechniquesTheme {
+        SliderControlsScreen {}
     }
 }
 
@@ -117,7 +125,7 @@ private fun BadExample1() {
 
     BodyText(stringResource(id = R.string.slider_controls_example_1_label))
 
-    val (ratingValue, setRatingValue) = remember { mutableStateOf(0.0f) }
+    val (ratingValue, setRatingValue) = remember { mutableFloatStateOf(0.0f) }
     Slider(
         value = ratingValue,
         onValueChange = setRatingValue,
@@ -130,7 +138,7 @@ private fun BadExample1() {
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample1Preview() {
+private fun BadExample1Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -152,7 +160,7 @@ private fun GoodExample2() {
     BodyText(textId = R.string.slider_controls_example_2_description)
     Spacer(modifier = Modifier.height(8.dp))
 
-    val (ratingValue, setRatingValue) = remember { mutableStateOf(0.0f) }
+    val (ratingValue, setRatingValue) = remember { mutableFloatStateOf(0.0f) }
     GenericSlider(
         label = stringResource(id = R.string.slider_controls_example_2_label),
         value = ratingValue,
@@ -167,7 +175,7 @@ private fun GoodExample2() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample2Preview() {
+private fun GoodExample2Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -179,9 +187,8 @@ fun GoodExample2Preview() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProblematicExample3() {
+private fun ProblematicExample3() {
     // Problematic example 3: Remediated RangeSlider is not keyboard accessible
     ProblematicExampleHeading(
         text = stringResource(id = R.string.slider_controls_example_3_header),
@@ -226,7 +233,7 @@ fun ProblematicExample3() {
 
 @Preview(showBackground = true)
 @Composable
-fun ProblematicExample3Preview() {
+private fun ProblematicExample3Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -239,7 +246,7 @@ fun ProblematicExample3Preview() {
 }
 
 @Composable
-fun ProblematicExample4() {
+private fun ProblematicExample4() {
     // Problematic example 4: View RangeSlider is keyboard inaccessible
     ProblematicExampleHeading(
         text = stringResource(id = R.string.slider_controls_example_4_header),
@@ -294,7 +301,7 @@ fun ProblematicExample4() {
 
 @Preview(showBackground = true)
 @Composable
-fun ProblematicExample4Preview() {
+private fun ProblematicExample4Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

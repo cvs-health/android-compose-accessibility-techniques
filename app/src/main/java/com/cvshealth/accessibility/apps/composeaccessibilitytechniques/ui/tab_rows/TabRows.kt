@@ -29,7 +29,7 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -66,6 +66,13 @@ const val tabRowsExample4TabContentTestTagBase = "tabRowsExample4TabContent"
 const val tabRowsExample4PagerTestTag = "tabRowsExample4Pager"
 const val tabRowsEndSpacerTestTag = "tabRowsEndSpacer"
 
+/**
+ * Demonstrate accessibility techniques for [TabRow] and [Tab] controls.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun TabRowsScreen(
     onBackPressed: () -> Unit
@@ -120,7 +127,7 @@ fun TabRowsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         TabRowsScreen {}
     }
@@ -137,7 +144,7 @@ private fun BadExample1(
         modifier = Modifier.testTag(tabRowsExample1HeadingTestTag)
     )
 
-    val (tabIndex, setTabIndex) = rememberSaveable { mutableStateOf(0) }
+    val (tabIndex, setTabIndex) = rememberSaveable { mutableIntStateOf(0) }
     Column {
         TabRow(
             selectedTabIndex = tabIndex,
@@ -176,7 +183,7 @@ private fun BadExample1(
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample1Preview() {
+private fun BadExample1Preview() {
     val titles = listOf(
         stringResource(id = R.string.tab_rows_tab_1),
         stringResource(id = R.string.tab_rows_tab_2),
@@ -232,7 +239,7 @@ private fun GoodExample2(
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample2Preview() {
+private fun GoodExample2Preview() {
     val titles = listOf(
         stringResource(id = R.string.tab_rows_tab_1),
         stringResource(id = R.string.tab_rows_tab_2),
@@ -268,7 +275,7 @@ private fun OkExample3(
 
     // Note: Tab selection state is hoisted to this composable for example purposes only.
     // This example could use StatefulScrollableTabGroup instead.
-    val (example2TabIndex, setExample2TabIndex) = rememberSaveable { mutableStateOf(0) }
+    val (example2TabIndex, setExample2TabIndex) = rememberSaveable { mutableIntStateOf(0) }
     StatelessScrollableTabGroup(
         tabIndex = example2TabIndex,
         setTabIndex = setExample2TabIndex,
@@ -291,7 +298,7 @@ private fun OkExample3(
 
 @Preview(showBackground = true)
 @Composable
-fun OkExample3Preview() {
+private fun OkExample3Preview() {
     val titles = listOf(
         stringResource(id = R.string.tab_rows_tab_1),
         stringResource(id = R.string.tab_rows_tab_2),
@@ -352,7 +359,7 @@ private fun OkExample4(
 
 @Preview(showBackground = true)
 @Composable
-fun OkExample4Preview() {
+private fun OkExample4Preview() {
     val titles = listOf(
         stringResource(id = R.string.tab_rows_tab_1),
         stringResource(id = R.string.tab_rows_tab_2),

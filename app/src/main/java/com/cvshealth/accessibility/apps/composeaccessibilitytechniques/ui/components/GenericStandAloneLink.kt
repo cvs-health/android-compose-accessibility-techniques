@@ -34,16 +34,16 @@ import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 
 /**
- * GenericStandAloneLink - Presents an accessible stand-alone link with an optional external link
- * icon and a custom onClickLabel.
+ * Presents an accessible stand-alone link with an optional external link icon and a custom
+ * onClickLabel.
  *
  * Note that Android does not have a defined semantic "link" role. As a proxy, provide an
  * onClickLabel the specifies that this control opens a browser.
  *
  * @param text - Link text to display
- * @param modifier - Modifies the clickable Row layout of the stand-alone link
+ * @param modifier - optional [Modifier] for the clickable layout [Row] of the stand-alone link
  * @param showExternalLinkIcon - Selects whether to display external link icon (default) or not
- * @param onClick - Callback when the stand-alone link is activated.
+ * @param onClick - Callback when the stand-alone link is activated
  */
 @Composable
 fun GenericStandAloneLink(

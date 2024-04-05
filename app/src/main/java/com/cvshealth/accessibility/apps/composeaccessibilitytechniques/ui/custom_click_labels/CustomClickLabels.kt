@@ -42,7 +42,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
@@ -53,7 +52,6 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SnackbarLauncher
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderButton
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.VisibleFocusBorderTextButton
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleCardFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -65,7 +63,14 @@ const val customClickLabelsExample2CardTestTag = "customClickLabelsExample2Card"
 const val customClickLabelsExample3HeadingTestTag = "customClickLabelsExample3Heading"
 const val customClickLabelsExample3ButtonTestTag = "customClickLabelsExample3Button"
 
-
+/**
+ * Demonstrate accessibility techniques for customizing TalkBack on-click action announcements.
+ * (Also affects Switch Access action name display when there is more than one action available.)
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun CustomClickLabelsScreen(
     onBackPressed: () -> Unit
@@ -110,7 +115,6 @@ private fun PreviewWithScaffold() {
         CustomClickLabelsScreen {}
     }
 }
-
 
 @Composable
 private fun OkExample1(snackbarLauncher: SnackbarLauncher?) {

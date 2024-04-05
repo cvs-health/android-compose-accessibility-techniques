@@ -58,7 +58,6 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -82,7 +81,14 @@ const val modalBottomSheetLayoutsExample1Button2TestTag = "modalBottomSheetLayou
 const val modalBottomSheetLayoutsExample1SelectedItemTestTag = "modalBottomSheetLayoutsExample1SelectedItem"
 const val modalBottomSheetLayoutsExampleSheetTestTag = "modalBottomSheetLayoutsExampleSheet"
 
-@OptIn(ExperimentalTextApi::class, ExperimentalMaterial3Api::class)
+/**
+ * Demonstrate accessibility techniques for [ModalBottomSheet] layouts.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ModalBottomSheetLayoutsScreen(
     onBackPressed: () -> Unit
@@ -305,7 +311,7 @@ fun ModalBottomSheetLayoutsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         ModalBottomSheetLayoutsScreen {}
     }

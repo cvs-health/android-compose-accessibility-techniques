@@ -39,8 +39,8 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericTitledCard
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericTitledCard
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
@@ -51,14 +51,19 @@ const val adaptiveLayoutsExample1HeadingTestTag = "adaptiveLayoutsExample1Headin
 const val adaptiveLayoutsExample2HeadingTestTag = "adaptiveLayoutsExample2Heading"
 
 /**
- * AdaptiveLayoutsScreen -- demonstrates how to make screen layouts adapt to orientation and display
- * size changes. See MainActivity.kt for information on determining the appropriate WindowSizeClass.
+ * Demonstrates how to make screen layouts adapt to orientation and display size changes.
+ * See MainActivity.kt for information on determining the appropriate WindowSizeClass.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
  *
  * Key adaptive layout techniques:
  * 1. Make the entire screen's content scrollable.
  * 2. Use LocalConfiguration.current.orientation if necessary, but with caution.
  * 3. Accept a WindowSizeClass (from Activity level) and create layout conditionally based on its
  *    widthSizeClass and/or heightSizeClass properties.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ * @param windowSizeClass the displayed [WindowSizeClass] for determining adaptive layouts
  */
 @Composable
 fun AdaptiveLayoutsScreen(
@@ -100,8 +105,8 @@ fun AdaptiveLayoutsScreen(
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Preview(showBackground = true)
 @Composable
-fun AdaptiveLayoutsScreenCompactPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun AdaptiveLayoutsScreenCompactPreview() {
+    ComposeAccessibilityTechniquesTheme {
         AdaptiveLayoutsScreen(
             onBackPressed = {},
             // Key preview technique: Create a WindowSizeClass matching this preview's window.
@@ -115,8 +120,8 @@ fun AdaptiveLayoutsScreenCompactPreview() {
 // The following widthDp sets a Medium width.
 @Preview(showBackground = true, widthDp = 600, heightDp = 900)
 @Composable
-fun AdaptiveLayoutsScreenMediumPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun AdaptiveLayoutsScreenMediumPreview() {
+    ComposeAccessibilityTechniquesTheme {
         AdaptiveLayoutsScreen(
             onBackPressed = {},
             // Key preview technique: Create a WindowSizeClass matching this preview's window.
@@ -166,7 +171,7 @@ private fun OkExample1() {
 
 @Preview(showBackground = true)
 @Composable
-fun OkExample1Preview() {
+private fun OkExample1Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -270,7 +275,7 @@ private fun GoodExample2(windowSizeClass: WindowSizeClass) {
 // The following widthDp sets a Compact width.
 @Preview(showBackground = true, widthDp = 400, heightDp = 400)
 @Composable
-fun GoodExample2CompactPreview() {
+private fun GoodExample2CompactPreview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -290,7 +295,7 @@ fun GoodExample2CompactPreview() {
 // The following widthDp sets a Medium width.
 @Preview(showBackground = true, widthDp = 600, heightDp = 300)
 @Composable
-fun GoodExample2MediumPreview() {
+private fun GoodExample2MediumPreview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -309,7 +314,7 @@ fun GoodExample2MediumPreview() {
 // The following widthDp sets an Expanded width.
 @Preview(showBackground = true, widthDp = 1000, heightDp = 200)
 @Composable
-fun GoodExample2ExpandedPreview() {
+private fun GoodExample2ExpandedPreview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

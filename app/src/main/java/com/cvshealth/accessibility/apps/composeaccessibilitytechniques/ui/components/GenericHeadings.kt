@@ -37,6 +37,12 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.SuccessGreen
 
+/**
+ * Composable for simple headings without leading icons used throughout the app.
+ *
+ * @param text heading label string
+ * @param modifier optional [Modifier] for the heading [Text]
+ */
 @Composable
 fun SimpleHeading(
     text: String,
@@ -52,12 +58,20 @@ fun SimpleHeading(
 
 @Preview(showBackground = true)
 @Composable
-fun SimpleHeadingHeadingLongPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun SimpleHeadingHeadingLongPreview() {
+    ComposeAccessibilityTechniquesTheme {
         SimpleHeading(text = "This is a test. This is only a test. If this were a real heading, it would be shorter.")
     }
 }
 
+/**
+ * Local helper composable for example headings used throughout this app.
+ *
+ * @param text heading label string
+ * @param modifier optional [Modifier] for the heading layout [Row]
+ * @param painter optional [Painter] for a leading [Icon]
+ * @param tint the [Color] to paint a leading [Icon]
+ */
 @Composable
 private fun GenericExampleHeading(
     text: String,
@@ -93,6 +107,12 @@ private fun GenericExampleHeading(
     }
 }
 
+/**
+ * Composable for good example headings used throughout this app.
+ *
+ * @param text heading label string
+ * @param modifier optional [Modifier] for the heading layout [Row]
+ */
 @Composable
 fun GoodExampleHeading(text: String, modifier: Modifier = Modifier) {
     GenericExampleHeading(
@@ -106,12 +126,18 @@ fun GoodExampleHeading(text: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExampleHeadingShortPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun GoodExampleHeadingShortPreview() {
+    ComposeAccessibilityTechniquesTheme {
         GoodExampleHeading(text = "This is a test")
     }
 }
 
+/**
+ * Composable for "OK" example headings used throughout this app.
+ *
+ * @param text heading label string
+ * @param modifier optional [Modifier] for the heading layout [Row]
+ */
 @Composable
 fun OkExampleHeading(text: String, modifier: Modifier = Modifier) {
     GenericExampleHeading(
@@ -126,12 +152,18 @@ fun OkExampleHeading(text: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun OkExampleHeadingShortPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun OkExampleHeadingShortPreview() {
+    ComposeAccessibilityTechniquesTheme {
         OkExampleHeading(text = "This is a test")
     }
 }
 
+/**
+ * Composable for "Problematic" example headings used throughout this app.
+ *
+ * @param text heading label string
+ * @param modifier optional [Modifier] for the heading layout [Row]
+ */
 @Composable
 fun ProblematicExampleHeading(text: String, modifier: Modifier = Modifier) {
     GenericExampleHeading(
@@ -146,12 +178,18 @@ fun ProblematicExampleHeading(text: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun ProblematicExampleHeadingShortPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun ProblematicExampleHeadingShortPreview() {
+    ComposeAccessibilityTechniquesTheme {
         ProblematicExampleHeading(text = "This is a test")
     }
 }
 
+/**
+ * Composable for bad example headings used throughout this app.
+ *
+ * @param text heading label string
+ * @param modifier optional [Modifier] for the heading layout [Row]
+ */
 @Composable
 fun BadExampleHeading(text: String, modifier: Modifier = Modifier) {
     GenericExampleHeading(
@@ -165,8 +203,8 @@ fun BadExampleHeading(text: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun BadExampleHeadingLongPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun BadExampleHeadingLongPreview() {
+    ComposeAccessibilityTechniquesTheme {
         BadExampleHeading(
             text = "This is a test. This is only a test. If this were a real heading, it would be shorter."
         )

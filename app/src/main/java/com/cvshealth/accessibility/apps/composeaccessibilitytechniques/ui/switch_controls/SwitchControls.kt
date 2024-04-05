@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -48,6 +48,14 @@ const val switchControlsExample1SwitchTestTag = "switchControlsExample1Switch"
 const val switchControlsExample2HeadingTestTag = "switchControlsExample2Heading"
 const val switchControlsExample2SwitchTestTag = "switchControlsExample2Switch"
 
+/**
+ * Demonstrate accessibility techniques for [Switch] controls in conformance with WCAG
+ * [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships) and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value).
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun SwitchControlsScreen(
     onBackPressed: () -> Unit
@@ -106,14 +114,33 @@ fun SwitchControlsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         SwitchControlsScreen {}
     }
 }
 
+/**
+ * Displays a deliberately inaccessible [Switch] control. This control fails to properly label the
+ * [Switch] composable in the following ways:
+ * 1. The [Row] layout does not apply Modifier.toggleable() with role=Role.Switch and row-level
+ * click handling.
+ * 2. Nor does the [Row] apply semantics(mergeDescendants = true), which is automatic with a
+ * toggleable() click handler, so the [Text] label is not programmatically-associated with the
+ * [Switch].
+ * 3. The [Switch] composable itself performs the onClick handling, so it is a separate, unlabeled
+ * focusable element, leading to a confusing user experience.
+ *
+ * Also, the tappable area of the [Switch] is fragile, because appropriate padding is only added
+ * automatically by Compose since the [Switch] is clickable.
+ *
+ * @param text the [Switch] control's label string
+ * @param checked the current [Switch] state
+ * @param toggleHandler callback for toggling the [Switch]
+ * @param modifier optional [Modifier] for the [Switch] control's layout [Row]
+ */
 @Composable
-fun FauxSwitchRow(
+private fun FauxSwitchRow(
     text: String,
     checked: Boolean,
     toggleHandler: (Boolean) -> Unit,

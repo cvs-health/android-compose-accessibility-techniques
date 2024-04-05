@@ -35,8 +35,12 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
 const val screenAndPaneTitlesHeadingTestTag = "screenAndPaneTitlesHeading"
 
 /**
- * ScreenAndPaneTitlesScreen -- describes screen and pane title techniques and how to observe them.
- * Actual screen title techniques are found in GenericScaffold code.
+ * Demonstrate accessibility techniques for screen and pane titles and how to observe them.
+ * Actual screen title techniques are found in [GenericScaffold] code.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
  */
 @Composable
 fun ScreenAndPaneTitlesScreen(
@@ -66,8 +70,8 @@ fun ScreenAndPaneTitlesScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun ScreenAndPaneTitlesScreenPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun ScreenAndPaneTitlesScreenPreview() {
+    ComposeAccessibilityTechniquesTheme {
         ScreenAndPaneTitlesScreen(
             onBackPressed = {}
         )

@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -23,13 +23,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -57,6 +56,14 @@ const val radioButtonGroupsExample2RadioButtonGroupTestTag = "radioButtonGroupsE
 const val radioButtonGroupsExample3HeadingTestTag = "radioButtonGroupsExample3Heading"
 const val radioButtonGroupsExample3RadioButtonGroupTestTag = "radioButtonGroupsExample3RadioButtonGroup"
 
+/**
+ * Demonstrate accessibility techniques for [RadioButton] groups in conformance with WCAG
+ * [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships) and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value).
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun RadioButtonGroupsScreen(
     onBackPressed: () -> Unit
@@ -88,7 +95,7 @@ fun RadioButtonGroupsScreen(
                 modifier = Modifier.testTag(radioButtonGroupsExample1HeadingTestTag)
             )
             Spacer(modifier = Modifier.height(8.dp))
-            val (example1Selection, setExample1Selection) = remember { mutableStateOf(0) }
+            val (example1Selection, setExample1Selection) = remember { mutableIntStateOf(0) }
             FauxRadioButtonGroup(
                 groupLabel = stringResource(id = R.string.radio_button_groups_group_label),
                 itemLabels = options,
@@ -103,7 +110,7 @@ fun RadioButtonGroupsScreen(
             )
             BodyText(textId = R.string.radio_button_groups_example_2_description)
             Spacer(modifier = Modifier.height(8.dp))
-            val (example2Selection, setExample2Selection) = remember { mutableStateOf(0) }
+            val (example2Selection, setExample2Selection) = remember { mutableIntStateOf(0) }
             FauxRadioButtonGroup2(
                 groupLabel = stringResource(id = R.string.radio_button_groups_group_label),
                 itemLabels = options,
@@ -120,7 +127,7 @@ fun RadioButtonGroupsScreen(
             // Important technique: RadioButton group state has been hoisted up to this parent
             // composable. The state value and a state mutator function lambda are passed down to
             // the RadioButtonGroup() composable.
-            val (example3Selection, setExample3Selection) = remember { mutableStateOf(0) }
+            val (example3Selection, setExample3Selection) = remember { mutableIntStateOf(0) }
             // Key accessibility techniques are described in components/RadioButtonGroup.kt.
             RadioButtonGroup(
                 groupLabel = stringResource(id = R.string.radio_button_groups_group_label),
@@ -137,14 +144,31 @@ fun RadioButtonGroupsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         RadioButtonGroupsScreen {}
     }
 }
 
+/**
+ * Constructs a deliberately inaccessible group of [RadioButton] controls. Fails to implement proper
+ * accessibility semantics in the following ways:
+ * 1. The Column is not marked as an selectableGroup().
+ * 2. The Row is not selectable() with Role.RadioButton. This means the Text() and RadioButton() are
+ *    not programmatically-associated and makes the touch target smaller.
+ * 3. The RadioButton selection click handler is non-null; this should be handled by the Row-level
+ *    selectable().
+ * Also, the tap target size of the RadioButton is fragile: it is automatically expanded to 48x48 dp
+ * by Compose only because it is clickable.
+ *
+ * @param groupLabel the radio button group label string
+ * @param itemLabels a [List] of radio button label strings
+ * @param selectedIndex the currently selected [RadioButton]'s index in the itemLabels list
+ * @param selectHandler callback for selecting a [RadioButton]
+ * @param modifier optional [Modifier] for the radio button group's [Column] layout
+ */
 @Composable
-fun FauxRadioButtonGroup(
+private fun FauxRadioButtonGroup(
     groupLabel: String,
     itemLabels: List<String>,
     selectedIndex: Int,
@@ -165,7 +189,7 @@ fun FauxRadioButtonGroup(
                 ) {
                     // Key mistake #3: Related to mistake #2, this RadioButton should not do its own
                     // onClick handling; that should be done at the Row level only. (If onClick
-                    // handling is also retained here, the RodioButton would become separately
+                    // handling is also retained here, the RadioButton would become separately
                     // focusable from the Row in assistive technologies like TalkBack and Switch
                     // Access.)
                     RadioButton(
@@ -181,11 +205,11 @@ fun FauxRadioButtonGroup(
 
 @Preview(showBackground = true)
 @Composable
-fun FauxRadioGroupPreview() {
+private fun FauxRadioGroupPreview() {
     val options = listOf("Banana", "Grape", "Orange")
-    val (selectedOption, setSelectedOption) = remember { mutableStateOf(0) }
-    ComposeAccessibilityTechniquesTheme() {
-        Column() {
+    val (selectedOption, setSelectedOption) = remember { mutableIntStateOf(0) }
+    ComposeAccessibilityTechniquesTheme {
+        Column {
             FauxRadioButtonGroup(
                 groupLabel = "Pick a fruit:",
                 itemLabels = options,
@@ -196,10 +220,20 @@ fun FauxRadioGroupPreview() {
     }
 }
 
-// FauxRadioButtonGroup2 correctly remediates the individual RadioButton controls, but does not
-// apply single-selection list semantics to the radio button group as a whole.
+/**
+ * Constructs a deliberately semi-inaccessible group of [RadioButton] controls. Although
+ * FauxRadioButtonGroup2 correctly remediates the individual [RadioButton] controls, it fails to
+ * apply single-selection list semantics to the radio button group as a whole, i.e. the inner
+ * [Column] is not marked as a selectableGroup().
+ *
+ * @param groupLabel the radio button group label string
+ * @param itemLabels a [List] of radio button label strings
+ * @param selectedIndex the currently selected [RadioButton]'s index in the itemLabels list
+ * @param selectHandler callback for selecting a [RadioButton]
+ * @param modifier optional [Modifier] for the radio button group's [Column] layout
+ */
 @Composable
-fun FauxRadioButtonGroup2(
+private fun FauxRadioButtonGroup2(
     groupLabel: String,
     itemLabels: List<String>,
     selectedIndex: Int,
@@ -208,7 +242,7 @@ fun FauxRadioButtonGroup2(
 ) {
     Column(modifier = modifier) {
         Text(groupLabel)
-        // Key mistake 1: The following Column needs Modifier.selectableGroup() to supply
+        // Key mistake: The following Column needs Modifier.selectableGroup() to supply
         // single-selection list semantics to the group.
         Column {
             itemLabels.forEachIndexed { index: Int, label: String ->
@@ -245,11 +279,11 @@ fun FauxRadioButtonGroup2(
 
 @Preview(showBackground = true)
 @Composable
-fun FauxRadioGroupPreview2() {
+private fun FauxRadioGroupPreview2() {
     val options = listOf("Banana", "Grape", "Orange")
-    val (selectedOption, setSelectedOption) = remember { mutableStateOf(0) }
-    ComposeAccessibilityTechniquesTheme() {
-        Column() {
+    val (selectedOption, setSelectedOption) = remember { mutableIntStateOf(0) }
+    ComposeAccessibilityTechniquesTheme {
+        Column {
             FauxRadioButtonGroup2(
                 groupLabel = "Pick a fruit:",
                 itemLabels = options,

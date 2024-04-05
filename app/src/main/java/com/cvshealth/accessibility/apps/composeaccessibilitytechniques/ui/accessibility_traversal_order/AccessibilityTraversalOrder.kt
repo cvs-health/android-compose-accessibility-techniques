@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -56,6 +56,15 @@ const val accessibilityTraversalOrderExample3RowTestTag = "accessibilityTraversa
 const val accessibilityTraversalOrderExample3MainColumnTestTag = "accessibilityTraversalOrderExample3MainColumn"
 const val accessibilityTraversalOrderExample3SidebarColumnTestTag = "accessibilityTraversalOrderExample3SidebarColumn"
 
+/**
+ * Demonstrate techniques regarding accessibility traversal order. This demonstration illustrates
+ * traversal using TalkBack reading order, but the same techniques also apply to Switch Access focus
+ * order.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun AccessibilityTraversalOrderScreen(
     onBackPressed: () -> Unit
@@ -89,14 +98,14 @@ fun AccessibilityTraversalOrderScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         AccessibilityTraversalOrderScreen {}
     }
 }
 
 @Composable
-fun BadExample1() {
+private fun BadExample1() {
     // Bad example 1: Texts in an illogical traversal order
     BadExampleHeading(
         text = stringResource(id = R.string.accessibility_traversal_order_example_1_heading),
@@ -134,7 +143,7 @@ fun BadExample1() {
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample1Preview() {
+private fun BadExample1Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -147,7 +156,7 @@ fun BadExample1Preview() {
 }
 
 @Composable
-fun GoodExample2() {
+private fun GoodExample2() {
     // Good example 2: Texts arranged in a logical traversal order with isTraversalGroup
     GoodExampleHeading(
         text = stringResource(id = R.string.accessibility_traversal_order_example_2_heading),
@@ -195,7 +204,7 @@ fun GoodExample2() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample2Preview() {
+private fun GoodExample2Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -208,7 +217,7 @@ fun GoodExample2Preview() {
 }
 
 @Composable
-fun GoodExample3() {
+private fun GoodExample3() {
     // Good example 3: Texts arranged in a different logical traversal order with isTraversalGroup
     // and traversalIndex
     GoodExampleHeading(
@@ -264,7 +273,7 @@ fun GoodExample3() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample3Preview() {
+private fun GoodExample3Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

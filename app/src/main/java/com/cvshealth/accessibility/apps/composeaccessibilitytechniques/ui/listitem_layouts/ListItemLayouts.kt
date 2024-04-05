@@ -61,6 +61,13 @@ const val listItemLayoutsExample3ListItemTestTag = "listItemLayoutsExample3ListI
 const val listItemLayoutsExample4HeadingTestTag = "listItemLayoutsExample4Heading"
 const val listItemLayoutsExample4ListItemTestTag = "listItemLayoutsExample4ListItem"
 
+/**
+ * Demonstrate accessibility techniques for [ListItem] layouts.
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun ListItemLayoutsScreen(
     onBackPressed: () -> Unit
@@ -99,7 +106,7 @@ fun ListItemLayoutsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         ListItemLayoutsScreen {}
     }
@@ -131,7 +138,7 @@ private fun GoodExample1() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample1Preview() {
+private fun GoodExample1Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -179,7 +186,7 @@ private fun GoodExample2(
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample2Preview() {
+private fun GoodExample2Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -228,7 +235,7 @@ private fun GoodExample3() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample3Preview() {
+private fun GoodExample3Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -277,7 +284,7 @@ private fun GoodExample4() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample4Preview() {
+private fun GoodExample4Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

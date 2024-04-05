@@ -39,6 +39,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -79,6 +80,14 @@ const val uxChangeAnnouncementsExample4HeadingTestTag = "uxChangeAnnouncementsEx
 const val uxChangeAnnouncementsExample4ButtonTestTag = "uxChangeAnnouncementsExample4Button"
 const val uxChangeAnnouncementsExample4AlertTestTag = "uxChangeAnnouncementsExample4LiveRegionText"
 
+/**
+ * Demonstrate accessibility techniques for UX change announcements in conformance to WCAG
+ * [Success Criterion 4.1.3 Status Messages](https://www.w3.org/TR/WCAG22/#status-messages).
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UxChangeAnnouncementsScreen(
@@ -89,7 +98,7 @@ fun UxChangeAnnouncementsScreen(
         onBackPressed = onBackPressed
     ) { modifier: Modifier ->
         val scrollState = rememberScrollState()
-        val (counterValue, setCounterValue) = rememberSaveable { mutableStateOf(0) }
+        val (counterValue, setCounterValue) = rememberSaveable { mutableIntStateOf(0) }
 
         // Box to hold scrollable Column and centered ProgressIndicator.
         Box(
@@ -361,7 +370,7 @@ fun UxChangeAnnouncementsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         UxChangeAnnouncementsScreen {}
     }

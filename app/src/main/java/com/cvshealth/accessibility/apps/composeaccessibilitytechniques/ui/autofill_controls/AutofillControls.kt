@@ -55,7 +55,15 @@ const val autofillControlsExample2HeadingTestTag = "autofillControlsExample2Head
 const val autofillControlsExample2TextField1TestTag = "autofillControlsExample2TextField1"
 const val autofillControlsExample2TextField2TestTag = "autofillControlsExample2TextField2"
 
-
+/**
+ * Demonstrate techniques regarding Autofill controls, specifically selecting the correct
+ * [AutofillType] for a control. See [AutofilledOutlinedTextField] for key techniques to implement
+ * autofill controls themselves.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun AutofillControlsScreen(
     onBackPressed: () -> Unit
@@ -89,12 +97,11 @@ fun AutofillControlsScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewWithScaffold() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         AutofillControlsScreen {}
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun BadExample1() {
     // Bad example 1: Non-autofilled name and email TextFields
@@ -146,7 +153,7 @@ private fun BadExample1() {
 @Preview(showBackground = true)
 @Composable
 private fun BadExample1Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -212,7 +219,7 @@ private fun GoodExample2() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample2Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)

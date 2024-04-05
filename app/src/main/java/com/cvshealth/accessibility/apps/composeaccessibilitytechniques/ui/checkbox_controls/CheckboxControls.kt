@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -48,6 +48,14 @@ const val checkboxControlsExample1CheckboxTestTag = "checkboxControlsExample1Che
 const val checkboxControlsExample2HeadingTestTag = "checkboxControlsExample2Heading"
 const val checkboxControlsExample2CheckboxTestTag = "checkboxControlsExample2Checkbox"
 
+/**
+ * Demonstrate the need to remediate Compose [Checkbox] controls for accessibility.
+ * See [CheckboxRow] for remediation details.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun CheckboxControlsScreen(
     onBackPressed: () -> Unit
@@ -106,12 +114,24 @@ fun CheckboxControlsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         CheckboxControlsScreen {}
     }
 }
 
+/**
+ * Creates an inaccessible [Checkbox] control. Specifically, this control does not programmatically
+ * associate the checkbox's label with the checkbox itself, as is required by WCAG
+ * [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships) and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value),
+ * so a screen reader does not announce the checkbox's label when it is focused, only the raw fact
+ * that there is a checkbox and its checked/not checked state.
+ *
+ * @param text the checkbox label string
+ * @param checked whether the checkbox is presently checked or not
+ * @param toggleHandler changes the checked/not checked state of the checkbox
+ * @param modifier optional [Modifier] for the checkbox's layout [Row]
+ */
 @Composable
 private fun FauxCheckboxRow(
     text: String,

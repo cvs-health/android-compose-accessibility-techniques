@@ -32,24 +32,25 @@ import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 /**
- * SwitchRow properly labels a Switch composable and hoists the selected state handling to its caller.
+ * Displays a properly labeled [Switch] composable and hoists the selected state handling to its
+ * caller.
  *
  * SwitchRow applies the following key techniques:
- * 1. The Row() applied Modifier.toggleable() with role=Role.Switch and performs click handling at
- *    the Row level.
+ * 1. The [Row] applied Modifier.toggleable() with role=Role.Switch and performs click handling at
+ * the [Row] level.
  * 2. Applying click handling at this level automatically applies semantics(mergeDescentants = true)
- *    which programmatically associates the Text() label with the Switch().
- * 3. The Switch() composable itself has a null onClick handler; clicks are handled at the
- *    Row()-level only. (This prevents the Switch() from becoming a separate focusable element
- *    within the Row(), leading to a poor audio user experience.)
- * 4. Given that the Switch() is no longer clickable, appropriate padding is applied manually
- *    with .minimumInteractiveComponentSize() to replace the automatic padding that Compose adds to
- *    clickable elements.
+ * which programmatically associates the [Text] label with the [Switch].
+ * 3. The [Switch] composable itself has a null onClick handler; clicks are handled at the
+ * [Row]-level only. (This prevents the [Switch] from becoming a separate focusable element
+ * within the [Row], leading to a poor audio user experience.)
+ * 4. Given that the [Switch] is no longer clickable, appropriate padding is applied manually
+ * with Modifier.minimumInteractiveComponentSize() to replace the automatic padding that Compose
+ * adds to clickable elements.
  *
- * @param text label string for the Switch
- * @param checked the current Switch state
- * @param toggleHandler sets the current Switch state
- * @param modifier settings for the wrapping Row
+ * @param text label string for the [Switch]
+ * @param checked the current [Switch] state
+ * @param toggleHandler callback that sets the current [Switch] state
+ * @param modifier optional [Modifier] for the layout [Row]
  */
 @Composable
 fun SwitchRow(
@@ -80,8 +81,8 @@ fun SwitchRow(
 
 @Preview(showBackground = true)
 @Composable
-fun SwitchRowPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun SwitchRowPreview() {
+    ComposeAccessibilityTechniquesTheme {
         val (switchValue, setSwitchValue) = remember { mutableStateOf(false) }
         SwitchRow(
             text = "Test Switch",

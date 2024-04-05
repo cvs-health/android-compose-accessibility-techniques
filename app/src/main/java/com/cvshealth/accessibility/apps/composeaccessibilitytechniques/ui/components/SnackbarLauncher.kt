@@ -16,14 +16,30 @@
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components
 
 import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+/**
+ * Encapsulates the data and operation of displaying a Snackbar.
+ *
+ * @property coroutineScope the [CoroutineScope] in which to launch Snackbar display
+ * @property snackbarHostState the [SnackbarHostState] provided to the Scaffold and used to show a
+ * Snackbar
+ */
 class SnackbarLauncher(
-    val coroutineScope: CoroutineScope,
+    private val coroutineScope: CoroutineScope,
     val snackbarHostState: SnackbarHostState,
 ) {
+    /**
+     * Display a simple Snackbar pop-up message without actions.
+     *
+     * @param message text to be shown in the Snackbar
+     * @param withDismissAction a boolean to show a dismiss action in the Snackbar
+     * @param duration duration to control how long snackbar will be shown in [SnackbarHost], either
+     * [SnackbarDuration.Short], [SnackbarDuration.Long] or [SnackbarDuration.Indefinite].
+     */
     fun show(
         message: String,
         withDismissAction: Boolean = true,

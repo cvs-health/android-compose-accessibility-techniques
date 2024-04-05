@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -75,6 +75,14 @@ const val listSemanticsExample4Column4TestTag = "listSemanticsExample4Column4"
 const val listSemanticsExample4Column5TestTag = "listSemanticsExample4Column5"
 const val listSemanticsExample4Column6TestTag = "listSemanticsExample4Column6"
 
+/**
+ * Demonstrate accessibility techniques for list semantics in accordance with WCAG
+ * [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships) and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value).
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun ListSemanticsScreen(
     onBackPressed: () -> Unit
@@ -110,7 +118,7 @@ fun ListSemanticsScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewWithScaffold() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         ListSemanticsScreen {}
     }
 }
@@ -162,7 +170,7 @@ private fun BadExample1() {
 @Preview(showBackground = true)
 @Composable
 private fun BadExample1Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -208,7 +216,7 @@ private fun GoodExample2() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample2Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -254,7 +262,7 @@ private fun GoodExample3() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample3Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -270,7 +278,6 @@ private fun LazyRowItem(
     @StringRes textId: Int,
     modifier: Modifier = Modifier
 ) {
-    MaterialTheme.colorScheme.onSurface
     Box(
         modifier = modifier
             .padding(end = 8.dp)
@@ -345,7 +352,7 @@ private fun GoodExample4() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample4Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)

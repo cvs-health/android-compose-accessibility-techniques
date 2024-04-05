@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -76,7 +75,13 @@ const val contentGroupingCardExample4CardTestTag = "contentGroupingCardExample4C
 const val contentGroupingCardExample5CardTestTag = "contentGroupingCardExample5Card"
 const val contentGroupingCardExample6CardTestTag = "contentGroupingCardExample6Card"
 
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * Demonstrate accessibility techniques regarding content grouping.
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun ContentGroupingScreen(
     onBackPressed: () -> Unit
@@ -133,7 +138,7 @@ fun ContentGroupingScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewWithScaffold() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         ContentGroupingScreen {}
     }
 }
@@ -200,7 +205,7 @@ private fun BadExample1() {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewBadExample1() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -266,7 +271,7 @@ private fun BadExample2() {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewBadExample2() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -336,7 +341,7 @@ private fun GoodExample3() {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewGoodExample3() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -386,7 +391,7 @@ private fun BadExample4() {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewBadExample4() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -445,7 +450,7 @@ private fun GoodExample5() {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewGoodExample5() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -457,7 +462,6 @@ private fun PreviewGoodExample5() {
 }
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class)
 private fun GoodExample6(
     snackbarLauncher: SnackbarLauncher?
 ) {
@@ -513,7 +517,7 @@ private fun GoodExample6(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewGoodExample6() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)

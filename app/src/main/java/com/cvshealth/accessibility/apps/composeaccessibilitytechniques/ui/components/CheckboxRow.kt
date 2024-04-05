@@ -32,19 +32,19 @@ import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 /**
- * CheckboxRow properly labels a Switch composable and hoists the selected state handling to its caller.
+ * Properly labels a [Checkbox] composable and hoists the selected state handling to its caller.
  *
  * CheckboxRow applies the following key techniques:
- * 1. The Row() applied Modifier.toggleable() with role=Role.Checkbox and performs click handling at
- *    the Row level.
- * 2. Applying click handling at this level automatically applies semantics(mergeDescentants = true)
- *    which programmatically associates the Text() label with the Checkbox().
- * 3. The Checkbox() composable itself has a null onClick handler; clicks are handled at the
- *    Row()-level only. (This prevents the Checkbox() from becoming a separate focusable element
- *    within the Row(), leading to a poor audio user experience.)
- * 4. Given that the Checkbox() is no longer clickable, appropriate padding is applied manually
- *    with .minimumInteractiveComponentSize() to replace the automatic padding that Compose adds to
- *    clickable elements.
+ * 1. The [Row] applied Modifier.toggleable() with role=Role.Checkbox and performs click handling at
+ * the [Row] level.
+ * 2. Applying click handling at this level automatically applies semantics(mergeDescendants = true)
+ * which programmatically associates the [Text] label with the [Checkbox].
+ * 3. The [Checkbox] composable itself has a null onClick handler; clicks are handled at the
+ * [Row]-level only. (This prevents the [Checkbox] from becoming a separate focusable element
+ * within the [Row], leading to a poor audio user experience.)
+ * 4. Given that the [Checkbox] is no longer clickable, appropriate padding is applied manually
+ * with .minimumInteractiveComponentSize() to replace the automatic padding that Compose adds to
+ * clickable elements.
  *
  * @param text label for the Checkbox,
  * @param checked current state of the Checkbox,
@@ -79,8 +79,8 @@ fun CheckboxRow(
 
 @Preview(showBackground = true)
 @Composable
-fun CheckboxRowPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun CheckboxRowPreview() {
+    ComposeAccessibilityTechniquesTheme {
         val (checkboxValue, setCheckboxValue) = remember { mutableStateOf(false) }
         CheckboxRow(
             text = "Test Checkbox",

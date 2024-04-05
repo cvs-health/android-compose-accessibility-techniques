@@ -57,8 +57,8 @@ import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 
 /**
- * visibleFocusBorder - a Modifier extension that applies a highly-visible custom keyboard focus
- * indicator border to a Composable.
+ * A [Modifier] extension function that applies a highly-visible custom keyboard focus indicator
+ * border to a Composable.
  *
  * See [React to focus](https://developer.android.com/jetpack/compose/touch-input/focus/react-to-focus) for other options.
  *
@@ -84,8 +84,8 @@ fun Modifier.visibleFocusBorder(): Modifier {
 }
 
 /**
- * visibleCardFocusBorder - a Modifier extension that applies a highly-visible custom keyboard focus
- * indicator border to a Card Composable using the default Card outline shape.
+ * A [Modifier] extension that applies a highly-visible custom keyboard focus indicator border to a
+ * Card Composable using the default Card outline shape.
  */
 @Composable
 fun Modifier.visibleCardFocusBorder(): Modifier {
@@ -101,11 +101,11 @@ fun Modifier.visibleCardFocusBorder(): Modifier {
 }
 
 /**
- * VisibleFocusBorderButton - creates a standard filled Button with a visible custom keyboard focus
- * indicator border, unless an overriding BorderStroke is provided.
+ * Displays a standard filled [Button] with a visible custom keyboard focus indicator border, unless
+ * an overriding [BorderStroke] is provided.
  *
  * @param onClick called when this button is clicked
- * @param modifier the [Modifier] to be applied to this button
+ * @param modifier optional [Modifier] for the [Button]
  * @param enabled controls the enabled state of this button. When `false`, this component will not
  * respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
@@ -126,6 +126,7 @@ fun Modifier.visibleCardFocusBorder(): Modifier {
  * for this button. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this button in different states.
  * @param onClickLabel semantic / accessibility label for the [onClick] action
+ * @param content the [Button] content composable
  */
 @Composable
 fun VisibleFocusBorderButton(
@@ -187,11 +188,11 @@ fun VisibleFocusBorderButton(
 }
 
 /**
- * VisibleFocusBorderTextButton - creates a standard TextButton with a visible custom keyboard focus
- * indicator border, unless an overriding BorderStroke is provided.
+ * Displays a standard [TextButton] with a visible custom keyboard focus indicator border, unless an
+ * overriding [BorderStroke] is provided.
  *
  * @param onClick called when this button is clicked
- * @param modifier the [Modifier] to be applied to this button
+ * @param modifier optional [Modifier] for this [TextButton]
  * @param enabled controls the enabled state of this button. When `false`, this component will not
  * respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
@@ -212,6 +213,7 @@ fun VisibleFocusBorderButton(
  * for this button. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this button in different states.
  * @param onClickLabel semantic / accessibility label for the [onClick] action
+ * @param content the [TextButton] content composable
  */
 @Composable
 fun VisibleFocusBorderTextButton(
@@ -273,11 +275,11 @@ fun VisibleFocusBorderTextButton(
 }
 
 /**
- * VisibleFocusBorderIconButton - creates a standard IconButton with a visible custom keyboard focus
- * indicator border, unless an overriding BorderStroke is provided.
+ * Displays a standard [OutlinedIconButton] with a visible custom keyboard focus indicator border,
+ * unless an overriding [BorderStroke] is provided.
  *
  * @param onClick called when this icon button is clicked
- * @param modifier the [Modifier] to be applied to this icon button
+ * @param modifier optional [Modifier] for this [OutlinedIconButton]
  * @param enabled controls the enabled state of this icon button. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
@@ -354,9 +356,8 @@ fun VisibleFocusBorderIconButton(
 }
 
 /**
- * VisibleFocusIndication - a factory method for a custom [IndicationInstance] that performs custom
- * focus state drawing over a composable. Apply this [Indication] to a composable with
- * Modifier.indication().
+ * A factory method for a custom [IndicationInstance] that performs custom focus state drawing over
+ * a composable. Apply this [Indication] to a composable with Modifier.indication().
  *
  * [Indication]s provide low-level drawing control to indicate state, so they have a lot of power
  * and flexibility, but at the cost of considerable complexity. They also cannot directly access
@@ -387,8 +388,8 @@ class VisibleFocusIndication(
 }
 
 /**
- * VisibleFocusIndicationInstance performs state-based rendering of a composable. Specifically, it
- * draws a rounded rectangle over a focused composable using a theme-appropriate color.
+ * Performs state-based rendering of a composable. Specifically, it draws a rounded rectangle over a
+ * focused composable using a theme-appropriate color.
  *
  * @param themedIndicationColor Theme-based color used to draw the focus indicator
  * @param isFocusedState a State holder indicating if this composable is focused or not

@@ -54,6 +54,13 @@ const val inlineLinksExample1TextWithLinksTestTag = "inlineLinksExample1TextWith
 const val inlineLinksExample2HeadingTestTag = "inlineLinksExample2Heading"
 const val inlineLinksExample2TextWithLinksTestTag = "inlineLinksExample2TextWithLinks"
 
+/**
+ * Demonstrate accessibility techniques for links inline with text.
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Opens links in an external browser.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun InlineLinksScreen(
     onBackPressed: () -> Unit
@@ -86,7 +93,7 @@ fun InlineLinksScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         InlineLinksScreen {}
     }
@@ -162,7 +169,7 @@ private fun ProblematicExample1() {
 
 @Preview(showBackground = true)
 @Composable
-fun ProblematicExample1Preview() {
+private fun ProblematicExample1Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -201,7 +208,7 @@ private fun ProblematicExample2() {
 
 @Preview(showBackground = true)
 @Composable
-fun ProblematicExample2Preview() {
+private fun ProblematicExample2Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

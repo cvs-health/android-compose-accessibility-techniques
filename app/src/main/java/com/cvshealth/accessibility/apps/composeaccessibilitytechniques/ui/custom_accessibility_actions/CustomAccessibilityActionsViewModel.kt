@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -20,6 +20,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
+/**
+ * ViewModel for demonstrating custom accessibility actions.
+ *
+ * Surfaces methods to accept UI events from the Compose UI and a StateFlow of values to be
+ * collected by the Compose UI for display.
+ *
+ * Supports unidirectional data flow by separating this state holder from the Compose UI code.
+ * Real-world implementations would implement domain logic and data layers in addition to a state
+ * holder.
+ */
 class CustomAccessibilityActionsViewModel : ViewModel() {
     private val initialCustomActionScreenState = CustomActionScreenState(
         cardStates = mapOf(
@@ -31,6 +41,16 @@ class CustomAccessibilityActionsViewModel : ViewModel() {
     private val _customActionScreenState = MutableStateFlow(initialCustomActionScreenState)
     val customActionScreenState = _customActionScreenState.asStateFlow()
 
+    /**
+     * Handle UI events that will trigger a message back to the UI.
+     *
+     * This kind of event handling cycle would normally involve domain and data layer logic. It is
+     * simplified here for demonstration purposes, while still making clear the importance of
+     * handling events in a state holder, such as a ViewModel, rather than in the Compose UI code
+     * itself.
+     *
+     * @param messageEvent a [CustomActionMessageEvent] describing the UI action and post id
+     */
     fun handleMessageEvent(messageEvent: CustomActionMessageEvent) {
         if (messageEvent.cardId < 0 ||
             messageEvent.cardId > customActionScreenState.value.cardStates.size
@@ -52,11 +72,17 @@ class CustomAccessibilityActionsViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Clears all message events queued for UI display.
+     */
     fun clearMessageEvents() {
         _customActionScreenState.value = initialCustomActionScreenState
     }
 }
 
+/**
+ * Enumerates the available UI actions for any given card.
+ */
 enum class CustomActionType {
     ShowDetails,
     Like,
@@ -64,15 +90,24 @@ enum class CustomActionType {
     Report
 }
 
+/**
+ * Holds a UI event, indicating the action invoked and the card it was invoked on.
+ */
 data class CustomActionMessageEvent(
     val actionType: CustomActionType,
     val cardId: Int
 )
 
+/**
+ * Holds a map of card ids to actions activated on those cards.
+ */
 data class CustomActionScreenState(
     val cardStates: Map<Int, CustomActionCardState>
 )
 
+/**
+ * Holds the set of custom actions that have been activated (on an unspecified card).
+ */
 data class CustomActionCardState(
     val actionsActivated: Set<CustomActionType>
 )

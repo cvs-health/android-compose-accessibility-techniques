@@ -50,6 +50,14 @@ const val headingSemanticsLargeTextFauxHeading = "headingSemanticsLargeTextFauxH
 const val headingSemanticsContentDescriptionFauxHeading = "headingSemanticsContentDescriptionFauxHeading"
 const val headingSemanticsExample3HeadingTestTag = "headingSemanticsExample3Heading"
 
+/**
+ * Demonstrate accessibility techniques for heading semantics in conformance with WCAG
+ * [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships) and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value).
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun HeadingSemanticsScreen(
     onBackPressed: () -> Unit
@@ -91,6 +99,16 @@ fun HeadingSemanticsScreen(
     }
 }
 
+/**
+ * Displays a large-text row with icon that resembles a standard bad example heading for this app.
+ * This composable is inaccessible, because it is not semantically indicated as a heading, so screen
+ * reader users will have no indication that this text is a heading and cannot navigate to it using
+ * heading navigation. This does not conform to WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships)
+ * and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value).
+ *
+ * @param text the label to display as if it were a heading
+ * @param modifier optional [Modifier] for this composable's layout [Row]
+ */
 @Composable
 private fun LargeTextFauxHeading(
     text: String,
@@ -122,12 +140,22 @@ private fun LargeTextFauxHeading(
     }
 }
 
+/**
+ * Displays a large-text row with icon that resembles a standard bad example heading for this app
+ * and forces a TalkBack announcement that it is a heading. This composable is inaccessible, because
+ * it is not semantically indicated as a heading, so even though it announces itself as a heading, a
+ * screen reader user cannot navigate to it using heading navigation. This does not conform to WCAG
+ * [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value).
+ *
+ * @param text the label to display as if it were a heading
+ * @param modifier optional [Modifier] for this composable's layout [Row]
+ */
 @Composable
 private fun ContentDescriptionFauxHeading(
     text: String,
     modifier: Modifier = Modifier
 ) {
-    // Appends ", Heading" to the text. Never do this!
+    // Key failure: Appends ", Heading" to the text. Never do this!
     val fauxHeadingContentDescription =
         stringResource(id = R.string.heading_semantics_faux_heading_content_description, text)
     Row(
@@ -161,7 +189,7 @@ private fun ContentDescriptionFauxHeading(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewWithScaffold() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         HeadingSemanticsScreen {}
     }
 }

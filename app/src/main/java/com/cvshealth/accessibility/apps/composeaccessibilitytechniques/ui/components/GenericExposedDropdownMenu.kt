@@ -37,18 +37,18 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
 import kotlinx.coroutines.delay
 
 /**
- * GenericExposedDropdownMenu encapsulates the Exposed Dropdown menu pattern for a list of String
- * menu options. This pattern consist of the ExposedDropdownMenuBox, TextField, DropdownMenu, and
- * DropdownMenuItem composable widgets, operating in coordination. This composable contains its own
+ * Encapsulates the Exposed Dropdown menu pattern for a list of String menu options. This pattern
+ * consist of the [ExposedDropdownMenuBox], TextField, DropdownMenu, and [DropdownMenuItem]
+ * composable widgets, operating in coordination. This composable contains its own
  * expanded/collapsed state handling.
  *
  * This composable can also be applied either as a fixed, uneditable menu or as an unconstrained,
  * editable text field with a suggested list of values. However, editable menus pose accessibility
  * challenges for screen reader users as well as being keyboard traps and otherwise keyboard
- * inaccessible. While values can be typed into the OutlinedTextField with a keyboard, the dropdown
- * menu does not appear to suggest values (nor would such a list be keyboard selectable).
+ * inaccessible. While values can be typed into the [OutlinedTextField] with a keyboard, the
+ * dropdown menu does not appear to suggest values (nor would such a list be keyboard selectable).
  *
- * Note that non-editable menus are also not keyboard accessible, as of Compose BOM 2024-01-00. No
+ * Note that non-editable menus are also not keyboard accessible, as of Compose BOM 2024-04-00. No
  * remediation is known, because key events are only available to the ExposedDropdownMenuBox and the
  * OutlinedTextField, not to the ExposedDropdownMenu or DropdownMenuItem.
  *
@@ -163,7 +163,7 @@ fun GenericExposedDropdownMenu(
 @Preview(showBackground = true)
 @Composable
 private fun EmptyDropdownMenuPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         val options = listOf("Yes", "No", "It depends")
         val (menuValue, setMenuValue) = remember { mutableStateOf("")}
         GenericExposedDropdownMenu(value = menuValue, setValue = setMenuValue, options = options) {
@@ -175,7 +175,7 @@ private fun EmptyDropdownMenuPreview() {
 @Preview(showBackground = true)
 @Composable
 private fun FirstDefaultDropdownMenuPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         val options = listOf("Yes", "No", "It depends")
         val (menuValue, setMenuValue) = remember { mutableStateOf(options.first())}
         GenericExposedDropdownMenu(value = menuValue, setValue = setMenuValue, options = options) {
@@ -187,7 +187,7 @@ private fun FirstDefaultDropdownMenuPreview() {
 @Preview(showBackground = true)
 @Composable
 private fun ErrorDropdownMenuPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         val options = listOf("Yes", "No", "It depends")
         val (menuValue, setMenuValue) = remember { mutableStateOf("")}
         GenericExposedDropdownMenu(

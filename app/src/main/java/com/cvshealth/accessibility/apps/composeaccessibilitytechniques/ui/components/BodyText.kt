@@ -27,7 +27,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
-
+/**
+ * Presents medium body copy [Text] with restricted formatting and no padding.
+ *
+ * @param text body copy string
+ * @param modifier optional [Modifier] for the [Text]
+ * @param textAlign a [TextAlign] alignment setting for the [Text]
+ */
 @Composable
 fun BodyTextNoPadding(
     text: String,
@@ -43,6 +49,13 @@ fun BodyTextNoPadding(
     )
 }
 
+/**
+ * Presents medium body copy [Text] with restricted formatting and no padding.
+ *
+ * @param textId body copy string resource identifier
+ * @param modifier optional [Modifier] for the [Text]
+ * @param textAlign a [TextAlign] alignment setting for the [Text]
+ */
 @Composable
 fun BodyTextNoPadding(
     @StringRes textId: Int,
@@ -56,6 +69,13 @@ fun BodyTextNoPadding(
     )
 }
 
+/**
+ * Presents medium body copy [Text] with restricted formatting and standard top padding.
+ *
+ * @param text body copy string
+ * @param modifier optional [Modifier] for the [Text]
+ * @param textAlign a [TextAlign] alignment setting for the [Text]
+ */
 @Composable
 fun BodyText(
     text: String,
@@ -69,6 +89,13 @@ fun BodyText(
     )
 }
 
+/**
+ * Presents medium body copy [Text] with restricted formatting and standard top padding.
+ *
+ * @param textId body copy string resource identifier
+ * @param modifier optional [Modifier] for the [Text]
+ * @param textAlign a [TextAlign] alignment setting for the [Text]
+ */
 @Composable
 fun BodyText(
     @StringRes textId: Int,
@@ -82,6 +109,13 @@ fun BodyText(
     )
 }
 
+/**
+ * Presents bold body copy [Text] with restricted formatting and no padding.
+ *
+ * @param textId body copy string resource identifier
+ * @param modifier optional [Modifier] for the [Text]
+ * @param textAlign a [TextAlign] alignment setting for the [Text]
+ */
 @Composable
 fun BoldBodyTextNoPadding(
     @StringRes textId: Int,
@@ -98,6 +132,13 @@ fun BoldBodyTextNoPadding(
     )
 }
 
+/**
+ * Presents bold body copy [Text] with restricted formatting and standard top padding.
+ *
+ * @param textId body copy string resource identifier
+ * @param modifier optional [Modifier] for the [Text]
+ * @param textAlign a [TextAlign] alignment setting for the [Text]
+ */
 @Composable
 fun BoldBodyText(
     @StringRes textId: Int,

@@ -83,6 +83,13 @@ const val dropdownMenusExample2MenuItem1TestTag = "dropdownMenusExample2MenuItem
 const val dropdownMenusExample2MenuItem2TestTag = "dropdownMenusExample2MenuItem2"
 const val dropdownMenusExample2CloseMenuItemTestTag = "dropdownMenusExample2CloseMenuItem"
 
+/**
+ * Demonstrate accessibility techniques for dropdown action menus.
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun DropdownMenusScreen(
     onBackPressed: () -> Unit
@@ -119,7 +126,7 @@ fun DropdownMenusScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         DropdownMenusScreen {}
     }
@@ -206,7 +213,7 @@ private fun ProblematicExample1(
 
 @Preview(showBackground = true)
 @Composable
-fun ProblematicExample1Preview() {
+private fun ProblematicExample1Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -364,7 +371,7 @@ private fun GoodExample2(
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample2Preview() {
+private fun GoodExample2Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

@@ -95,6 +95,14 @@ const val textAlternativesExample12GroupedDecorativeIconsAndTextTestTag = "textA
 const val textAlternativesExample13HeadingTestTag = "textAlternativesExample13Heading"
 const val textAlternativesExample13GroupedDecorativeIconsAndTextTestTag = "textAlternativesExample13GroupedDecorativeIconsAndText"
 
+/**
+ * Demonstrate accessibility techniques for text alternatives to non-text content (in these cases,
+ * icons) in accordance with WCAG [Success Criterion 1.1.1 Non-text Content](https://www.w3.org/TR/WCAG22/#non-text-content).
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun TextAlternativesScreen(
     onBackPressed: () -> Unit
@@ -137,7 +145,7 @@ fun TextAlternativesScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewWithScaffold() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         TextAlternativesScreen {}
     }
 }
@@ -157,7 +165,7 @@ private fun TextAlternativesHeadingSection() {
 private fun PreviewWrapper(
     content: @Composable () -> Unit
 ) {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -663,8 +671,14 @@ private fun GoodExample13Preview() {
 
 // Helper composables:
 
+/**
+ * Helper composable to simplify creation of sample text in examples.
+ *
+ * @param textId string resource identifier for sample text to display
+ * @param modifier optional [Modifier] for [Text]
+ */
 @Composable
-fun SampleText(@StringRes textId: Int, modifier: Modifier = Modifier) {
+private fun SampleText(@StringRes textId: Int, modifier: Modifier = Modifier) {
     Text(
         stringResource(id = textId),
         modifier = modifier,
@@ -675,11 +689,19 @@ fun SampleText(@StringRes textId: Int, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun SampleTextPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         SampleText(textId = R.string.text_alternatives_title)
     }
 }
 
+/**
+ * Helper to create examples of an ungrouped [Row] containing a [Text], followed by an [Icon].
+ *
+ * @param textId string resource identifier for sample text to display
+ * @param iconId drawable resource identifier for sample [Icon] to display
+ * @param modifier optional [Modifier] for layout [Row]
+ * @param contentDescription optional content description string for [Icon]
+ */
 @Composable
 private fun UngroupedTextAndImage(
     @StringRes textId: Int,
@@ -705,7 +727,7 @@ private fun UngroupedTextAndImage(
 @Preview(showBackground = true)
 @Composable
 private fun UngroupedTextAndImagePreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         UngroupedTextAndImage(
             textId = R.string.text_alternatives_title,
             iconId = R.drawable.ic_angle_right_outline
@@ -713,6 +735,15 @@ private fun UngroupedTextAndImagePreview() {
     }
 }
 
+/**
+ * Helper to create examples of a grouped [Row] using merge semantics to combine the screen reader
+ * announcements of a [Text] followed by an [Icon].
+ *
+ * @param textId string resource identifier for sample text to display
+ * @param iconId drawable resource identifier for sample [Icon] to display
+ * @param modifier optional [Modifier] for layout [Row]
+ * @param contentDescription optional content description string for [Icon]
+ */
 @Composable
 private fun TextAndImageGroup(
     @StringRes textId: Int,
@@ -740,7 +771,7 @@ private fun TextAndImageGroup(
 @Preview(showBackground = true)
 @Composable
 private fun TextAndImageGroupPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         TextAndImageGroup(
             textId = R.string.text_alternatives_title,
             iconId = R.drawable.ic_angle_right_outline
@@ -748,6 +779,15 @@ private fun TextAndImageGroupPreview() {
     }
 }
 
+/**
+ * Helper to create examples of a grouped [Row] using merge semantics and contentDescription to
+ * replace the screen reader announcements of a [Text] followed by an [Icon].
+ *
+ * @param textId string resource identifier for sample text to display
+ * @param iconId drawable resource identifier for sample [Icon] to display
+ * @param groupContentDescriptionId content description string resource identifier for layout [Row]
+ * @param modifier optional [Modifier] for layout [Row]
+ */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun TextAndImageGroupSemanticsReplaced(
@@ -798,7 +838,7 @@ private fun TextAndImageGroupSemanticsReplaced(
 @Preview(showBackground = true)
 @Composable
 private fun TextAndImageGroupReplacedPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         TextAndImageGroupSemanticsReplaced(
             textId = R.string.text_alternatives_title,
             iconId = R.drawable.ic_angle_right_outline,
@@ -807,6 +847,16 @@ private fun TextAndImageGroupReplacedPreview() {
     }
 }
 
+/**
+ * Helper to create examples of a grouped [Row] using merge semantics to combine the screen reader
+ * announcements of a [Text] followed by an [Icon] followed by a [Text].
+ *
+ * @param textId string resource identifier for the first sample text to display
+ * @param iconId drawable resource identifier for sample [Icon] to display
+ * @param textId2 string resource identifier for the second sample text to display
+ * @param modifier optional [Modifier] for layout [Row]
+ * @param contentDescription optional content description string for [Icon]
+ */
 @Composable
 private fun TextImageAndTextGroup(
     @StringRes textId: Int,
@@ -839,7 +889,7 @@ private fun TextImageAndTextGroup(
 @Preview(showBackground = true)
 @Composable
 private fun TextImageAndTextGroupPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         TextImageAndTextGroup(
             textId = R.string.home_title,
             iconId = R.drawable.ic_angle_right_outline,

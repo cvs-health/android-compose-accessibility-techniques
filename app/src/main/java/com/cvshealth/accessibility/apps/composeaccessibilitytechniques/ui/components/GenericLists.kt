@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -86,7 +86,15 @@ fun Modifier.addListItemSemantics(
     )
 }
 
-
+/**
+ * Display a [Column] with list semantics.
+ *
+ * @param rowCount the number of rows in the list
+ * @param modifier optional [Modifier] for the list layout [Column]
+ * @param verticalArrangement optional [Arrangement.Vertical] for the list layout [Column]
+ * @param horizontalAlignment optional [Alignment.Horizontal] for the list layout [Column]
+ * @param content the content of the list layout [Column]
+ */
 @Composable
 fun GenericListColumn(
     rowCount: Int,
@@ -103,6 +111,15 @@ fun GenericListColumn(
     )
 }
 
+/**
+ * Display a [Row] with list item semantics.
+ *
+ * @param rowIndex the 0-based index of this row in the list
+ * @param modifier optional [Modifier] for the list item layout [Row]
+ * @param horizontalArrangement optional [Arrangement.Horizontal] for the list item layout [Row]
+ * @param verticalAlignment optional [Alignment.Vertical] for the list item layout [Row]
+ * @param content the content of the list item layout [Row]
+ */
 @Composable
 fun GenericListItemRow(
     rowIndex: Int,
@@ -121,8 +138,8 @@ fun GenericListItemRow(
 
 @Preview(showBackground = true)
 @Composable
-fun GenericListPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun GenericListPreview() {
+    ComposeAccessibilityTechniquesTheme {
         GenericListColumn(rowCount = 1) {
             GenericListItemRow(rowIndex = 0) {
                 Text("This is a test list item")
@@ -134,6 +151,13 @@ fun GenericListPreview() {
     }
 }
 
+/**
+ * Display a [Row] with list item semantics containing only a single [Text].
+ *
+ * @param rowIndex the 0-based index of this row in the list
+ * @param textId the string resource identifier of the list item [Text]
+ * @param modifier optional [Modifier] for the list item layout [Row]
+ */
 @Composable
 fun TextListItemRow(
     rowIndex: Int,
@@ -153,8 +177,8 @@ fun TextListItemRow(
 
 @Preview(showBackground = true)
 @Composable
-fun TextListPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun TextListPreview() {
+    ComposeAccessibilityTechniquesTheme {
         GenericListColumn(rowCount = 1) {
             TextListItemRow(
                 rowIndex = 0,
@@ -168,6 +192,13 @@ fun TextListPreview() {
     }
 }
 
+/**
+ * Display a [Row] with list item semantics containing a bullet point (as [Text]) and a [Text].
+ *
+ * @param rowIndex the 0-based index of this row in the list
+ * @param textId the string resource identifier of the list item [Text]
+ * @param modifier optional [Modifier] for the list item layout [Row]
+ */
 @Composable
 fun BulletListItemRow(
     rowIndex: Int,
@@ -200,8 +231,8 @@ fun BulletListItemRow(
 
 @Preview(showBackground = true)
 @Composable
-fun BulletListShortPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun BulletListShortPreview() {
+    ComposeAccessibilityTechniquesTheme {
         GenericListColumn(rowCount = 1) {
             BulletListItemRow(
                 rowIndex = 0,
@@ -217,8 +248,8 @@ fun BulletListShortPreview() {
 
 @Preview(showBackground = true)
 @Composable
-fun BulletListLongPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun BulletListLongPreview() {
+    ComposeAccessibilityTechniquesTheme {
         GenericListColumn(rowCount = 1) {
             BulletListItemRow(
                 rowIndex = 0,

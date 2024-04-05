@@ -36,12 +36,16 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
 const val darkAndLightThemesHeadingTestTag = "darkAndLightThemesHeading"
 
 /**
- * DarkAndLightThemesScreen -- describes Dark and Light Theme support techniques and how to observe
+ * Describes Dark and Light Theme support techniques and how to observe
  * them. Actual theme color techniques are found in Color.kt, Theme.kt, and MainActivity.kt. (Also
  * see the special coding required for custom Indication classes in CustomFocusIndicators.kt and
  * KeyboardFocusIndicators.kt.)
  *
  * Note also the techniques of setting uiMode to control theme in Previews that are shown below.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
  */
 @Composable
 fun DarkAndLightThemesScreen(
@@ -71,8 +75,8 @@ fun DarkAndLightThemesScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun DarkThemeScreenDefaultThemePreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun DarkThemeScreenDefaultThemePreview() {
+    ComposeAccessibilityTechniquesTheme {
         DarkAndLightThemesScreen(
             onBackPressed = {}
         )
@@ -86,8 +90,8 @@ fun DarkThemeScreenDefaultThemePreview() {
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 @Composable
-fun DarkThemeScreenDarkThemePreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun DarkThemeScreenDarkThemePreview() {
+    ComposeAccessibilityTechniquesTheme {
         DarkAndLightThemesScreen(
             onBackPressed = {}
         )
@@ -101,8 +105,8 @@ fun DarkThemeScreenDarkThemePreview() {
     uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 @Composable
-fun DarkThemeScreenLightThemePreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun DarkThemeScreenLightThemePreview() {
+    ComposeAccessibilityTechniquesTheme {
         DarkAndLightThemesScreen(
             onBackPressed = {}
         )

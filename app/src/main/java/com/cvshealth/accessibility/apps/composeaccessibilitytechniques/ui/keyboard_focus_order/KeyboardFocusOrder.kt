@@ -78,7 +78,13 @@ const val keyboardFocusOrderExample4HeadingTestTag = "keyboardFocusOrderExample4
 const val keyboardFocusOrderExample4Button1TestTag = "keyboardFocusOrderExample4Button1"
 const val keyboardFocusOrderExample4Button2TestTag = "keyboardFocusOrderExample4Button2"
 
-@OptIn(ExperimentalComposeUiApi::class)
+/**
+ * Demonstrate accessibility techniques for keyboard focus order.
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun KeyboardFocusOrderScreen(
     onBackPressed: () -> Unit
@@ -118,7 +124,7 @@ fun KeyboardFocusOrderScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         KeyboardFocusOrderScreen {}
     }
@@ -209,7 +215,7 @@ private fun BadExample1() {
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample1Preview() {
+private fun BadExample1Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -363,7 +369,7 @@ private fun OkExample2() {
 
 @Preview(showBackground = true)
 @Composable
-fun OkExample2Preview() {
+private fun OkExample2Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -447,7 +453,7 @@ private fun GoodExample3() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample3Preview() {
+private fun GoodExample3Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -513,7 +519,7 @@ private fun BadExample4(
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample4Preview() {
+private fun BadExample4Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

@@ -68,6 +68,13 @@ const val contentGroupReplacementExamplesRating = 3.4f
 const val contentGroupReplacementExamplesMaxRating = 5
 const val contentGroupReplacementExamplesReviews = 856
 
+/**
+ * Demonstrate techniques for replacing the accessibility announcement for a content group.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun ContentGroupReplacementScreen(
     onBackPressed: () -> Unit
@@ -103,7 +110,7 @@ fun ContentGroupReplacementScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewWithScaffold() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         ContentGroupReplacementScreen {}
     }
 }
@@ -159,7 +166,7 @@ private fun BadExample1() {
 @Preview(showBackground = true)
 @Composable
 private fun BadExample1Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -217,7 +224,7 @@ private fun BadExample2() {
 @Preview(showBackground = true)
 @Composable
 private fun BadExample2Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -301,7 +308,7 @@ private fun GoodExample3() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample3Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -378,7 +385,7 @@ private fun GoodExample4() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample4Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)

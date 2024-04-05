@@ -56,7 +56,21 @@ const val textFieldControlsExample1HeadingTestTag = "textFieldControlsExample1He
 const val textFieldControlsExample1TextFieldTestTag = "textFieldControlsExample1TextField"
 const val textFieldControlsExample1ButtonTestTag = "textFieldControlsExample1Button"
 
-@OptIn(ExperimentalComposeUiApi::class)
+/**
+ * Demonstrate accessibility techniques for TextField controls in conformance with WCAG
+ * [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships),
+ * [Success Criterion 1.3.5 Identify Input Purpose](https://www.w3.org/TR/WCAG22/#identify-input-purpose),
+ * [Success Criterion 2.1.2 No Keyboard Trap](https://www.w3.org/TR/WCAG22/#no-keyboard-trap),
+ * [Success Criterion 3.3.1 Error Identification](https://www.w3.org/TR/WCAG22/#error-identification),
+ * [Success Criterion 3.3.7 Redundant Entry](https://www.w3.org/TR/WCAG22/#redundant-entry),
+ * and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value).
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * Some key techniques are demonstrated in [AutofilledClearableOutlinedTextField].
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun TextFieldControlsScreen(
     onBackPressed: () -> Unit

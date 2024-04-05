@@ -35,7 +35,7 @@ import androidx.compose.material3.TabRowDefaults.primaryContainerColor
 import androidx.compose.material3.TabRowDefaults.primaryContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -50,17 +50,20 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
 import kotlinx.coroutines.launch
 
 /**
- * StatelessFixedTabGroup presents a fixed TabRow of String labels in Tab composables and displays
- * their corresponding tab pane content when each is selected. StatelessFixedTabGroup hoists the
- * selected tab state handling to its caller, so it is appropriate to use when the parent composable
- * must know that the tab selection has changed.
+ * Presents a fixed [TabRow] of [String] labels in [Tab] composables and displays their
+ * corresponding tab pane content when each is selected. StatelessFixedTabGroup hoists the selected
+ * tab state handling to its caller, so it is appropriate to use when the parent composable must
+ * know that the tab selection has changed.
  *
  * @param tabIndex the current selected tab index
- * @param setTabIndex sets the current selected tab index
+ * @param setTabIndex callback to set the current selected tab index
  * @param tabTitles the list of all tab titles; tabIndex must be within the range of this list
- * @param modifier Modifier of the TabRow
- * @param containerColor the color used for the background of this tab row. Use Color.Transparent to have no color.
- * @param contentColor the preferred color for content inside this tab row. Defaults to either the matching content color for containerColor, or to the current LocalContentColor if containerColor is not a color from the theme.
+ * @param modifier optional [Modifier] of the [TabRow]
+ * @param containerColor the color used for the background of this tab row. Use [Color.Transparent]
+ * to have no color.
+ * @param contentColor the preferred color for content inside this tab row. Defaults to either the
+ * matching content color for containerColor, or to the current LocalContentColor if containerColor
+ * is not a color from the theme.
  * @param content displays the contents of a tab pane, given its index
  */
 @Composable
@@ -95,14 +98,14 @@ fun StatelessFixedTabGroup(
 
 @Preview(showBackground = true)
 @Composable
-fun StatelessFixedTabGroupPreview() {
+private fun StatelessFixedTabGroupPreview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            val (tabIndex, setTabIndex) = rememberSaveable { mutableStateOf(0) }
+            val (tabIndex, setTabIndex) = rememberSaveable { mutableIntStateOf(0) }
             StatelessFixedTabGroup(
                 tabIndex = tabIndex,
                 setTabIndex = setTabIndex,
@@ -115,17 +118,17 @@ fun StatelessFixedTabGroupPreview() {
 }
 
 /**
- * StatefulFixedTabGroup presents a fixed TabRow of String labels in Tab composables and displays
- * their corresponding tab pane content when each is selected. StatefulFixedTabGroup performs its
- * own selected tab state handling without informing its parent composable, so it is only applicable
+ * Presents a fixed [TabRow] of [String] labels in [Tab] composables and displays their
+ * corresponding tab pane content when each is selected. StatefulFixedTabGroup performs its own
+ * selected tab state handling without informing its parent composable, so it is only applicable
  * when tab selection is a pure UI operation.
  *
  * rememberSaveable is used to hold tab selection state across configuration changes.
  *
  * @param tabTitles the list of all tab titles; tabIndex must be within the range of this list
- * @param modifier Modifier of the TabRow
+ * @param modifier optional [Modifier] of the [TabRow]
  * @param initialTabIndex the tab index to be initially displays; defaults to the first tab (0)
- * @param containerColor the color used for the background of this tab row. Use Color.Transparent
+ * @param containerColor the color used for the background of this tab row. Use [Color.Transparent]
  * to have no color.
  * @param contentColor the preferred color for content inside this tab row. Defaults to either the
  * matching content color for containerColor, or to the current LocalContentColor if containerColor
@@ -141,7 +144,7 @@ fun StatefulFixedTabGroup(
     contentColor: Color = primaryContentColor,
     content: @Composable (tabIndex: Int) -> Unit
 ) {
-    val (tabIndex, setTabIndex) = rememberSaveable { mutableStateOf(initialTabIndex) }
+    val (tabIndex, setTabIndex) = rememberSaveable { mutableIntStateOf(initialTabIndex) }
     StatelessFixedTabGroup(
         tabIndex = tabIndex,
         setTabIndex = setTabIndex,
@@ -154,7 +157,7 @@ fun StatefulFixedTabGroup(
 
 @Preview(showBackground = true)
 @Composable
-fun StatefulFixedTabGroupPreview() {
+private fun StatefulFixedTabGroupPreview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -172,17 +175,20 @@ fun StatefulFixedTabGroupPreview() {
 }
 
 /**
- * StatelessScrollableTabGroup presents a ScrollableTabRow of String labels in Tab composables and
- * displays their corresponding tab pane content when each is selected. StatelessScrollableTabGroup
- * hoists the selected tab state handling to its caller, so it is appropriate to use when the parent
- * composable must know that the tab selection has changed.
+ * Presents a [ScrollableTabRow] of [String] labels in [Tab] composables and displays their
+ * corresponding tab pane content when each is selected. StatelessScrollableTabGroup hoists the
+ * selected tab state handling to its caller, so it is appropriate to use when the parent composable
+ * must know that the tab selection has changed.
  *
  * @param tabIndex the current selected tab index
- * @param setTabIndex sets the current selected tab index
+ * @param setTabIndex callback to set the current selected tab index
  * @param tabTitles the list of all tab titles; tabIndex must be within the range of this list
- * @param modifier Modifier of the TabRow
- * @param containerColor the color used for the background of this tab row. Use Color.Transparent to have no color.
- * @param contentColor the preferred color for content inside this tab row. Defaults to either the matching content color for containerColor, or to the current LocalContentColor if containerColor is not a color from the theme.
+ * @param modifier optional [Modifier] of the [TabRow]
+ * @param containerColor the color used for the background of this tab row. Use [Color.Transparent]
+ * to have no color.
+ * @param contentColor the preferred color for content inside this tab row. Defaults to either the
+ * matching content color for containerColor, or to the current LocalContentColor if containerColor
+ * is not a color from the theme.
  * @param content displays the contents of a tab pane, given its index
  */
 @Composable
@@ -217,14 +223,14 @@ fun StatelessScrollableTabGroup(
 
 @Preview(showBackground = true)
 @Composable
-fun StatelessScrollableTabGroupPreview() {
+private fun StatelessScrollableTabGroupPreview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            val (tabIndex, setTabIndex) = rememberSaveable { mutableStateOf(0) }
+            val (tabIndex, setTabIndex) = rememberSaveable { mutableIntStateOf(0) }
             StatelessScrollableTabGroup(
                 tabIndex = tabIndex,
                 setTabIndex = setTabIndex,
@@ -237,17 +243,17 @@ fun StatelessScrollableTabGroupPreview() {
 }
 
 /**
- * StatefulScrollableTabGroup presents a ScrollableTabRow of String labels in Tab composables and
- * displays their corresponding tab pane content when each is selected. StatefulScrollableTabGroup
- * performs its own selected tab state handling without informing its parent composable, so it is
- * only applicable when tab selection is a pure UI operation.
+ * Presents a [ScrollableTabRow] of [String] labels in [Tab] composables and displays their
+ * corresponding tab pane content when each is selected. StatefulScrollableTabGroup performs its own
+ * selected tab state handling without informing its parent composable, so it is only applicable
+ * when tab selection is a pure UI operation.
  *
  * rememberSaveable is used to hold tab selection state across configuration changes.
  *
  * @param tabTitles the list of all tab titles; tabIndex must be within the range of this list
- * @param modifier Modifier of the TabRow
+ * @param modifier optional [Modifier] of the [TabRow]
  * @param initialTabIndex the tab index to be initially displays; defaults to the first tab (0)
- * @param containerColor the color used for the background of this tab row. Use Color.Transparent
+ * @param containerColor the color used for the background of this tab row. Use [Color.Transparent]
  * to have no color.
  * @param contentColor the preferred color for content inside this tab row. Defaults to either the
  * matching content color for containerColor, or to the current LocalContentColor if containerColor
@@ -263,7 +269,7 @@ fun StatefulScrollableTabGroup(
     contentColor: Color = primaryContentColor,
     content: @Composable (tabIndex: Int) -> Unit
 ) {
-    val (tabIndex, setTabIndex) = rememberSaveable { mutableStateOf(initialTabIndex) }
+    val (tabIndex, setTabIndex) = rememberSaveable { mutableIntStateOf(initialTabIndex) }
     StatelessScrollableTabGroup(
         tabIndex = tabIndex,
         setTabIndex = setTabIndex,
@@ -276,7 +282,7 @@ fun StatefulScrollableTabGroup(
 
 @Preview(showBackground = true)
 @Composable
-fun StatefulScrollableTabGroupPreview() {
+private fun StatefulScrollableTabGroupPreview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -293,18 +299,19 @@ fun StatefulScrollableTabGroupPreview() {
     }
 }
 
-
-
 /**
- * FixedPagedTabGroup presents a fixed TabRow of String labels in Tab composables and
- * displays their corresponding tab pane content within a HorizontalPager. FixedPagedTabGroup will
- * manage its own page state, unless a PagerState is provided by its caller.
+ * Presents a fixed [TabRow] of [String] labels in [Tab] composables and displays their
+ * corresponding tab pane content within a [HorizontalPager]. FixedPagedTabGroup will manage its own
+ * page state, unless a [PagerState] is provided by its caller.
  *
  * @param tabTitles the list of all tab titles; tabIndex must be within the range of this list
- * @param modifier Modifier of the TabRow
- * @param tabContainerColor the color used for the background of this tab row. Use Color.Transparent to have no color.
- * @param tabContentColor the preferred color for content inside this tab row. Defaults to either the matching content color for containerColor, or to the current LocalContentColor if containerColor is not a color from the theme.
- * @param pagerState the state of the HorizontalPager. Must supply the correct count of pages.
+ * @param modifier optional [Modifier] of the [TabRow]
+ * @param tabContainerColor the color used for the background of this tab row. Use
+ * [Color.Transparent] to have no color.
+ * @param tabContentColor the preferred color for content inside this tab row. Defaults to either
+ * the matching content color for containerColor, or to the current LocalContentColor if
+ * containerColor is not a color from the theme.
+ * @param pagerState the state of the [HorizontalPager]. Must supply the correct count of pages.
  * @param pagerContentPadding the padding around the entire tab pane pager.
  * @param pageSize determines how pages are laid out.
  * @param beyondBoundsPageCount pages before and after the selected tab pane to be composed.
@@ -315,7 +322,7 @@ fun StatefulScrollableTabGroupPreview() {
  * @param reverseLayout reverses direction of layout and scrolling
  * @param pageKey returns a unique, stable item key for each page index value
  * @param pageNestedScrollConnection determines how nested lists act
- * @param pageContent displays the contents of a tab pane, given its page index in the context of a PagerScope
+ * @param pageContent displays the contents of a tab pane, given its page index in the context of a [PagerScope]
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -387,7 +394,7 @@ fun FixedPagedTabGroup(
 @OptIn(ExperimentalFoundationApi::class)
 @Preview(showBackground = true)
 @Composable
-fun FixedPagedTabGroupPreview() {
+private fun FixedPagedTabGroupPreview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

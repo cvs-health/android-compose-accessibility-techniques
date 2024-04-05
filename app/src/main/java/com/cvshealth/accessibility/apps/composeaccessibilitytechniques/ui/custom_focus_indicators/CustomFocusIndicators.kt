@@ -70,7 +70,13 @@ const val customFocusIndicatorsExample6CardTestTag = "customFocusIndicatorsExamp
 const val customFocusIndicatorsExample7HeadingTestTag = "customFocusIndicatorsExample7Heading"
 const val customFocusIndicatorsExample7CardTestTag = "customFocusIndicatorsExample7Card"
 
-
+/**
+ * Demonstrate accessibility techniques for customizing keyboard focus indicators.
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun CustomFocusIndicatorsScreen(
     onBackPressed: () -> Unit

@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -58,7 +57,13 @@ const val exposedDropdownMenusExample1DropdownMenuTextFieldTestTag =
 const val exposedDropdownMenusExample2HeadingTestTag = "exposedDropdownMenusExample2Heading"
 const val exposedDropdownMenusExample2AndroidViewTestTag = "exposedDropdownMenusExample2AndroidView"
 
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * Demonstrate accessibility techniques for exposed dropdown selection menus.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun ExposedDropdownMenusScreen(
     onBackPressed: () -> Unit
@@ -173,7 +178,7 @@ fun ExposedDropdownMenusScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         ExposedDropdownMenusScreen {}
     }

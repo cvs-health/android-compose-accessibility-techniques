@@ -58,6 +58,13 @@ const val standaloneLinksExample4LinkButtonTestTag = "standaloneLinksExample4Lin
 
 private const val COMPOSE_ACCESSIBILITY_URL = "https://developer.android.com/jetpack/compose/accessibility"
 
+/**
+ * Demonstrate accessibility techniques for stand-alone links.
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun StandAloneLinksScreen(
     onBackPressed: () -> Unit

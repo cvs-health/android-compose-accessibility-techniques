@@ -38,6 +38,14 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.SuccessGreen
 
+/**
+ * Presents a [Row] containing a large title [Text] with an optional leading [Icon].
+ *
+ * @param text the title string
+ * @param modifier optional [Modifier] for the layout [Row]
+ * @param drawableId optional drawable resource identifier for a leading icon
+ * @param tint optional [Color] for the leading [Icon]
+ */
 @Composable
 fun GenericExampleTitle(
     text: String,
@@ -72,6 +80,14 @@ fun GenericExampleTitle(
     }
 }
 
+/**
+ * Presents a [Row] containing a large title [Text] with an optional leading [Icon].
+ *
+ * @param textId the title string resource identifier
+ * @param modifier optional [Modifier] for the layout [Row]
+ * @param drawableId optional drawable resource identifier for a leading icon
+ * @param tint optional [Color] for the leading [Icon]
+ */
 @Composable
 fun GenericExampleTitle(
     @StringRes textId: Int,
@@ -85,6 +101,12 @@ fun GenericExampleTitle(
     tint = tint
 )
 
+/**
+ * Particularizes a [GenericExampleTitle] with an [Icon] indicating success.
+ *
+ * @param textId the title string resource identifier
+ * @param modifier optional [Modifier] for the [GenericExampleTitle]'s layout [Row]
+ */
 @Composable
 fun GoodExampleTitle(
     @StringRes textId: Int,
@@ -98,6 +120,13 @@ fun GoodExampleTitle(
     )
 }
 
+/**
+ * Particularizes a [GenericExampleTitle] with an [Icon] indicating success and groups its content
+ * with mergeDescendants semantics.
+ *
+ * @param textId the title string resource identifier
+ * @param modifier optional [Modifier] for the [GenericExampleTitle]'s layout [Row]
+ */
 @Composable
 fun GroupedGoodExampleTitle(
     @StringRes textId: Int,
@@ -116,11 +145,17 @@ fun GroupedGoodExampleTitle(
 @Preview(showBackground = true)
 @Composable
 private fun GoodExampleTitlePreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         GoodExampleTitle(textId = R.string.content_grouping_table_example_3)
     }
 }
 
+/**
+ * Particularizes a [GenericExampleTitle] with an [Icon] indicating failure.
+ *
+ * @param textId the title string resource identifier
+ * @param modifier optional [Modifier] for the [GenericExampleTitle]'s layout [Row]
+ */
 @Composable
 fun BadExampleTitle(
     @StringRes textId: Int,
@@ -134,6 +169,13 @@ fun BadExampleTitle(
     )
 }
 
+/**
+ * Particularizes a [GenericExampleTitle] with an [Icon] indicating failure and groups its content
+ * with mergeDescendants semantics.
+ *
+ * @param textId the title string resource identifier
+ * @param modifier optional [Modifier] for the [GenericExampleTitle]'s layout [Row]
+ */
 @Composable
 fun GroupedBadExampleTitle(
     @StringRes textId: Int,
@@ -152,7 +194,7 @@ fun GroupedBadExampleTitle(
 @Preview(showBackground = true)
 @Composable
 private fun BadExampleTitlePreview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         BadExampleTitle(textId = R.string.content_grouping_card1_title)
     }
 }

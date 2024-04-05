@@ -69,7 +69,13 @@ const val keyboardActionsExample5TextFieldTestTag = "keyboardActionsExample5Text
 const val keyboardActionsExample6HeadingTestTag = "keyboardActionsExample6Heading"
 const val keyboardActionsExample6TextFieldTestTag = "keyboardActionsExample6TextField"
 
-
+/**
+ * Demonstrate accessibility techniques for keyboard actions.
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun KeyboardActionsScreen(
     onBackPressed: () -> Unit
@@ -111,7 +117,7 @@ fun KeyboardActionsScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewWithScaffold() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         KeyboardActionsScreen {}
     }
 }
@@ -151,7 +157,7 @@ private fun OkExample1() {
 @Preview(showBackground = true)
 @Composable
 private fun OkExample1Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -202,7 +208,7 @@ private fun GoodExample2() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample2Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -257,7 +263,7 @@ private fun GoodExample3(
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample3Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -268,7 +274,6 @@ private fun GoodExample3Preview() {
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun GoodExample4(
     snackbarLauncher: SnackbarLauncher?
@@ -311,7 +316,7 @@ private fun GoodExample4(
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample4Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -322,7 +327,6 @@ private fun GoodExample4Preview() {
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun GoodExample5(
     snackbarLauncher: SnackbarLauncher?
@@ -365,7 +369,7 @@ private fun GoodExample5(
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample5Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -422,7 +426,7 @@ private fun GoodExample6(
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample6Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)

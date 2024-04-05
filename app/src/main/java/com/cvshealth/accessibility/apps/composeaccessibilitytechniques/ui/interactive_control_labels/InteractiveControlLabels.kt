@@ -27,7 +27,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RangeSlider
 import androidx.compose.material3.Slider
@@ -36,6 +35,8 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -96,6 +97,14 @@ const val interactiveControlLabelsExample11ControlTestTag = "interactiveControlL
 const val interactiveControlLabelsExample12HeadingTestTag = "interactiveControlLabelsExample12Heading"
 const val interactiveControlLabelsExample12ControlTestTag = "interactiveControlLabelsExample12Control"
 
+/**
+ * Demonstrate accessibility techniques for labeling interactive controls in conformance with WCAG
+ * [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships).
+ *
+ * Applies [GenericScaffold] to wrap the screen content. Hosts Snackbars.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun InteractiveControlLabelsScreen(
     onBackPressed: () -> Unit
@@ -154,9 +163,9 @@ fun InteractiveControlLabelsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun InteractiveControlLabelsScreenPreview() {
-    ComposeAccessibilityTechniquesTheme() {
-        InteractiveControlLabelsScreen() {}
+private fun InteractiveControlLabelsScreenPreview() {
+    ComposeAccessibilityTechniquesTheme {
+        InteractiveControlLabelsScreen {}
     }
 }
 
@@ -184,7 +193,7 @@ private fun BadExample1() {
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample1Preview() {
+private fun BadExample1Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -219,7 +228,7 @@ private fun GoodExample2() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample2Preview() {
+private fun GoodExample2Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -249,7 +258,7 @@ private fun BadExample3() {
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample3Preview() {
+private fun BadExample3Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -279,7 +288,7 @@ private fun GoodExample4() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample4Preview() {
+private fun GoodExample4Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -313,7 +322,7 @@ private fun BadExample5(columnScope: ColumnScope){
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample5Preview() {
+private fun BadExample5Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -347,7 +356,7 @@ private fun GoodExample6(columnScope: ColumnScope) {
 
 @Preview(showBackground = true)
 @Composable
-fun goodExample6Preview() {
+private fun GoodExample6Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -368,17 +377,17 @@ private fun BadExample7() {
     )
     Spacer(modifier = Modifier.height(8.dp))
     val (example7SelectedRadioGroupOption, setExample7RadioGroupOption) = remember {
-        mutableStateOf(
+        mutableIntStateOf(
             0
         )
     }
-    FauxRadioGroup(
+    FauxRadioButtonGroup(
         groupLabel = stringResource(id = R.string.interactive_control_labels_radio_button_group_label),
         itemLabels = listOf(
             stringResource(id = R.string.interactive_control_labels_unassociated_radio_button_label_1),
             stringResource(id = R.string.interactive_control_labels_unassociated_radio_button_label_2)
         ),
-        current = example7SelectedRadioGroupOption,
+        selectedIndex = example7SelectedRadioGroupOption,
         selectHandler = setExample7RadioGroupOption,
         modifier = Modifier.testTag(interactiveControlLabelsExample7ControlTestTag)
     )
@@ -386,7 +395,7 @@ private fun BadExample7() {
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample7Preview() {
+private fun BadExample7Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -407,7 +416,7 @@ private fun GoodExample8() {
     )
     Spacer(modifier = Modifier.height(8.dp))
     val (example8SelectedRadioGroupOption, setExample8RadioGroupOption) = remember {
-        mutableStateOf(
+        mutableIntStateOf(
             0
         )
     }
@@ -425,7 +434,7 @@ private fun GoodExample8() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample8Preview() {
+private fun GoodExample8Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -465,7 +474,7 @@ private fun GoodExample9(
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample9Preview() {
+private fun GoodExample9Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -489,7 +498,7 @@ private fun BadExample10() {
         id = R.string.interactive_control_labels_unassociated_slider_label
     )
     BodyText(slider1LabelText)
-    val (slider1Value, setSlider1Value) = remember { mutableStateOf(0.0f) }
+    val (slider1Value, setSlider1Value) = remember { mutableFloatStateOf(0.0f) }
     Slider(
         value = slider1Value,
         onValueChange = setSlider1Value,
@@ -502,7 +511,7 @@ private fun BadExample10() {
 
 @Preview(showBackground = true)
 @Composable
-fun BadExample10Preview() {
+private fun BadExample10Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -525,7 +534,7 @@ private fun OkExample11() {
     Spacer(modifier = Modifier.height(8.dp))
 
     BodyText(textId = R.string.interactive_control_labels_associated_slider_label)
-    val (slider2Value, setSlider2Value) = remember { mutableStateOf(0.0f) }
+    val (slider2Value, setSlider2Value) = remember { mutableFloatStateOf(0.0f) }
     val slider2ContentDescription = stringResource(
         id = R.string.interactive_control_labels_associated_slider_content_description
     )
@@ -594,7 +603,7 @@ private fun OkExample11() {
 
 @Preview(showBackground = true)
 @Composable
-fun OkExample11Preview() {
+private fun OkExample11Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -606,9 +615,8 @@ fun OkExample11Preview() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProblematicExample12() {
+private fun ProblematicExample12() {
     // Problematic example 12: RangeSlider with associated field label
     ProblematicExampleHeading(
         text = stringResource(id = R.string.interactive_control_labels_example_12),
@@ -635,7 +643,7 @@ fun ProblematicExample12() {
         onValueChange = setRangeSlider2Value,
         modifier = Modifier
             .testTag(interactiveControlLabelsExample12ControlTestTag)
-            .semantics() {
+            .semantics {
                 // RangeSlider contentDescription must duplicate label text, because
                 // RangeSlider does not support a text label, just as Slider does not.
                 contentDescription = rangeSlider2ContentDescription
@@ -653,7 +661,7 @@ fun ProblematicExample12() {
 
 @Preview(showBackground = true)
 @Composable
-fun ProblematicExample12Preview() {
+private fun ProblematicExample12Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -665,7 +673,7 @@ fun ProblematicExample12Preview() {
     }
 }
 
-/*
+/**
  * FauxCheckboxRow fails to properly labels a Checkbox composable in the following ways:
  * 1. The Row() does not apply Modifier.toggleable() with role=Role.Checkbox and row-level click
  *    handling.
@@ -677,6 +685,11 @@ fun ProblematicExample12Preview() {
  *
  * Also, the tappable area of the Checkbox is fragile, because appropriate padding is only added
  * automatically by Compose since the Switch is clickable.
+ *
+ * @param text the [Checkbox] control's label string
+ * @param checked the current [Checkbox] state
+ * @param toggleHandler callback for toggling the [Checkbox]
+ * @param modifier optional [Modifier] for the [Checkbox] control's layout [Row]
  */
 @Composable
 private fun FauxCheckboxRow(
@@ -699,8 +712,8 @@ private fun FauxCheckboxRow(
 
 @Preview(showBackground = true)
 @Composable
-fun FauxCheckboxRowPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun FauxCheckboxRowPreview() {
+    ComposeAccessibilityTechniquesTheme {
         val (checkBoxValue, setCheckboxValue) = remember { mutableStateOf(false) }
         FauxCheckboxRow(
             text = "Test Checkbox",
@@ -711,20 +724,26 @@ fun FauxCheckboxRowPreview() {
 }
 
 /**
- * FauxSwitchRow fails to properly label a Switch composable in the following ways:
- * 1. The Row() does not apply Modifier.toggleable() with role=Role.Switch and row-level click
- *    handling.
- * 2. Nor does the Row apply semantics(mergeDescendants = true), which is automatic with a
- *    toggleable() click handler, so the Text() label is not programmatically-associated with the
- *    Switch().
- * 3. The Switch() composable itself performs the onClick handling, so it is a separate, unlabeled
- *    focusable element, leading to a confusing user experience.
+ * Displays a deliberately inaccessible [Switch] control. This control fails to properly label the
+ * [Switch] composable in the following ways:
+ * 1. The [Row] layout does not apply Modifier.toggleable() with role=Role.Switch and row-level
+ * click handling.
+ * 2. Nor does the [Row] apply semantics(mergeDescendants = true), which is automatic with a
+ * toggleable() click handler, so the [Text] label is not programmatically-associated with the
+ * [Switch].
+ * 3. The [Switch] composable itself performs the onClick handling, so it is a separate, unlabeled
+ * focusable element, leading to a confusing user experience.
  *
- * Also, the tappable area of the Switch is fragile, because appropriate padding is only added
- * automatically by Compose since the Switch is clickable.
+ * Also, the tappable area of the [Switch] is fragile, because appropriate padding is only added
+ * automatically by Compose since the [Switch] is clickable.
+ *
+ * @param text the [Switch] control's label string
+ * @param checked the current [Switch] state
+ * @param toggleHandler callback for toggling the [Switch]
+ * @param modifier optional [Modifier] for the [Switch] control's layout [Row]
  */
 @Composable
-fun FauxSwitchRow(
+private fun FauxSwitchRow(
     text: String,
     checked: Boolean,
     toggleHandler: (Boolean) -> Unit,
@@ -744,8 +763,8 @@ fun FauxSwitchRow(
 
 @Preview(showBackground = true)
 @Composable
-fun FauxSwitchRowPreview() {
-    ComposeAccessibilityTechniquesTheme() {
+private fun FauxSwitchRowPreview() {
+    ComposeAccessibilityTechniquesTheme {
         val (switchValue, setSwitchValue) = remember { mutableStateOf(false) }
         FauxSwitchRow(
             text = "Test Switch",
@@ -756,20 +775,27 @@ fun FauxSwitchRowPreview() {
 }
 
 /**
- * FauxRadioGroup fails to implement proper accessibility semantics in the following ways:
+ * Constructs a deliberately inaccessible group of [RadioButton] controls. Fails to implement proper
+ * accessibility semantics in the following ways:
  * 1. The Column is not marked as an selectableGroup().
  * 2. The Row is not selectable() with Role.RadioButton. This means the Text() and RadioButton() are
  *    not programmatically-associated and makes the touch target smaller.
  * 3. The RadioButton selection click handler is non-null; this should be handled by the Row-level
  *    selectable().
  * Also, the tap target size of the RadioButton is fragile: it is automatically expanded to 48x48 dp
- * by Compose, only because it is clickable.
+ * by Compose only because it is clickable.
+ *
+ * @param groupLabel the radio button group label string
+ * @param itemLabels a [List] of radio button label strings
+ * @param selectedIndex the currently selected [RadioButton]'s index in the itemLabels list
+ * @param selectHandler callback for selecting a [RadioButton]
+ * @param modifier optional [Modifier] for the radio button group's [Column] layout
  */
 @Composable
-fun FauxRadioGroup(
+private fun FauxRadioButtonGroup(
     groupLabel: String,
     itemLabels: List<String>,
-    current: Int,
+    selectedIndex: Int,
     selectHandler: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -781,7 +807,7 @@ fun FauxRadioGroup(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 RadioButton(
-                    selected = (current == index),
+                    selected = (selectedIndex == index),
                     onClick = { selectHandler(index) }
                 )
                 Text(text = label, modifier = Modifier.padding(start = 8.dp))
@@ -792,14 +818,14 @@ fun FauxRadioGroup(
 
 @Preview(showBackground = true)
 @Composable
-fun FauxRadioGroupPreview() {
+private fun FauxRadioGroupPreview() {
     val options = listOf( "Banana", "Grape", "Orange")
-    val (selectedOption, setSelectedOption) = remember { mutableStateOf(0) }
-    ComposeAccessibilityTechniquesTheme() {
-        FauxRadioGroup(
+    val (selectedOption, setSelectedOption) = remember { mutableIntStateOf(0) }
+    ComposeAccessibilityTechniquesTheme {
+        FauxRadioButtonGroup(
             groupLabel = "Pick a fruit:",
             itemLabels = options,
-            current = selectedOption,
+            selectedIndex = selectedOption,
             selectHandler = setSelectedOption
         )
     }

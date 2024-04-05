@@ -60,6 +60,14 @@ const val accordionExample2Item1TestTag = "accordionExample2Item1"
 const val accordionExample2Item2TestTag = "accordionExample2Item2"
 const val accordionExample2Item3TestTag = "accordionExample2Item3"
 
+/**
+ * Demonstrate techniques for implementing Accordion controls with semantic expand/collapse
+ * functionality in conformance with WCAG [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value).
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun AccordionControlsScreen(
     onBackPressed: () -> Unit
@@ -130,11 +138,21 @@ fun AccordionControlsScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewWithScaffold() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         AccordionControlsScreen {}
     }
 }
 
+/**
+ * Creates an accordion heading control that expands and collapses content, but does not provide
+ * support for assistive technologies by indicating that expand/collapse semantics apply. This
+ * control does not conform to WCAG [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value),
+ * because it lacks that semantic support.
+ *
+ * @param text the control's text label string
+ * @param modifier optional [Modifier] for control's wrapping layout [Column]
+ * @param content the composable content to be hidden/revealed by this accordion-style control
+ */
 @Composable
 private fun FauxAccordionHeading(
     text: String,

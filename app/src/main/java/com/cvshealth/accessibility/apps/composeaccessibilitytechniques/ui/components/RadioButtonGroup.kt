@@ -25,7 +25,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,25 +35,25 @@ import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
 /**
- * RadioGroup presents a list of String labels are radio button options and hoists the selected
- * option state handling to its caller.
+ * Presents a list of [String] labels as [RadioButton] options and hoists the selected option state
+ * handling to its caller.
  *
- * RadioGroup applies the following key techniques:
- * 1. The Column with the list of radio buttons applies Modifier.selectableGroup(), which adds
+ * RadioButtonGroup applies the following key techniques:
+ * 1. The [Column] with the list of radio buttons applies Modifier.selectableGroup(), which adds
  *    single-selection list semantics. (It could be argued whether the group label Text() should be
  *    inside or outside the selectableGroup(). Each way has advantages and disadvantages at present.)
- * 2. Each radio button Row() applied Modifier.selectable() with role=Role.RadioButton and performs
+ * 2. Each radio button [Row] applied Modifier.selectable() with role=Role.RadioButton and performs
  *    click handling at the Row level.
- * 3. Each RadioButton() has a null onClick handler; clicks are handled at the Row()-level only.
- * 4. Given that the RadioButton is no longer clickable, appropriate padding is applied manually
- *    with .minimumInteractiveComponentSize() to replace the automatic padding that Compose adds to
- *    clickable elements.
+ * 3. Each [RadioButton] has a null onClick handler; clicks are handled at the [Row]-level only.
+ * 4. Given that the [RadioButton] is no longer clickable, appropriate padding is applied manually
+ *    with Modifier.minimumInteractiveComponentSize() to replace the automatic padding that Compose
+ *    adds to clickable elements.
  *
  * @param groupLabel label string for the radio button group
  * @param itemLabels list of radio button label strings
- * @param selectedIndex the currently selected radio button's 0-based index
- * @param selectHandler: sets the currently selected radio button, given its index value
- * @param modifier setting for the wrapping Column
+ * @param selectedIndex the currently selected radio button's 0-based index in the [itemLabels] list
+ * @param selectHandler: callback to set the currently selected radio button, given its index value
+ * @param modifier optional [Modifier] for the RadioButtonGroup layout [Column]
  */
 @Composable
 fun RadioButtonGroup(
@@ -102,11 +102,11 @@ fun RadioButtonGroup(
 
 @Preview(showBackground = true)
 @Composable
-fun RadioGroupPreview() {
+private fun RadioGroupPreview() {
     val options = listOf("Banana", "Grape", "Orange")
-    val (selectedOption, setSelectedOption) = remember { mutableStateOf(0) }
-    ComposeAccessibilityTechniquesTheme() {
-        Column() {
+    val (selectedOption, setSelectedOption) = remember { mutableIntStateOf(0) }
+    ComposeAccessibilityTechniquesTheme {
+        Column {
             RadioButtonGroup(
                 groupLabel = "Pick a fruit:",
                 itemLabels = options,

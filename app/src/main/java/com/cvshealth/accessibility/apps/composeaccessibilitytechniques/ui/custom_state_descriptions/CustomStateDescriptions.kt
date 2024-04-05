@@ -1,5 +1,5 @@
 /*
-   Copyright 2023 CVS Health and/or one of its affiliates
+   Copyright 2023-2024 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -52,6 +52,13 @@ const val customStateDescriptionsExample3SwitchTestTag = "customStateDescription
 const val customStateDescriptionsExample4HeadingTestTag = "customStateDescriptionsExample4Heading"
 const val customStateDescriptionsExample4SwitchTestTag = "customStateDescriptionsExample4Switch"
 
+/**
+ * Demonstrate accessibility techniques for customizing state description announcements by TalkBack.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun CustomStateDescriptionsScreen(
     onBackPressed: () -> Unit
@@ -87,7 +94,7 @@ fun CustomStateDescriptionsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewWithScaffold() {
+private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         CustomStateDescriptionsScreen {}
     }
@@ -111,7 +118,7 @@ private fun OkExample1() {
 
 @Preview(showBackground = true)
 @Composable
-fun OkExample1Preview() {
+private fun OkExample1Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -157,7 +164,7 @@ private fun GoodExample2() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample2Preview() {
+private fun GoodExample2Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -187,7 +194,7 @@ private fun OkExample3() {
 
 @Preview(showBackground = true)
 @Composable
-fun OkExample3Preview() {
+private fun OkExample3Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -233,7 +240,7 @@ private fun GoodExample4() {
 
 @Preview(showBackground = true)
 @Composable
-fun GoodExample4Preview() {
+private fun GoodExample4Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

@@ -31,6 +31,24 @@ import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 
+/**
+ * Create an accessible, labeled [Slider] control.
+ *
+ * Adds semantic labeling, keyboard operability with navigation key adjustment, an override for the
+ * default [Slider] state description announcement ("xx percent"), and liveRegion semantics.
+ *
+ * @param label label text string
+ * @param value the current [Slider] value
+ * @param onValueChange callback for [Slider] value change
+ * @param modifier optional [Modifier] for [Slider]
+ * @param enabled the enabled state of this [Slider]
+ * @param valueRange optional [ClosedFloatingPointRange] of allowed values for [Slider]
+ * @param steps optional discrete step count between start and end points of [Slider]
+ * @param onValueChangeFinished callback for [Slider] completion of value change operations
+ * @param colors optional [SliderColors] for [Slider]
+ * @param interactionSource optional [MutableInteractionSource] for [Slider]
+ * @param toStateDescription optional callback to map [Slider] value to a state description message string
+ */
 @Composable
 fun GenericSlider(
     label: String,

@@ -77,6 +77,13 @@ const val keyboardTypesExample13TextFieldTestTag = "keyboardTypesExample13TextFi
 const val keyboardTypesExample14HeadingTestTag = "keyboardTypesExample14Heading"
 const val keyboardTypesExample14TextFieldTestTag = "keyboardTypesExample14TextField"
 
+/**
+ * Demonstrate accessibility techniques for on-screen (virtual, soft) keyboard types.
+ *
+ * Applies [GenericScaffold] to wrap the screen content.
+ *
+ * @param onBackPressed handler function for "Navigate Up" button
+ */
 @Composable
 fun KeyboardTypesScreen(
     onBackPressed: () -> Unit
@@ -122,7 +129,7 @@ fun KeyboardTypesScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewWithScaffold() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         KeyboardTypesScreen {}
     }
 }
@@ -155,7 +162,7 @@ private fun BadExample1() {
 @Preview(showBackground = true)
 @Composable
 private fun BadExample1Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -195,7 +202,7 @@ private fun BadExample2() {
 @Preview(showBackground = true)
 @Composable
 private fun BadExample2Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -236,7 +243,7 @@ private fun GoodExample3() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample3Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -277,7 +284,7 @@ private fun GoodExample4() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample4Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -318,7 +325,7 @@ private fun GoodExample5() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample5Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -357,7 +364,7 @@ private fun GoodExample6() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample6Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -396,7 +403,7 @@ private fun GoodExample7() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample7Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -440,7 +447,7 @@ private fun GoodExample8() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample8Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -482,7 +489,7 @@ private fun GoodExample9() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample9Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -524,7 +531,7 @@ private fun GoodExample10() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample10Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -565,7 +572,7 @@ private fun GoodExample11() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample11Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -604,7 +611,7 @@ private fun GoodExample12() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample12Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -647,7 +654,7 @@ private fun GoodExample13() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample13Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -688,7 +695,7 @@ private fun GoodExample14() {
 @Preview(showBackground = true)
 @Composable
 private fun GoodExample14Preview() {
-    ComposeAccessibilityTechniquesTheme() {
+    ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)

@@ -32,7 +32,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accessibility_traversal_order.AccessibilityTraversalOrderScreen
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_actions.KeyboardActionsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.AccordionControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.adaptive_layouts.AdaptiveLayoutsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.autofill_controls.AutofillControlsScreen
@@ -50,6 +49,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.headin
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.home.HomeScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.inline_links.InlineLinksScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.InteractiveControlLabelsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_actions.KeyboardActionsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_focus_order.KeyboardFocusOrderScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_types.KeyboardTypesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.list_semantics.ListSemanticsScreen
@@ -68,6 +68,14 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.textfi
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.ux_change_announcements.UxChangeAnnouncementsScreen
 
+/**
+ * Define the sole Activity in the application.
+ *
+ * Sets the composable content and app theme.
+ *
+ * Owns the app navigation controller and the current display's window size class (for adaptive
+ * screen resizing).
+ */
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -93,8 +101,18 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+/**
+ *  Declares all composables that can be navigated to, passing them the backstack navigation
+ *  function and window size class, as appropriate.
+ *
+ *  Defines the [NavHost] and the popBackStack() navigation function.
+ *
+ *  @param navController the main application [NavHostController]
+ *  @param windowSizeClass the display's [WindowSizeClass], used in adaptive screen layout
+ *  @param modifier an optional [Modifier] to adjust display of the [NavHost] within the application
+ */
 @Composable
-fun ComposeAccessibilityTechniquesNavHost(
+private fun ComposeAccessibilityTechniquesNavHost(
     navController: NavHostController,
     windowSizeClass: WindowSizeClass,
     modifier: Modifier = Modifier
@@ -104,8 +122,15 @@ fun ComposeAccessibilityTechniquesNavHost(
         startDestination = "home",
         modifier = modifier
     ) {
+        // Declare a generic function for popping the navigation back stack. Used by screens for
+        // their "Navigate Up" button handling.
         val popBackStack: () -> Unit = { navController.popBackStack() }
+
         composable(route = ComposeAccessibilityTechniquesRoute.Home.route) {
+            // Note: popBackStack() and the HomeScreen onNavigationButtonClicked() lambda declared
+            // here are the only access to the navController outside of this function. Restricting
+            // access to the NavController like this is considered a best practice: do not pass the
+            // navController itself into the app, only functions which use it in specific ways.
             HomeScreen { route: ComposeAccessibilityTechniquesRoute ->
                 navController.navigate(route.route)
             }

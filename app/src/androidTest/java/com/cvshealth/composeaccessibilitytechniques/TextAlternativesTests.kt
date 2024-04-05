@@ -35,10 +35,12 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_a
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample11Icon1TestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample11Icon2TestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample11TextTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample12GroupedDecorativeIconsAndTextTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample12GroupTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample12HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample13GroupedDecorativeIconsAndTextTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample13GroupTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample13HeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample14GroupTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample14HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample1HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample1UngroupedTextAndIcon1TestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample1UngroupedTextAndIcon2TestTag
@@ -136,6 +138,9 @@ class TextAlternativesTests {
             .assertExists()
         composeTestRule
             .onNode(hasTestTag(textAlternativesExample13HeadingTestTag) and isHeading())
+            .assertExists()
+        composeTestRule
+            .onNode(hasTestTag(textAlternativesExample14HeadingTestTag) and isHeading())
             .assertExists()
     }
 
@@ -393,7 +398,7 @@ class TextAlternativesTests {
         // Example 12
         composeTestRule
             .onNode(
-                hasTestTag(textAlternativesExample12GroupedDecorativeIconsAndTextTestTag)
+                hasTestTag(textAlternativesExample12GroupTestTag)
                         and
                         !isHeading()
                         and
@@ -404,7 +409,18 @@ class TextAlternativesTests {
         // Example 13
         composeTestRule
             .onNode(
-                hasTestTag(textAlternativesExample13GroupedDecorativeIconsAndTextTestTag)
+                hasTestTag(textAlternativesExample13GroupTestTag)
+                        and
+                        !isHeading()
+                        and
+                        !hasAnyDescendant(isHeading())
+            )
+            .assertExists()
+
+        // Example 14
+        composeTestRule
+            .onNode(
+                hasTestTag(textAlternativesExample14GroupTestTag)
                         and
                         !isHeading()
                         and
@@ -775,19 +791,36 @@ class TextAlternativesTests {
     }
 
     @Test
-    fun verifyExample12GroupedTextAndIconsHaveExpectedTextAndInvisibleToUserContentDescriptions() {
+    fun verifyExample12GroupedTextAndIconsHaveExpectedTextAndEmptyContentDescriptions() {
+        composeTestRule
+            .onNode(
+                hasTestTag(textAlternativesExample12GroupTestTag)
+                        and
+                        hasTextExactly(
+                            composeTestRule.activity.getString(
+                                R.string.text_alternatives_example_12_decorated_text
+                            )
+                        )
+                        and
+                        hasContentDescriptionExactly("", "")
+            )
+            .assertExists()
+    }
+
+    @Test
+    fun verifyExample13GroupedTextAndIconsHaveExpectedTextAndInvisibleToUserContentDescriptions() {
         // It is hard to write automated tests that distinguish between texts suppressed with
         // invisibleToUser() and not those which are not. The current test on the unmerged tree
         // works around that problem by looking for a node with the expected contentDescription and
         // verifying that it is invisibleToUser.
         composeTestRule
             .onNode(
-                hasTestTag(textAlternativesExample12GroupedDecorativeIconsAndTextTestTag)
+                hasTestTag(textAlternativesExample13GroupTestTag)
                         and
                         hasAnyDescendant(
                             hasContentDescriptionExactly(
                                 composeTestRule.activity.getString(
-                                    R.string.text_alternatives_example_12_content_description
+                                    R.string.text_alternatives_example_13_content_description
                                 )
                             ) and isInvisibleToUser()
                         )
@@ -795,7 +828,7 @@ class TextAlternativesTests {
                         hasAnyDescendant(
                             hasTextExactly(
                                 composeTestRule.activity.getString(
-                                    R.string.text_alternatives_example_12_decorated_text
+                                    R.string.text_alternatives_example_13_decorated_text
                                 )
                             )
                         ),
@@ -805,16 +838,16 @@ class TextAlternativesTests {
     }
 
     @Test
-    fun verifyExample13GroupedTextAndIconsHaveExpectedTextAndNullContentDescriptions() {
+    fun verifyExample14GroupedTextAndIconsHaveExpectedTextAndNullContentDescriptions() {
         composeTestRule
             .onNode(
-                hasTestTag(textAlternativesExample13GroupedDecorativeIconsAndTextTestTag)
+                hasTestTag(textAlternativesExample14GroupTestTag)
                         and
                         hasContentDescriptionExactly()
                         and
                         hasTextExactly(
                             composeTestRule.activity.getString(
-                                R.string.text_alternatives_example_13_decorated_text
+                                R.string.text_alternatives_example_14_decorated_text
                             )
                         )
             )

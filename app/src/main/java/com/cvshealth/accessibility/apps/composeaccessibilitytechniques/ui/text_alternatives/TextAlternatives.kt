@@ -91,9 +91,11 @@ const val textAlternativesExample11Icon1TestTag = "textAlternativesExample11Icon
 const val textAlternativesExample11Icon2TestTag = "textAlternativesExample11Icon2"
 const val textAlternativesExample11TextTestTag = "textAlternativesExample11Text"
 const val textAlternativesExample12HeadingTestTag = "textAlternativesExample12Heading"
-const val textAlternativesExample12GroupedDecorativeIconsAndTextTestTag = "textAlternativesExample12GroupedDecorativeIconsAndText"
+const val textAlternativesExample12GroupTestTag = "textAlternativesExample12Group"
 const val textAlternativesExample13HeadingTestTag = "textAlternativesExample13Heading"
-const val textAlternativesExample13GroupedDecorativeIconsAndTextTestTag = "textAlternativesExample13GroupedDecorativeIconsAndText"
+const val textAlternativesExample13GroupTestTag = "textAlternativesExample13Group"
+const val textAlternativesExample14HeadingTestTag = "textAlternativesExample14Heading"
+const val textAlternativesExample14GroupTestTag = "textAlternativesExample14Group"
 
 /**
  * Demonstrate accessibility techniques for text alternatives to non-text content (in these cases,
@@ -134,8 +136,9 @@ fun TextAlternativesScreen(
             BadExample9()
             BadExample10()
             GoodExample11()
-            OkExample12()
-            GoodExample13()
+            BadExample12()
+            OkExample13()
+            GoodExample14()
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -576,34 +579,30 @@ private fun GoodExample11Preview() {
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-private fun OkExample12() {
-    // OK example 12: Grouped decorative images with invisibleToUser()
+private fun BadExample12() {
+    // Bad example 12: Grouped decorative images with empty contentDescription
 
-    // Key techniques:
-    // 1. Use Modifier.semantics(mergeDescendants = true) {} to group content semantic text.
-    // 2. Use Modifier.semantics { invisibleToUser() } to mark the Icons as not
-    //    applicable to the accessibility API.
-    // Use the invisibleToUser() technique for more complex composables, because for Icons,
-    // contentDescription=null is a simpler approach. See Good Example 13 below.
-    OkExampleHeading(
+    BadExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_12_heading),
         modifier = Modifier.testTag(textAlternativesExample12HeadingTestTag)
     )
+    BodyText(textId = R.string.text_alternatives_example_12_description)
+
+    // Key technique: Use Modifier.semantics(mergeDescendants = true) to merge the Row contents.
     Row(
         modifier = Modifier
-            .testTag(textAlternativesExample12GroupedDecorativeIconsAndTextTestTag)
+            .testTag(textAlternativesExample12GroupTestTag)
             .padding(top = 8.dp)
             .semantics(mergeDescendants = true) { },
         verticalAlignment = Alignment.CenterVertically
     ) {
+        // Key failures: Uses Icon(..., contentDescription = "").
+        // Note: Empty string contentDescriptions are a bad code smell. They change the semantics
+        // tree's contents and can affect jUnit UI tests.
         Icon(
             painter = painterResource(id = R.drawable.ic_sprout_fill),
-            contentDescription = stringResource(
-                id = R.string.text_alternatives_example_12_content_description
-            ),
-            modifier = Modifier.semantics { invisibleToUser() }
+            contentDescription = "" // Do not do this. See note above.
         )
         SampleText(
             textId = R.string.text_alternatives_example_12_decorated_text,
@@ -611,8 +610,56 @@ private fun OkExample12() {
         )
         Icon(
             painter = painterResource(id = R.drawable.ic_sprout_fill),
+            contentDescription = "" // Do not do this. See note above.
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun BadExample12Preview() {
+    PreviewWrapper {
+        BadExample12()
+    }
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+private fun OkExample13() {
+    // OK example 13: Grouped decorative images with invisibleToUser()
+
+    // Key techniques:
+    // 1. Use Modifier.semantics(mergeDescendants = true) {} to group content semantic text.
+    // 2. Use Modifier.semantics { invisibleToUser() } to mark the Icons as not
+    //    applicable to the accessibility API.
+    // Use the invisibleToUser() technique for more complex composables, because for Icons,
+    // contentDescription=null is a simpler approach. See Good Example 14 below.
+    OkExampleHeading(
+        text = stringResource(id = R.string.text_alternatives_example_13_heading),
+        modifier = Modifier.testTag(textAlternativesExample13HeadingTestTag)
+    )
+    Row(
+        modifier = Modifier
+            .testTag(textAlternativesExample13GroupTestTag)
+            .padding(top = 8.dp)
+            .semantics(mergeDescendants = true) { },
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_sprout_fill),
             contentDescription = stringResource(
-                id = R.string.text_alternatives_example_12_content_description
+                id = R.string.text_alternatives_example_13_content_description
+            ),
+            modifier = Modifier.semantics { invisibleToUser() }
+        )
+        SampleText(
+            textId = R.string.text_alternatives_example_13_decorated_text,
+            modifier = Modifier.padding(start = 4.dp, end = 4.dp)
+        )
+        Icon(
+            painter = painterResource(id = R.drawable.ic_sprout_fill),
+            contentDescription = stringResource(
+                id = R.string.text_alternatives_example_13_content_description
             ),
             modifier = Modifier.semantics { invisibleToUser() }
         )
@@ -621,26 +668,26 @@ private fun OkExample12() {
 
 @Preview(showBackground = true)
 @Composable
-private fun OkExample12Preview() {
+private fun OkExample13Preview() {
     PreviewWrapper {
-        OkExample12()
+        OkExample13()
     }
 }
 
 @Composable
-private fun GoodExample13() {
-    // Good example 13: Grouped decorative images with null contentDescription
+private fun GoodExample14() {
+    // Good example 14: Grouped decorative images with null contentDescription
 
     // Key techniques:
     // 1. Use Modifier.semantics(mergeDescendants = true) to merge the Row contents.
     // 2. Use Icon(..., contentDescription = null) to mark the images as decorative.
     GoodExampleHeading(
-        text = stringResource(id = R.string.text_alternatives_example_13_heading),
-        modifier = Modifier.testTag(textAlternativesExample13HeadingTestTag)
+        text = stringResource(id = R.string.text_alternatives_example_14_heading),
+        modifier = Modifier.testTag(textAlternativesExample14HeadingTestTag)
     )
     Row(
         modifier = Modifier
-            .testTag(textAlternativesExample13GroupedDecorativeIconsAndTextTestTag)
+            .testTag(textAlternativesExample14GroupTestTag)
             .padding(top = 8.dp)
             .semantics(mergeDescendants = true) { },
         verticalAlignment = Alignment.CenterVertically
@@ -650,7 +697,7 @@ private fun GoodExample13() {
             contentDescription = null
         )
         SampleText(
-            textId = R.string.text_alternatives_example_13_decorated_text,
+            textId = R.string.text_alternatives_example_14_decorated_text,
             modifier = Modifier.padding(start = 4.dp, end = 4.dp)
         )
         Icon(
@@ -662,9 +709,9 @@ private fun GoodExample13() {
 
 @Preview(showBackground = true)
 @Composable
-private fun GoodExample13Preview() {
+private fun GoodExample14Preview() {
     PreviewWrapper {
-        GoodExample13()
+        GoodExample14()
     }
 }
 

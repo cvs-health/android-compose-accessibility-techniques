@@ -46,6 +46,8 @@ Icon(
 )
 ```
 
+Note: _Never_ use the empty string for a `contentDescription`. If done in an isolated image, an empty `contentDescription` will cause TalkBack to announce "Unlabeled. Image", creating an accessibility issue. If done when the image is grouped with other content, TalkBack will not announce them, but these empty contentDescriptions will change the semantics tree and thus affects jUnit UI automations tests.
+
 ## Avoid redundancy in grouped content
 
 Informative non-text content that is redundant with adjacent text content should be grouped with that text content, rather than given a redundant `contentDescription`. Using `Modifier.semantics(mergeDescendants = true) { }` on the enclosing group layout (and nulling out the non-text content's `contentDescription`) is the simplest way to achieve this.

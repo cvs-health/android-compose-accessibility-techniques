@@ -65,11 +65,14 @@
     <string name="text_alternatives_example_10_decorated_text">Example decorated text.</string>
     <string name="text_alternatives_example_11_heading">Good example 11: Decorative images with null contentDescription</string>
     <string name="text_alternatives_example_11_decorated_text">Example decorated text.</string>
-    <string name="text_alternatives_example_12_heading">OK example 12: Grouped decorative images with invisibleToUser()</string>
-    <string name="text_alternatives_example_12_content_description">Sprout</string>
+    <string name="text_alternatives_example_12_heading">Bad example 12: Grouped decorative images with empty contentDescription</string>
+    <string name="text_alternatives_example_12_description">Grouping images with empty contentDescriptions hides how they are coded, because \"Unlabeled. Image\" is not announced in TalkBack. But they are a bad code smell and change the semantics tree used for automated UI tests.</string>
     <string name="text_alternatives_example_12_decorated_text">Example decorated text.</string>
-    <string name="text_alternatives_example_13_heading">Good example 13: Grouped decorative images with null contentDescription</string>
+    <string name="text_alternatives_example_13_heading">OK example 13: Grouped decorative images with invisibleToUser()</string>
+    <string name="text_alternatives_example_13_content_description">Sprout</string>
     <string name="text_alternatives_example_13_decorated_text">Example decorated text.</string>
+    <string name="text_alternatives_example_14_heading">Good example 14: Grouped decorative images with null contentDescription</string>
+    <string name="text_alternatives_example_14_decorated_text">Example decorated text.</string>
 
     <!-- Accessibility traversal order -->
     <string name="accessibility_traversal_order_title">Accessibility traversal order</string>

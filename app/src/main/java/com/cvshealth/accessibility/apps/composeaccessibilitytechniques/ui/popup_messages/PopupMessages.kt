@@ -18,26 +18,20 @@ package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.popup
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialogDefaults
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -461,97 +455,88 @@ private fun GoodExample6() {
 }
 
 @Composable
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 private fun Example6AlertDialog(
     setIsAlertDialogOpen: (Boolean) -> Unit,
     setIsShowMoreDialogOpen: (Boolean) -> Unit
 ) {
-    BasicAlertDialog(
+    AlertDialog(
         onDismissRequest = {
             setIsAlertDialogOpen(false)
         },
-        modifier = Modifier.testTag(popupMessagesExample6AlertDialogTestTag),
-    ) {
-        Surface(
-            modifier = Modifier
-                .wrapContentWidth()
-                .wrapContentHeight(),
-            shape = MaterialTheme.shapes.extraLarge,
-            tonalElevation = AlertDialogDefaults.TonalElevation
-        ) {
-            Column(modifier = Modifier.padding(24.dp)) {
-                Text(
-                    text = stringResource(id = R.string.popup_messages_example_6_message),
-                )
-                Spacer(modifier = Modifier.height(24.dp))
-                FlowRow(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
-                ) {
-                    TextButton(
-                        onClick = {
-                            setIsAlertDialogOpen(false)
-                            setIsShowMoreDialogOpen(true)
-                        },
-                        modifier = Modifier
-                            .testTag(popupMessagesExample6AlertDialogActionButtonTestTag)
-                            .visibleFocusBorder()
-                    ) {
-                        Text(stringResource(id = R.string.popup_messages_example_6_show_more_label))
-                    }
-                    TextButton(
-                        onClick = {
-                            setIsAlertDialogOpen(false)
-                        },
-                        modifier = Modifier
-                            .testTag(popupMessagesExample6AlertDialogDismissButtonTestTag)
-                            .visibleFocusBorder()
-                    ) {
-                        Text(stringResource(id = R.string.popup_messages_example_6_dismiss_label))
-                    }
-                }
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    setIsAlertDialogOpen(false)
+                    setIsShowMoreDialogOpen(true)
+                },
+                modifier = Modifier
+                    .testTag(popupMessagesExample6AlertDialogActionButtonTestTag)
+                    .visibleFocusBorder()
+            ) {
+                Text(stringResource(id = R.string.popup_messages_example_6_show_more_label))
             }
+        },
+        modifier = Modifier.testTag(popupMessagesExample6AlertDialogTestTag),
+        dismissButton = {
+            TextButton(
+                onClick = {
+                    setIsAlertDialogOpen(false)
+                },
+                modifier = Modifier
+                    .testTag(popupMessagesExample6AlertDialogDismissButtonTestTag)
+                    .visibleFocusBorder()
+            ) {
+                Text(stringResource(id = R.string.popup_messages_example_6_dismiss_label))
+            }
+        },
+        title = {
+            Text(
+                text = stringResource(id = R.string.popup_messages_example_6_alert_title),
+            )
+        },
+        text = {
+            Text(
+                text = stringResource(id = R.string.popup_messages_example_6_message),
+            )
         }
-    }
+    )
 }
 
-@Composable
 @OptIn(ExperimentalMaterial3Api::class)
+@Composable
 private fun Example6ShowMoreDialog(
     setIsShowMoreDialogOpen: (Boolean) -> Unit
 ) {
-    BasicAlertDialog(
+    AlertDialog(
         onDismissRequest = {
             setIsShowMoreDialogOpen(false)
         },
-        modifier = Modifier.testTag(popupMessagesExample6ShowMoreAlertDialogTestTag),
-    ) {
-        Surface(
-            modifier = Modifier
-                .wrapContentWidth()
-                .wrapContentHeight(),
-            shape = MaterialTheme.shapes.extraLarge,
-            tonalElevation = AlertDialogDefaults.TonalElevation
-        ) {
-            Column(modifier = Modifier.padding(24.dp)) {
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    setIsShowMoreDialogOpen(false)
+                },
+                modifier = Modifier
+                    .testTag(popupMessagesExample6ShowMoreAlertDialogDismissButtonTestTag)
+                    .visibleFocusBorder()
+            ) {
                 Text(
-                    text = stringResource(id = R.string.popup_messages_example_6_action_message),
+                    stringResource(id = R.string.popup_messages_example_6_action_popup_dismiss_label)
                 )
-                Spacer(modifier = Modifier.height(24.dp))
-                TextButton(
-                    onClick = {
-                        setIsShowMoreDialogOpen(false)
-                    },
-                    modifier = Modifier
-                        .testTag(popupMessagesExample6ShowMoreAlertDialogDismissButtonTestTag)
-                        .align(Alignment.End)
-                        .visibleFocusBorder()
-                ) {
-                    Text(stringResource(id = R.string.popup_messages_example_6_dismiss_label))
-                }
             }
+        },
+        modifier = Modifier.testTag(popupMessagesExample6ShowMoreAlertDialogTestTag),
+        title = {
+            Text(
+                text = stringResource(id = R.string.popup_messages_example_6_action_popup_title),
+            )
+        },
+        text = {
+            Text(
+                text = stringResource(id = R.string.popup_messages_example_6_action_popup_message),
+            )
         }
-    }
+    )
 }
 
 @Preview(showBackground = true)

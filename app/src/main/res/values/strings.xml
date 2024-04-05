@@ -646,10 +646,13 @@
     <string name="popup_messages_example_6_header">Good example 6: AlertDialog with action buttons</string>
     <string name="popup_messages_example_6_description">AlertDialogs are pop-up modal dialogs that change the screen context, which can cause confusion. However, the first content element in an AlertDialog is automatically announced by TalkBack, and AlertDialog action buttons are easily accessible.</string>
     <string name="popup_messages_example_6_button_label">Show an AlertDialog with action buttons</string>
-    <string name="popup_messages_example_6_message">This is an AlertDialog with action buttons. Select \"Show more\" to see a further alert dialog. Select the \"OK\" button to close this pop-up.</string>
+    <string name="popup_messages_example_6_alert_title">AlertDialog with action buttons</string>
+    <string name="popup_messages_example_6_message">Select \"Show more\" to see a further alert dialog. Select the \"OK\" button to close this pop-up.</string>
     <string name="popup_messages_example_6_show_more_label">Show more</string>
-    <string name="popup_messages_example_6_dismiss_label">OK</string>
-    <string name="popup_messages_example_6_action_message">You selected the \"Show more\" action button.</string>
+    <string name="popup_messages_example_6_dismiss_label">Close</string>
+    <string name="popup_messages_example_6_action_popup_title">Show more AlertDialog</string>
+    <string name="popup_messages_example_6_action_popup_message">You selected the \"Show more\" action button.</string>
+    <string name="popup_messages_example_6_action_popup_dismiss_label">OK</string>
     <string name="popup_messages_example_7_header">Good example 7: On-screen text messages and buttons</string>
     <string name="popup_messages_example_7_description">On-screen text can also be used to announce status messages and present contextual actions.</string>
     <string name="popup_messages_example_7_button_label">Change an on-screen text value</string>

@@ -79,9 +79,10 @@ Scaffold(
 
 ## `AlertDialog` modal pop-up messages
 
-The `AlertDialog` (or Material Design 3's `BasicAlertDialog`) control creates a modal pop-up dialog.
+The `AlertDialog` (or `BasicAlertDialog`) composable creates a modal pop-up dialog.
 
 * The dialog's first composable's content is announced by TalkBack.
+    * Note: Dialog titles do not require heading semantics.
 * The dialog is persistent, providing time for a user to read the content, but requiring taking an action to dismiss it.
 * Focus is constrained to the pop-up dialog, so the underlying screen is unavailable, which makes it easier to focus on the dialog's action controls.
 
@@ -99,25 +100,68 @@ Button(
 
 // Compose the dialog if it is open.
 if (isAlertDialogOpen) {
+    AlertDialog(
+        onDismissRequest = { isAlertDialogOpen = false }, // Close the dialog if it is dismissed
+        confirmButton = {
+            TextButton(
+                onClick = { setIsShowMoreDialogOpen(false) }
+            ) {
+                Text("OK")
+            }
+        },
+        title = {
+            Text("AlertDialog title")
+        },
+        text = {
+            Text("This is an AlertDialog pop-up message.")
+        }
+    )
+}
+```
+
+Alternatively, this can be done using Material Design 3's `BasicAlertDialog` (with far more manual spacing and theming):
+
+```kotlin
+// Remember if the dialog is open.
+val isBasicAlertDialogOpen by remember { mutableStateOf(false) }
+
+Button(
+    onClick = { isBasicAlertDialogOpen = true } // Open the dialog.
+) {
+    Text("Show BasicAlertDialog pop-up message")
+}
+
+// Compose the dialog if it is open.
+if (isBasicAlertDialogOpen) {
     BasicAlertDialog(
-        onDismissRequest = { isAlertDialogOpen = false } // Close the dialog if it is dismissed.
+        onDismissRequest = { isBasicAlertDialogOpen = false } // Close the dialog if it is dismissed
     ) {
         // Apply Material Design-specified shape, background tone, padding, and spacing.
         Surface(
             modifier = Modifier.wrapContentWidth().wrapContentHeight(),
-            shape = MaterialTheme.shapes.extraLarge,
-            tonalElevation = AlertDialogDefaults.TonalElevation
+            shape = MaterialTheme.shapes.extraLarge, // dialog default shape
+            tonalElevation = AlertDialogDefaults.TonalElevation // dialog default tonal elevation
         ) {
-            Column(modifier = Modifier.padding(24.dp)) {
-                Text("This is an AlertDialog pop-up message.")
+            Column(modifier = Modifier.padding(24.dp)) { // dialog surrounding padding
+                Text(
+                    text = "BasicAlertDialog title",
+                    modifier = Modifier.padding(bottom = 16.dp), // space between title and content
+                    style = MaterialTheme.typography.headlineSmall // dialog title text style
+                )
               
-                Spacer(modifier = Modifier.height(24.dp))
+                Text(
+                    text = "This is a BasicAlertDialog pop-up message.",
+                    modifier = Modifier.padding(bottom = 24.dp) // space between content and buttons
+                )
               
                 TextButton(
-                    onClick = { isAlertDialogOpen = false }, // Close the dialog.
-                    modifier = Modifier.align(Alignment.End)
+                    onClick = { isBasicAlertDialogOpen = false }, // Close the dialog.
+                    modifier = Modifier.align(Alignment.End) // button positioning
                 ) {
-                    Text("OK")
+                    Text(
+                        text = "OK",
+                        style = MaterialTheme.typography.labelLarge // dialog button text style
+                    )
                 }
             }
         }

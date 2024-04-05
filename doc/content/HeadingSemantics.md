@@ -1,5 +1,5 @@
 # Heading Semantics
-Top-level heading text must be marked as an accessibility heading. This supports the WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships), which requires information conveyed through presentation (such as larger-sized heading text) to be programmatically available to accessibility services.
+Top-level heading text must be marked as an accessibility heading. This supports the WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships), which requires information conveyed through presentation (such as larger-sized heading text) to be programmatically available to accessibility services.
 
 Mark a composable as an accessibility heading by applying `Modifier.semantics { heading() }`. 
 
@@ -24,12 +24,13 @@ Notes:
 
 ----
 
-Copyright 2023 CVS Health and/or one of its affiliates
+Copyright 2023-2024 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

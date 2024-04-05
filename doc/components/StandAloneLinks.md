@@ -1,6 +1,6 @@
 # Stand-alone Links
 
-Stand-alone links (links not embedded in blocks of text) require specific construction in order to be accessible. Specific techniques are required to address each of the follow WCAG 2 success criteria:
+Stand-alone links (links not embedded in blocks of text) require specific construction in order to be accessible. Specific techniques are required to address each of the follow WCAG success criteria:
 
 * [Success Criterion 2.4.4 Link Purpose (In Context)](https://www.w3.org/TR/WCAG22/#link-purpose-in-context)
 * [Success Criterion 1.4.1 Use of Color](https://www.w3.org/TR/WCAG22/#use-of-color)
@@ -165,7 +165,8 @@ Copyright 2024 CVS Health and/or one of its affiliates
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

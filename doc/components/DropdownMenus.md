@@ -1,6 +1,6 @@
 # Dropdown Menus
 
-Dropdown menus allow selection of an action from a pop-up list of available options. By default, the stock [DropdownMenu](https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#DropdownMenu(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.unit.DpOffset,androidx.compose.foundation.ScrollState,androidx.compose.ui.window.PopupProperties,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.foundation.BorderStroke,kotlin.Function1)) composable is mostly accessible, but can be improved to better meet WCAG 2 [Success Criterion 2.2.1 Keyboard](https://www.w3.org/TR/WCAG21/#keyboard) and especially [Success Criterion 2.2.2 No Keyboard Trap](https://www.w3.org/TR/WCAG21/#no-keyboard-trap).
+Dropdown menus allow selection of an action from a pop-up list of available options. By default, the stock [DropdownMenu](https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#DropdownMenu(kotlin.Boolean,kotlin.Function0,androidx.compose.ui.Modifier,androidx.compose.ui.unit.DpOffset,androidx.compose.foundation.ScrollState,androidx.compose.ui.window.PopupProperties,androidx.compose.ui.graphics.Shape,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.Dp,androidx.compose.ui.unit.Dp,androidx.compose.foundation.BorderStroke,kotlin.Function1)) composable is mostly accessible, but can be improved to better meet WCAG [Success Criterion 2.2.1 Keyboard](https://www.w3.org/TR/WCAG22/#keyboard) and especially [Success Criterion 2.2.2 No Keyboard Trap](https://www.w3.org/TR/WCAG22/#no-keyboard-trap).
 
 The specific improvements suggested are:
 
@@ -98,7 +98,8 @@ Copyright 2024 CVS Health and/or one of its affiliates
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

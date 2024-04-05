@@ -2,7 +2,7 @@
 `Slider` and `RangeSlider` controls require remediations in order to be accessible. Unfortunately, at this time remediations for the keyboard accessibility of `RangeSlider` are not known, and the option of falling back on a wrapped View `RangeSlider` is blocked by a known keyboard focus issue with Compose/View interoperation.
 
 ## Accessible `Slider` controls 
-`Slider` controls require specific construction in order to be accessible and conform to WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships), [Success Criterion 2.5.3 Label in Name](https://www.w3.org/TR/WCAG21/#label-in-name), [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG21/#keyboard), and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG21/#name-role-value).
+`Slider` controls require specific construction in order to be accessible and conform to WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships), [Success Criterion 2.5.3 Label in Name](https://www.w3.org/TR/WCAG22/#label-in-name), [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG22/#keyboard), and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value).
 
 The required techniques are:
 
@@ -81,9 +81,9 @@ Slider(
 ```
 
 ## Partially-accessible `RangeSlider` controls
-`RangeSlider` controls require specific construction in order to conform to WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships), [Success Criterion 2.5.3 Label in Name](https://www.w3.org/TR/WCAG21/#label-in-name), and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG21/#name-role-value).
+`RangeSlider` controls require specific construction in order to conform to WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships), [Success Criterion 2.5.3 Label in Name](https://www.w3.org/TR/WCAG22/#label-in-name), and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value).
 
-Unfortunately, no remediation is known at this time that allows the Compose `RangeSlider` control to conform to WCAG 2 [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG21/#keyboard). This is due to all key events being handled by the `RangeSlider` itself, and not passed to its individual range start and end `Thumb` controls when they have keyboard focus.
+Unfortunately, no remediation is known at this time that allows the Compose `RangeSlider` control to conform to WCAG [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG22/#keyboard). This is due to all key events being handled by the `RangeSlider` itself, and not passed to its individual range start and end `Thumb` controls when they have keyboard focus.
 
 The required techniques are:
 
@@ -172,7 +172,8 @@ Copyright 2024 CVS Health and/or one of its affiliates
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

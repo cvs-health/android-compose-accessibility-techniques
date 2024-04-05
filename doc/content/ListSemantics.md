@@ -1,5 +1,5 @@
 # List Semantics
-Elements which create a visually-presented list must be marked as a list using the Android Accessibility API. This supports the WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships), which requires information conveyed through presentation (such as lists) to be programmatically available to accessibility services.
+Elements which create a visually-presented list must be marked as a list using the Android Accessibility API. This supports the WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships), which requires information conveyed through presentation (such as lists) to be programmatically available to accessibility services.
 
 Lists created with the standard lazy list controls, such as `LazyColumn` and `LazyRow`, have list semantics applied automatically.
 
@@ -98,12 +98,13 @@ Notes:
 
 ----
 
-Copyright 2023 CVS Health and/or one of its affiliates
+Copyright 2023-2024 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

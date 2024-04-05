@@ -1,5 +1,5 @@
 # UX Change Announcements
-All user experiences changes resulting from user interactions or automatic updates must be announced to accessibility services (such as TalkBack) in order to support the WCAG 2 [Success Criterion 4.1.3 Status Messages](https://www.w3.org/TR/WCAG21/#status-messages). (That said, it is reasonable and acceptable to rate-limit the announcement of automatic updates or they can overwhelm the user.)
+All user experiences changes resulting from user interactions or automatic updates must be announced to accessibility services (such as TalkBack) in order to support the WCAG [Success Criterion 4.1.3 Status Messages](https://www.w3.org/TR/WCAG22/#status-messages). (That said, it is reasonable and acceptable to rate-limit the announcement of automatic updates or they can overwhelm the user.)
 
 There are two key techniques for providing UX change announcements: `liveRegion` semantics and `announceForAccessibility()`.
 
@@ -84,7 +84,8 @@ Copyright 2023-2024 CVS Health and/or one of its affiliates
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

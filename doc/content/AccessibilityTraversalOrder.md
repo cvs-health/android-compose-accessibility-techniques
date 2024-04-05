@@ -1,5 +1,5 @@
 # Accessibility Traversal Order
-Sequence content composables appropriately so they are read by screen readers in an order that preserves the meaning of their visual layout. Incorrectly sequenced content is hard to understand and violates the WCAG 2 [Success Criterion 1.3.2 Meaningful Sequence](https://www.w3.org/TR/WCAG21/#meaningful-sequence).
+Sequence content composables appropriately so they are read by screen readers in an order that preserves the meaning of their visual layout. Incorrectly sequenced content is hard to understand and violates the WCAG [Success Criterion 1.3.2 Meaningful Sequence](https://www.w3.org/TR/WCAG22/#meaningful-sequence).
 
 There are three techniques for influencing the accessibility traversal order (i.e., TalkBack's reading order) of composables:
 
@@ -64,12 +64,13 @@ Column {
 
 ----
 
-Copyright 2023 CVS Health and/or one of its affiliates
+Copyright 2023-2024 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

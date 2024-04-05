@@ -59,7 +59,7 @@ The `keyboardOptions` property can either be set by copying the `KeyboardOptions
 Notes:
 
 * Adding `android:windowSoftInputMode="adjustResize"` to the `<activity>` element in AndroidManifest.xml can help fit both screen content and the soft keyboard on-screen at the same time.
-* It is also necessary to handle the keyboard trap in default `TextField` composables to avoid issues with WCAG 2 [Success Criterion 2.1.2 No Keyboard Trap](https://www.w3.org/TR/WCAG21/#no-keyboard-trap).
+* It is also necessary to handle the keyboard trap in default `TextField` composables to avoid issues with WCAG [Success Criterion 2.1.2 No Keyboard Trap](https://www.w3.org/TR/WCAG22/#no-keyboard-trap).
 * The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.
 
 ----
@@ -69,7 +69,8 @@ Copyright 2023-2024 CVS Health and/or one of its affiliates
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

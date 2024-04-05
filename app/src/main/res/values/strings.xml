@@ -358,7 +358,7 @@
     <string name="custom_focus_indicators_description_2">Tab through this page with an external keyboard to see default and improved focus indicators.</string>
     <string name="custom_focus_indicators_description_3">(Note that these techniques have been applied to many controls throughout this app.)</string>
     <string name="custom_focus_indicators_example_1_heading">Problematic example 1: Default button focus indicator</string>
-    <string name="custom_focus_indicators_example_1_description">Because this button uses the default system focus indicator, it technically conforms with the WCAG 2.2 guidelines regarding focus visibility. However, it provides a poor user experience.</string>
+    <string name="custom_focus_indicators_example_1_description">Because this button uses the default system focus indicator, it technically conforms with the WCAG guidelines regarding focus visibility. However, it provides a poor user experience.</string>
     <string name="custom_focus_indicators_example_1_button">Default focus indicator</string>
     <string name="custom_focus_indicators_example_1_message">Activated example 1 button showing default focus indicator.</string>
     <string name="custom_focus_indicators_example_2_heading">Good example 2: Custom button focus indicator</string>

@@ -1,5 +1,5 @@
 # Text Alternatives
-All informative non-text content must have a text alternative associated with it, generally via the `contentDescription` property. Providing text alternatives is required by the WCAG 2 [Success Criterion 1.1.1 Non-Text Content](https://www.w3.org/TR/WCAG21/#non-text-content).
+All informative non-text content must have a text alternative associated with it, generally via the `contentDescription` property. Providing text alternatives is required by the WCAG [Success Criterion 1.1.1 Non-Text Content](https://www.w3.org/TR/WCAG22/#non-text-content).
 
 ## Informative non-text content
 
@@ -143,12 +143,13 @@ Complex images, such as charts and graphs, should have a concise `contentDescrip
 
 ----
 
-Copyright 2023 CVS Health and/or one of its affiliates
+Copyright 2023-2024 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

@@ -146,7 +146,7 @@ For the simple status message use case, best practice is to use a limited-time, 
 
 For status messages with contextual actions, prefer `AlertDialog` modal pop-up messages; although on-screen `Text` can also work. Avoid the `Snackbar`, since its contextual action buttons are nearly inaccessible.
 
-The relevant WCAG 2 success criteria are:
+The relevant WCAG success criteria are:
 
 * [Success Criterion 4.1.3 Status Messages](https://www.w3.org/TR/WCAG22/#status-messages)
 * [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG22/#keyboard), which logically extends to assistive technologies that would be keyboard-driven on the web, such as Switch Access and TalkBack
@@ -164,7 +164,8 @@ Copyright 2024 CVS Health and/or one of its affiliates
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

@@ -1,5 +1,5 @@
 # TextField Controls
-`TextField` controls require specific construction in order to be accessible. Specifically, they must have a label, be adjusted to remove a keyboard trap, and set the appropriate keyboard type, options, and actions for their data. These techniques support WCAG 2 [Success Criterion 1.3.5 Identify Input Purpose](https://www.w3.org/TR/WCAG21/#identify-input-purpose) and [Success Criterion 2.1.2 No Keyboard Trap](https://www.w3.org/TR/WCAG21/#no-keyboard-trap).
+`TextField` controls require specific construction in order to be accessible. Specifically, they must have a label, be adjusted to remove a keyboard trap, and set the appropriate keyboard type, options, and actions for their data. These techniques support WCAG [Success Criterion 1.3.5 Identify Input Purpose](https://www.w3.org/TR/WCAG22/#identify-input-purpose) and [Success Criterion 2.1.2 No Keyboard Trap](https://www.w3.org/TR/WCAG22/#no-keyboard-trap).
 
 The required techniques are:
 
@@ -12,7 +12,7 @@ The required techniques are:
 4. Set the appropriate soft keyboard actions using the `TextField` `keyboardOptions` `imeAction` property and the `TextField` `keyboardActions` property. See [Keyboard Actions](../interactions/KeyboardActions.md) for details.
 5. Apply autofill with appropriate `AutofillType`(s) to the `TextField`, if the data to be entered is supported by autofill. See [Autofill Controls](../components/AutofillControls.md) for details.
 
-Appropriate error handling must be added to any `TextField` in support of WCAG 2 [Success Criterion 3.3.1 Error Identification](https://www.w3.org/TR/WCAG21/#error-identification). Error handling techniques include:
+Appropriate error handling must be added to any `TextField` in support of WCAG [Success Criterion 3.3.1 Error Identification](https://www.w3.org/TR/WCAG22/#error-identification). Error handling techniques include:
 
 * Setting the `TextField` `isError` property when the field's value is in error.
 * Declaring a semantic error text using the `Modifier.semantics` `error()` property.
@@ -153,7 +153,8 @@ Copyright 2023-2024 CVS Health and/or one of its affiliates
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

@@ -1,5 +1,5 @@
 # Checkbox Controls
-`Checkbox` controls require specific construction in order to be accessible. Specifically they must have a wrapping layout to programmatically associate a label and subsume the `Checkbox`'s role and toggle handling. These techniques support WCAG 2 [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships) and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG21/#name-role-value).
+`Checkbox` controls require specific construction in order to be accessible. Specifically they must have a wrapping layout to programmatically associate a label and subsume the `Checkbox`'s role and toggle handling. These techniques support WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships) and [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value).
 
 The required techniques are:
 
@@ -39,12 +39,13 @@ Notes:
 
 ----
 
-Copyright 2023 CVS Health and/or one of its affiliates
+Copyright 2023-2024 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

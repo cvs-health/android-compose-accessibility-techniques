@@ -1,5 +1,5 @@
 # Links Inline with Text
-Always create links which are inline with text that announce their name, role, and value in accordance with the WCAG 2 [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG21/#name-role-value). 
+Always create links which are inline with text that announce their name, role, and value in accordance with the WCAG [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value). 
 
 The goal is to make TalkBack announce inline links with the "Links available..." action message and display the TalkBack menu's Links menu. Switch Access should allow the entire text block to be selected, then display a modal menu of links. Inline links should also be focusable and selectable from the keyboard.
 
@@ -17,7 +17,7 @@ Native Compose inline links are displayed using `ClickableText` composables. `Cl
 
 Within a `ClickableText`'s `onClick` lambda function, translate the selected text position to an URL using `AnnotatedString.getUrlAnnotations()`, and then invoke appropriate code to open the link.
 
-Note: `ClickableText` has been fully enabled for accessibility services, so it works well with TalkBack and Switch Access, and it obeys standard Compose theming. Unfortunately, the same is not true for keyboard accessibility: neither a `ClickableText` nor the links with one are keyboard focusable or selectable. This is a known deficiency; see [Issue 311488543: Support for clickable portions of text to be focusable](https://issuetracker.google.com/issues/311488543) and [Issue 303096408: ClickableText doesn't support hardware keyboard navigation](https://issuetracker.google.com/issues/303096408). Because `ClickableText` does not conform to WCAG 2 [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG21/#keyboard), its use is problematic; however, it should improve given time. 
+Note: `ClickableText` has been fully enabled for accessibility services, so it works well with TalkBack and Switch Access, and it obeys standard Compose theming. Unfortunately, the same is not true for keyboard accessibility: neither a `ClickableText` nor the links with one are keyboard focusable or selectable. This is a known deficiency; see [Issue 311488543: Support for clickable portions of text to be focusable](https://issuetracker.google.com/issues/311488543) and [Issue 303096408: ClickableText doesn't support hardware keyboard navigation](https://issuetracker.google.com/issues/303096408). Because `ClickableText` does not conform to WCAG [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG22/#keyboard), its use is problematic; however, it should improve given time. 
 
 For example:
 
@@ -99,12 +99,13 @@ Notes:
 
 ----
 
-Copyright 2023 CVS Health and/or one of its affiliates
+Copyright 2023-2024 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

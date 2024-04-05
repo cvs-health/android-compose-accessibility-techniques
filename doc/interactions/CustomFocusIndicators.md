@@ -1,7 +1,7 @@
 # Custom Focus Indicators
-By default, all standard Android control types have focus indicators which display when keyboard focus is on a control. However, the default focus indicators are generally low-contrast, which makes the focussed control very hard to identify for keyboard users with low vision. Applying custom focus indicators is one way to better support those users in accordance with the WCAG 2 [Success Criterion 2.4.7 Focus Visible](https://www.w3.org/TR/WCAG21/#focus-visible) and the WCAG 2.2 [Success Criterion 2.4.13 Focus Appearance](https://www.w3.org/TR/WCAG22/#focus-appearance) (Level AAA).
+By default, all standard Android control types have focus indicators which display when keyboard focus is on a control. However, the default focus indicators are generally low-contrast, which makes the focussed control very hard to identify for keyboard users with low vision. Applying custom focus indicators is one way to better support those users in accordance with the WCAG [Success Criterion 2.4.7 Focus Visible](https://www.w3.org/TR/WCAG22/#focus-visible) and [Success Criterion 2.4.13 Focus Appearance](https://www.w3.org/TR/WCAG22/#focus-appearance) (Level AAA).
 
-(Note that using the default focus indicator is in technical conformance with WCAG 2.2 [Success Criterion 2.4.13 Focus Appearance](https://www.w3.org/TR/WCAG22/#focus-appearance) (Level AAA), but it provides a poor user experience for keyboard users.)
+(Note that using the default focus indicator is in technical conformance with WCAG [Success Criterion 2.4.13 Focus Appearance](https://www.w3.org/TR/WCAG22/#focus-appearance) (Level AAA), but it provides a poor user experience for keyboard users.)
 
 There are three major techniques available to customize the focus indicators for controls:
 
@@ -45,7 +45,7 @@ Text(
 Notes:
 
 - Be sure to make the border color distinguishable in both Light and Dark themes.
-- But sure to make the border distinguished by more than hue to avoid a failure of WCAG [Success Criterion 1.4.1 Use of Color](https://www.w3.org/TR/WCAG21/#use-of-color). In the example above, this is done by making the border only appear visible in the focused state. 
+- But sure to make the border distinguished by more than hue to avoid a failure of WCAG [Success Criterion 1.4.1 Use of Color](https://www.w3.org/TR/WCAG22/#use-of-color). In the example above, this is done by making the border only appear visible in the focused state. 
 - See also [React to focus](https://developer.android.com/jetpack/compose/touch-input/focus/react-to-focus).
 
 This technique can also be encapsulated into a reusable `Modifier` extension function:
@@ -207,7 +207,8 @@ Copyright 2024 CVS Health and/or one of its affiliates
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

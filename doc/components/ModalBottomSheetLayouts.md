@@ -1,5 +1,5 @@
 # ModalBottomSheet Layouts
-`ModalBottomSheet` layouts require specific construction in order to be accessible. Specifically, these techniques support WCAG 2 [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG21/#keyboard), among others.
+`ModalBottomSheet` layouts require specific construction in order to be accessible. Specifically, these techniques support WCAG [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG22/#keyboard), among others.
 
 The following additions are needed to make a `ModalBottomSheet` accessible:
 
@@ -110,7 +110,8 @@ Copyright 2023-2024 CVS Health and/or one of its affiliates
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

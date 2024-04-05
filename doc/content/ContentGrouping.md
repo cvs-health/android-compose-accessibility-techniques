@@ -1,5 +1,5 @@
 # Content Grouping
-Group content elements that should be read together as a single unit by screen readers. Incorrectly grouped content can be misleading and violate the WCAG 2 [Success Criterion 1.3.2 Meaningful Sequence](https://www.w3.org/TR/WCAG21/#meaningful-sequence). And correctly grouping content can significantly improve the audio-textual user experience.
+Group content elements that should be read together as a single unit by screen readers. Incorrectly grouped content can be misleading and violate the WCAG [Success Criterion 1.3.2 Meaningful Sequence](https://www.w3.org/TR/WCAG22/#meaningful-sequence). And correctly grouping content can significantly improve the audio-textual user experience.
 
 Two factors must be weighed in the successful design of grouped content:
 
@@ -36,7 +36,7 @@ Card(
 
 Group any separate content labels with their associated text values. For example, group simple table headings together with their table values.
 
-* This is an important point: misgrouping or a lack of grouping could read all the table headings, then the table values, without saying what those table values mean. (Which would violate the WCAG [Success Criterion 1.3.2 Meaningful Sequence](https://www.w3.org/TR/WCAG21/#meaningful-sequence) and [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG21/#info-and-relationships).)
+* This is an important point: misgrouping or a lack of grouping could read all the table headings, then the table values, without saying what those table values mean. (Which would violate the WCAG [Success Criterion 1.3.2 Meaningful Sequence](https://www.w3.org/TR/WCAG22/#meaningful-sequence) and [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships).)
 
 * Note that associating active controls and their labels requires different techniques. (See [Interactive Control Labels](../interactions/InteractiveControlLabels.md) for details.)
 
@@ -76,12 +76,13 @@ For clickable grouped content (such as cards or list items that allow drilling d
 
 ----
 
-Copyright 2023 CVS Health and/or one of its affiliates
+Copyright 2023-2024 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-[http://www.apache.org/licenses/LICENSE-2.0]()
+
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

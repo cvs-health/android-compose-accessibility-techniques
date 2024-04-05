@@ -39,8 +39,8 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericGroupedTitledCard
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericTitledCard
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
@@ -143,23 +143,23 @@ private fun OkExample1() {
     // Key technique: Get LocalConfiguration orientation and test for portrait/landscape setting
     val orientation = LocalConfiguration.current.orientation
     if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-        GenericTitledCard(titleId = R.string.adaptive_layouts_pane_1_title) {
+        GenericGroupedTitledCard(titleId = R.string.adaptive_layouts_pane_1_title) {
             BodyText(textId = R.string.adaptive_layouts_pane_1_description)
         }
         Spacer(modifier = Modifier.height(8.dp))
-        GenericTitledCard(titleId = R.string.adaptive_layouts_pane_2_title) {
+        GenericGroupedTitledCard(titleId = R.string.adaptive_layouts_pane_2_title) {
             BodyText(textId = R.string.adaptive_layouts_pane_2_description)
         }
     } else {
         Row {
-            GenericTitledCard(
+            GenericGroupedTitledCard(
                 titleId = R.string.adaptive_layouts_pane_1_title,
                 modifier = Modifier.weight(1f)
             ) {
                 BodyText(textId = R.string.adaptive_layouts_pane_1_description)
             }
             Spacer(modifier = Modifier.width(8.dp))
-            GenericTitledCard(
+            GenericGroupedTitledCard(
                 titleId = R.string.adaptive_layouts_pane_2_title,
                 modifier = Modifier.weight(1f)
             ) {
@@ -199,15 +199,15 @@ private fun GoodExample2(windowSizeClass: WindowSizeClass) {
     when (windowSizeClass.widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
             // Linear column of cards
-            GenericTitledCard(titleId = R.string.adaptive_layouts_pane_1_title) {
+            GenericGroupedTitledCard(titleId = R.string.adaptive_layouts_pane_1_title) {
                 BodyText(textId = R.string.adaptive_layouts_pane_1_description)
             }
             Spacer(modifier = Modifier.height(8.dp))
-            GenericTitledCard(titleId = R.string.adaptive_layouts_pane_2_title) {
+            GenericGroupedTitledCard(titleId = R.string.adaptive_layouts_pane_2_title) {
                 BodyText(textId = R.string.adaptive_layouts_pane_2_description)
             }
             Spacer(modifier = Modifier.height(8.dp))
-            GenericTitledCard(titleId = R.string.adaptive_layouts_pane_3_title) {
+            GenericGroupedTitledCard(titleId = R.string.adaptive_layouts_pane_3_title) {
                 BodyText(textId = R.string.adaptive_layouts_pane_3_description)
             }
         }
@@ -215,14 +215,14 @@ private fun GoodExample2(windowSizeClass: WindowSizeClass) {
         WindowWidthSizeClass.Medium -> {
             // 2-wide rows of cards
             Row {
-                GenericTitledCard(
+                GenericGroupedTitledCard(
                     titleId = R.string.adaptive_layouts_pane_1_title,
                     modifier = Modifier.weight(1f)
                 ) {
                     BodyText(textId = R.string.adaptive_layouts_pane_1_description)
                 }
                 Spacer(modifier = Modifier.width(8.dp))
-                GenericTitledCard(
+                GenericGroupedTitledCard(
                     titleId = R.string.adaptive_layouts_pane_2_title,
                     modifier = Modifier.weight(1f)
                 ) {
@@ -231,7 +231,7 @@ private fun GoodExample2(windowSizeClass: WindowSizeClass) {
             }
             Spacer(modifier = Modifier.height(8.dp))
             Row {
-                GenericTitledCard(
+                GenericGroupedTitledCard(
                     titleId = R.string.adaptive_layouts_pane_3_title,
                     modifier = Modifier.weight(1f)
                 ) {
@@ -245,21 +245,21 @@ private fun GoodExample2(windowSizeClass: WindowSizeClass) {
         WindowWidthSizeClass.Expanded -> {
             // 3-wide row of cards
             Row {
-                GenericTitledCard(
+                GenericGroupedTitledCard(
                     titleId = R.string.adaptive_layouts_pane_1_title,
                     modifier = Modifier.weight(1f)
                 ) {
                     BodyText(textId = R.string.adaptive_layouts_pane_1_description)
                 }
                 Spacer(modifier = Modifier.width(8.dp))
-                GenericTitledCard(
+                GenericGroupedTitledCard(
                     titleId = R.string.adaptive_layouts_pane_2_title,
                     modifier = Modifier.weight(1f)
                 ) {
                     BodyText(textId = R.string.adaptive_layouts_pane_2_description)
                 }
                 Spacer(modifier = Modifier.width(8.dp))
-                GenericTitledCard(
+                GenericGroupedTitledCard(
                     titleId = R.string.adaptive_layouts_pane_3_title,
                     modifier = Modifier.weight(1f)
                 ) {

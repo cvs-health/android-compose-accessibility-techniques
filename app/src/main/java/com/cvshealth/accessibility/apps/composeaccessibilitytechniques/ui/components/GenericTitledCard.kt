@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -94,3 +95,53 @@ private fun GenericPanePreview() {
         }
     }
 }
+
+/**
+ * Displays a reusable [OutlinedCard] with an title string and content, grouping them for
+ * accessibility.
+ *
+ * @param title card title string
+ * @param modifier optional [Modifier] for the [OutlinedCard]
+ * @param content composable contents of the [OutlinedCard] following the title row
+ */
+@Composable
+fun GenericGroupedTitledCard(
+    title: String,
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    OutlinedCard(
+        modifier = modifier.semantics(mergeDescendants = true) {},
+    ) {
+        GenericExampleTitle(
+            text = title,
+            modifier = Modifier.padding(horizontal = 8.dp)
+        )
+        HorizontalDivider()
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+        )  {
+            content(this)
+        }
+    }
+}
+
+/**
+ * Displays a reusable [OutlinedCard] with an title string and content, grouping them for
+ * accessibility.
+ *
+ * @param titleId card title string resource identifier
+ * @param modifier optional [Modifier] for the [OutlinedCard]
+ * @param content composable contents of the [OutlinedCard] following the title row
+ */
+@Composable
+fun GenericGroupedTitledCard(
+    @StringRes titleId: Int,
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) = GenericGroupedTitledCard(
+    title = stringResource(titleId),
+    modifier = modifier,
+    content = content
+)

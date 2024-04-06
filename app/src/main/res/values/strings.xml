@@ -392,9 +392,8 @@
     <string name="custom_click_labels_title">Custom click labels</string>
     <string name="custom_click_labels_heading">Enhance screen reader user experience by customizing click action labels</string>
     <string name="custom_click_labels_description_1">How TalkBack describes the click or long-click action of a control can be partially overridden to be more useful. For example, \"Double-tap to activate\" can be changed to \"Double-tap to show details\".</string>
-    <string name="custom_click_labels_description_2">Unfortunately, these techniques cannot be applied to Material Design buttons at this time.</string>
-    <string name="custom_click_labels_description_3">Turn on TalkBack and navigate the screen below for demonstrations on custom click labels.</string>
-    <string name="custom_click_labels_description_4">Also, note that the clickable cards do not announce the \"Button\" role. These cards are still accessible, because on Android the click action provides role information.</string>
+    <string name="custom_click_labels_description_2">Turn on TalkBack and navigate the screen below for demonstrations on custom click labels.</string>
+    <string name="custom_click_labels_description_3">Also, note that the clickable cards do not announce the \"Button\" role. These cards are still accessible, because on Android the click action provides role information.</string>
     <string name="custom_click_labels_example_1_heading">OK example 1: Default click action label</string>
     <string name="custom_click_labels_example_1_label">Default click action label</string>
     <string name="custom_click_labels_example_1_message">Selected to activate Default click action label card.</string>

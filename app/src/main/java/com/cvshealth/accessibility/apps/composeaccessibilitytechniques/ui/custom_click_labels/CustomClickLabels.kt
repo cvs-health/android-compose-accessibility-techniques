@@ -97,13 +97,12 @@ fun CustomClickLabelsScreen(
             BodyText(textId = R.string.custom_click_labels_description_1)
             BodyText(textId = R.string.custom_click_labels_description_2)
             BodyText(textId = R.string.custom_click_labels_description_3)
-            BodyText(textId = R.string.custom_click_labels_description_4)
 
             OkExample1(snackbarLauncher)
             GoodExample2(snackbarLauncher)
             GoodExample3(snackbarLauncher)
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(72.dp))
         }
     }
 }

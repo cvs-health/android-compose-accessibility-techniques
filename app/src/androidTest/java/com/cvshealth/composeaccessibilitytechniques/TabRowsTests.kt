@@ -339,6 +339,8 @@ class TabRowsTests {
 
         // verify that not all tabs are displayed
         tabs[0].performScrollTo().assertIsDisplayed()
+        // Note: This test will fail if run in Landscape mode or on a tablet with enough room to
+        // display the entire ScrollableTabRow.
         tabs[4].assertIsNotDisplayed()
 
         // verify 1st tab selected and no other tab is selected

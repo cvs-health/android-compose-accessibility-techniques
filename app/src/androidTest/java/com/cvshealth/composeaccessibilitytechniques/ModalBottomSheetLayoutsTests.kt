@@ -184,6 +184,7 @@ class ModalBottomSheetLayoutsTests {
                         and
                         hasText(text = "Banana", substring = true)
             )
+            .performScrollTo()
             .assertIsDisplayed()
     }
 
@@ -241,12 +242,12 @@ class ModalBottomSheetLayoutsTests {
 
         // Verify a slightly later bottom sheet item is displayed.
         composeTestRule
-            .onNodeWithText("Grape")
+            .onNodeWithText("Cherry")
             .assertIsDisplayed()
 
         // Activate the later bottom sheet item.
         composeTestRule
-            .onNodeWithText("Grape")
+            .onNodeWithText("Cherry")
             .performScrollTo()
             .performClick()
 
@@ -260,8 +261,9 @@ class ModalBottomSheetLayoutsTests {
             .onNode(
                 hasTestTag(modalBottomSheetLayoutsExample1SelectedItemTestTag)
                         and
-                        hasText(text = "Grape", substring = true)
+                        hasText(text = "Cherry", substring = true)
             )
+            .performScrollTo()
             .assertIsDisplayed()
     }
 }

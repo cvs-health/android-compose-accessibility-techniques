@@ -50,8 +50,9 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Compose Semantics automated testing](doc/AutomatedComposeAccessibilityTesting.md)
 
 
-## Screenshot
+## Screenshots
 <img src="doc/images/HomePartiallyExpanded.png" width=50% height=50% alt="android-compose-accessibility-techniques app Home screen showing the three accessibility technique topic groups: Informative Content, Interactive Behaviors, and Specific Component Types. The Specific Component Types topic group is expanded and shows topics such as Accordion controls and Dropdown menus.">
+<img src="doc/images/InteractiveControlLabels.png" width=50% height=50% alt="Interactive control labels screen showing bad and good examples of programmatically-associating text labels with TextField and CheckBox controls.">
 
 ## Contributor Guide
 

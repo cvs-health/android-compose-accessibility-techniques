@@ -46,6 +46,8 @@ import androidx.compose.ui.autofill.AutofillNode
 import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.composed
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.key.Key
@@ -560,11 +562,16 @@ fun AutofilledClearableOutlinedTextField(
     shape: Shape = OutlinedTextFieldDefaults.shape,
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
     onEnterHandler: (() -> Unit)? = null
-) =  AutofilledOutlinedTextField(
+) {
+    // Keyboard focus technique: Remember a focus requester to handle moving keyboard focus.
+    val focusRequester = remember { FocusRequester() }
+
+    AutofilledOutlinedTextField(
         value = value,
         onValueChange = onValueChange,
         autofillType = autofillType,
-        modifier = modifier,
+        // Keyboard focus technique: Declare where the focusRequester will place keyboard focus.
+        modifier = modifier.focusRequester(focusRequester),
         enabled = enabled,
         readOnly = readOnly,
         textStyle = textStyle,
@@ -581,6 +588,11 @@ fun AutofilledClearableOutlinedTextField(
                     onClick = {
                         // Clear the text value.
                         onValueChange("")
+                        // Keyboard focus technique: Move keyboard focus somewhere logical if a
+                        // control is removed or disabled. In this case, return focus to the
+                        // TextField after clearing its current value, so a new value can be
+                        // entered. Note: A logical focus location does not always exist...
+                        focusRequester.requestFocus()
                     },
                     enabled = value.isNotEmpty()
                 ) {
@@ -606,3 +618,5 @@ fun AutofilledClearableOutlinedTextField(
         colors = colors,
         onEnterHandler = onEnterHandler
     )
+}
+

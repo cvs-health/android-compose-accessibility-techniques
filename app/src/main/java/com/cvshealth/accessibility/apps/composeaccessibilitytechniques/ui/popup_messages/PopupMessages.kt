@@ -16,6 +16,7 @@
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.popup_messages
 
 import android.widget.Toast
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +24,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
@@ -43,6 +46,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -553,6 +558,7 @@ private fun GoodExample6Preview() {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun GoodExample7() {
     // Good example 7: On-screen text messages and buttons
@@ -564,19 +570,34 @@ private fun GoodExample7() {
     )
     BodyText(textId = R.string.popup_messages_example_7_description)
 
+    // Keyboard focus technique: Remember a focus requester to handle moving keyboard focus.
+    val focusRequester = remember { FocusRequester() }
+
+    // Scrolling technique: Remember a BringIntoViewRequester.
+    val scope = rememberCoroutineScope()
+    val bringIntoViewRequester = remember { BringIntoViewRequester() }
+
     VisibleFocusBorderButton(
         onClick = {
             counterValue++
+            // Scrolling technique: Launch bringIntoViewRequester to scroll to a composable/region.
+            scope.launch {
+                bringIntoViewRequester.bringIntoView()
+            }
         },
         modifier = Modifier
             .testTag(popupMessagesExample7ButtonTestTag)
-            .padding(top = 8.dp),
+            .padding(top = 8.dp)
+            // Keyboard focus technique: Declare where the focusRequester will place keyboard focus.
+            .focusRequester(focusRequester),
     ) {
         Text(stringResource(id = R.string.popup_messages_example_7_button_label))
     }
 
     val counterStatusMessage = stringResource(id = R.string.popup_messages_example_7_message, counterValue)
     Row(
+        // Scrolling technique: Define the composable to be scrolled to.
+        modifier = Modifier.bringIntoViewRequester(bringIntoViewRequester),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -595,6 +616,8 @@ private fun GoodExample7() {
             VisibleFocusBorderTextButton(
                 onClick = {
                     counterValue = 0
+                    // Keyboard focus technique: Move keyboard focus back to the increment button.
+                    focusRequester.requestFocus()
                 },
                 modifier = Modifier.testTag(popupMessagesExample7MessageTextButtonTestTag)
             ) {

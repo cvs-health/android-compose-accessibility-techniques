@@ -202,7 +202,10 @@ private fun GoodExample2() {
                 focusManager.moveFocus(FocusDirection.Down)
             }
         )
-    )
+    ) {
+        // Do the same thing as the imeAction when Enter is pressed.
+        focusManager.moveFocus(FocusDirection.Down)
+    }
 }
 
 @Preview(showBackground = true)
@@ -257,7 +260,12 @@ private fun GoodExample3(
                 snackbarLauncher?.show(doneMessage)
             }
         )
-    )
+    ) {
+        // Do the same thing as the imeAction when Enter is pressed.
+        keyboardController?.hide()
+        // Note: Typically, the ViewModel would be invoked here to submit the form data.
+        snackbarLauncher?.show(doneMessage)
+    }
 }
 
 @Preview(showBackground = true)
@@ -310,7 +318,12 @@ private fun GoodExample4(
                 snackbarLauncher?.show(sendMessage)
             }
         )
-    )
+    ) {
+        // Do the same thing as the imeAction when Enter is pressed.
+        keyboardController?.hide()
+        // Note: Typically, the ViewModel would be invoked here to send the field/form data.
+        snackbarLauncher?.show(sendMessage)
+    }
 }
 
 @Preview(showBackground = true)
@@ -363,7 +376,12 @@ private fun GoodExample5(
                 snackbarLauncher?.show(searchMessage)
             }
         )
-    )
+    ) {
+        // Do the same thing as the imeAction when Enter is pressed.
+        keyboardController?.hide()
+        // Note: Typically, the ViewModel would be invoked here to submit the field/form data.
+        snackbarLauncher?.show(searchMessage)
+    }
 }
 
 @Preview(showBackground = true)
@@ -420,7 +438,12 @@ private fun GoodExample6(
                 snackbarLauncher?.show(goMessage)
             }
         )
-    )
+    ) {
+        // Do the same thing as the imeAction when Enter is pressed.
+        keyboardController?.hide()
+        // Note: Typically, the ViewModel would be invoked here to submit the field/form data.
+        snackbarLauncher?.show(goMessage)
+    }
 }
 
 @Preview(showBackground = true)

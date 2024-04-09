@@ -64,11 +64,11 @@ dependencies {
 
     implementation 'androidx.compose.material3:material3'
     implementation 'androidx.compose.material3:material3-window-size-class'
-    // Note: Beta release version of Material MDC - Android libraries used for
+    // Note: Release Candidate version of Material MDC - Android libraries used for
     // access to Material3.DayNight styles per https://stackoverflow.com/a/76806434.
     // TODO: Update to stable Material libraries as soon as possible.
     // implementation 'com.google.android.material:material' // included for View interop styling
-    implementation 'com.google.android.material:material:1.12.0-beta01'  // included for View interop styling
+    implementation 'com.google.android.material:material:1.12.0-rc01'  // included for View interop styling
     implementation 'androidx.compose.ui:ui-viewbinding' // included for View interop binding with XML layouts
 
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"

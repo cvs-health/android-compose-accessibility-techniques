@@ -45,7 +45,7 @@ class InlineLinksTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 InlineLinksScreen { }
             }
         }

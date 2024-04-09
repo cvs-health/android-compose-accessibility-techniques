@@ -45,7 +45,7 @@ class CustomStateDescriptionsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 CustomStateDescriptionsScreen { }
             }
         }

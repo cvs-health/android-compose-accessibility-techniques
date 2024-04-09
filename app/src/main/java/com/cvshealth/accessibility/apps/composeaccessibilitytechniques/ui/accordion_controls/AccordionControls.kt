@@ -123,7 +123,8 @@ fun AccordionControlsScreen(
                     )
                     BodyText(
                         textId = R.string.accordion_item_2_2,
-                        modifier = Modifier.testTag(accordionExample2Item2TestTag))
+                        modifier = Modifier.testTag(accordionExample2Item2TestTag)
+                    )
                     BodyText(
                         textId = R.string.accordion_item_2_3,
                         modifier = Modifier.testTag(accordionExample2Item3TestTag)
@@ -226,5 +227,4 @@ private fun FauxAccordionHeading(
             content()
         }
     }
-
 }

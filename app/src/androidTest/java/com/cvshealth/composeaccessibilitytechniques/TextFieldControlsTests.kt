@@ -46,7 +46,7 @@ class TextFieldControlsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 TextFieldControlsScreen { }
             }
         }

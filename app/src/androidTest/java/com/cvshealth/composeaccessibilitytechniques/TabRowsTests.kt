@@ -64,7 +64,7 @@ class TabRowsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 TabRowsScreen { }
             }
         }

@@ -67,7 +67,7 @@ class KeyboardTypesTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 KeyboardTypesScreen { }
             }
         }

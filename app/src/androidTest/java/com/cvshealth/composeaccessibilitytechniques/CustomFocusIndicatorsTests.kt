@@ -55,7 +55,7 @@ class CustomFocusIndicatorsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 CustomFocusIndicatorsScreen { }
             }
         }

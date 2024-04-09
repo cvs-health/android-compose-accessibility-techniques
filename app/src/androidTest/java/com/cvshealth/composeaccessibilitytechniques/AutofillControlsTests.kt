@@ -46,7 +46,7 @@ class AutofillControlsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 AutofillControlsScreen { }
             }
         }

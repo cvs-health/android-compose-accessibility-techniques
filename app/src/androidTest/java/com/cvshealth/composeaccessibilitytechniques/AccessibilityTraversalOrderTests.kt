@@ -43,7 +43,7 @@ class AccessibilityTraversalOrderTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 AccessibilityTraversalOrderScreen { }
             }
         }

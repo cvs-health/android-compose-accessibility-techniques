@@ -61,7 +61,7 @@ class UxChangeAnnouncementsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 UxChangeAnnouncementsScreen { }
             }
         }

@@ -46,7 +46,7 @@ class SwitchControlsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 SwitchControlsScreen { }
             }
         }

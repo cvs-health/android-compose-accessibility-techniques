@@ -37,7 +37,7 @@ class DarkAndLightThemesTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 DarkAndLightThemesScreen { }
             }
         }

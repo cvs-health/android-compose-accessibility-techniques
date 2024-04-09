@@ -53,7 +53,7 @@ class RadioButtonGroupsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 RadioButtonGroupsScreen { }
             }
         }

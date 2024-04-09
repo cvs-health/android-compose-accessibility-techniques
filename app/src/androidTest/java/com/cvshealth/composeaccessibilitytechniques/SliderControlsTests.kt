@@ -23,9 +23,6 @@ import androidx.compose.ui.test.hasProgressBarRangeInfo
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.createComposeRule
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample10ControlTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample11ControlTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample12ControlTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider_controls.SliderControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider_controls.sliderControlsExample1ControlTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider_controls.sliderControlsExample1HeadingTestTag
@@ -48,7 +45,7 @@ class SliderControlsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 SliderControlsScreen { /* NO-OP */ }
             }
         }

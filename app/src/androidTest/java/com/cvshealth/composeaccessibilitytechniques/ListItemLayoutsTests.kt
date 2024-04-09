@@ -48,7 +48,7 @@ class ListItemLayoutsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 ListItemLayoutsScreen { }
             }
         }

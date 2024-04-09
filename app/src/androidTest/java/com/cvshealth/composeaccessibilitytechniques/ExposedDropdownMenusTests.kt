@@ -52,7 +52,7 @@ class ExposedDropdownMenusTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 ExposedDropdownMenusScreen { }
             }
         }

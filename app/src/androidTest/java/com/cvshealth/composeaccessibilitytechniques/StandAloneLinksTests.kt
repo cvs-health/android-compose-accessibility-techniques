@@ -47,7 +47,7 @@ class StandAloneLinksTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 StandAloneLinksScreen { }
             }
         }

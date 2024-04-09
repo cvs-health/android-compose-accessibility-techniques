@@ -74,7 +74,7 @@ class InteractiveControlLabelsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 InteractiveControlLabelsScreen { /* NO-OP */ }
             }
         }

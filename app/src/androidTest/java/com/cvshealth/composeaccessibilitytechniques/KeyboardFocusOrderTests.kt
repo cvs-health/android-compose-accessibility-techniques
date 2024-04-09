@@ -50,7 +50,7 @@ class KeyboardFocusOrderTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 KeyboardFocusOrderScreen { }
             }
         }

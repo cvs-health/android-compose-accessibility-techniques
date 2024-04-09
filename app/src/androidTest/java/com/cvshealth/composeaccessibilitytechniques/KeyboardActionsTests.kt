@@ -46,7 +46,7 @@ class KeyboardActionsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 KeyboardActionsScreen { }
             }
         }

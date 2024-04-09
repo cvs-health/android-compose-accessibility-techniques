@@ -24,7 +24,6 @@
 
     <!-- HomeScreen -->
     <string name="home_title">Home</string>
-    <string name="home_heading">Android Compose Accessibility Techniques Demo App</string>
     <string name="home_description">This application demonstrates a variety of accessibility best practices for Jetpack Compose-based UIs, as well as the problems they can address.</string>
     <string name="home_description_2">Use the cards below to pick a topic area and follow the directions on the screen regarding the assistive technology employed in that demonstration.</string>
     <string name="home_informative_content">Informative Content</string>
@@ -252,7 +251,6 @@
     <string name="interactive_control_labels_example_12">Problematic example 12: RangeSlider with associated field label</string>
     <string name="interactive_control_labels_example_12_description">Like Sliders, RangeSliders also require the use of contentDescription to provide an accessible label. However, RangeSliders are not keyboard accessible.</string>
     <string name="interactive_control_labels_associated_rangeslider_label">Field label for RangeSlider</string>
-    <string name="interactive_control_labels_associated_rangeslider_content_description">Field label for RangeSlider (contained in contentDescription)</string>
     <string name="interactive_control_labels_associated_rangeslider_state_description">%1$d to %2$d</string>
 
     <!-- UX change announcements -->
@@ -262,7 +260,6 @@
     <string name="ux_change_announcements_description_2">Turn on TalkBack and activate the controls below for demonstrations.</string>
     <string name="ux_change_announcements_example_1_header">Good example 1: Counter with liveRegion semantics</string>
     <string name="ux_change_announcements_counter">Counter: %1d</string>
-    <string name="ux_change_announcements_counter2">Counter 2: %1d</string>
     <string name="ux_change_announcements_increment_counter">Increment counter</string>
     <string name="ux_change_announcements_reset_counter">Reset counter</string>
     <string name="ux_change_announcements_example_2_header">Good example 2: Announcing visibility with announceForAccessibility</string>
@@ -411,7 +408,6 @@
     <string name="custom_state_descriptions_heading">Enhance screen reader user experience by customizing state description labels</string>
     <string name="custom_state_descriptions_description">How TalkBack describes the state of a control (such as \“Checked\” and \"Unchecked\" for check boxes) can be overridden to be more useful.</string>
     <string name="custom_state_descriptions_description_2">Turn on TalkBack and then select and toggle the following controls to hear demonstrations.</string>
-    <string name="custom_state_descriptions_description_3">Note: This technique does not work on all platforms and API levels.</string>
     <string name="custom_state_descriptions_example_1_heading">OK example 1: Checkbox with default state labels</string>
     <string name="custom_state_descriptions_default_checkbox">Motion detector</string>
     <string name="custom_state_descriptions_example_2_heading">Good example 2: Checkbox with customized state labels</string>
@@ -471,7 +467,6 @@
     <string name="accordion_item_2_1">Correct Accordion example, Item 1</string>
     <string name="accordion_item_2_2">Correct Accordion example, Item 2</string>
     <string name="accordion_item_2_3">Correct Accordion example, Item 3</string>
-    <string name="accordion_item_2_4">Correct Accordion example, Item 4</string>
 
     <!-- Checkbox controls -->
     <string name="checkbox_controls_title">Checkbox controls</string>
@@ -562,7 +557,6 @@
     <string name="modalbottomsheet_layouts_example_1_button_1">Pick a fruit from a half-open bottom sheet</string>
     <string name="modalbottomsheet_layouts_example_1_button_2">Pick a fruit from a fully-open bottom sheet</string>
     <string name="modalbottomsheet_layouts_example_1_selected_item">Selected fruit: %1$s</string>
-    <string name="modalbottomsheet_layouts_example_2_header">OK example 2: Paging ModalBottomSheet content</string>
     <string name="modalbottomsheet_layouts_sheet_title">Pick a fruit</string>
     <string name="modalbottomsheet_layouts_sheet_drag_handle_description">Pick a fruit bottom sheet drag handle</string>
     <string name="modalbottomsheet_layouts_item_1">Apple</string>
@@ -684,7 +678,6 @@
     <string name="slider_controls_example_2_header">Good example 2: Remediated Slider control</string>
     <string name="slider_controls_example_2_description">Sliders require the use of contentDescription to provide an accessible label. Applying stateDescription and liveRegion semantics are required for proper state announcements in TalkBack. Key handling remediation is required for keyboard accessibility.</string>
     <string name="slider_controls_example_2_label">Rating</string>
-    <string name="slider_controls_example_2_content_description">Rating</string>
     <string name="slider_controls_example_3_header">Problematic example 3: Remediated RangeSlider is not keyboard accessible</string>
     <string name="slider_controls_example_3_description">Like Sliders, RangeSliders require contentDescription to provide an accessible label and require semantics changes to provide good state announcements in TalkBack. However, no remediation for its keyboard accessibility issues is currently known.</string>
     <string name="slider_controls_example_3_label">Rating filter range</string>

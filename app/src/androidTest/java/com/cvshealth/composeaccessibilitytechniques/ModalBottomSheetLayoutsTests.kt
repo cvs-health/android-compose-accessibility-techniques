@@ -50,7 +50,7 @@ class ModalBottomSheetLayoutsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 ModalBottomSheetLayoutsScreen { }
             }
         }

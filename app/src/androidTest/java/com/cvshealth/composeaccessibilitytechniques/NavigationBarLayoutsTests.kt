@@ -54,7 +54,7 @@ class NavigationBarLayoutsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 NavigationBarLayoutsScreen { }
             }
         }

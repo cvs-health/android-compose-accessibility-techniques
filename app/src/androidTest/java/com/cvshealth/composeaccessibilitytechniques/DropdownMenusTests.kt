@@ -56,7 +56,7 @@ class DropdownMenusTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 DropdownMenusScreen { }
             }
         }

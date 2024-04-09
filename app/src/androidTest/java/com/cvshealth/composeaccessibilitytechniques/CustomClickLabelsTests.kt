@@ -48,7 +48,7 @@ class CustomClickLabelsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 CustomClickLabelsScreen { }
             }
         }

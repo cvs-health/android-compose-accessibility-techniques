@@ -140,7 +140,7 @@ private fun OkExample1() {
             .padding(top = 8.dp)
             .fillMaxWidth(),
         label = {
-            Text(text = stringResource(id = R.string.keyboard_types_example_8_label))
+            Text(text = stringResource(id = R.string.keyboard_actions_example_1_label))
         },
         keyboardOptions = KeyboardOptions.Default.copy(
             capitalization = KeyboardCapitalization.Words,

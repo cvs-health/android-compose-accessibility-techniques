@@ -42,7 +42,7 @@ class CustomAccessibilityActionsTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 CustomAccessibilityActionsScreen { }
             }
         }

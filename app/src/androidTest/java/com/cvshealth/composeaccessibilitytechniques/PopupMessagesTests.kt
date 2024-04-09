@@ -72,7 +72,7 @@ class PopupMessagesTests {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            ComposeAccessibilityTechniquesTheme() {
+            ComposeAccessibilityTechniquesTheme {
                 PopupMessagesScreen { }
             }
         }

@@ -4,7 +4,7 @@ Thank you for wanting to explore and contribute to android-compose-accessibility
 
 ## Sign CLA
 
-Before contributing to this CVS Health sponsored project, you will need to sign the associated [Contributor License Agreement (TBD)]().
+Before contributing to this CVS Health sponsored project, you will need to sign the associated [Contributor License Agreement](https://forms.office.com/r/9e9VmE7qLW).
 
 ## Submitting a Pull Request
 

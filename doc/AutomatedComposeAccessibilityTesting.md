@@ -159,7 +159,7 @@ If that code fails because of multiple root nodes (such as when pop-up dialogs a
 
 ----
 
-Copyright 2023-2024 CVS Health and/or one of its affiliates
+© Copyright 2023-2024 CVS Health and/or one of its affiliates. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

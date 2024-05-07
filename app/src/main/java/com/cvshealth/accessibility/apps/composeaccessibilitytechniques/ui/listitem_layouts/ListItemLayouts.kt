@@ -40,6 +40,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.selectableGroup
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
@@ -57,7 +59,8 @@ const val listItemLayoutsExample1ListItemTestTag = "listItemLayoutsExample1ListI
 const val listItemLayoutsExample2HeadingTestTag = "listItemLayoutsExample2Heading"
 const val listItemLayoutsExample2ListItemTestTag = "listItemLayoutsExample2ListItem"
 const val listItemLayoutsExample3HeadingTestTag = "listItemLayoutsExample3Heading"
-const val listItemLayoutsExample3ListItemTestTag = "listItemLayoutsExample3ListItem"
+const val listItemLayoutsExample3ListItem1TestTag = "listItemLayoutsExample3ListItem1"
+const val listItemLayoutsExample3ListItem2TestTag = "listItemLayoutsExample3ListItem2"
 const val listItemLayoutsExample4HeadingTestTag = "listItemLayoutsExample4Heading"
 const val listItemLayoutsExample4ListItemTestTag = "listItemLayoutsExample4ListItem"
 
@@ -130,7 +133,7 @@ private fun GoodExample1() {
         modifier = Modifier
             .testTag(listItemLayoutsExample1ListItemTestTag),
         supportingContent = {
-            Text(stringResource(id = R.string.listitem_layouts_example_1_label_2))
+            Text(stringResource(id = R.string.listitem_layouts_example_1_subtitle))
         },
     )
     HorizontalDivider()
@@ -177,7 +180,7 @@ private fun GoodExample2(
                 snackbarLauncher?.show(listItemMessage)
             },
         supportingContent = {
-            Text(stringResource(id = R.string.listitem_layouts_example_2_label_2))
+            Text(stringResource(id = R.string.listitem_layouts_example_2_subtitle))
         }
     )
 
@@ -200,8 +203,8 @@ private fun GoodExample2Preview() {
 
 @Composable
 private fun GoodExample3() {
-    // Good example 3: Accessible selectable ListItem layout
-    val (exampleValue, setExampleValue) = remember { mutableStateOf(false) }
+    // Good example 3: Accessible selectable ListItem layouts
+    val (exampleValue, setExampleValue) = remember { mutableStateOf(0) }
     GoodExampleHeading(
         text = stringResource(id = R.string.listitem_layouts_example_3_header),
         modifier = Modifier.testTag(listItemLayoutsExample3HeadingTestTag)
@@ -210,25 +213,52 @@ private fun GoodExample3() {
     Spacer(modifier = Modifier.height(8.dp))
     HorizontalDivider()
 
-    ListItem(
-        headlineContent = {
-            Text(stringResource(id = R.string.listitem_layouts_example_3_label))
-        },
-        modifier = Modifier
-            .testTag(listItemLayoutsExample3ListItemTestTag)
-            .visibleFocusBorder()
-            .selectable(
-                selected = exampleValue,
-                role = Role.RadioButton,
-                onClick = { setExampleValue(!exampleValue) }
-            ),
-        supportingContent = {
-            Text(stringResource(id = R.string.listitem_layouts_example_3_label_2))
-        },
-        leadingContent = {
-            RadioButton(selected = exampleValue, onClick = null)
+    Column(
+        modifier = Modifier.semantics {
+            selectableGroup()
         }
-    )
+    ) {
+        ListItem(
+            headlineContent = {
+                Text(stringResource(id = R.string.listitem_layouts_example_3_label_1))
+            },
+            modifier = Modifier
+                .testTag(listItemLayoutsExample3ListItem1TestTag)
+                .visibleFocusBorder()
+                .selectable(
+                    selected = exampleValue == 0,
+                    role = Role.RadioButton,
+                    onClick = { setExampleValue(0) }
+                ),
+            supportingContent = {
+                Text(stringResource(id = R.string.listitem_layouts_example_3_subtitle_1))
+            },
+            leadingContent = {
+                RadioButton(selected = exampleValue == 0, onClick = null)
+            }
+        )
+
+        ListItem(
+            headlineContent = {
+                Text(stringResource(id = R.string.listitem_layouts_example_3_label_2))
+            },
+            modifier = Modifier
+                .testTag(listItemLayoutsExample3ListItem2TestTag)
+                .visibleFocusBorder()
+                .selectable(
+                    selected = exampleValue == 1,
+                    role = Role.RadioButton,
+                    onClick = { setExampleValue(1) }
+                ),
+            supportingContent = {
+                Text(stringResource(id = R.string.listitem_layouts_example_3_subtitle_2))
+            },
+            leadingContent = {
+                RadioButton(selected = exampleValue == 1, onClick = null)
+            }
+        )
+
+    }
 
     HorizontalDivider()
 }
@@ -272,7 +302,7 @@ private fun GoodExample4() {
                 onValueChange = setExampleValue
             ),
         supportingContent = {
-            Text(stringResource(id = R.string.listitem_layouts_example_4_label_2))
+            Text(stringResource(id = R.string.listitem_layouts_example_4_subtitle))
         },
         trailingContent = {
             Switch(checked = exampleValue, onCheckedChange = null)

@@ -24,15 +24,20 @@ import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasTextExactly
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.isSelectable
+import androidx.compose.ui.test.isSelected
 import androidx.compose.ui.test.isToggleable
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.ListItemLayoutsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample1HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample1ListItemTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample2HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample2ListItemTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample3HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample3ListItemTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample3ListItem1TestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample3ListItem2TestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample4HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsExample4ListItemTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.listitem_layouts.listItemLayoutsHeadingTestTag
@@ -100,7 +105,16 @@ class ListItemLayoutsTests {
             .assertExists()
         composeTestRule
             .onNode(
-                hasTestTag(listItemLayoutsExample3ListItemTestTag)
+                hasTestTag(listItemLayoutsExample3ListItem1TestTag)
+                        and
+                        !isHeading()
+                        and
+                        !hasAnyDescendant(isHeading())
+            )
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(listItemLayoutsExample3ListItem2TestTag)
                         and
                         !isHeading()
                         and
@@ -160,20 +174,59 @@ class ListItemLayoutsTests {
     }
 
     @Test
-    fun verifyExample3ListItemHasExpectedSemantics() {
+    fun verifyExample3ListItemsHaveExpectedSemantics() {
         composeTestRule
             .onNode(
-                hasTestTag(listItemLayoutsExample3ListItemTestTag)
+                hasTestTag(listItemLayoutsExample3ListItem1TestTag)
                         and
                         isSelectable()
+                        and
+                        isSelected()
                         and
                         isTraversalGroup()
                         and
                         hasRole(Role.RadioButton)
                         and
-                        hasTextExactly("Accessible selectable ListItem", "Announces as a single labeled, selectable radio button.")
+                        hasTextExactly("Accessible selectable ListItem 1", "Announces as the first of two labeled, selectable radio buttons.")
                         and
                         hasContentDescriptionExactly()
+            )
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(listItemLayoutsExample3ListItem2TestTag)
+                        and
+                        isSelectable()
+                        and
+                        !isSelected()
+                        and
+                        isTraversalGroup()
+                        and
+                        hasRole(Role.RadioButton)
+                        and
+                        hasTextExactly("Accessible selectable ListItem 2", "Announces as the second of two labeled, selectable radio buttons.")
+                        and
+                        hasContentDescriptionExactly()
+            )
+            .assertExists()
+
+        // Click on unselected ListItem changes isSelected state of both ListItems
+        composeTestRule
+            .onNodeWithTag(listItemLayoutsExample3ListItem2TestTag)
+            .performScrollTo()
+            .performClick()
+        composeTestRule
+            .onNode(
+                hasTestTag(listItemLayoutsExample3ListItem1TestTag)
+                        and
+                        !isSelected()
+            )
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(listItemLayoutsExample3ListItem2TestTag)
+                        and
+                        isSelected()
             )
             .assertExists()
     }

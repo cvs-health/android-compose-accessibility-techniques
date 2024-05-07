@@ -535,17 +535,19 @@
     <string name="listitem_layouts_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of ListItem layouts.</string>
     <string name="listitem_layouts_example_1_header">Good example 1: Accessible inactive ListItem layout</string>
     <string name="listitem_layouts_example_1_label">Accessible inactive ListItem</string>
-    <string name="listitem_layouts_example_1_label_2">Announces as a single text.</string>
+    <string name="listitem_layouts_example_1_subtitle">Announces as a single text.</string>
     <string name="listitem_layouts_example_2_header">Good example 2: Accessible clickable ListItem layout</string>
     <string name="listitem_layouts_example_2_label">Accessible clickable ListItem</string>
-    <string name="listitem_layouts_example_2_label_2">Announces as a single labeled, clickable Button.</string>
+    <string name="listitem_layouts_example_2_subtitle">Announces as a single labeled, clickable Button.</string>
     <string name="listitem_layouts_example_2_message">Clicked accessible clickable ListItem</string>
-    <string name="listitem_layouts_example_3_header">Good example 3: Accessible selectable ListItem layout</string>
-    <string name="listitem_layouts_example_3_label">Accessible selectable ListItem</string>
-    <string name="listitem_layouts_example_3_label_2">Announces as a single labeled, selectable radio button.</string>
+    <string name="listitem_layouts_example_3_header">Good example 3: Accessible selectable ListItem layouts</string>
+    <string name="listitem_layouts_example_3_label_1">Accessible selectable ListItem 1</string>
+    <string name="listitem_layouts_example_3_subtitle_1">Announces as the first of two labeled, selectable radio buttons.</string>
+    <string name="listitem_layouts_example_3_label_2">Accessible selectable ListItem 2</string>
+    <string name="listitem_layouts_example_3_subtitle_2">Announces as the second of two labeled, selectable radio buttons.</string>
     <string name="listitem_layouts_example_4_header">Good example 4: Accessible toggleable ListItem layout</string>
     <string name="listitem_layouts_example_4_label">Accessible toggleable ListItem</string>
-    <string name="listitem_layouts_example_4_label_2">Announces as a single labeled, toggleable Switch.</string>
+    <string name="listitem_layouts_example_4_subtitle">Announces as a single labeled, toggleable Switch.</string>
 
     <!-- ModalBottomSheet layouts -->
     <string name="modalbottomsheet_layouts_title">ModalBottomSheet layouts</string>

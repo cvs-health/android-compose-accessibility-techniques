@@ -15,6 +15,7 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.home
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -51,6 +52,8 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BasicAccordionHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyTextNoPadding
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericListColumn
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.addListItemSemantics
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleCardFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -97,189 +100,192 @@ fun HomeScreen(
             BodyText(textId = R.string.home_description_2)
             Spacer(modifier = Modifier.height(8.dp))
 
+            val informativeContentCardInfo = listOf(
+                NavigationCardInfo(
+                    labelId = R.string.text_alternatives_title,
+                    route = ComposeAccessibilityTechniquesRoute.TextAlternatives
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.accessibility_traversal_order_title,
+                    route = ComposeAccessibilityTechniquesRoute.AccessibilityTraversalOrder,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.content_grouping_title,
+                    route = ComposeAccessibilityTechniquesRoute.ContentGrouping,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.content_group_replacement_title,
+                    route = ComposeAccessibilityTechniquesRoute.ContentGroupReplacement,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.heading_semantics_title,
+                    route = ComposeAccessibilityTechniquesRoute.HeadingSemantics,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.list_semantics_title,
+                    route = ComposeAccessibilityTechniquesRoute.ListSemantics,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.adaptive_layouts_title,
+                    route = ComposeAccessibilityTechniquesRoute.AdaptiveLayouts,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.dark_theme_title,
+                    route = ComposeAccessibilityTechniquesRoute.DarkAndLightThemes,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.screen_and_pane_titles_title,
+                    route = ComposeAccessibilityTechniquesRoute.ScreenAndPaneTitles,
+                ),
+            )
             BasicAccordionHeading(
                 text = stringResource(id = R.string.home_informative_content)
             ) {
-                NavigationCard(
-                    label = stringResource(R.string.text_alternatives_title),
-                    route = ComposeAccessibilityTechniquesRoute.TextAlternatives,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.accessibility_traversal_order_title),
-                    route = ComposeAccessibilityTechniquesRoute.AccessibilityTraversalOrder,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.content_grouping_title),
-                    route = ComposeAccessibilityTechniquesRoute.ContentGrouping,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.content_group_replacement_title),
-                    route = ComposeAccessibilityTechniquesRoute.ContentGroupReplacement,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.heading_semantics_title),
-                    route = ComposeAccessibilityTechniquesRoute.HeadingSemantics,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.list_semantics_title),
-                    route = ComposeAccessibilityTechniquesRoute.ListSemantics,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.adaptive_layouts_title),
-                    route = ComposeAccessibilityTechniquesRoute.AdaptiveLayouts,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.dark_theme_title),
-                    route = ComposeAccessibilityTechniquesRoute.DarkAndLightThemes,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.screen_and_pane_titles_title),
-                    route = ComposeAccessibilityTechniquesRoute.ScreenAndPaneTitles,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
+                GenericListColumn(rowCount = informativeContentCardInfo.size) {
+                    informativeContentCardInfo.forEachIndexed { index, cardInfo ->
+                        NavigationCard(
+                            label = stringResource(cardInfo.labelId),
+                            route = cardInfo.route,
+                            rowIndex = index,
+                            onNavigationButtonClicked = onNavigationButtonClicked
+                        )
+                    }
+                }
             }
 
+            val interactiveBehaviorsCardInfo = listOf(
+                NavigationCardInfo(
+                    labelId = R.string.interactive_control_labels_title,
+                    route = ComposeAccessibilityTechniquesRoute.InteractiveControlLabels
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.ux_change_announcements_title,
+                    route = ComposeAccessibilityTechniquesRoute.UxChangeAnnouncements,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.keyboard_types_title,
+                    route = ComposeAccessibilityTechniquesRoute.KeyboardTypes,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.keyboard_actions_title,
+                    route = ComposeAccessibilityTechniquesRoute.KeyboardActions,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.keyboard_focus_order_title,
+                    route = ComposeAccessibilityTechniquesRoute.KeyboardFocusOrder,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.custom_focus_indicators_title,
+                    route = ComposeAccessibilityTechniquesRoute.CustomFocusIndicators,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.custom_click_labels_title,
+                    route = ComposeAccessibilityTechniquesRoute.CustomClickLabels,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.custom_state_descriptions_title,
+                    route = ComposeAccessibilityTechniquesRoute.CustomStateDescriptions,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.custom_accessibility_actions_title,
+                    route = ComposeAccessibilityTechniquesRoute.CustomAccessibilityActions,
+                ),
+            )
             BasicAccordionHeading(
                 text = stringResource(id = R.string.home_interactive_behaviors)
             ) {
-                NavigationCard(
-                    label = stringResource(R.string.interactive_control_labels_title),
-                    route = ComposeAccessibilityTechniquesRoute.InteractiveControlLabels,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.ux_change_announcements_title),
-                    route = ComposeAccessibilityTechniquesRoute.UxChangeAnnouncements,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.keyboard_types_title),
-                    route = ComposeAccessibilityTechniquesRoute.KeyboardTypes,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.keyboard_actions_title),
-                    route = ComposeAccessibilityTechniquesRoute.KeyboardActions,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.keyboard_focus_order_title),
-                    route = ComposeAccessibilityTechniquesRoute.KeyboardFocusOrder,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.custom_focus_indicators_title),
-                    route = ComposeAccessibilityTechniquesRoute.CustomFocusIndicators,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.custom_click_labels_title),
-                    route = ComposeAccessibilityTechniquesRoute.CustomClickLabels,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.custom_state_descriptions_title),
-                    route = ComposeAccessibilityTechniquesRoute.CustomStateDescriptions,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.custom_accessibility_actions_title),
-                    route = ComposeAccessibilityTechniquesRoute.CustomAccessibilityActions,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
+                GenericListColumn(rowCount = interactiveBehaviorsCardInfo.size) {
+                    interactiveBehaviorsCardInfo.forEachIndexed { index, cardInfo ->
+                        NavigationCard(
+                            label = stringResource(cardInfo.labelId),
+                            route = cardInfo.route,
+                            rowIndex = index,
+                            onNavigationButtonClicked = onNavigationButtonClicked
+                        )
+                    }
+                }
             }
 
+
+            val specificComponentTypesCardInfo = listOf(
+                NavigationCardInfo(
+                    labelId = R.string.accordion_title,
+                    route = ComposeAccessibilityTechniquesRoute.AccordionControls
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.autofill_title,
+                    route = ComposeAccessibilityTechniquesRoute.AutofillControls,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.checkbox_controls_title,
+                    route = ComposeAccessibilityTechniquesRoute.CheckboxControls,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.dropdown_menus_title,
+                    route = ComposeAccessibilityTechniquesRoute.DropdownMenus,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.exposed_dropdown_menus_title,
+                    route = ComposeAccessibilityTechniquesRoute.ExposedDropdownMenus,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.inline_links_title,
+                    route = ComposeAccessibilityTechniquesRoute.InlineLinks,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.listitem_layouts_title,
+                    route = ComposeAccessibilityTechniquesRoute.ListItemLayouts,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.modalbottomsheet_layouts_title,
+                    route = ComposeAccessibilityTechniquesRoute.ModalBottomSheetLayouts,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.navigationbar_layouts_title,
+                    route = ComposeAccessibilityTechniquesRoute.NavigationBarLayouts,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.popup_messages_title,
+                    route = ComposeAccessibilityTechniquesRoute.PopupMessages,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.radio_button_groups_title,
+                    route = ComposeAccessibilityTechniquesRoute.RadioButtonGroups,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.slider_controls_title,
+                    route = ComposeAccessibilityTechniquesRoute.SliderControls,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.standalone_links_title,
+                    route = ComposeAccessibilityTechniquesRoute.StandAloneLinks,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.switch_controls_title,
+                    route = ComposeAccessibilityTechniquesRoute.SwitchControls,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.tab_rows_title,
+                    route = ComposeAccessibilityTechniquesRoute.TabRows,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.textfield_controls_title,
+                    route = ComposeAccessibilityTechniquesRoute.TextFieldControls,
+                ),
+            )
             BasicAccordionHeading(
                 text = stringResource(id = R.string.home_components)
             ) {
-                NavigationCard(
-                    label = stringResource(R.string.accordion_title),
-                    route = ComposeAccessibilityTechniquesRoute.AccordionControls,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.autofill_title),
-                    route = ComposeAccessibilityTechniquesRoute.AutofillControls,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.checkbox_controls_title),
-                    route = ComposeAccessibilityTechniquesRoute.CheckboxControls,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.dropdown_menus_title),
-                    route = ComposeAccessibilityTechniquesRoute.DropdownMenus,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.exposed_dropdown_menus_title),
-                    route = ComposeAccessibilityTechniquesRoute.ExposedDropdownMenus,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.inline_links_title),
-                    route = ComposeAccessibilityTechniquesRoute.InlineLinks,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.listitem_layouts_title),
-                    route = ComposeAccessibilityTechniquesRoute.ListItemLayouts,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.modalbottomsheet_layouts_title),
-                    route = ComposeAccessibilityTechniquesRoute.ModalBottomSheetLayouts,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.navigationbar_layouts_title),
-                    route = ComposeAccessibilityTechniquesRoute.NavigationBarLayouts,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.popup_messages_title),
-                    route = ComposeAccessibilityTechniquesRoute.PopupMessages,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(id = R.string.radio_button_groups_title),
-                    route = ComposeAccessibilityTechniquesRoute.RadioButtonGroups,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.slider_controls_title),
-                    route = ComposeAccessibilityTechniquesRoute.SliderControls,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.standalone_links_title),
-                    route = ComposeAccessibilityTechniquesRoute.StandAloneLinks,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.switch_controls_title),
-                    route = ComposeAccessibilityTechniquesRoute.SwitchControls,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.tab_rows_title),
-                    route = ComposeAccessibilityTechniquesRoute.TabRows,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
-                NavigationCard(
-                    label = stringResource(R.string.textfield_controls_title),
-                    route = ComposeAccessibilityTechniquesRoute.TextFieldControls,
-                    onNavigationButtonClicked = onNavigationButtonClicked
-                )
+                GenericListColumn(rowCount = specificComponentTypesCardInfo.size) {
+                    specificComponentTypesCardInfo.forEachIndexed { index, cardInfo ->
+                        NavigationCard(
+                            label = stringResource(cardInfo.labelId),
+                            route = cardInfo.route,
+                            rowIndex = index,
+                            onNavigationButtonClicked = onNavigationButtonClicked
+                        )
+                    }
+                }
             }
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -298,6 +304,11 @@ private fun HomeScreenPreview() {
     }
 }
 
+private data class NavigationCardInfo(
+    @StringRes val labelId: Int,
+    val route: ComposeAccessibilityTechniquesRoute
+)
+
 /**
  * Display an [OutlinedCard] with label and '>' icon that navigates to a specific route in the app.
  * Applies a visible card border and an onClickLabel to enhance accessibility.
@@ -313,6 +324,7 @@ private fun HomeScreenPreview() {
 private fun NavigationCard(
     label: String,
     route: ComposeAccessibilityTechniquesRoute,
+    rowIndex: Int,
     modifier: Modifier = Modifier,
     onNavigationButtonClicked: (ComposeAccessibilityTechniquesRoute) -> Unit
 ) {
@@ -325,7 +337,8 @@ private fun NavigationCard(
                 onClickLabel = stringResource(id = R.string.home_navigation_click_label)
             ) {
                 onNavigationButtonClicked(route)
-            },
+            }
+            .addListItemSemantics(rowIndex),
         border = BorderStroke(2.dp, CardDefaults.outlinedCardBorder().brush)
     ) {
         Row(
@@ -355,7 +368,9 @@ private fun NavigationCardPreview() {
         NavigationCard(
             label = "Home",
             route = ComposeAccessibilityTechniquesRoute.Home,
+            rowIndex = 0,
             onNavigationButtonClicked = {  }
         )
     }
 }
+

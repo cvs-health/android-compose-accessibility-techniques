@@ -44,9 +44,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericListColumn
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SuccessAccordionHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.addListItemSemantics
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -96,17 +98,27 @@ fun AccordionControlsScreen(
                 text = stringResource(id = R.string.accordion_section_1),
                 modifier = Modifier.testTag(accordionExample1TestTag)
             ) {
-                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+                GenericListColumn(
+                    rowCount = 3,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                ) {
                     BodyText(
                         textId = R.string.accordion_item_1_1,
-                        modifier = Modifier.testTag(accordionExample1Item1TestTag)
+                        modifier = Modifier
+                            .testTag(accordionExample1Item1TestTag)
+                            .addListItemSemantics(index = 0),
                     )
                     BodyText(
                         textId = R.string.accordion_item_1_2,
-                        modifier = Modifier.testTag(accordionExample1Item2TestTag))
+                        modifier = Modifier
+                            .testTag(accordionExample1Item2TestTag)
+                            .addListItemSemantics(index = 1),
+                    )
                     BodyText(
                         textId = R.string.accordion_item_1_3,
-                        modifier = Modifier.testTag(accordionExample1Item3TestTag)
+                        modifier = Modifier
+                            .testTag(accordionExample1Item3TestTag)
+                            .addListItemSemantics(index = 2),
                     )
                 }
             }
@@ -116,18 +128,27 @@ fun AccordionControlsScreen(
                 text = stringResource(id = R.string.accordion_section_2),
                 modifier = Modifier.testTag(accordionExample2TestTag)
             ) {
-                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+                GenericListColumn(
+                    rowCount = 3,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                ) {
                     BodyText(
                         textId = R.string.accordion_item_2_1,
-                        modifier = Modifier.testTag(accordionExample2Item1TestTag)
+                        modifier = Modifier
+                            .testTag(accordionExample2Item1TestTag)
+                            .addListItemSemantics(index = 0),
                     )
                     BodyText(
                         textId = R.string.accordion_item_2_2,
-                        modifier = Modifier.testTag(accordionExample2Item2TestTag)
+                        modifier = Modifier
+                            .testTag(accordionExample2Item2TestTag)
+                            .addListItemSemantics(index = 1),
                     )
                     BodyText(
                         textId = R.string.accordion_item_2_3,
-                        modifier = Modifier.testTag(accordionExample2Item3TestTag)
+                        modifier = Modifier
+                            .testTag(accordionExample2Item3TestTag)
+                            .addListItemSemantics(index = 2),
                     )
                 }
             }

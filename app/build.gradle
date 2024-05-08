@@ -36,6 +36,7 @@ android {
     }
     buildFeatures {
         compose true
+        buildConfig true
         viewBinding true // for View interop binding with XML layouts
     }
     composeOptions {

@@ -219,10 +219,9 @@ fun SuccessAccordionHeading(
         initiallyExpanded = initiallyExpanded,
         headingIconPainter = painterResource(id = R.drawable.ic_check_fill),
         headingIconTint = SuccessGreen,
-        expanderIconTint = MaterialTheme.colorScheme.primary
-    ) {
-        content()
-    }
+        expanderIconTint = MaterialTheme.colorScheme.primary,
+        content = content
+    )
 }
 
 @Preview(showBackground = true)
@@ -263,10 +262,9 @@ fun BasicAccordionHeading(
         modifier = modifier
             .padding(top = 8.dp),
         initiallyExpanded = initiallyExpanded,
-        expanderIconTint = MaterialTheme.colorScheme.primary
-    ) {
-        content()
-    }
+        expanderIconTint = MaterialTheme.colorScheme.primary,
+        content = content
+    )
 }
 
 @Preview(showBackground = true)

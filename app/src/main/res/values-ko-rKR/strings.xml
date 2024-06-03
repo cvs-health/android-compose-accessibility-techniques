@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Compose 접근성 기술 모음집</string>
+    <string name="navigate_up">뒤로</string>
+    <string name="collapse_button_description">접기</string>
+    <string name="expand_button_description">펼치기</string>
+    <string name="standalone_link_on_click_label">브라우저로 열기</string>
+    <string name="textfield_clear_button_description">텍스트 비우기</string>
+
+    <!-- HomeScreen -->
+    <string name="home_title">홈</string>
+    <string name="home_description">이 애플리케이션은 Jetpack Composes 기반 UI에 관하여 다양한 접근성 모범 사례와 이를 통해 해결할 수 있는 문제 예시를 보여줍니다.</string>
+    <string name="home_description_2">아래 카드를 사용하여 주제 영역을 선택하고 해당 시연에 사용된 보조 기술에 관한 화면 속 지시 사항을 따르세요.</string>
+    <string name="home_informative_content">정보성 콘텐츠</string>
+    <string name="home_interactive_behaviors">상호작용 동작</string>
+    <string name="home_components">특정 컴포넌트 유형</string>
+    <string name="home_navigation_click_label">자세히 보기</string>
+
+    <!-- Text alternatives -->
+    <string name="text_alternatives_title">대체 텍스트</string>
+    <string name="text_alternatives_heading">텍스트가 아닌 콘텐츠에 관한 적절한 대체 텍스트 제공</string>
+    <string name="text_alternatives_description_1">정보성을 띄는 모든 콘텐츠는 보편적으로 contentDescription 속성을 통해 그에 맞는 적절한 대체텍스트를 제공해야 합니다. 순전히 장식을 목적으로 하는 경우 contentDescription을 null로 제공할 수 있습니다.</string>
+    <string name="text_alternatives_description_2">인접한 텍스트 콘텐츠와 중복되는 유익한 비 텍스트 콘텐츠는 해당 텍스트 콘텐츠와 그룹화하여 contentDescription을 null로 부여하여 중복된 내용을 최소화해야 합니다. 아래의 예시 4를 참조하십시오.</string>
+    <string name="text_alternatives_description_3">TalkBack을 켜고, 화면 예시 요소를 읽어보세요.</string>
+    <string name="text_alternatives_example_1_heading">안 좋은 예시 1: 일출 및 일몰 시간 아이콘에 대체 텍스트가 없음</string>
+    <string name="text_alternatives_example_sunrise_time">오전 6:24</string>
+    <string name="text_alternatives_example_sunset_time">오후 5:35</string>
+    <string name="text_alternatives_example_2_heading">무난한 예시 2: 일출 및 일몰 시간 아이콘에 대체 텍스트를 제공함</string>
+    <string name="text_alternatives_example_sunrise_description">일출</string>
+    <string name="text_alternatives_example_sunset_description">일몰</string>
+    <string name="text_alternatives_example_3_heading">좋은 예시 3: 일출 및 일몰 시간과 아이콘을 그룹화함</string>
+    <string name="text_alternatives_example_4_heading">좋은 예시 4: 일출 및 일몰 시간과 아이콘 중복 텍스트를 그룹화함</string>
+    <string name="text_alternatives_example_4_note">참고사항으로 이 앱의 거의 모든 예제 제목은 유사한 기술을 사용합니다.</string>
+    <string name="text_alternatives_example_5_heading">좋은 예시 5: 일출 및 일몰 시간과 아이콘을 하나의 대체텍스트로 합침</string>
+    <string name="text_alternatives_example_5_grouped_sunrise_text">오전 6:24에 해가 뜸</string>
+    <string name="text_alternatives_example_5_grouped_sunset_text">오후 5:35에 해가 짐</string>
+    <string name="text_alternatives_example_6_heading">안 좋은 예시 6: \'공유하기\' 아이콘 버튼에 빈 대체 텍스트가 있음</string>
+    <string name="text_alternatives_example_6_message">대체 텍스트가 비어있는 공유하기 아이콘을 눌렀습니다.</string>
+    <string name="text_alternatives_example_6_note">대체 텍스트가 비어있는 \'공유하기\' 아이콘은 TalkBack으로 선택할 수 없습니다.</string>
+    <string name="text_alternatives_example_7_heading">안 좋은 예시 7: \'공유하기\' 아이콘 버튼의 contentDescription이 null임</string>
+    <string name="text_alternatives_example_7_message">대체 텍스트가 null로 제공된 공유하기 아이콘 버튼을 눌렀습니다.</string>
+    <string name="text_alternatives_example_8_heading">좋은 예시 8: \'공유하기\' 아이콘 버튼에 대체 텍스트 제공</string>
+    <string name="text_alternatives_example_8_content_description">공유하기</string>
+    <string name="text_alternatives_example_8_message">대체 텍스트가 제공된 공유하기 아이콘 버튼을 눌렀습니다.</string>
+    <string name="text_alternatives_example_9_heading">안 좋은 예시 9: 장식용 이미지에 빈 대체 텍스트가 있음</string>
+    <string name="text_alternatives_example_9_decorated_text">장식용 텍스트 예시입니다.</string>
+    <string name="text_alternatives_example_10_heading">나쁜 예시 10: 의미 없는 장식용 이미지에 대체 텍스트가 있음</string>
+    <string name="text_alternatives_example_10_content_description">새싹</string>
+    <string name="text_alternatives_example_10_decorated_text">장식용 텍스트 예시입니다.</string>
+    <string name="text_alternatives_example_11_heading">좋은 사례 11: 장식용 이미지에 contentDescription을 null로 제공</string>
+    <string name="text_alternatives_example_11_decorated_text">장식용 텍스트 예시입니다.</string>
+    <string name="text_alternatives_example_12_heading">나쁜 예시 12: 그룹화된 장식용 이미지의 contentDescription이 비어 있음</string>
+    <string name="text_alternatives_example_12_description">
+이미지에 빈 contentDescription을 사용하는 것은 TalkBack에서 \"레이블이 지정되지 않음. 이미지\"가 발표되지 않기 때문에 코드가 어떻게 작성되었는지 숨깁니다. 하지만 이는 나쁜 코드로 여겨지며 자동 UI 테스트에 사용되는 의미론적 트리를 변경합니다.</string>
+    <string name="text_alternatives_example_12_decorated_text">장식용 텍스트 예시입니다.</string>
+    <string name="text_alternatives_example_13_heading">무난한 예시 13: 그룹화된 장식용 이미지에 invisibleToUser() 적용</string>
+    <string name="text_alternatives_example_13_content_description">새싹</string>
+    <string name="text_alternatives_example_13_decorated_text">장식용 텍스트 예시입니다.</string>
+    <string name="text_alternatives_example_14_heading">좋은 예시 14: 그룹화된 장식 이미지에 contentDescription을 null로 제공</string>
+    <string name="text_alternatives_example_14_decorated_text">장식용 텍스트 예시입니다..</string>
+    <!-- Accessibility traversal order -->
+    <string name="accessibility_traversal_order_title">접근성 초점 순회 순서</string>
+    <string name="accessibility_traversal_order_heading">Accessibility traversal order must be logical</string>
+    <string name="accessibility_traversal_order_description_1">Accessibility traversal order (i.e., TalkBack\'s reading order) is set left-to-right, top-to-bottom by default. The Modifier.semantics properties isTraversalGroup and traversalIndex may be used to adjust that reading order.</string>
+    <string name="accessibility_traversal_order_description_2">Turn on TalkBack and step through the screen for examples.</string>
+    <string name="accessibility_traversal_order_example_1_heading">Bad example 1: Texts in an illogical traversal order</string>
+    <string name="accessibility_traversal_order_example_1_description">The main text block is a column two-thirds of the width of the screen with the sidebar text column shown beside it. TalkBack should read each column in order, but will instead read each text block left-to-right, top-to-bottom, mixing the main text and sidebar texts illogically.</string>
+    <string name="accessibility_traversal_order_example_group_1_label">Main text</string>
+    <string name="accessibility_traversal_order_example_group_1_text_a">This is the first paragraph of the main text block.</string>
+    <string name="accessibility_traversal_order_example_group_1_text_b">This is the second paragraph of the main text block.</string>
+    <string name="accessibility_traversal_order_example_group_1_text_c">This is the third paragraph of the main text block.</string>
+    <string name="accessibility_traversal_order_example_group_2_label">Sidebar</string>
+    <string name="accessibility_traversal_order_example_group_2_text_a">This is the first sidebar paragraph.</string>
+    <string name="accessibility_traversal_order_example_group_2_text_b">This is the second sidebar paragraph.</string>
+    <string name="accessibility_traversal_order_example_2_heading">Good example 2: Texts arranged in a logical traversal order with isTraversalGroup</string>
+    <string name="accessibility_traversal_order_example_2_description">TalkBack reads each of this example\'s Main text completely before its Sidebar text, because isTraversalGroup properly groups the texts.</string>
+    <string name="accessibility_traversal_order_example_2_afterword">This is text following the two-column region.</string>
+    <string name="accessibility_traversal_order_example_3_heading">Good example 3: Texts arranged in a different order with traversalIndex</string>
+    <string name="accessibility_traversal_order_example_3_description">TalkBack reads each of this example\'s Sidebar text before its Main text, because isTraversalGroup collects them and traversalIndex orders the Sidebar first. Note that the enclosing Row must also set isTraversalGroup to limit the effect of traversalIndex to only its enclosed Columns.</string>
+    <string name="accessibility_traversal_order_example_3_afterword">This is text following the two-column region.</string>
+
+    <!-- Content grouping -->
+    <string name="content_grouping_title">Content grouping</string>
+    <string name="content_grouping_heading">Some content should be grouped for screen readers</string>
+    <string name="content_grouping_description">Some text, particularly in simple tables, cards, and list items, should be read as single block by a screen reader, even when the content consists of separate Text composables. This enables a screen reader user to skip to the next content block instead of hearing each text separately. If a card or list item is clickable, this is handled automatically; otherwise, it should be done manually.</string>
+    <string name="content_grouping_description_2">Turn on TalkBack and listen the following items for a demonstration.</string>
+    <string name="content_grouping_table_examples">Simple table examples</string>
+    <string name="content_grouping_table_example_1">Bad example 1: Ungrouped table</string>
+    <string name="content_grouping_table_example_2">Bad example 2: Misgrouped table</string>
+    <string name="content_grouping_table_example_3">Good example 3: Properly grouped table</string>
+    <string name="content_grouping_table_example_header_1">City name</string>
+    <string name="content_grouping_table_example_header_2">Population</string>
+    <string name="content_grouping_table_example_header_3">Area (sq mi)</string>
+    <string name="content_grouping_table_example_value_1">Boston</string>
+    <string name="content_grouping_table_example_value_2">675,647</string>
+    <string name="content_grouping_table_example_value_3">48.4</string>
+    <string name="content_grouping_card_examples">Card examples</string>
+    <string name="content_grouping_card1_title">Bad example 4: Card without grouped content</string>
+    <string name="content_grouping_card1_author">First Author</string>
+    <string name="content_grouping_card1_date">January, 2014</string>
+    <string name="content_grouping_card1_description">This card does not group its content for screen readers. Note how you have to swipe through each separate Text.</string>
+    <string name="content_grouping_card2_title">Good example 5: Card with grouped content</string>
+    <string name="content_grouping_card2_author">Second Author</string>
+    <string name="content_grouping_card2_date">March, 2020</string>
+    <string name="content_grouping_card2_description">This card groups its content for screen readers using Modifier.semantics( mergeDescendants = true ). Note how a single swipe takes you to the next card.</string>
+    <string name="content_grouping_card3_title">Good example 6: Another card with grouped content</string>
+    <string name="content_grouping_card3_author">Third Author</string>
+    <string name="content_grouping_card3_date">May, 2022</string>
+    <string name="content_grouping_card3_description">This card groups its content by being clickable.</string>
+    <string name="content_grouping_card3_message">Activating a card would normally open a detail view of the card\'s content.</string>
+
+    <!-- Content group replacement -->
+    <string name="content_group_replacement_title">Content group replacement</string>
+    <string name="content_group_replacement_heading">Grouped content can be replaced to enhance screen reader experience</string>
+    <string name="content_group_replacement_description">Sometimes the graphical components of a layout group do not convey their meaning well to screen readers, even if grouped into a single text. In this case, replace the screen reader text for the layout group with something better.</string>
+    <string name="content_group_replacement_description_2">Turn on TalkBack and listen to the items on this page for a demonstration.</string>
+    <string name="content_group_replacement_ungrouped_rating_heading">Bad example 1: Rating with content ungrouped</string>
+    <string name="content_group_replacement_rating_group_heading">Bad example 2: Rating with content grouped</string>
+    <string name="content_group_replacement_rating_group_note">Note how the LinearProgressIndicator is announced separately in TalkBack, despite the Row\'s merge semantics.</string>
+    <string name="content_group_replacement_rating_group_replaced_heading">Good example 3: Rating with grouped content replaced with invisibleToUser()</string>
+    <string name="content_group_replacement_rating_group_overridden_heading">Good example 4: Rating with grouped content replaced with clearAndSetSemantics</string>
+    <string name="content_group_replacement_rating_label">Rating: </string>
+    <string name="content_group_replacement_rating_text">%1$s / %2$s</string>
+    <string name="content_group_replacement_reviews">Reviews: %1$d</string>
+    <plurals name="content_group_replacement_rating_group_content_description">
+        <item quantity="one">Rating: %1$s out of %2$s stars, based on %3$d review</item>
+        <item quantity="other">Rating: %1$s out of %2$s stars, based on %3$d reviews</item>
+    </plurals>
+
+    <!-- Heading semantics -->
+    <string name="heading_semantics_title">Heading semantics</string>
+    <string name="heading_semantics_heading">Heading text must be marked as an accessibility heading</string>
+    <string name="heading_semantics_description_1">Accessibility headings both convey the semantic meaning that text is a heading to a screen reader user and allow heading navigation in screen readers.</string>
+    <string name="heading_semantics_description_2">Turn on TalkBack and read the following text for examples. Switch TalkBack to use the Reading Control \"Headings\" and swipe down and up to experience heading navigation.</string>
+    <string name="heading_semantics_example_1_heading">Bad example 1: Big text that is not a heading</string>
+    <string name="heading_semantics_example_1_body_text">Graphically large text won\'t act as a heading for accessibility purposes by itself; it must be marked as a heading.</string>
+    <string name="heading_semantics_example_2_heading">Bad example 2: Ending contentDescription with \'Heading\' is not a heading</string>
+    <string name="heading_semantics_faux_heading_content_description">%1$s, Heading.</string>
+    <string name="heading_semantics_example_2_body_text">Marking a Composable with a contentDescription that appends \"Heading\" to the text does not give that Composable accessibility heading semantics. The large text above might announce \"Heading\" in TalkBack, but it is not recognized as having that role by the TalkBack \"Headings\" Reading Control.</string>
+    <string name="heading_semantics_example_3_heading">Good example 3: Use semantics heading() property</string>
+    <string name="heading_semantics_example_3_body_text">Composables can be marked as accessibility headings by adding the Modifier.semantics heading() property.</string>
+
+    <!-- List semantics -->
+    <string name="list_semantics_title">List semantics</string>
+    <string name="list_semantics_heading">Mark visual lists with accessibility list semantics</string>
+    <string name="list_semantics_description_1">Lists created with LazyColumn and LazyRow automatically provide list semantics to accessibility services like TalkBack, reading things like “in list” / “out of list” and “1 of 5.” However, visual lists created with Column or Row need to have list semantics added via the collectionInfo and collectionItemInfo semantics properties.</string>
+    <string name="list_semantics_description_2">Turn on TalkBack and swipe through this page to hear demonstrations of visual lists without and with list semantics applied.</string>
+    <string name="list_semantics_bullet_point_alt_text">Bullet.</string>
+    <string name="list_semantics_example_1">Bad example 1: Visual list without list semantics</string>
+    <string name="list_semantics_bad_point_1">Bad example, Point 1</string>
+    <string name="list_semantics_bad_point_2">Bad example, Point 2</string>
+    <string name="list_semantics_bad_point_3">Bad example, Point 3</string>
+    <string name="list_semantics_after_bad_example">Text after a non-semantic visual list.</string>
+    <string name="list_semantics_example_2">Good example 2: Bullet list with list semantics</string>
+    <string name="list_semantics_good_point_1">Good example, Point 1</string>
+    <string name="list_semantics_good_point_2">Good example, Point 2</string>
+    <string name="list_semantics_good_point_3">Good example, Point 3</string>
+    <string name="list_semantics_after_list">Text after a semantic bullet list.</string>
+    <string name="list_semantics_example_3">Good example 3: Numbered list with list semantics</string>
+    <string name="list_semantics_good_point_1_numbered">1. Good numbered example, Point 1</string>
+    <string name="list_semantics_good_point_2_numbered">2. Good numbered example, Point 2</string>
+    <string name="list_semantics_good_point_3_numbered">3. Good numbered example, Point 3</string>
+    <string name="list_semantics_after_list_2">Text after a semantic numbered list.</string>
+    <string name="list_semantics_example_4">Good example 4: LazyRow list with automatic list semantics</string>
+    <string name="list_semantics_lazyrow_1">LazyRow 1</string>
+    <string name="list_semantics_lazyrow_2">LazyRow 2</string>
+    <string name="list_semantics_lazyrow_3">LazyRow 3</string>
+    <string name="list_semantics_lazyrow_4">LazyRow 4</string>
+    <string name="list_semantics_lazyrow_5">LazyRow 5</string>
+    <string name="list_semantics_lazyrow_6">LazyRow 6</string>
+    <string name="list_semantics_after_list_3">Text after a LazyRow list.</string>
+
+    <!-- Adaptive layouts -->
+    <string name="adaptive_layouts_title">Adaptive layouts</string>
+    <string name="adaptive_layouts_heading">Screen layout should adapt to screen size</string>
+    <string name="adaptive_layouts_description_1">All screens are required to reorient in response to device orientation changes. If a layout change should result, this can be done based on either device orientation or on available display space. Layouts that adapt to the available display space are strongly preferred.</string>
+    <string name="adaptive_layouts_description_2">Note how the cards on this screen are laid out. Reorient the device between portrait and landscape mode and observe how the card layouts change. Also try this screen on a larger tablet device.</string>
+    <string name="adaptive_layouts_example_1_heading">OK example 1: Adaptive layout from orientation</string>
+    <string name="adaptive_layouts_example_1_description">In this example, layout is determined by device orientation configuration. However, this setting does not reflect the actual display space available. It is fragile on tablet devices, foldables, and in multi-window modes.</string>
+    <string name="adaptive_layouts_example_2_heading">Good example 2: Adaptive layout using WindowSizeClass</string>
+    <string name="adaptive_layouts_example_2_description">In this example, layout is determined by actual available display space, as abstracted by WindowSizeClass. Layouts with this technique adapt better to more circumstances.</string>
+    <string name="adaptive_layouts_pane_1_title">Card 1</string>
+    <string name="adaptive_layouts_pane_1_description">This is the content of the first card.</string>
+    <string name="adaptive_layouts_pane_2_title">Card 2</string>
+    <string name="adaptive_layouts_pane_2_description">This is the content of the second card.</string>
+    <string name="adaptive_layouts_pane_3_title">Card 3</string>
+    <string name="adaptive_layouts_pane_3_description">This is the content of the third card.</string>
+
+    <!-- Dark and light themes -->
+    <string name="dark_theme_title">Dark and Light themes</string>
+    <string name="dark_theme_heading">Support both Dark and Light themes</string>
+    <string name="dark_theme_description_1">Different users and situations require different screen display colors. Some users are light-sensitive and require Dark Theme at all times; others require Light Theme to see text clearly. Similarly, many users may prefer Dark Theme in a dark setting and Light Theme in a bright setting. Supporting both themes with sufficiently contrasting colors is important.</string>
+    <string name="dark_theme_description_2">Color values are set in Color.kt. The application\'s theme is defined in Theme.kt and is conditional on the system dark theme setting. This theme is used to wrap all displays in MainActivity.kt.</string>
+    <string name="dark_theme_description_3">In the device Settings app, select Display, then toggle the Dark theme switch. Return to this app and note the color changes.</string>
+
+    <!-- Screen and pane titles -->
+    <string name="screen_and_pane_titles_title">Screen and pane titles</string>
+    <string name="screen_and_pane_titles_heading">Screens and panes need titles</string>
+    <string name="screen_and_pane_titles_description_1">All screens and distinct panes within a screen require a descriptive title to allow users to orient themselves within the app.</string>
+    <string name="screen_and_pane_titles_description_2">Screen titles can be visually presented using a TopAppBar title in the screen\'s Scaffold. Note that TopAppBar titles may be visually limited to a single line.</string>
+    <string name="screen_and_pane_titles_description_3">Screen and pane titles are announced in screen readers by setting the Modifier.semantics paneTitle property on the appropriate enclosing composable, such as a screen\'s Scaffold.</string>
+    <string name="screen_and_pane_titles_description_4">Note the visible appbar screen title. Turn on TalkBack and navigate to other screens to hear demonstrations of screen title announcement.</string>
+
+    <!-- Interactive control labels -->
+    <string name="interactive_control_labels_title">Interactive control labels</string>
+    <string name="interactive_control_labels_heading">Associate interactive controls programmatically with labels</string>
+    <string name="interactive_control_labels_description">Turn on TalkBack and swipe through this page to hear demonstrations of interactive controls with and without programmatically-associated labels.</string>
+    <string name="interactive_control_labels_example_1">Bad example 1: TextField without associated field label</string>
+    <string name="interactive_control_labels_unassociated_textfield_label">Text not associated with TextField</string>
+    <string name="interactive_control_labels_example_2">Good example 2: TextField automatically associates label and uses as hint</string>
+    <string name="interactive_control_labels_associated_textinput_label">Associated field label/hint</string>
+    <string name="interactive_control_labels_example_3">Bad example 3: CheckBox without associated field label</string>
+    <string name="interactive_control_labels_unassociated_checkbox_label">Text not associated with CheckBox</string>
+    <string name="interactive_control_labels_example_4">Good example 4: CheckBox with associated field label</string>
+    <string name="interactive_control_labels_associated_checkbox_label">Field label associated with CheckBox</string>
+    <string name="interactive_control_labels_example_5">Bad example 5: Switch without associated field label</string>
+    <string name="interactive_control_labels_unassociated_switch_label">Text not associated with Switch</string>
+    <string name="interactive_control_labels_example_6">Good example 6: Switch with associated field label (text)</string>
+    <string name="interactive_control_labels_associated_switch_label">Field label associated with Switch</string>
+    <string name="interactive_control_labels_example_7">Bad example 7: RadioButton group without associated field labels, etc.</string>
+    <string name="interactive_control_labels_unassociated_radio_button_label_1">Text not associated with RadioButton 1</string>
+    <string name="interactive_control_labels_unassociated_radio_button_label_2">Text not associated with RadioButton 2</string>
+    <string name="interactive_control_labels_example_8">Good example 8: RadioButton group with associated field labels, etc.</string>
+    <string name="interactive_control_labels_radio_button_group_label">RadioButton group label</string>
+    <string name="interactive_control_labels_associated_radio_button_label_1">Field label for RadioButton 1</string>
+    <string name="interactive_control_labels_associated_radio_button_label_2">Field label for RadioButton 2</string>
+    <string name="interactive_control_labels_example_9">Good example 9: Button with associated label</string>
+    <string name="interactive_control_labels_associated_button_label">Button label</string>
+    <string name="interactive_control_labels_associated_button_message">Button pressed</string>
+    <string name="interactive_control_labels_example_10">Bad example 10: Slider without associated field label</string>
+    <string name="interactive_control_labels_unassociated_slider_label">Field label not associated with Slider</string>
+    <string name="interactive_control_labels_example_11">OK example 11: Slider with associated field label</string>
+    <string name="interactive_control_labels_example_11_description">Sliders require the use of contentDescription to provide an accessible label. Slider controls cannot be simply associated with a visible text label, so both the visible label text and contentDescription are necessary. The contentDescription must also contain the visible label text.</string>
+    <string name="interactive_control_labels_associated_slider_label">Field label for Slider</string>
+    <string name="interactive_control_labels_associated_slider_content_description">Field label for Slider (contained in contentDescription)</string>
+    <string name="interactive_control_labels_example_12">Problematic example 12: RangeSlider with associated field label</string>
+    <string name="interactive_control_labels_example_12_description">Like Sliders, RangeSliders also require the use of contentDescription to provide an accessible label. However, RangeSliders are not keyboard accessible.</string>
+    <string name="interactive_control_labels_associated_rangeslider_label">Field label for RangeSlider</string>
+    <string name="interactive_control_labels_associated_rangeslider_state_description">%1$d to %2$d</string>
+
+    <!-- UX change announcements -->
+    <string name="ux_change_announcements_title">UX change announcements</string>
+    <string name="ux_change_announcements_heading">Announce all UX changes (with live regions when possible)</string>
+    <string name="ux_change_announcements_description">All UX changes resulting from user action or automatic updates must be announced to accessibility services. Live regions announce changes to their value, including becoming visible, but not when they are hidden. Accessibility announcements can also be made with direct code, but that should be done sparingly.</string>
+    <string name="ux_change_announcements_description_2">Turn on TalkBack and activate the controls below for demonstrations.</string>
+    <string name="ux_change_announcements_example_1_header">Good example 1: Counter with liveRegion semantics</string>
+    <string name="ux_change_announcements_counter">Counter: %1d</string>
+    <string name="ux_change_announcements_increment_counter">Increment counter</string>
+    <string name="ux_change_announcements_reset_counter">Reset counter</string>
+    <string name="ux_change_announcements_example_2_header">Good example 2: Announcing visibility with announceForAccessibility</string>
+    <string name="ux_change_announcements_example_2_show_text">Show Text</string>
+    <string name="ux_change_announcements_example_2_hide_text">Hide Text</string>
+    <string name="ux_change_announcements_example_2_text">Text shown</string>
+    <string name="ux_change_announcements_example_2_text_hidden">Text hidden</string>
+    <string name="ux_change_announcements_example_3_header">Good example 3: Waiting indicator with announceForAccessibility</string>
+    <string name="ux_change_announcements_example_3_show_waiting_indicator">Show waiting indicator for 15 seconds</string>
+    <string name="ux_change_announcements_waiting">Waiting…</string>
+    <string name="ux_change_announcements_waiting_completed">Waiting completed</string>
+    <string name="ux_change_announcements_example_4_header">Good example 4: Waiting indicator in AlertDialog</string>
+    <string name="ux_change_announcements_example_4_show_waiting_indicator">Show wait dialog for 15 seconds</string>
+
+    <!-- Keyboard types and options -->
+    <string name="keyboard_types_title">Keyboard types and options</string>
+    <string name="keyboard_types_heading">Match keyboard type and options to input data</string>
+    <string name="keyboard_types_description_1">Text input fields should configure a keyboard type and options appropriate to the data they accept. An inappropriate keyboard type can make data entry harder or even impossible.</string>
+    <string name="keyboard_types_description_2">Select each field below for editing and observe the soft keyboard type displayed.</string>
+    <string name="keyboard_types_example_1_header">Bad example 1: Numeric keyboard type prevents name text data entry</string>
+    <string name="keyboard_types_example_1_label">Name</string>
+    <string name="keyboard_types_example_2_header">Bad example 2: Decimal Keyboard type allows most data entry, but is not specific to the Phone field data type</string>
+    <string name="keyboard_types_example_2_label">Phone</string>
+    <string name="keyboard_types_example_3_header">Good example 3: Keyboard type for phone number (Phone)</string>
+    <string name="keyboard_types_example_3_label">Phone</string>
+    <string name="keyboard_types_example_4_header">Good example 4: Keyboard type for number (Number)</string>
+    <string name="keyboard_types_example_4_label">Count</string>
+    <string name="keyboard_types_example_5_header">Good example 5: Keyboard type for decimal number (Decimal)</string>
+    <string name="keyboard_types_example_5_label">Price</string>
+    <string name="keyboard_types_example_6_header">Good example 6: Keyboard type for generic text (Text)</string>
+    <string name="keyboard_types_example_6_label">Text</string>
+    <string name="keyboard_types_example_7_header">Good example 7: Keyboard type for full ASCII text (Ascii)</string>
+    <string name="keyboard_types_example_7_label">ASCII Text</string>
+    <string name="keyboard_types_example_8_header">Good example 8: Keyboard options for capitalized words (e.g., names)</string>
+    <string name="keyboard_types_example_8_label">Name</string>
+    <string name="keyboard_types_example_9_header">Good example 9: Keyboard options for sentences with autocorrect</string>
+    <string name="keyboard_types_example_9_label">Description</string>
+    <string name="keyboard_types_example_10_header">Good example 10: Keyboard options for sentences without autocorrect</string>
+    <string name="keyboard_types_example_10_label">Description</string>
+    <string name="keyboard_types_example_11_header">Good example 11: Keyboard type for email (Email)</string>
+    <string name="keyboard_types_example_11_label">Email</string>
+    <string name="keyboard_types_example_12_header">Good example 12: Keyboard type for URL (Uri)</string>
+    <string name="keyboard_types_example_12_label">URL</string>
+    <string name="keyboard_types_example_13_header">Good example 13: Keyboard type for text passwords (Password), plus masking</string>
+    <string name="keyboard_types_example_13_label">Password (text)</string>
+    <string name="keyboard_types_example_14_header">Good example 14: Keyboard type for numeric passwords (NumberPassword), plus masking</string>
+    <string name="keyboard_types_example_14_label">Password (numeric)</string>
+
+    <!-- Keyboard actions -->
+    <string name="keyboard_actions_title">Keyboard actions</string>
+    <string name="keyboard_actions_heading">Match keyboard actions to input field purpose or position</string>
+    <string name="keyboard_actions_description_1">Text input fields should configure a keyboard action appropriate to their purpose or on-screen position. For example, a search field should have action \"Search\" and an independent messaging field should have action \"Send\". Alternatively, the last text input field on a form should generally have the keyboard action \"Done\" and earlier fields should have the action \"Next\". An inappropriate keyboard action can make data entry harder.</string>
+    <string name="keyboard_actions_description_2">Select each field below for editing, observe the soft keyboard action displayed, and activate that action for its effect.</string>
+    <string name="keyboard_actions_example_1_header">OK example 1: Keyboard action None adds a newline</string>
+    <string name="keyboard_actions_example_1_label">Name</string>
+    <string name="keyboard_actions_example_2_header">Good example 2: Keyboard action Next moves to next field</string>
+    <string name="keyboard_actions_example_2_label">Address</string>
+    <string name="keyboard_actions_example_3_header">Good example 3: Keyboard action Done submits the form</string>
+    <string name="keyboard_actions_example_3_label">Postal code</string>
+    <string name="keyboard_actions_example_3_done_message">Keyboard \"Done\" selected.</string>
+    <string name="keyboard_actions_example_4_header">Good example 4: Keyboard action Send sends a message</string>
+    <string name="keyboard_actions_example_4_label">Message</string>
+    <string name="keyboard_actions_example_4_send_message">Keyboard \"Send\" selected.</string>
+    <string name="keyboard_actions_example_5_header">Good example 5: Keyboard action Search submits a query</string>
+    <string name="keyboard_actions_example_5_label">Search</string>
+    <string name="keyboard_actions_example_5_search_message">Keyboard \"Search\" selected.</string>
+    <string name="keyboard_actions_example_6_header">Good example 6: Keyboard action Go opens a new view</string>
+    <string name="keyboard_actions_example_6_label">Phone</string>
+    <string name="keyboard_actions_example_6_go_message">Keyboard \"Go\" selected for text: %1$s.</string>
+
+    <!-- Keyboard focus order -->
+    <string name="keyboard_focus_order_title">Keyboard focus order</string>
+    <string name="keyboard_focus_order_heading">Keyboard focus order must be logical and contain no traps</string>
+    <string name="keyboard_focus_order_description_1">Keyboard focus order defaults to composition tree order (depth-first), but that is not always the focus order that makes sense. Sometimes Modifier.focusRequester and .focusProperties must be used to force a specific focus order. But avoid creating focus traps!</string>
+    <string name="keyboard_focus_order_description_2">Note that accessibility traversal order is set separately from keyboard focus order.</string>
+    <string name="keyboard_focus_order_description_3">Tab through this screen with an external keyboard for demonstrations. Also, step through the screen with TalkBack for comparison.</string>
+    <string name="keyboard_focus_order_example_1_heading">Bad example 1: Controls in an illogical focus order</string>
+    <string name="keyboard_focus_order_example_2_heading">OK example 2: Controls forced into a logical focus order with focusProperties</string>
+    <string name="keyboard_focus_order_example_3_heading">Good example 3: Controls grouped into a logical focus order</string>
+    <string name="keyboard_focus_order_example_group_1">Group 1</string>
+    <string name="keyboard_focus_order_example_group_1_checkbox_a">Checkbox 1a</string>
+    <string name="keyboard_focus_order_example_group_1_checkbox_b">Checkbox 1b</string>
+    <string name="keyboard_focus_order_example_group_2">Group 2</string>
+    <string name="keyboard_focus_order_example_group_2_checkbox_a">Checkbox 2a</string>
+    <string name="keyboard_focus_order_example_group_2_checkbox_b">Checkbox 2b</string>
+    <string name="keyboard_focus_order_example_4_heading">Bad example 4: A keyboard focus trap</string>
+    <string name="keyboard_focus_order_example_4_description">Improperly setting focusProperties next and previous can create a focus order loop. The second button below cannot be reached by tabbing from the first button, nor can the focus loop be escaped by back-tabbing. Use the up or down arrow keys to escape the focus trap.</string>
+    <string name="keyboard_focus_order_example_4_button_1">First button (keyboard focus trap)</string>
+    <string name="keyboard_focus_order_example_4_button_2">Second button (can\'t be reached)</string>
+    <string name="keyboard_focus_order_example_4_buttton_1_message">Example 4 first button clicked.</string>
+    <string name="keyboard_focus_order_example_4_buttton_2_message">Example 4 second button clicked.</string>
+
+    <!-- Custom keyboard focus indicators -->
+    <string name="custom_focus_indicators_title">Custom focus indicators</string>
+    <string name="custom_focus_indicators_heading">Increase focus visibility with custom focus indicators</string>
+    <string name="custom_focus_indicators_description_1">By default, Material Design components have low-contrast focus indicators. Focus visibility can be improved using custom focus indicators.</string>
+    <string name="custom_focus_indicators_description_2">Tab through this page with an external keyboard to see default and improved focus indicators.</string>
+    <string name="custom_focus_indicators_description_3">(Note that these techniques have been applied to many controls throughout this app.)</string>
+    <string name="custom_focus_indicators_example_1_heading">Problematic example 1: Default button focus indicator</string>
+    <string name="custom_focus_indicators_example_1_description">Because this button uses the default system focus indicator, it technically conforms with the WCAG guidelines regarding focus visibility. However, it provides a poor user experience.</string>
+    <string name="custom_focus_indicators_example_1_button">Default focus indicator</string>
+    <string name="custom_focus_indicators_example_1_message">Activated example 1 button showing default focus indicator.</string>
+    <string name="custom_focus_indicators_example_2_heading">Good example 2: Custom button focus indicator</string>
+    <string name="custom_focus_indicators_example_2_description">This example demonstrates a custom focus indicator implemented using Button\'s border property to improve focus visibility.</string>
+    <string name="custom_focus_indicators_example_2_button">Custom focus indicator</string>
+    <string name="custom_focus_indicators_example_2_message">Activated example 2 button showing custom focus indicator.</string>
+    <string name="custom_focus_indicators_example_3_heading">Problematic example 3: Default icon button focus indicator</string>
+    <string name="custom_focus_indicators_example_3_button_description">Share icon button with default focus indicator</string>
+    <string name="custom_focus_indicators_example_3_message">Activated example 3 Share icon button showing default focus indicator.</string>
+    <string name="custom_focus_indicators_example_4_heading">Good example 4: Custom icon button focus indicator</string>
+    <string name="custom_focus_indicators_example_4_button_description">Share icon button with custom focus indicator</string>
+    <string name="custom_focus_indicators_example_4_message">Activated example 4 Share icon button showing custom focus indicator.</string>
+    <string name="custom_focus_indicators_example_5_heading">Problematic example 5: Default clickable Card focus indicator</string>
+    <string name="custom_focus_indicators_example_5_card_title">Clickable card showing default focus indicator</string>
+    <string name="custom_focus_indicators_example_5_card_description">Tab to this card to see the default OutlinedCard focus indicator.</string>
+    <string name="custom_focus_indicators_example_5_message">Activated example 5 clickable card showing default focus indicator.</string>
+    <string name="custom_focus_indicators_example_6_heading">Good example 6: Custom clickable Card focus indicator</string>
+    <string name="custom_focus_indicators_example_6_card_title">Clickable card showing custom focus indicator.</string>
+    <string name="custom_focus_indicators_example_6_card_description">Tab to this card to see a custom focus indicator implemented using the Modifier.border property.</string>
+    <string name="custom_focus_indicators_example_6_message">Activated example 6 clickable card showing custom focus indicator.</string>
+    <string name="custom_focus_indicators_example_7_heading">Good example 7: Custom Indication focus indicator</string>
+    <string name="custom_focus_indicators_example_7_card_title">Clickable card showing a custom Indication focus indicator.</string>
+    <string name="custom_focus_indicators_example_7_card_description">Tab to this card to see a custom Indication focus indicator.</string>
+    <string name="custom_focus_indicators_example_7_message">Activated example 7 clickable card showing custom Indication focus indicator.</string>
+
+    <!-- Custom click labels -->
+    <string name="custom_click_labels_title">Custom click labels</string>
+    <string name="custom_click_labels_heading">Enhance screen reader user experience by customizing click action labels</string>
+    <string name="custom_click_labels_description_1">How TalkBack describes the click or long-click action of a control can be partially overridden to be more useful. For example, \"Double-tap to activate\" can be changed to \"Double-tap to show details\".</string>
+    <string name="custom_click_labels_description_2">Turn on TalkBack and navigate the screen below for demonstrations on custom click labels.</string>
+    <string name="custom_click_labels_description_3">Also, note that the clickable cards do not announce the \"Button\" role. These cards are still accessible, because on Android the click action provides role information.</string>
+    <string name="custom_click_labels_example_1_heading">OK example 1: Default click action label</string>
+    <string name="custom_click_labels_example_1_label">Default click action label</string>
+    <string name="custom_click_labels_example_1_message">Selected to activate Default click action label card.</string>
+    <string name="custom_click_labels_example_2_heading">Good example 2: Customized click action label</string>
+    <string name="custom_click_labels_example_2_label">Customized click action label</string>
+    <string name="custom_click_labels_example_2_custom_click_label">show details</string>
+    <string name="custom_click_labels_example_2_message">Selected to show details of Customized click action label card.</string>
+    <string name="custom_click_labels_example_3_heading">Good example 3: Customized button click action label</string>
+    <string name="custom_click_labels_example_3_label">Demonstrate a Snackbar</string>
+    <string name="custom_click_labels_example_3_custom_click_label">display a pop-up message</string>
+    <string name="custom_click_labels_example_3_message">Selected a button with customized click action label.</string>
+
+    <!-- Custom state descriptions -->
+    <string name="custom_state_descriptions_title">Custom state descriptions</string>
+    <string name="custom_state_descriptions_heading">Enhance screen reader user experience by customizing state description labels</string>
+    <string name="custom_state_descriptions_description">How TalkBack describes the state of a control (such as \“Checked\” and \"Unchecked\" for check boxes) can be overridden to be more useful.</string>
+    <string name="custom_state_descriptions_description_2">Turn on TalkBack and then select and toggle the following controls to hear demonstrations.</string>
+    <string name="custom_state_descriptions_example_1_heading">OK example 1: Checkbox with default state labels</string>
+    <string name="custom_state_descriptions_default_checkbox">Motion detector</string>
+    <string name="custom_state_descriptions_example_2_heading">Good example 2: Checkbox with customized state labels</string>
+    <string name="custom_state_descriptions_customized_checkbox">Motion detector</string>
+    <string name="custom_state_descriptions_checked_label">Activated</string>
+    <string name="custom_state_descriptions_unchecked_label">Deactivated</string>
+    <string name="custom_state_descriptions_example_3_heading">OK example 3: Switch with default state labels</string>
+    <string name="custom_state_descriptions_default_switch">Shields</string>
+    <string name="custom_state_descriptions_example_4_heading">Good example 4: Switch with custom state labels</string>
+    <string name="custom_state_descriptions_customized_switch">Shields</string>
+    <string name="custom_state_descriptions_shields_raised">Raised</string>
+    <string name="custom_state_descriptions_shields_lowered">Lowered</string>
+
+    <!-- Custom accessibility actions -->
+    <string name="custom_accessibility_actions_title">Custom accessibility actions</string>
+    <string name="custom_accessibility_actions_heading">Simplify screen reader user experience with custom accessibility actions</string>
+    <string name="custom_accessibility_actions_description_1">Turn on TalkBack and swipe through this page to hear demonstrations of cards with and without custom accessibility actions. Clicking on cards and buttons displays a snackbar message.</string>
+    <string name="custom_accessibility_actions_description_2">Alternatively, turn on Switch Access with two-button linear scanning, and use the Next switch to move through this page to see which elements are selectable. Use the Select switch on the good example cards to see their custom accessibility actions.</string>
+    <string name="custom_accessibility_actions_see_details">See details</string>
+    <string name="custom_accessibility_actions_example_1_card_heading">Bad example 1: Card without custom accessibility actions</string>
+    <string name="custom_accessibility_actions_example_1_card_description">Note how each button must be read as a separate item in TalkBack before the next card is read. TalkBack does not read \"Actions available…\" on this card.</string>
+    <string name="custom_accessibility_actions_example_2_card_heading">Good example 2: Card with custom accessibility actions</string>
+    <string name="custom_accessibility_actions_example_2_card_description">Note how the card is read as a single item. Buttons have become custom accessibility actions; TalkBack reads \"Actions available…\" and one swipe takes you to the next card instead of to a button within the card.</string>
+    <string name="custom_accessibility_actions_example_3_card_heading">Good example 3: Another card with custom accessibility actions</string>
+    <string name="custom_accessibility_actions_example_3_card_description">TalkBack also reads \"Actions available…\" on this card. Open the TalkBack menu and then the Actions menu to perform the buttons\' actions, or select the card with Switch Access. Isn\'t that easier to use?</string>
+    <string name="custom_accessibility_actions_example_like_button">Like this post</string>
+    <string name="custom_accessibility_actions_example_share_button">Share this post</string>
+    <string name="custom_accessibility_actions_example_report_button">Report this post as inappropriate</string>
+    <string name="custom_accessibility_actions_show_details_event">Selected to show details of card example #%1$d</string>
+    <string name="custom_accessibility_actions_like_event">Selected to like card example #%1$d</string>
+    <string name="custom_accessibility_actions_share_event">Selected to share card example #%1$d</string>
+    <string name="custom_accessibility_actions_report_event">Selected to report card example #%1$d as inappropriate</string>
+
+    <!-- Autofill controls -->
+    <string name="autofill_title">Autofill controls</string>
+    <string name="autofill_heading">Autofill is required where applicable</string>
+    <string name="autofill_description_1">Whenever possible, a TextField should support autofill suggestions in order to reduce redundant data entry. Provided that an autofill service with the appropriate data has been configured for your device, autofill suggestions will appear as pop-ups in some assistive technologies or on the virtual keyboard. They are not available from a physical keyboard.</string>
+    <string name="autofill_description_2">Select to edit the input fields below and autofill suggestions should appear for the good example fields.</string>
+    <string name="autofill_example_1_heading">Bad example 1: Non-autofilled name and email TextFields</string>
+    <string name="autofill_example_1_label_1">Full name</string>
+    <string name="autofill_example_1_label_2">Email</string>
+    <string name="autofill_example_2_heading">Good example 2: Auto-filled name and email TextFields</string>
+    <string name="autofill_example_2_label_1">Full name</string>
+    <string name="autofill_example_2_label_2">Email</string>
+
+    <!-- Accordion controls -->
+    <string name="accordion_title">Accordion controls</string>
+    <string name="accordion_heading">Accordion controls require an expand or collapse semantics property</string>
+    <string name="accordion_description_1">Accordion controls must declare the appropriate Modifier.semantics expand() or collapse() action property, depending on their collapsed/expanded state, in addition to any tap to toggle action.</string>
+    <string name="accordion_description_2">There are many ways to code these controls - as layout elements or list items, but all require this additional semantics in order to announce their expanded/collapsed state.</string>
+    <string name="accordion_description_3">Turn on TalkBack, navigate the page, and activate the controls for a demonstration. Listen for expanded/collapsed state announcement as well as special expand/collapse actions.</string>
+    <string name="accordion_section_1">Bad example 1: Accordion without expand/collapse actions</string>
+    <string name="accordion_item_1_1">Incorrect Accordion example, Item 1</string>
+    <string name="accordion_item_1_2">Incorrect Accordion example, Item 2</string>
+    <string name="accordion_item_1_3">Incorrect Accordion example, Item 3</string>
+    <string name="accordion_section_2">Good example 2: Accordion with expand/collapse actions</string>
+    <string name="accordion_item_2_1">Correct Accordion example, Item 1</string>
+    <string name="accordion_item_2_2">Correct Accordion example, Item 2</string>
+    <string name="accordion_item_2_3">Correct Accordion example, Item 3</string>
+
+    <!-- Checkbox controls -->
+    <string name="checkbox_controls_title">Checkbox controls</string>
+    <string name="checkbox_controls_heading">Checkbox controls require labels and Modifier.toggleable</string>
+    <string name="checkbox_controls_description_1">Checkbox composables require a wrapping layout that subsumes their semantics (using Modifier.toggleable and Role.Checkbox) and provides a control label.</string>
+    <string name="checkbox_controls_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of inaccessible and accessible Checkbox groups.</string>
+    <string name="checkbox_controls_example_1_header">Bad example 1: Inaccessible Checkbox</string>
+    <string name="checkbox_controls_example_1_label">Faux checkbox</string>
+    <string name="checkbox_controls_example_2_header">Good example 2: Accessible Checkbox</string>
+    <string name="checkbox_controls_example_2_label">Accessible checkbox</string>
+
+    <!-- Dropdown selection menus -->
+    <string name="dropdown_menus_title">Dropdown menus</string>
+    <string name="dropdown_menus_heading">Dropdown menus can be improved</string>
+    <string name="dropdown_menus_description_1">The stock Dropdown Menu pattern creates a mostly-accessible dropdown selection menu. But they are challenging to close without making a selection unless improved. Custom dropdown approaches may be even less accessible.</string>
+    <string name="dropdown_menus_description_2">Turn on TalkBack, Switch Access, or use a physical keyboard, and navigate this page, activating the dropdown menu controls and making selections.</string>
+    <string name="dropdown_menus_example_1_heading">Problematic example 1: ListItem with stock DropdownMenu</string>
+    <string name="dropdown_menus_example_1_listitem_heading">ListItem with stock DropdownMenu</string>
+    <string name="dropdown_menus_example_2_heading">Good example 2: ListItem with accessible DropdownMenu</string>
+    <string name="dropdown_menus_example_2_description">An accessible DropdownMenu has a Close menu item, assumes keyboard focus automatically, and closes when the Esc key is pressed.</string>
+    <string name="dropdown_menus_example_2_listitem_heading">ListItem with accessible DropdownMenu</string>
+    <string name="dropdown_menus_example_menu_content_description">Show dropdown menu</string>
+    <string name="dropdown_menus_example_menu_item_1">Menu item 1</string>
+    <string name="dropdown_menus_example_menu_item_1_message">Selected menu item 1.</string>
+    <string name="dropdown_menus_example_menu_item_2">Menu item 2</string>
+    <string name="dropdown_menus_example_menu_item_2_message">Selected menu item 2.</string>
+    <string name="dropdown_menus_example_menu_close_item">Close menu</string>
+    <string name="dropdown_menus_example_menu_close_message">Menu closed.</string>
+
+    <!-- Exposed dropdown selection menus -->
+    <string name="exposed_dropdown_menus_title">Exposed dropdown menus</string>
+    <string name="exposed_dropdown_menus_heading">Exposed Dropdown Menus are not keyboard operable</string>
+    <string name="exposed_dropdown_menus_description_1">The Exposed Dropdown Menu pattern creates a mostly-accessible dropdown selection menu. But as of Compose BOM 2024.04.00, no Compose dropdown control is keyboard accessible, and no remediation is known. Custom dropdown approaches may be even less accessible.</string>
+    <string name="exposed_dropdown_menus_description_2">Turn on TalkBack or Switch Access and navigate this page, activating the list controls and making selections. Then repeat the process using a physical keyboard to observe the problems.</string>
+    <string name="exposed_dropdown_menus_example_1_heading">Problematic example 1: Non-editable Exposed Dropdown Menu</string>
+    <string name="exposed_dropdown_menus_example_1_description">The Exposed Dropdown Menu pattern uses ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem controls to create a dropdown selection menu that is mostly accessible, except for keyboard operation.</string>
+    <string name="exposed_dropdown_menus_example_2_heading">Problematic example 2: View-based non-editable Exposed Dropdown Menu</string>
+    <string name="exposed_dropdown_menus_example_2_description">Wrapping the View Exposed Dropdown Menu pattern in AndroidView is also mostly accessible. But it is not keyboard accessible, due to Compose/View interoperability issues.</string>
+    <string name="exposed_dropdown_menus_example_label">Payment type</string>
+    <string name="exposed_dropdown_menus_example_option_1">Cash</string>
+    <string name="exposed_dropdown_menus_example_option_2">Check</string>
+    <string name="exposed_dropdown_menus_example_option_3">Credit/Debit card</string>
+    <string name="exposed_dropdown_menus_example_option_4">Money order</string>
+    <string name="exposed_dropdown_menus_example_option_5">Voucher</string>
+    <string name="exposed_dropdown_menus_example_option_not_selected">(No payment type selected.)</string>
+
+    <!-- Links inline with text -->
+    <string name="inline_links_title">Links inline with text</string>
+    <string name="inline_links_heading">Create inline links differently from standalone links</string>
+    <string name="inline_links_description_1">Links inline with text can be created using AnnotatedString and ClickableText. Links will appear in the TalkBack menu\'s Links dialog.</string>
+    <string name="inline_links_description_2">Turn on TalkBack and navigate the page text for a demonstration. Note the pauses around the inline linked texts. Listen for the \"Links available\" action notifications, tap with 3-fingers to open the TalkBack menu, and select \"Links\" to see a dialog containing the available links. Pick a link to open a browser displaying the linked page.</string>
+    <string name="inline_links_example_1">Problematic example 1: Using AnnotatedString and ClickableText</string>
+    <string name="inline_links_example_1_text">This paragraph is a simple example of inline links using AnnotatedString and ClickableText with fixed link text values.</string>
+    <string name="inline_links_example_1_link_text_1">inline links</string>
+    <string name="inline_links_example_1_link_text_2">AnnotatedString</string>
+    <string name="inline_links_example_1_link_text_3">ClickableText</string>
+    <string name="inline_links_example_1_note">Note: These links work fine with assistive technologies, but they are not keyboard accessible.</string>
+    <string name="inline_links_example_2">Problematic example 2: Using AndroidView and TextView</string>
+    <string name="inline_links_example_2_text">For best current accessibility, use <a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/viewinterop/package-summary#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a> and <a href="https://github.com/cvs-health/android-view-accessibility-techniques/blob/main/doc/componenttypes/LinksInlineWithText.md">TextView links</a> instead of ClickableText.</string>
+    <string name="inline_links_example_2_note">This paragraph works with assistive technologies. It is not keyboard accessible, due to Compose/View interoperability issues. If it did work, navigation arrow keys would focus on the links within the focused text block.</string>
+
+    <!-- ListItem layouts -->
+    <string name="listitem_layouts_title">ListItem layouts</string>
+    <string name="listitem_layouts_heading">Standard ListItem layouts are accessible</string>
+    <string name="listitem_layouts_description_1">ListItem layouts merge their descendants.</string>
+    <string name="listitem_layouts_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of ListItem layouts.</string>
+    <string name="listitem_layouts_example_1_header">Good example 1: Accessible inactive ListItem layout</string>
+    <string name="listitem_layouts_example_1_label">Accessible inactive ListItem</string>
+    <string name="listitem_layouts_example_1_subtitle">Announces as a single text.</string>
+    <string name="listitem_layouts_example_2_header">Good example 2: Accessible clickable ListItem layout</string>
+    <string name="listitem_layouts_example_2_label">Accessible clickable ListItem</string>
+    <string name="listitem_layouts_example_2_subtitle">Announces as a single labeled, clickable Button.</string>
+    <string name="listitem_layouts_example_2_message">Clicked accessible clickable ListItem</string>
+    <string name="listitem_layouts_example_3_header">Good example 3: Accessible selectable ListItem layouts</string>
+    <string name="listitem_layouts_example_3_label_1">Accessible selectable ListItem 1</string>
+    <string name="listitem_layouts_example_3_subtitle_1">Announces as the first of two labeled, selectable radio buttons.</string>
+    <string name="listitem_layouts_example_3_label_2">Accessible selectable ListItem 2</string>
+    <string name="listitem_layouts_example_3_subtitle_2">Announces as the second of two labeled, selectable radio buttons.</string>
+    <string name="listitem_layouts_example_4_header">Good example 4: Accessible toggleable ListItem layout</string>
+    <string name="listitem_layouts_example_4_label">Accessible toggleable ListItem</string>
+    <string name="listitem_layouts_example_4_subtitle">Announces as a single labeled, toggleable Switch.</string>
+
+    <!-- ModalBottomSheet layouts -->
+    <string name="modalbottomsheet_layouts_title">ModalBottomSheet layouts</string>
+    <string name="modalbottomsheet_layouts_heading">ModalBottomSheet layouts require keyboard fixes</string>
+    <string name="modalbottomsheet_layouts_description_1">ModalBottomSheet layouts are not entirely accessible by default. They require a title, a better grab bar description, bottom padding, and keyboard fixes to avoid issues.</string>
+    <string name="modalbottomsheet_layouts_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of a ModalBottomSheet layout.</string>
+    <string name="modalbottomsheet_layouts_description_3">Also, test using keyboard navigation to see how the Esc key and focus management work.</string>
+    <string name="modalbottomsheet_layouts_example_1_header">Good example 1: ModalBottomSheet selector</string>
+    <string name="modalbottomsheet_layouts_example_1_button_1">Pick a fruit from a half-open bottom sheet</string>
+    <string name="modalbottomsheet_layouts_example_1_button_2">Pick a fruit from a fully-open bottom sheet</string>
+    <string name="modalbottomsheet_layouts_example_1_selected_item">Selected fruit: %1$s</string>
+    <string name="modalbottomsheet_layouts_sheet_title">Pick a fruit</string>
+    <string name="modalbottomsheet_layouts_sheet_drag_handle_description">Pick a fruit bottom sheet drag handle</string>
+    <string name="modalbottomsheet_layouts_item_1">Apple</string>
+    <string name="modalbottomsheet_layouts_item_2">Apricot</string>
+    <string name="modalbottomsheet_layouts_item_3">Banana</string>
+    <string name="modalbottomsheet_layouts_item_4">Blueberry</string>
+    <string name="modalbottomsheet_layouts_item_5">Cherry</string>
+    <string name="modalbottomsheet_layouts_item_6">Date</string>
+    <string name="modalbottomsheet_layouts_item_7">Durian</string>
+    <string name="modalbottomsheet_layouts_item_8">Elderberry</string>
+    <string name="modalbottomsheet_layouts_item_9">Fig</string>
+    <string name="modalbottomsheet_layouts_item_10">Grape</string>
+    <string name="modalbottomsheet_layouts_item_11">Guava</string>
+    <string name="modalbottomsheet_layouts_item_12">Honeydew melon</string>
+    <string name="modalbottomsheet_layouts_item_13">Jackfruit</string>
+    <string name="modalbottomsheet_layouts_item_14">Kiwi</string>
+    <string name="modalbottomsheet_layouts_item_15">Lime</string>
+    <string name="modalbottomsheet_layouts_item_16">Lychee</string>
+    <string name="modalbottomsheet_layouts_item_17">Mango</string>
+    <string name="modalbottomsheet_layouts_item_18">Nectarine</string>
+    <string name="modalbottomsheet_layouts_item_19">Orange</string>
+    <string name="modalbottomsheet_layouts_item_20">Papaya</string>
+    <string name="modalbottomsheet_layouts_item_21">Peach</string>
+    <string name="modalbottomsheet_layouts_item_22">Raspberry</string>
+    <string name="modalbottomsheet_layouts_item_23">Strawberry</string>
+    <string name="modalbottomsheet_layouts_item_24">Tamarind</string>
+    <string name="modalbottomsheet_layouts_item_25">Ugli Fruit</string>
+    <string name="modalbottomsheet_layouts_item_26">Watermelon</string>
+    <string name="modalbottomsheet_layouts_item_27">Xigua</string>
+    <string name="modalbottomsheet_layouts_item_28">Yangmei</string>
+
+    <!-- NavigationBar layouts -->
+    <string name="navigationbar_layouts_title">NavigationBar layouts</string>
+    <string name="navigationbar_layouts_heading">NavigationBar layouts work, given good contents</string>
+    <string name="navigationbar_layouts_description_1">NavigationBar layouts behave similarly to fixed tab rows: fully accessible by default, but sensitive to problematic item content. Avoid maxLines or fixed heights on label texts.</string>
+    <string name="navigationbar_layouts_description_2">Note how the long Home navigation item label is treated. Then navigate the page using TalkBack, Switch Access, and an external keyboard for demonstrations of NavigationBar layout accessibility.</string>
+    <string name="navigationbar_layouts_example_1_header">Bad example 1: NavigationBar layout with limited text lines</string>
+    <string name="navigationbar_layouts_example_2_header">Good example 2: NavigationBar layout with text reflow</string>
+    <string name="navigationbar_layouts_example_3_header">OK example 3: NavigationBar layout with only selected item labeled</string>
+    <string name="navigationbar_layouts_tab_1_label">Home: Long label example</string>
+    <string name="navigationbar_layouts_tab_2_label">Favorites</string>
+    <string name="navigationbar_layouts_tab_3_label">Notifications</string>
+    <string name="navigationbar_layouts_tab_4_label">Settings</string>
+    <string name="navigationbar_layouts_tab_1_description_1">Home screen placeholder. Note how the NavigationBar item text is truncated (or not).</string>
+    <string name="navigationbar_layouts_tab_2_description_1">Favorites screen placeholder.</string>
+    <string name="navigationbar_layouts_tab_3_description_1">Notifications screen placeholder.</string>
+    <string name="navigationbar_layouts_tab_4_description_1">Settings screen placeholder.</string>
+
+    <!-- Pop-up messages: Toasts, Snackbars, and AlertDialogs -->
+    <string name="popup_messages_title">Pop-up messages</string>
+    <string name="popup_messages_heading">Pop-up messages involve trade-offs</string>
+    <string name="popup_messages_description_1">There are three controls that display pop-up messages: Toasts, Snackbars, and AlertDialogs. There is also the option of using on-screen text instead of a pop-up.</string>
+    <string name="popup_messages_description_2">Each pop-up control has pros and cons. Toasts only appear briefly. Snackbars are more flexible, but their action buttons are nearly inaccessible. AlertDialogs can be intrusive, but their action buttons are very accessible. Which control to use is a design trade-off.</string>
+    <string name="popup_messages_description_3">Turn on TalkBack, navigate the page, and activate the buttons for demonstrations of pop-up messaging options.</string>
+    <string name="popup_messages_example_1_header">OK example 1: Toast messages</string>
+    <string name="popup_messages_example_1_description_1">Toast messages are briefly-appearing pop-up messages that pre-date Material Design. Toasts are automatically announced by TalkBack when they appear. Toasts cannot contain actions or be manually dismissed.</string>
+    <string name="popup_messages_example_1_description_2">Toasts pose challenges for some users because of their brief duration and by obscuring other content.</string>
+    <string name="popup_messages_example_1_button_label">Show a Toast message</string>
+    <string name="popup_messages_example_1_message">This is a Toast message. Wait and it will close itself.</string>
+    <string name="popup_messages_example_2_header">OK example 2: Fixed-duration Snackbar</string>
+    <string name="popup_messages_example_2_description_1">Snackbars are Material Design\'s replacement for the Toast. They may appear briefly or indefinitely; they may also contain action buttons. Snackbars are automatically announced by TalkBack when they appear; however, they are not modal and their action buttons are very hard to access.</string>
+    <string name="popup_messages_example_2_description_2">Fixed-duration Snackbars pose challenges for some users because of their brief appearance and by obscuring other content.</string>
+    <string name="popup_messages_example_2_button_label">Show a fixed-duration Snackbar</string>
+    <string name="popup_messages_example_2_message">This is a fixed-duration Snackbar with no dismiss button. Wait and it will close itself.</string>
+    <string name="popup_messages_example_3_header">OK example 3: Fixed-duration, dismissable Snackbar</string>
+    <string name="popup_messages_example_3_description_1">Snackbars offer the option of displaying a dismiss icon button to uncover content. This button is hard to access with assistive technologies, but the time-limited duration offers a workable alternative.</string>
+    <string name="popup_messages_example_3_button_label">Show a fixed-duration, dismissable Snackbar</string>
+    <string name="popup_messages_example_3_message">This is a fixed-duration, dismissable Snackbar. Wait briefly or select the dismiss icon button to close this pop-up.</string>
+    <string name="popup_messages_example_4_header">Bad example 4: Fixed-duration Snackbar with a contextual action button</string>
+    <string name="popup_messages_example_4_description">A fixed-duration Snackbar may offer the option of performing a contextual action, such as \"Undo\". But action buttons are nearly inaccessible with most assistive technologies, and certainly not quick to access. This design is unusable by some people.</string>
+    <string name="popup_messages_example_4_button_label">Show a fixed-duration Snackbar with an action button</string>
+    <string name="popup_messages_example_4_message">This is a fixed-duration Snackbar with an action button. Wait briefly to close. Select the \"Show more\" button for another message.</string>
+    <string name="popup_messages_example_4_message_action_label">Show more</string>
+    <string name="popup_messages_example_4_action_message">You selected the \"Show more\" action button.</string>
+    <string name="popup_messages_example_5_header">Bad example 5: Indefinite-duration, dismissable Snackbar</string>
+    <string name="popup_messages_example_5_description_1">Indefinite-duration Snackbars solve the problem of too-brief messaging, but at the cost of requiring the use of a dismiss action button on the Snackbar, which is nearly inaccessible.</string>
+    <string name="popup_messages_example_5_description_2">TalkBack also changes focus when this form of Snackbar appears, which may prevent its announcement.</string>
+    <string name="popup_messages_example_5_button_label">Show an indefinite-duration, dismissable Snackbar</string>
+    <string name="popup_messages_example_5_message">This is an indefinite-duration, dismissable Snackbar. Select the dismiss icon button to close this pop-up.</string>
+    <string name="popup_messages_example_6_header">Good example 6: AlertDialog with action buttons</string>
+    <string name="popup_messages_example_6_description">AlertDialogs are pop-up modal dialogs that change the screen context, which can cause confusion. However, the first content element in an AlertDialog is automatically announced by TalkBack, and AlertDialog action buttons are easily accessible.</string>
+    <string name="popup_messages_example_6_button_label">Show an AlertDialog with action buttons</string>
+    <string name="popup_messages_example_6_alert_title">AlertDialog with action buttons</string>
+    <string name="popup_messages_example_6_message">Select \"Show more\" to see a further alert dialog. Select the \"OK\" button to close this pop-up.</string>
+    <string name="popup_messages_example_6_show_more_label">Show more</string>
+    <string name="popup_messages_example_6_dismiss_label">Close</string>
+    <string name="popup_messages_example_6_action_popup_title">Show more AlertDialog</string>
+    <string name="popup_messages_example_6_action_popup_message">You selected the \"Show more\" action button.</string>
+    <string name="popup_messages_example_6_action_popup_dismiss_label">OK</string>
+    <string name="popup_messages_example_7_header">Good example 7: On-screen text messages and buttons</string>
+    <string name="popup_messages_example_7_description">On-screen text can also be used to announce status messages and present contextual actions.</string>
+    <string name="popup_messages_example_7_button_label">Change an on-screen text value</string>
+    <string name="popup_messages_example_7_message">Counter: %1$d</string>
+    <string name="popup_messages_example_7_clear_label">Clear</string>
+    <string name="popup_messages_example_7_clear_content_description">Clear counter</string>
+
+    <!-- RadioButton groups -->
+    <string name="radio_button_groups_title">RadioButton groups</string>
+    <string name="radio_button_groups_heading">RadioButton groups require the selectableGroup modifier; RadioButtons require labels</string>
+    <string name="radio_button_groups_description_1">Layout composables which group RadioButton composables require Modifier.selectableGroup(). Individual RadioButton composables require a wrapping layout that subsumes their semantics and provides a control label.</string>
+    <string name="radio_button_groups_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of inaccessible and accessible RadioButton groups.</string>
+    <string name="radio_button_groups_example_1_header">Bad example 1: Inaccessible RadioButton group</string>
+    <string name="radio_button_groups_example_2_header">Bad example 2: Accessible RadioButton; inaccessible group</string>
+    <string name="radio_button_groups_example_2_description">These RadioButtons are properly remediated; however, the radio button group is missing the selectableGroup Modifier.</string>
+    <string name="radio_button_groups_example_3_header">Good example 3: Accessible RadioButton group</string>
+    <string name="radio_button_groups_group_label">Pick a fruit:</string>
+    <string name="radio_button_groups_option_1">Banana</string>
+    <string name="radio_button_groups_option_2">Grape</string>
+    <string name="radio_button_groups_option_3">Orange</string>
+
+    <!-- Slider and RangeSlider controls -->
+    <string name="slider_controls_title">Slider and RangeSlider controls</string>
+    <string name="slider_controls_heading">Slider and RangeSlider require remediation</string>
+    <string name="slider_controls_description_1">Slider controls can be made completely accessible with specific remediation for labeling, state announcement, and keyboard operation. RangeSlider requires similar remediation for TalkBack, but no remediation for its keyboard accessibility issues is known at this time.</string>
+    <string name="slider_controls_description_2">Turn on TalkBack or Switch Access, navigate the page, and activate the controls for demonstrations of Slider and RangeSlider controls. Note that the RangeSlider control is not keyboard accessible.</string>
+    <string name="slider_controls_example_1_header">Bad example 1: Unremediated Slider control</string>
+    <string name="slider_controls_example_1_description">Without remediation, a Slider will not announce its label or state properly in TalkBack.</string>
+    <string name="slider_controls_example_1_label">Rating</string>
+    <string name="slider_controls_example_2_header">Good example 2: Remediated Slider control</string>
+    <string name="slider_controls_example_2_description">Sliders require the use of contentDescription to provide an accessible label. Applying stateDescription and liveRegion semantics are required for proper state announcements in TalkBack. Key handling remediation is required for keyboard accessibility.</string>
+    <string name="slider_controls_example_2_label">Rating</string>
+    <string name="slider_controls_example_3_header">Problematic example 3: Remediated RangeSlider is not keyboard accessible</string>
+    <string name="slider_controls_example_3_description">Like Sliders, RangeSliders require contentDescription to provide an accessible label and require semantics changes to provide good state announcements in TalkBack. However, no remediation for its keyboard accessibility issues is currently known.</string>
+    <string name="slider_controls_example_3_label">Rating filter range</string>
+    <string name="slider_controls_example_3_content_description">Rating filter range</string>
+    <string name="slider_controls_example_3_state_description">%1$d to %2$d</string>
+    <string name="slider_controls_example_4_header">Problematic example 4: View RangeSlider is not keyboard accessible</string>
+    <string name="slider_controls_example_4_description">A View RangeSlider wrapped in AndroidView is not keyboard accessible, because of Compose/View interoperability issues.</string>
+    <string name="slider_controls_example_4_label">Rating filter range</string>
+    <string name="slider_controls_example_4_content_description">Rating filter range</string>
+    <string name="slider_controls_example_4_selected_range">Include ratings from %1$d to %2$d</string>
+
+    <!-- Stand-alone links -->
+    <string name="standalone_links_title">Stand-alone links</string>
+    <string name="standalone_links_heading">Stand-alone links need onClickLabel, etc.</string>
+    <string name="standalone_links_description_1">Android has no \"link\" role to distinguish links from buttons or other clickable elements. But there are things that need to be done to make a stand-alone link understandable to users.</string>
+    <string name="standalone_links_description_2">Turn on TalkBack, navigate the page, and activate the links for demonstrations of more and less accessible stand-alone links.</string>
+    <string name="standalone_links_example_1_header">Bad example 1: Indistinguishable text link</string>
+    <string name="standalone_links_example_1_text">Nothing indicates that this text is a link, nor does the text describe where the link goes. This link fails multiple accessibility guidelines.</string>
+    <string name="standalone_links_example_2_header">Good example 2: Accessible stand-alone link text</string>
+    <string name="standalone_links_example_2_description">To create an accessible stand-alone link, describe the link destination, use distinctive link styling, and apply onClickLabel to indicate that the click action will open a browser window. Using \"call to action\" wording is also a good practice.</string>
+    <string name="standalone_links_example_2_text">Read about Jetpack Compose Accessibility</string>
+    <string name="standalone_links_example_3_header">Good example 3: Accessible stand-alone link with icon</string>
+    <string name="standalone_links_example_3_text">Read about Jetpack Compose Accessibility</string>
+    <string name="standalone_links_example_4_header">Good example 4: Stand-alone link TextButton with semantic onClickLabel</string>
+    <string name="standalone_links_example_4_text">Read about Jetpack Compose Accessibility</string>
+
+    <!-- Switch controls -->
+    <string name="switch_controls_title">Switch controls</string>
+    <string name="switch_controls_heading">Switch controls require labels and Modifier.toggleable</string>
+    <string name="switch_controls_description_1">Switch composables require a wrapping layout that subsumes their semantics (using Modifier.toggleable and Role.Switch) and provides a control label.</string>
+    <string name="switch_controls_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of inaccessible and accessible Switch groups.</string>
+    <string name="switch_controls_example_1_header">Bad example 1: Inaccessible Switch</string>
+    <string name="switch_controls_example_1_label">Faux switch</string>
+    <string name="switch_controls_example_2_header">Good example 2: Accessible Switch</string>
+    <string name="switch_controls_example_2_label">Accessible switch</string>
+
+    <!-- Tab rows -->
+    <string name="tab_rows_title">Tab rows</string>
+    <string name="tab_rows_heading">Fixed tab rows work; scrollable tab rows are problematic</string>
+    <string name="tab_rows_description_1">All tab row composables collect Tab widgets into a single-selection row used to control other page content. Fixed TabRow composables display tabs of equal width. ScrollableTabRow composables allow tabs of different widths and scroll to show additional tabs if necessary.</string>
+    <string name="tab_rows_description_2">Fixed tab rows are accessible by default, but are sensitive to problematic tab labels.</string>
+    <string name="tab_rows_description_3">Navigate this page using Switch Access and then again using TalkBack for examples of tab accessibility. Note how the long first tab label is treated.</string>
+    <string name="tab_rows_example_1_header">Bad example 1: Fixed TabRow with limited text lines</string>
+    <string name="tab_rows_example_2_header">Good example 2: Fixed TabRow with text reflow</string>
+    <string name="tab_rows_example_3_header">OK example 3: ScrollableTabRow</string>
+    <string name="tab_rows_example_3_description">In TalkBack, ScrollableTabRows pose challenges in swiping back from tab content to a scrolled tab row. In Switch Access, ScrollableTabRow scroll regions appear too early in the page traversal order. But that is a platform issue that may be resolved in later versions of the relevant libraries.</string>
+    <string name="tab_rows_example_4_header">OK example 4: TabRow with paging content</string>
+    <string name="tab_rows_example_4_description">TabRow tab selection can be coordinated with tab content in a HorizontalPager. In Switch Access, HorizontalPager scroll regions appear too early in the page traversal order. In TalkBack, the tab content announces as being in a vertical pager. Again, these are platform issues.</string>
+    <string name="tab_rows_tab_1">Tab 1: Long label</string>
+    <string name="tab_rows_tab_2">Tab 2</string>
+    <string name="tab_rows_tab_3">Tab 3</string>
+    <string name="tab_rows_tab_4">Tab 4</string>
+    <string name="tab_rows_tab_5">Tab 5</string>
+    <string name="tab_rows_tab_1_content">Tab 1 Content</string>
+    <string name="tab_rows_tab_2_content">Tab 2 Content</string>
+    <string name="tab_rows_tab_3_content">Tab 3 Content</string>
+    <string name="tab_rows_tab_4_content">Tab 4 Content</string>
+    <string name="tab_rows_tab_5_content">Tab 5 Content</string>
+
+    <!-- TextField controls -->
+    <string name="textfield_controls_title">TextField controls</string>
+    <string name="textfield_controls_heading">TextField controls require keyboard trap fix, etc.</string>
+    <string name="textfield_controls_description_1">TextField controls requires a label, Modifier fixes to properly handle keyboard tabbing, any appropriate error handling, any appropriate autofill, and correct keyboard type, options, and actions.</string>
+    <string name="textfield_controls_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of an accessible TextField.</string>
+    <string name="textfield_controls_example_1_header">Good example 1: Accessible required TextField</string>
+    <string name="textfield_controls_example_1_label">Name</string>
+    <string name="textfield_controls_example_1_supporting_text">A non-blank name is required.</string>
+    <string name="textfield_controls_example_1_button">Submit</string>
+    <string name="textfield_controls_example_1_short_error">Name is required. Please supply a non-blank name.</string>
+    <string name="textfield_controls_example_1_long_error">Error: Name is required. Please supply a non-blank name.</string>
+    <string name="textfield_controls_example_1_message">TextField value %1$s submitted.</string>
+</resources>

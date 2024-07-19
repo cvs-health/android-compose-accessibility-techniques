@@ -32,9 +32,18 @@ modifier = Modifier.clickable(
 }
 ```
 
+Lastly, Accordion controls frequently serve as top-level section headings on a screen. If so, be sure to mark them with accessibility [heading semantics](../content/HeadingSemantics.md):
+
+```kotlin
+modifier = Modifier.semantics {
+    heading()
+    // ...
+}
+```
+
 For example:
 
-```
+```kotlin
 val (isExpanded, setIsExpanded) = rememberSaveable { mutableStateOf(false) }
 Column {
      Row(
@@ -49,6 +58,7 @@ Column {
                 setIsExpanded(!isExpanded)
             }
             .semantics (mergeDescendants = true) {
+                heading()
                 if (isExpanded) {
                     collapse {
                         setIsExpanded(false)
@@ -64,7 +74,7 @@ Column {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text("This is an accordion control",
+        Text("This is an accordion control heading",
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier
                 .padding(start = 16.dp)

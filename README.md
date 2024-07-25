@@ -19,7 +19,8 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Dark and Light themes](doc/content/DarkAndLightThemes.md)
     - [x] [Screen and pane titles](doc/content/ScreenAndPaneTitles.md)
 - Interactive Behaviors
-    - [x] [Input field labels](doc/interactions/InteractiveControlLabels.md)
+    - [x] [Interactive control labels](doc/interactions/InteractiveControlLabels.md)
+    - [x] [Minimum touch target size](doc/interactions/MinimumTouchTargetSize.md)
     - [x] [UX change announcements](doc/interactions/UXChangeAnnouncements.md)
     - [x] [Keyboard types and options](doc/interactions/KeyboardTypes.md)
     - [x] [Keyboard actions](doc/interactions/KeyboardActions.md)

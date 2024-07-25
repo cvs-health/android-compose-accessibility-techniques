@@ -22,6 +22,8 @@ import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
 fun hasNoTestTag(): SemanticsMatcher =
     SemanticsMatcher.keyNotDefined(SemanticsProperties.TestTag)
@@ -234,3 +236,24 @@ fun hasNoDismissAction(): SemanticsMatcher =
 // RadioButton helpers
 fun hasSelectableGroup(): SemanticsMatcher =
     SemanticsMatcher.keyIsDefined(SemanticsProperties.SelectableGroup)
+
+// Target size helpers
+fun hasMinimumSize(density: Float, minSize: Dp) : SemanticsMatcher {
+    return SemanticsMatcher("SemanticsNode.size >= $minSize x $minSize") {
+        val heightDp = (it.size.height / density).dp
+        val widthDp = (it.size.width / density).dp
+        heightDp >= minSize && widthDp >= minSize
+    }
+}
+
+fun hasMinimumTouchTargetSize(density: Float, minSize: Dp) : SemanticsMatcher {
+    return SemanticsMatcher("SemanticsNode.touchBoundsInRoot >= $minSize x $minSize") {
+        if (it.touchBoundsInRoot.isEmpty || it.touchBoundsInRoot.isInfinite) {
+            false
+        } else {
+            val touchHeightDp = (it.touchBoundsInRoot.height / density).dp
+            val touchWidthDp = (it.touchBoundsInRoot.width / density).dp
+            touchHeightDp >= minSize && touchWidthDp >= minSize
+        }
+    }
+}

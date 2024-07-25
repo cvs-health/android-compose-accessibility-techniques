@@ -159,6 +159,10 @@ fun HomeScreen(
                     route = ComposeAccessibilityTechniquesRoute.InteractiveControlLabels
                 ),
                 NavigationCardInfo(
+                    labelId = R.string.target_size_title,
+                    route = ComposeAccessibilityTechniquesRoute.MinimumTouchTargetSize
+                ),
+                NavigationCardInfo(
                     labelId = R.string.ux_change_announcements_title,
                     route = ComposeAccessibilityTechniquesRoute.UxChangeAnnouncements,
                 ),

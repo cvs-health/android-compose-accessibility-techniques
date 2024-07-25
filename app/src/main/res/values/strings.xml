@@ -253,6 +253,36 @@
     <string name="interactive_control_labels_associated_rangeslider_label">Field label for RangeSlider</string>
     <string name="interactive_control_labels_associated_rangeslider_state_description">%1$d to %2$d</string>
 
+    <!-- Minimum touch target size -->
+    <string name="target_size_title">Minimum touch target size</string>
+    <string name="target_size_heading">Touch target sizes should be at least 48dp by 48dp</string>
+    <string name="target_size_description_1">Current WCAG guidelines require that touch target sizes be a minimum of 24 by 24 CSS pixels and suggest at least 44 by 44 CSS pixels. Android Material Design guidelines suggest that touch target sizes be at least 48dp by 48dp. Compose enforces this larger touch target size, even when controls are visually smaller; however, overlapping target areas can cause problems, so visually sizing controls to their touch target size is strongly suggested.</string>
+    <string name="target_size_description_2">Tap the example icon buttons below and note the extent of the visible ripple. Where possible, buttons are bordered to show their otherwise invisible Compose touch target area.</string>
+    <string name="target_size_example_1_heading">Bad example 1: A 12dp by 12dp icon button</string>
+    <string name="target_size_example_1_content_description">Show more details about a 12dp by 12dp icon button</string>
+    <string name="target_size_example_1_description">This icon button was forced to 12dp by 12dp using Modifier.height and Modifier.width, which is too small by WCAG standards. However, Compose adds a larger (generally invisible) touch target area, shown here by the outer circle, so a 48dp by 48dp region is actually clickable.</string>
+    <string name="target_size_example_1_message">Tapped in the 12dp by 12dp icon button\'s 48dp by 48dp touch target region.</string>
+    <string name="target_size_example_2_heading">Bad example 2: Overlapping touch targets</string>
+    <string name="target_size_example_2_content_description">Show more details about overlapping icon button #%1$d</string>
+    <string name="target_size_example_2_description_1">These 12dp by 12dp icon buttons have overlapping touch target regions, making their touch targets smaller than WCAG standards despite Compose enlarging them.</string>
+    <string name="target_size_example_2_description_2">Use the TalkBack or Switch Access focus rings to see these controls\' actual clickable areas.</string>
+    <string name="target_size_example_2_message">Tapped the overlapping icon button #%1$d, which fails WCAG touch target size standards.</string>
+    <string name="target_size_example_3_heading">OK example 3: A 24dp by 24dp icon button</string>
+    <string name="target_size_example_3_content_description">Show more details about a 24dp by 24dp icon button</string>
+    <string name="target_size_example_3_description">This icon button was forced to 24dp by 24dp using Modifier.size. However, Compose adds a larger (generally invisible) touch target area, shown by the outer circle, so a 48dp by 48dp region is actually clickable.</string>
+    <string name="target_size_example_3_message">Tapped the 24dp by 24dp icon button, which is the WCAG minimum size.</string>
+    <string name="target_size_example_4_heading">Good example 4: A 48dp by 48dp icon button using Modifier.sizeIn</string>
+    <string name="target_size_example_4_content_description">Show more details about a 48dp by 48dp icon button using Modifier.sizeIn</string>
+    <string name="target_size_example_4_message">Tapped the 48dp by 48dp icon button using Modifier.sizeIn. This button has Material Design\'s minimum size.</string>
+    <string name="target_size_example_5_heading">Good example 5: A 48dp by 48dp icon button using Modifier.minimumInteractiveComponentSize</string>
+    <string name="target_size_example_5_description">Material Design 3 also provides Modifier.minimumInteractiveComponentSize, which guarantees a control has sufficient touch target size.</string>
+    <string name="target_size_example_5_content_description">Show more details about a 48dp by 48dp icon button using Modifier.minimumInteractiveComponentSize</string>
+    <string name="target_size_example_5_message">Tapped the 48dp by 48dp icon button using Modifier.minimumInteractiveComponentSize. This button has Material Design\'s minimum size.</string>
+    <string name="target_size_example_6_heading">Good example 6: Clickable composables are made large enough by default</string>
+    <string name="target_size_example_6_description">Jetpack Compose gives all clickable composables (such as IconButton) sufficient visible touch target size (48dp by 48dp minimum) by default. Just avoid size restrictions.</string>
+    <string name="target_size_example_6_content_description">Show more details about a 48dp by 48dp icon button using clickable default sizing</string>
+    <string name="target_size_example_6_message">Tapped the 48dp by 48dp icon button using clickable default sizing. This button has Material Design\'s minimum size.</string>
+
     <!-- UX change announcements -->
     <string name="ux_change_announcements_title">UX change announcements</string>
     <string name="ux_change_announcements_heading">Announce all UX changes (with live regions when possible)</string>

@@ -63,6 +63,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.StandAloneLinksScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.SwitchControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.tab_rows.TabRowsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.target_size.MinimumTouchTargetSizeScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.TextAlternativesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.textfield_controls.TextFieldControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -164,6 +165,9 @@ private fun ComposeAccessibilityTechniquesNavHost(
         }
         composable(route = ComposeAccessibilityTechniquesRoute.InteractiveControlLabels.route) {
             InteractiveControlLabelsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.MinimumTouchTargetSize.route) {
+            MinimumTouchTargetSizeScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.UxChangeAnnouncements.route) {
             UxChangeAnnouncementsScreen(onBackPressed = popBackStack)

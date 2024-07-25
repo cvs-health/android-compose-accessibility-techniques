@@ -32,6 +32,7 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     DarkAndLightThemes("darkAndLightThemes"),
     ScreenAndPaneTitles("screenAndPaneTitles"),
     InteractiveControlLabels("interactiveControlLabels"),
+    MinimumTouchTargetSize("minimumTouchTargetSize"),
     UxChangeAnnouncements("uxChangeAnnouncements"),
     KeyboardTypes("keyboardTypes"),
     KeyboardActions("keyboardActions"),

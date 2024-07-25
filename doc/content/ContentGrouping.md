@@ -14,14 +14,14 @@ Another important use for content grouping is associating pieces information whi
 
 The key techniques for content grouping are:
 
-## Use an enclosing layout composable with `Modifier.semantics(mergeDescendants = true)`
+## Use an enclosing layout composable with `Modifier.semantics(mergeDescendants = true) {}`
 
-To group content, enclose all the relevant content elements in a single layout composable and set `Modifier.semantics(mergeDescendants = true)` on that wrapping composable. This semantic property makes the composable focusable by a screen reader and tells the screen reader to combine all child composable text into a single announcement.
+To group content, enclose all the relevant content elements in a single layout composable and set `Modifier.semantics(mergeDescendants = true) {}` on that wrapping composable. This semantic property makes the composable focusable by a screen reader and tells the screen reader to combine all child composable text into a single announcement.
 
 ```kotlin
 // All of this card's content will be grouped for accessibility.
 Card(
-    modifier = Modifier.semantics(mergeDescendants = true)
+    modifier = Modifier.semantics(mergeDescendants = true) {}
 ) {
     Column {
         Text("Random Article Title", style = MaterialTheme.typography.headlineSmall)
@@ -45,16 +45,16 @@ Group any separate content labels with their associated text values. For example
 ```kotlin
 /* This simple table correctly groups "City" with "Boston" and "Population (in 2020)" with 
    "675,647" for accessibility services by using layout structure and 
-   Modifier.semantics(mergeDescendants = true). */
+   Modifier.semantics(mergeDescendants = true) {}. */
 Row {
     Column(
-        modifier = Modifier.semantics(mergeDescendants = true)
+        modifier = Modifier.semantics(mergeDescendants = true) {}
     ) {
         Text("City")
         Text("Boston")
     }
     Column(
-        modifier = Modifier.semantics(mergeDescendants = true)
+        modifier = Modifier.semantics(mergeDescendants = true) {}
     ) {
         Text("Population (in 2020)")
         Text("675,647")
@@ -70,7 +70,7 @@ Alternatively, override the `contentDescription` of the entire group composable;
 
 ## Apply any `onClick` handling to the appropriate content group
 
-For clickable grouped content (such as cards or list items that allow drilling down to a detailed view), apply an `onClick` handler or a `Modifier.clickable()` property to the appropriate layout group composable. Doing so will set `Modifier.semantics(mergeDescendants = true)` implicitly.
+For clickable grouped content (such as cards or list items that allow drilling down to a detailed view), apply an `onClick` handler or a `Modifier.clickable()` property to the appropriate layout group composable. Doing so will set `Modifier.semantics(mergeDescendants = true) {}` implicitly.
 
 (Note: The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.)
 

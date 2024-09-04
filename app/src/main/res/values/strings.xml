@@ -471,18 +471,6 @@
     <string name="custom_accessibility_actions_share_event">Selected to share card example #%1$d</string>
     <string name="custom_accessibility_actions_report_event">Selected to report card example #%1$d as inappropriate</string>
 
-    <!-- Autofill controls -->
-    <string name="autofill_title">Autofill controls</string>
-    <string name="autofill_heading">Autofill is required where applicable</string>
-    <string name="autofill_description_1">Whenever possible, a TextField should support autofill suggestions in order to reduce redundant data entry. Provided that an autofill service with the appropriate data has been configured for your device, autofill suggestions will appear as pop-ups in some assistive technologies or on the virtual keyboard. They are not available from a physical keyboard.</string>
-    <string name="autofill_description_2">Select to edit the input fields below and autofill suggestions should appear for the good example fields.</string>
-    <string name="autofill_example_1_heading">Bad example 1: Non-autofilled name and email TextFields</string>
-    <string name="autofill_example_1_label_1">Full name</string>
-    <string name="autofill_example_1_label_2">Email</string>
-    <string name="autofill_example_2_heading">Good example 2: Auto-filled name and email TextFields</string>
-    <string name="autofill_example_2_label_1">Full name</string>
-    <string name="autofill_example_2_label_2">Email</string>
-
     <!-- Accordion controls -->
     <string name="accordion_title">Accordion controls</string>
     <string name="accordion_heading">Accordion controls require an expand or collapse semantics property</string>
@@ -497,6 +485,18 @@
     <string name="accordion_item_2_1">Correct Accordion example, Item 1</string>
     <string name="accordion_item_2_2">Correct Accordion example, Item 2</string>
     <string name="accordion_item_2_3">Correct Accordion example, Item 3</string>
+
+    <!-- Autofill controls -->
+    <string name="autofill_title">Autofill controls</string>
+    <string name="autofill_heading">Autofill is required where applicable</string>
+    <string name="autofill_description_1">Whenever possible, a TextField should support autofill suggestions in order to reduce redundant data entry. Provided that an autofill service with the appropriate data has been configured for your device, autofill suggestions will appear as pop-ups in some assistive technologies or on the virtual keyboard. They are not available from a physical keyboard.</string>
+    <string name="autofill_description_2">Select to edit the input fields below and autofill suggestions should appear for the good example fields.</string>
+    <string name="autofill_example_1_heading">Bad example 1: Non-autofilled name and email TextFields</string>
+    <string name="autofill_example_1_label_1">Full name</string>
+    <string name="autofill_example_1_label_2">Email</string>
+    <string name="autofill_example_2_heading">Good example 2: Auto-filled name and email TextFields</string>
+    <string name="autofill_example_2_label_1">Full name</string>
+    <string name="autofill_example_2_label_2">Email</string>
 
     <!-- Checkbox controls -->
     <string name="checkbox_controls_title">Checkbox controls</string>

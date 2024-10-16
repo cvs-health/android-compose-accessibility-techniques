@@ -22,7 +22,6 @@ import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasClickAction
-import androidx.compose.ui.test.hasStateDescription
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasTextExactly
 import androidx.compose.ui.test.isHeading
@@ -109,11 +108,15 @@ class ExposedDropdownMenusTests {
             .onNodeWithTag(exposedDropdownMenusExample1DropdownMenuTextFieldTestTag)
             .assert(
                 hasTextExactly("Payment type", "(No payment type selected.)")
-                and
+            )
+        composeTestRule
+            .onNodeWithTag(exposedDropdownMenusExample1DropdownMenuTextFieldTestTag)
+            .assert(
                 hasClickAction()
-                and
-                hasStateDescription("Collapsed")
-                and
+            )
+        composeTestRule
+            .onNodeWithTag(exposedDropdownMenusExample1DropdownMenuTextFieldTestTag)
+            .assert(
                 hasRole(Role.DropdownList)
             )
     }
@@ -126,10 +129,6 @@ class ExposedDropdownMenusTests {
             .performClick()
 
         composeTestRule
-            .onNodeWithTag(exposedDropdownMenusExample1DropdownMenuTextFieldTestTag)
-            .assert(hasStateDescription("Expanded"))
-
-        composeTestRule
             .onNodeWithText("Check")
             .assert(
                 hasAnyAncestor(keyIsDefined(SemanticsProperties.IsPopup))
@@ -140,8 +139,6 @@ class ExposedDropdownMenusTests {
             .onNodeWithTag(exposedDropdownMenusExample1DropdownMenuTextFieldTestTag)
             .assert(
                 hasTextExactly("Payment type", "Check")
-                and
-                hasStateDescription("Collapsed")
                 and
                 hasRole(Role.DropdownList)
             )

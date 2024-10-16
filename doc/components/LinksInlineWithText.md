@@ -3,63 +3,68 @@ Always create links which are inline with text that announce their name, role, a
 
 The goal is to make TalkBack announce inline links with the "Links available..." action message and display the TalkBack menu's Links menu. Switch Access should allow the entire text block to be selected, then display a modal menu of links. Inline links should also be focusable and selectable from the keyboard.
 
-Two approaches to creating links inline with text are using native Compose components and using a View interop approach. While using View interop is more keyboard accessible at the time of writing, neither approach works well nor is particularly testable. 
-
-Given these accessibility shortcomings, prefer using standalone links to links inline with text at this time.
+Two approaches to creating accessible links inline with text are using native Compose components and using a View interop approach. 
 
 ## Native Compose inline links
 
-Native Compose inline links are created using `AnnotatedString` and `UrlAnnotation`. Specifically, use `buildAnnotatedString()` with either `pushUrlAnnotation()` to append a link and its text or `addUrlAnnotation()` to apply an link to a range of existing text.
+Native Compose inline links are created using `AnnotatedString` and `LinkAnnotation.Url`. Specifically, use `buildAnnotatedString()` with either `pushLink()` to begin linked text (ended by `pop()`) or `addLink()` to apply an link to a range of existing text. 
 
-(Note that `UrlAnnotation` does not apply any styling to the linked text, so `withStyle()` or `addStyle()` must also be used to make link texts visually distinct.)
+Both `pushLink()` and `addLink()` take an instance of the `LinkAnnotation` interface which contains the link information and the link text styling. `LinkAnnotation.Url` is the most appropriate implementation class for inline links that open web pages.
 
-Native Compose inline links are displayed using `ClickableText` composables. `ClickableText` detects the location of taps within a text and allows that location to perform special click handling. This allows links within a text block to be opened individually.
-
-Within a `ClickableText`'s `onClick` lambda function, translate the selected text position to an URL using `AnnotatedString.getUrlAnnotations()`, and then invoke appropriate code to open the link.
-
-Note: `ClickableText` has been fully enabled for accessibility services, so it works well with TalkBack and Switch Access, and it obeys standard Compose theming. Unfortunately, the same is not true for keyboard accessibility: neither a `ClickableText` nor the links with one are keyboard focusable or selectable. This is a known deficiency; see [Issue 311488543: Support for clickable portions of text to be focusable](https://issuetracker.google.com/issues/311488543) and [Issue 303096408: ClickableText doesn't support hardware keyboard navigation](https://issuetracker.google.com/issues/303096408). Because `ClickableText` does not conform to WCAG [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG22/#keyboard), its use is problematic; however, it should improve given time. 
+Native Compose inline links are displayed using `Text` or another composable which displays annotated strings.
 
 For example:
 
 ```kotlin
+val linkStyles = TextLinkStyles(
+    style = SpanStyle(
+        color  = MaterialTheme.colorScheme.primary, // Handles both Dark Theme and Light Theme
+        textDecoration = TextDecoration.Underline
+    ),
+    focusedStyle = SpanStyle(
+        color  = MaterialTheme.colorScheme.primary,
+        fontWeight = FontWeight.Bold,
+        textDecoration = TextDecoration.Underline
+    ),
+    hoveredStyle = SpanStyle(
+        color  = MaterialTheme.colorScheme.primary,
+        fontWeight = FontWeight.Bold,
+        textDecoration = TextDecoration.Underline
+    ),
+    pressedStyle = SpanStyle(
+        color  = MaterialTheme.colorScheme.primary,
+        fontWeight = FontWeight.Bold,
+        textDecoration = TextDecoration.Underline
+    )
+)
+
 val text = buildAnnotatedString {
-    append("Learn how to build simple ")
-    pushUrlAnnotation(
-        UrlAnnotation("https://developer.android.com/reference/kotlin/androidx/compose/foundation/text/package-summary#ClickableText(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.Modifier,androidx.compose.ui.text.TextStyle,kotlin.Boolean,androidx.compose.ui.text.style.TextOverflow,kotlin.Int,kotlin.Function1,kotlin.Function1)")
+    append("Learn how to build simple links in-line with text using ")
+    pushLink(
+        LinkAnnotation.Url(
+            url = "https://developer.android.com/jetpack/compose/text/user-interactions#click-with-annotation",
+            styles = linkStyles
+        )
     )
-    withStyle(SpanStyle(color = Color.Blue, textDecoration = TextDecoration.Underline)) {
-        append("ClickableText")
-    }
-    pop()
-    append(" links using ")
-    pushUrlAnnotation(
-        UrlAnnotation("https://developer.android.com/jetpack/compose/text/user-interactions#click-with-annotation")
-    )
-    withStyle(SpanStyle(color = Color.Blue, textDecoration = TextDecoration.Underline)) {
-        append("Click with annotation")
-    }
+    append("Create clickable sections of text with LinkAnnotation")
     pop()
     append(".")
 }
 
-val uriHandler = LocalUriHandler.current
-ClickableText(
+Text(
     text = text, 
-    modifier = Modifier.fillMaxWidth(),
-    style = MaterialTheme.typography.bodyMedium.copy(color = LocalContentColor.current)
-) { position ->
-    text.getUrlAnnotations(position, position).firstOrNull()?.let { annotation ->
-        uriHandler.openUri(annotation.item.url)
-    }
-}
+    modifier = Modifier.fillMaxWidth()
+)
 ```
 
 Notes:
 
-- The hard-coded text shown in these examples are only used for simplicity. _Always_ use externalized string resource references in actual code. However, URL values may be an exceptions, depending on how the site in question handles internationalization.
-- Using `pushUrlAnnotation` does not scale well, and specifically is not particularly internationalizable. (Given that the order of links in a text may change when translated.) One solid approach is to embed link annotations in translation strings and applying reusable parsing code to create the correct `AnnotatedString`.
-- `ClickableText` does not support Dark Theme by default. This can be remediated by setting its `style` parameter so that `color = LocalContentColor.current` is merged into its expected styling (as is done with `Text` unless another color is set).
-- Automated testing of `ClickableText` is limited, since it appears to surface no semantic properties that distinguish it from `Text`.
+- The hard-coded text shown in these examples are only used for simplicity. _Always_ use externalized string resource references in actual code. However, URL values may be an exceptions, depending on how the website in question handles internationalization.
+- `LinkAnnotation.Url` can also take a `LinkInteractionListener` for link click handling. The default listener opens a link in the default browser. 
+    - The more generic class `LinkAnnotation.Clickable` is also available for non-URL-based interactions and requires a `LinkInteractionListener`.
+- Using `pushLink` does not scale well, and specifically is not particularly internationalizable. (Given that the order of links in a text may change when translated.) One solid approach is to embed link annotations in translation strings and applying reusable parsing code to create the correct `AnnotatedString`.
+- The TalkBack Links menu now displays link texts using the `TextLinkStyles` specified in the `AnnotatedString`. This can be a problem if the app does not support both Light theme and Dark theme based on the system setting, because TalkBack does. In the worst case, the link text color and background color can have insufficient contrast for the text to be read.
+- Automated testing of inline links is limited, since `Text` only surfaces the literal text of an `AnnotatedString`, not its annotations.
 
 
 ## Inline links with View interop (`AndroidView`)
@@ -68,7 +73,7 @@ The alternative approach to creating inline links is to fall back on the View UI
 
 All existing View inline link options are then possible, including HTML anchors in string resources or the use of `URLSpan`. See [Android View Accessibility Techniques - Links Inline with Text](https://github.com/cvs-health/android-view-accessibility-techniques/blob/main/doc/componenttypes/LinksInlineWithText.md) for more details. 
 
-The View interop approach is fully accessible from TalkBack and Switch Access, and it is more accessible from the keyboard than `ClickableSpan`. However, View interop does not follow expected keyboard Tab focus behavior: arrow key navigation is required to focus on the text block and on the link texts within it. This makes it less than ideal from an accessibility standpoint. 
+The View interop approach is fully accessible but the keyboard handling is slightly unusual: the Tab key will focus on the entire text block and arrow key navigation is required to focus on the individual link texts within it. 
 
 (Note: Elements within an `AndroidView` also do not follow Compose theming: the Material Design Components - Android library must be included and its theming mechanisms used.)
 
@@ -93,8 +98,9 @@ AndroidView(
 ```
 
 Notes: 
+
 - HTML linked text will not display as a link in Compose Preview, but does appear as a link when run in an app. Links using `URLSpan` do display correctly as links in Preview.
-- Automated testing of `AndroidView` is limited, since it appears to surface almost no semantic properties at all and its View-based contents are opaque to tests.
+- Automated testing of `AndroidView` is limited, since it appears to surface almost no semantic properties at all and its View-based contents are opaque to Compose jUnit UI tests.
 
 
 ----

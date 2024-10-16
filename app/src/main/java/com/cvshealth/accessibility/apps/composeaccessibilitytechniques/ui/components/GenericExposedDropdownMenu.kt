@@ -21,6 +21,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -102,7 +103,11 @@ fun GenericExposedDropdownMenu(
         OutlinedTextField(
             modifier = textFieldModifier
                 // Key technique 2: Anchor the TextField to the menu box.
-                .menuAnchor(),
+                // If the text field is read-only, then the menu gets focus; if it is editable,
+                // then the text field keeps focus.
+                .menuAnchor(
+                    if (readOnly) MenuAnchorType.PrimaryNotEditable else MenuAnchorType.PrimaryEditable
+                ),
             readOnly = readOnly, // Key technique 3a: Set readOnly appropriately.
             value = value,
             onValueChange = { newValue ->
@@ -115,7 +120,13 @@ fun GenericExposedDropdownMenu(
             supportingText = supportingText, // Optional: Allow supporting/error messaging.
             isError = isError, // Optional: Support announcing an error state.
             // Key technique 5: Set the trailing icon to show the expanded/collapsed state.
-            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded) },
+            // If the dropdown text box is editable, make the trailing icon a secondary anchor.
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(
+                    expanded = isExpanded,
+                    modifier = if (readOnly) Modifier else Modifier.menuAnchor(MenuAnchorType.SecondaryEditable)
+                )
+            },
             keyboardActions = keyboardActions,
             keyboardOptions = keyboardOptions,
             colors = ExposedDropdownMenuDefaults.textFieldColors(),

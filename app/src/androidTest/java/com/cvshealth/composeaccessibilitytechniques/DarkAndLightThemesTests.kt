@@ -18,6 +18,7 @@ package com.cvshealth.composeaccessibilitytechniques
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.createComposeRule
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dark_and_light_themes.DarkAndLightThemesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dark_and_light_themes.darkAndLightThemesHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -58,7 +59,13 @@ class DarkAndLightThemesTests {
     @Test
     fun verifyOnlyTheOneHeadingIsAHeading() {
         composeTestRule
-            .onNode(!hasTestTag(darkAndLightThemesHeadingTestTag) and isHeading())
+            .onNode(
+                !hasTestTag(darkAndLightThemesHeadingTestTag)
+                and
+                !hasTestTag(genericScaffoldTitleTestTag)
+                and
+                isHeading()
+            )
             .assertDoesNotExist()
     }
 

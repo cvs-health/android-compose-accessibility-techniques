@@ -17,7 +17,7 @@ package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compo
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.snapping.SnapFlingBehavior
+import androidx.compose.foundation.gestures.TargetedFlingBehavior
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,7 +36,6 @@ import androidx.compose.material3.TabRowDefaults.primaryContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -314,7 +313,7 @@ private fun StatefulScrollableTabGroupPreview() {
  * @param pagerState the state of the [HorizontalPager]. Must supply the correct count of pages.
  * @param pagerContentPadding the padding around the entire tab pane pager.
  * @param pageSize determines how pages are laid out.
- * @param beyondBoundsPageCount pages before and after the selected tab pane to be composed.
+ * @param beyondViewportPageCount pages before and after the selected tab pane to be composed.
  * @param pageSpacing spacing between pages.
  * @param verticalAlignment how pages are aligned vertically
  * @param flingBehavior how the tab panes react to user scroll gestures
@@ -337,16 +336,17 @@ fun FixedPagedTabGroup(
     pagerModifier: Modifier = Modifier,
     pagerContentPadding: PaddingValues = PaddingValues(0.dp),
     pageSize: PageSize = PageSize.Fill,
-    beyondBoundsPageCount: Int = 0,
+    beyondViewportPageCount: Int = 0,
     pageSpacing: Dp = 0.dp,
     verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
-    flingBehavior: SnapFlingBehavior = PagerDefaults.flingBehavior(state = pagerState),
+    flingBehavior: TargetedFlingBehavior = PagerDefaults.flingBehavior(state = pagerState),
     userScrollEnabled: Boolean = true,
     reverseLayout: Boolean = false,
     pageKey: ((index: Int) -> Any)? = null,
-    pageNestedScrollConnection: NestedScrollConnection = remember(pagerState) {
-        PagerDefaults.pageNestedScrollConnection(pagerState, Orientation.Horizontal)
-    },
+    pageNestedScrollConnection: NestedScrollConnection = PagerDefaults.pageNestedScrollConnection(
+        pagerState,
+        Orientation.Horizontal
+    ),
     pageContent: @Composable PagerScope.(page: Int) -> Unit
 ) {
     // Key technique: HorizontalPager coordinates the TabRow selected tab using rememberPagerState
@@ -378,7 +378,7 @@ fun FixedPagedTabGroup(
             modifier = pagerModifier,
             contentPadding = pagerContentPadding,
             pageSize = pageSize,
-            beyondBoundsPageCount = beyondBoundsPageCount,
+            beyondViewportPageCount = beyondViewportPageCount,
             pageSpacing = pageSpacing,
             verticalAlignment = verticalAlignment,
             flingBehavior = flingBehavior,

@@ -533,8 +533,8 @@
     <string name="exposed_dropdown_menus_description_2">Turn on TalkBack or Switch Access and navigate this page, activating the list controls and making selections. Then repeat the process using a physical keyboard to observe the problems.</string>
     <string name="exposed_dropdown_menus_example_1_heading">Problematic example 1: Non-editable Exposed Dropdown Menu</string>
     <string name="exposed_dropdown_menus_example_1_description">The Exposed Dropdown Menu pattern uses ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem controls to create a dropdown selection menu that is mostly accessible, except for keyboard operation.</string>
-    <string name="exposed_dropdown_menus_example_2_heading">Problematic example 2: View-based non-editable Exposed Dropdown Menu</string>
-    <string name="exposed_dropdown_menus_example_2_description">Wrapping the View Exposed Dropdown Menu pattern in AndroidView is also mostly accessible. But it is not keyboard accessible, due to Compose/View interoperability issues.</string>
+    <string name="exposed_dropdown_menus_example_2_heading">Good example 2: View-based non-editable Exposed Dropdown Menu</string>
+    <string name="exposed_dropdown_menus_example_2_description">Wrapping the View Exposed Dropdown Menu pattern in AndroidView creates a fully accessible control. Tab to the expand/collapse icon and type Enter to expand the menu. Navigate the menu using the arrow keys and select a value with the Enter key.</string>
     <string name="exposed_dropdown_menus_example_label">Payment type</string>
     <string name="exposed_dropdown_menus_example_option_1">Cash</string>
     <string name="exposed_dropdown_menus_example_option_2">Check</string>
@@ -546,17 +546,16 @@
     <!-- Links inline with text -->
     <string name="inline_links_title">Links inline with text</string>
     <string name="inline_links_heading">Create inline links differently from standalone links</string>
-    <string name="inline_links_description_1">Links inline with text can be created using AnnotatedString and ClickableText. Links will appear in the TalkBack menu\'s Links dialog.</string>
+    <string name="inline_links_description_1">Links inline with text can be created using AnnotatedString and LinkAnnotation.Url. Links will appear in the TalkBack menu\'s Links dialog.</string>
     <string name="inline_links_description_2">Turn on TalkBack and navigate the page text for a demonstration. Note the pauses around the inline linked texts. Listen for the \"Links available\" action notifications, tap with 3-fingers to open the TalkBack menu, and select \"Links\" to see a dialog containing the available links. Pick a link to open a browser displaying the linked page.</string>
-    <string name="inline_links_example_1">Problematic example 1: Using AnnotatedString and ClickableText</string>
-    <string name="inline_links_example_1_text">This paragraph is a simple example of inline links using AnnotatedString and ClickableText with fixed link text values.</string>
+    <string name="inline_links_example_1">Good example 1: Using AnnotatedString and LinkAnnotation.Url</string>
+    <string name="inline_links_example_1_text">This paragraph is a simple example of inline links using AnnotatedString and LinkAnnotation.Url with fixed link text values.</string>
+    <string name="inline_links_example_1_note">Note: The TalkBack Links dialog shows links using app styling. That feature can create color contrast problems unless the app supports both Dark and Light themes.</string>
     <string name="inline_links_example_1_link_text_1">inline links</string>
     <string name="inline_links_example_1_link_text_2">AnnotatedString</string>
-    <string name="inline_links_example_1_link_text_3">ClickableText</string>
-    <string name="inline_links_example_1_note">Note: These links work fine with assistive technologies, but they are not keyboard accessible.</string>
-    <string name="inline_links_example_2">Problematic example 2: Using AndroidView and TextView</string>
-    <string name="inline_links_example_2_text">For best current accessibility, use <a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/viewinterop/package-summary#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a> and <a href="https://github.com/cvs-health/android-view-accessibility-techniques/blob/main/doc/componenttypes/LinksInlineWithText.md">TextView links</a> instead of ClickableText.</string>
-    <string name="inline_links_example_2_note">This paragraph works with assistive technologies. It is not keyboard accessible, due to Compose/View interoperability issues. If it did work, navigation arrow keys would focus on the links within the focused text block.</string>
+    <string name="inline_links_example_1_link_text_3">LinkAnnotation.Url</string>
+    <string name="inline_links_example_2">Good example 2: Using AndroidView and TextView</string>
+    <string name="inline_links_example_2_text">Alternatively, use <a href="https://developer.android.com/reference/kotlin/androidx/compose/ui/viewinterop/package-summary#AndroidView(kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)">AndroidView</a> and <a href="https://github.com/cvs-health/android-view-accessibility-techniques/blob/main/doc/componenttypes/LinksInlineWithText.md">TextView links</a>. This paragraph is keyboard focusable. Then use navigation arrow keys to focus on the links within the paragraph.</string>
 
     <!-- ListItem layouts -->
     <string name="listitem_layouts_title">ListItem layouts</string>
@@ -703,20 +702,22 @@
     <string name="slider_controls_title">Slider and RangeSlider controls</string>
     <string name="slider_controls_heading">Slider and RangeSlider require remediation</string>
     <string name="slider_controls_description_1">Slider controls can be made completely accessible with specific remediation for labeling, state announcement, and keyboard operation. RangeSlider requires similar remediation for TalkBack, but no remediation for its keyboard accessibility issues is known at this time.</string>
-    <string name="slider_controls_description_2">Turn on TalkBack or Switch Access, navigate the page, and activate the controls for demonstrations of Slider and RangeSlider controls. Note that the RangeSlider control is not keyboard accessible.</string>
+    <string name="slider_controls_description_2">Turn on TalkBack or Switch Access, navigate the page, and activate the controls for demonstrations of Slider and RangeSlider controls.</string>
     <string name="slider_controls_example_1_header">Bad example 1: Unremediated Slider control</string>
     <string name="slider_controls_example_1_description">Without remediation, a Slider will not announce its label or state properly in TalkBack.</string>
     <string name="slider_controls_example_1_label">Rating</string>
     <string name="slider_controls_example_2_header">Good example 2: Remediated Slider control</string>
-    <string name="slider_controls_example_2_description">Sliders require the use of contentDescription to provide an accessible label. Applying stateDescription and liveRegion semantics are required for proper state announcements in TalkBack. Key handling remediation is required for keyboard accessibility.</string>
+    <string name="slider_controls_example_2_description_1">Sliders require the use of contentDescription to provide an accessible label. Applying stateDescription and liveRegion semantics are required for proper state announcements in TalkBack. Key handling remediation is required for keyboard accessibility. </string>
+    <string name="slider_controls_example_2_description_2">Note that keyboard control of the Slider thumb requires pressing the Enter key after tabbing to the control, and then using the left and right arrow keys to adjust the Slider\'s value.</string>
     <string name="slider_controls_example_2_label">Rating</string>
-    <string name="slider_controls_example_3_header">Problematic example 3: Remediated RangeSlider is not keyboard accessible</string>
+    <string name="slider_controls_example_3_header">Problematic example 3: Compose RangeSlider is not keyboard accessible</string>
     <string name="slider_controls_example_3_description">Like Sliders, RangeSliders require contentDescription to provide an accessible label and require semantics changes to provide good state announcements in TalkBack. However, no remediation for its keyboard accessibility issues is currently known.</string>
     <string name="slider_controls_example_3_label">Rating filter range</string>
     <string name="slider_controls_example_3_content_description">Rating filter range</string>
     <string name="slider_controls_example_3_state_description">%1$d to %2$d</string>
-    <string name="slider_controls_example_4_header">Problematic example 4: View RangeSlider is not keyboard accessible</string>
-    <string name="slider_controls_example_4_description">A View RangeSlider wrapped in AndroidView is not keyboard accessible, because of Compose/View interoperability issues.</string>
+    <string name="slider_controls_example_4_header">Good example 4: View RangeSlider is accessible</string>
+    <string name="slider_controls_example_4_description_1">A View RangeSlider control wrapped in AndroidView is accessible.</string>
+    <string name="slider_controls_example_4_description_2">Note that keyboard control of the RangeSlider thumbs requires pressing the Enter key after tabbing to the control, and then using the left and right arrow keys to adjust each thumb\'s value and tabbing to move between the thumbs.</string>
     <string name="slider_controls_example_4_label">Rating filter range</string>
     <string name="slider_controls_example_4_content_description">Rating filter range</string>
     <string name="slider_controls_example_4_selected_range">Include ratings from %1$d to %2$d</string>

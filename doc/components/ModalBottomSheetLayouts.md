@@ -5,11 +5,11 @@ The following additions are needed to make a `ModalBottomSheet` accessible:
 
 - Apply `Modifier.onKeyEvent` to capture any use of the escape (Esc) key and close the bottom sheet.
     - Note that a suspend function call in a coroutine scope is used to hide the bottom sheet asynchronously. 
-- Limit the size of half-opened bottom sheets with `fillMaxHeight(0.5f)` so that no part of their content is off-screen.
 - Provide a semantic pane title.
 - Override the default `dragHandle` `contentDescription` to provide a meaningful bottom sheet title.
-- Set the `ModalBottomSheet` `windowInsets` so bottom sheet padding can be measured, and add `bottom` padding to the bottom sheet contents so they avoid sliding under the bottom system navigation bar.
+- Set the `ModalBottomSheet` `contentWindowInsets` to `WindowInsets.safeDrawing` so the bottom sheet avoids sliding into any system bar or window cutout area.
 - Provide a visible bottom sheet title (preferably the same as the pane title).
+- Make sure the bottom sheet content below the title is scrollable, so it can adapt to different display sizes.
 - If a bottom sheet will change state that affects a `liveRegion` composable, be sure that state is changed only after the bottom sheet is dismissed; otherwise, the live region will not announce its new value. (Not shown below.)
 - Set keyboard focus onto the bottom sheet contents when the bottom sheet opens. 
 
@@ -19,7 +19,7 @@ For example:
 var openBottomSheet by rememberSaveable { mutableStateOf(false) }
 val scope = rememberCoroutineScope()
 val sheetState = rememberModalBottomSheetState(
-    skipPartiallyExpanded = false // only expand this sheet half-way when opened
+    skipPartiallyExpanded = true // always expand this sheet fully when opened
 )
 val focusRequester = remember { FocusRequester() } // to set keyboard focus
 
@@ -50,9 +50,6 @@ if (openBottomSheet) {
                     false
                 }
             }
-            // Since only a half-expanded sheet is shown, limit the size of the sheet; otherwise, 
-            // it is possible to use a keyboard to tab to and select content that is off-screen.
-            .fillMaxHeight(fraction = 0.5f)
             // The bottom sheet forms a separate pane, so give it a unique pane title.
             .semantics {
                 paneTitle = bottomSheetTitle
@@ -65,29 +62,25 @@ if (openBottomSheet) {
                 modifier = Modifier.semantics { contentDescription = dragHandleDescription }
             )
         },
-        // Set the windowInsets so bottom sheet padding can be measured.
-        windowInsets = WindowInsets.safeDrawing
+        // Set the contentWindowInsets to restrict the bottom sheet to a safe region; otherwise,
+        // it could overlap the top and bottom navigation regions.
+        contentWindowInsets = { WindowInsets.safeDrawing }
     ) {
-        // Pad the bottom of the bottom sheet contents to avoid them sliding under the bottom system 
-        // navigation bar and the last item becoming unfocusable with assistive technologies. 
-        val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-        LazyColumn(
+        Column(
             modifier = Modifier
-                // Apply the bottom padding calculated above.
-                .padding(bottom = bottomPadding)
                 // Mark the bottom sheet contents so they can receive focus.
                 .focusRequester(focusRequester)
         ) {
             // Provide a visual bottom sheet title, preferably with the same text as the pane title.
-            item {
-                Text(
-                    text = bottomSheetTitle,
-                    style = androidx.compose.material3.MaterialTheme.typography.headlineSmall
-                )
-                HorizontalDivider()
-            }
+            Text(
+                text = bottomSheetTitle,
+                modifier = Modifier.semantics { heading() }, // Less effective in a LazyColumn
+                style = androidx.compose.material3.MaterialTheme.typography.headlineSmall
+            )
+            HorizontalDivider()
             
-            // Bottom sheet contents ...
+            // Bottom sheet contents ... 
+            // Make sure this content is scrollable.
         }
     }
 }
@@ -101,7 +94,10 @@ LaunchedEffect(openBottomSheet) {
 }
 ```
 
-(Note: The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.)
+Notes:
+
+* Unfortunately, half-opened `ModalBottomSheet` layouts allow keyboard focus to move onto off-screen content without scrolling or expanding the bottom sheet to keep focus visible. No remediation is known at this time.
+* The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.)
 
 ----
 

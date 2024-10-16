@@ -17,12 +17,12 @@ package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compo
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Indication
-import androidx.compose.foundation.IndicationInstance
+import androidx.compose.foundation.IndicationNodeFactory
 import androidx.compose.foundation.border
+import androidx.compose.foundation.interaction.FocusInteraction
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,7 +38,6 @@ import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,11 +49,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.node.DelegatableNode
+import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
+import kotlinx.coroutines.launch
 
 /**
  * A [Modifier] extension function that applies a highly-visible custom keyboard focus indicator
@@ -356,8 +358,8 @@ fun VisibleFocusBorderIconButton(
 }
 
 /**
- * A factory method for a custom [IndicationInstance] that performs custom focus state drawing over
- * a composable. Apply this [Indication] to a composable with Modifier.indication().
+ * A factory method for a custom [Modifier.Node] that performs custom focus state drawing
+ * over a composable. Apply this [Indication] to a composable with Modifier.indication().
  *
  * [Indication]s provide low-level drawing control to indicate state, so they have a lot of power
  * and flexibility, but at the cost of considerable complexity. They also cannot directly access
@@ -371,20 +373,14 @@ fun VisibleFocusBorderIconButton(
  */
 class VisibleFocusIndication(
     val themedIndicationColor: Color
-) : Indication {
-    @Composable
-    override fun rememberUpdatedInstance(interactionSource: InteractionSource): IndicationInstance {
-        // Key technique: collect the focus start and end Interactions on this composable's
-        // InteractionSource as a State<Boolean> holding the current focus state value.
-        val isFocusedState = interactionSource.collectIsFocusedAsState()
-        return remember(interactionSource) {
-            // Key technique: Pass the given theme-based color into the IndicationInstance.
-            // Key technique: Pass the collected focus State holder (not it's current state value!)
-            // into the IndicationInstance that will perform the focus-state-based drawing. That way
-            // the IndicationInstance can retrieve the current focus state at time of drawing.
-            VisibleFocusIndicationInstance(themedIndicationColor, isFocusedState)
-        }
+) : IndicationNodeFactory {
+    override fun create(interactionSource: InteractionSource): DelegatableNode {
+        return VisibleFocusIndicationNode(themedIndicationColor, interactionSource)
     }
+
+    override fun hashCode(): Int = -1
+
+    override fun equals(other: Any?) = other === this
 }
 
 /**
@@ -392,15 +388,32 @@ class VisibleFocusIndication(
  * focused composable using a theme-appropriate color.
  *
  * @param themedIndicationColor Theme-based color used to draw the focus indicator
- * @param isFocusedState a State holder indicating if this composable is focused or not
+ * @param interactionSource the stream of interactions on the composable
  */
-private class VisibleFocusIndicationInstance(
+private class VisibleFocusIndicationNode(
     val themedIndicationColor: Color,
-    isFocusedState: State<Boolean>
-) : IndicationInstance {
-    private val isFocused by isFocusedState
-    override fun ContentDrawScope.drawIndication() {
-        drawContent()
+    private val interactionSource: InteractionSource
+) : Modifier.Node(), DrawModifierNode {
+    private var isFocused = false
+
+    override fun onAttach() {
+        super.onAttach()
+        coroutineScope.launch {
+            // Key technique: collect the focus start and end Interactions on this composable's
+            // InteractionSource as a Boolean holding the current focus state value.
+            val focusInteractions = mutableListOf<FocusInteraction.Focus>()
+            interactionSource.interactions.collect { interaction ->
+                when (interaction) {
+                    is FocusInteraction.Focus -> focusInteractions.add(interaction)
+                    is FocusInteraction.Unfocus -> focusInteractions.remove(interaction.focus)
+                }
+                isFocused = focusInteractions.isNotEmpty()
+            }
+        }
+    }
+
+    override fun ContentDrawScope.draw() {
+        this@draw.drawContent()
         if (isFocused) {
             drawRoundRect(
                 color = themedIndicationColor,

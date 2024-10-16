@@ -97,7 +97,7 @@ fun SliderControlsScreen(
 
             // RangeSlider examples
             ProblematicExample3()
-            ProblematicExample4()
+            GoodExample4()
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -157,7 +157,8 @@ private fun GoodExample2() {
         text = stringResource(id = R.string.slider_controls_example_2_header),
         modifier = Modifier.testTag(sliderControlsExample2HeadingTestTag)
     )
-    BodyText(textId = R.string.slider_controls_example_2_description)
+    BodyText(textId = R.string.slider_controls_example_2_description_1)
+    BodyText(textId = R.string.slider_controls_example_2_description_2)
     Spacer(modifier = Modifier.height(8.dp))
 
     val (ratingValue, setRatingValue) = remember { mutableFloatStateOf(0.0f) }
@@ -246,13 +247,14 @@ private fun ProblematicExample3Preview() {
 }
 
 @Composable
-private fun ProblematicExample4() {
+private fun GoodExample4() {
     // Problematic example 4: View RangeSlider is keyboard inaccessible
-    ProblematicExampleHeading(
+    GoodExampleHeading(
         text = stringResource(id = R.string.slider_controls_example_4_header),
         modifier = Modifier.testTag(sliderControlsExample4HeadingTestTag)
     )
-    BodyText(textId = R.string.slider_controls_example_4_description)
+    BodyText(textId = R.string.slider_controls_example_4_description_1)
+    BodyText(textId = R.string.slider_controls_example_4_description_2)
     Spacer(modifier = Modifier.height(8.dp))
 
     // Key technique: Provide a visible control label
@@ -264,8 +266,6 @@ private fun ProblematicExample4() {
         id = R.string.slider_controls_example_4_content_description
     )
     // Key technique: Wrap a com.google.android.material.slider.RangeSlider in AndroidView.
-    // Note: This approach fails to be keyboard accessible, because of a known Compose-View
-    // interop issue: see https://issuetracker.google.com/issues/255628260 for details.
     AndroidView(
         modifier = Modifier
             .testTag(sliderControlsExample4ControlTestTag)
@@ -301,14 +301,14 @@ private fun ProblematicExample4() {
 
 @Preview(showBackground = true)
 @Composable
-private fun ProblematicExample4Preview() {
+private fun GoodExample4Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         )  {
-            ProblematicExample4()
+            GoodExample4()
         }
     }
 }

@@ -43,6 +43,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.databindi
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericExposedDropdownMenu
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ProblematicExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -116,8 +117,8 @@ fun ExposedDropdownMenusScreen(
                 Text(stringResource(id = R.string.exposed_dropdown_menus_example_label))
             }
 
-            // Problematic example 2: View non-editable Exposed Dropdown Menu
-            ProblematicExampleHeading(
+            // Good example 2: View non-editable Exposed Dropdown Menu
+            GoodExampleHeading(
                 text = stringResource(id = R.string.exposed_dropdown_menus_example_2_heading),
                 modifier = Modifier.testTag(exposedDropdownMenusExample2HeadingTestTag)
             )
@@ -136,15 +137,12 @@ fun ExposedDropdownMenusScreen(
             // Key technique: Wrap a View-based Exposed Dropdown Menu pattern control ensemble in an
             // AndroidView (or in this case, AndroidViewBinding to use XML layout). See also
             // layout/view_exposed_dropdown_menu.xml.
-            //
-            // Note: This approach fails to be keyboard accessible, because of a known Compose-View
-            // interop issue: see https://issuetracker.google.com/issues/255628260 for details.
             AndroidViewBinding(
                 factory = ViewExposedDropdownMenuBinding::inflate,
                 modifier = Modifier
                     .testTag(exposedDropdownMenusExample2AndroidViewTestTag)
                     .fillMaxSize()
-                    .focusable()
+                    .focusable() // allows user to scroll the screen to this control using Tab key
             ) {
                 val context = this.root.context
                 val autoCompleteAdapter = ArrayAdapter(
@@ -169,7 +167,23 @@ fun ExposedDropdownMenusScreen(
             }
 
             // Note: Editable Exposed Dropdown Menus are not demonstrated, because they have
-            // even more accessibility problems than the non-editable version.
+            // even more accessibility problems than the non-editable version. Should you need to
+            // test one, here is the code to do so.
+//            BadExampleHeading(
+//                text = "Bad example 3: Editable Exposed Dropdown Menu", //stringResource(id = R.string.exposed_dropdown_menus_example_1_heading),
+//            )
+//            Spacer(modifier = Modifier.height(8.dp))
+//            var selectedItemText3 by remember { mutableStateOf(example1Options[0]) }
+//            GenericExposedDropdownMenu(
+//                value = selectedItemText3,
+//                setValue = { selectedItemText3 = it },
+//                options = example1Options,
+//                textFieldModifier = Modifier
+//                    .fillMaxWidth(),
+//                readOnly = false, // Creates an editable text field
+//            ) {
+//                Text(stringResource(id = R.string.exposed_dropdown_menus_example_label))
+//            }
 
             Spacer(modifier = Modifier.height(8.dp))
         }

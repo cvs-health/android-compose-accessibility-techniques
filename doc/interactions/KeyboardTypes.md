@@ -1,7 +1,7 @@
 # Keyboard Types and Options
 It is generally necessary to explicitly set the soft keyboard type (and other options) of text input controls in order to obtain the appropriate values for data, create a good user experience, and to support part of the WCAG [Success Criterion 1.3.5 Identify Input Purpose](https://www.w3.org/TR/WCAG22/#identify-input-purpose).
 
-The soft keyboard type and options are set by `keyboardOptions` property of any `TextField` composable. The complete list of keyboard options includes `capitalization`, `autocorrect`, and `keyboardType`, as described in this Android documentation: [KeyboardOptions](https://developer.android.com/reference/kotlin/androidx/compose/foundation/text/KeyboardOptions). The list of `keyboardType` values is available here:
+The soft keyboard type and options are set by the `keyboardOptions` property of any `TextField` composable. The complete list of keyboard options includes `capitalization`, `autoCorrectEnabled`, and `keyboardType`, as described in this Android documentation: [KeyboardOptions](https://developer.android.com/reference/kotlin/androidx/compose/foundation/text/KeyboardOptions). The list of `keyboardType` values is available here:
 [KeyboardType](https://developer.android.com/reference/kotlin/androidx/compose/ui/text/input/KeyboardType). (The `imeActions` keyboard option is described separately, in conjunction with `TextField` `keyboardActions` property.)
 
 In the following example, a text input field accepts a phone number using the dial keypad style of soft keyboard using `keyboardType = KeyboardType.Phone`.

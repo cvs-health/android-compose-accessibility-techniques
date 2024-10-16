@@ -480,7 +480,7 @@ private fun GoodExample9() {
         // for sentence-case capitalization, and autoCorrect=true (default) to apply auto-correct.
         keyboardOptions = KeyboardOptions.Default.copy(
             capitalization = KeyboardCapitalization.Sentences,
-            autoCorrect = true, // autocorrect is the default, so no real need to set its value here.
+            autoCorrectEnabled = true,
             keyboardType = KeyboardType.Text
         )
     )
@@ -522,7 +522,7 @@ private fun GoodExample10() {
         // for sentence-case capitalization, and autoCorrect=false to turn off auto-correct.
         keyboardOptions = KeyboardOptions.Default.copy(
             capitalization = KeyboardCapitalization.Sentences,
-            autoCorrect = false, // autocorrect is the default, must be set explicitly to turn off
+            autoCorrectEnabled = true,
             keyboardType = KeyboardType.Text
         )
     )

@@ -22,6 +22,7 @@ import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.createComposeRule
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_accessibility_actions.CustomAccessibilityActionsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_accessibility_actions.customAccessibilityActionsExample1CardTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_accessibility_actions.customAccessibilityActionsExample1LikeButtonTestTag
@@ -63,7 +64,12 @@ class CustomAccessibilityActionsTests {
     @Test
     fun verifyNonHeadingsAreNotHeadings() {
         composeTestRule
-            .onAllNodes(!hasTestTag(customAccessibilityActionsHeadingTestTag))
+            .onAllNodes(
+                !hasTestTag(customAccessibilityActionsHeadingTestTag)
+                and
+                !hasTestTag(genericScaffoldTitleTestTag)
+
+            )
             .assertAll(!isHeading())
     }
 

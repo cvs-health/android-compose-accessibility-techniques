@@ -110,41 +110,57 @@ Note: `IconButton` composables can be handled similarly using an `OutlinedIconBu
 
 ## Apply a custom `Indication` using `Modifier.indication()` or `Modifier.clickable()`
 
-Jetpack Compose also allows precise, low-level drawing to be performed when state changes using custom `Indicator` and `IndicationInstance` subclasses. This technique involves the following steps:
+Jetpack Compose also allows precise, low-level drawing to be performed when state changes using custom `IndicationNodeFactory` subclass and a `Modifier.Node` plus `DrawModifierNode` subclass. This technique involves the following steps:
 
-- Create an `IndicationInstance` subclass that accepts a `State<Boolean>` constructor parameter. This parameter will pass in a `State` holder containing the current focus state. 
+- Create a subclass of both `Modifier.Node` and `DrawModifierNode` that accepts an `InteractionSource` constructor parameter. This parameter provides a source of focus state events.
+  - Create a `Boolean` var to hold the current focus state value.
+  - Override the `Modifier.Node.onAttach()` method and collect the focus events from the `InteractionSource` to set the current focus state value.
   - Override the `ContentDrawScope.drawIndication()` method. 
       - Be certain to call `drawContent()` in this method. 
       - Use `compose.ui.graphics.drawscope` methods to apply an appropriate focus indicator based on the current focus state value. 
-- Create an `Indication` subclass.
-  - Override the `rememberUpdatedInstance()` method. 
-      - Use the method's `interactionSource` parameter to create a focus state holder using `interactionSource.collectIsFocusedAsState()`. 
-      - Return a remembered instance of the `IndicationInstance` subclass created using the focus state holder.
-- Apply this custom `Indication` subclass to a composable using the `Modifier.indication()` method or by passing it as a parameter to `Modifier.clickable()`.
+- Create an `IndicationNodeFactory` subclass.
+  - Override the `create()` method. 
+      - Pass the method's `interactionSource` parameter to the custom `Modifier.Node` plus `DrawModifierNode` subclass constructor.
+- Apply this custom `IndicationNodeFactory` subclass to a composable using the `Modifier.indication()` method or by passing it as a parameter to `Modifier.clickable()`.
 
 See also [React to focus - Implement advanced visual cues](https://developer.android.com/jetpack/compose/touch-input/focus/react-to-focus#advanced-visual-cues) and [Handling user interactions](https://developer.android.com/jetpack/compose/touch-input/handling-interactions).
 
 For example:
 
 ```kotlin
-class CustomFocusIndication : Indication {
-    @Composable
-    override fun rememberUpdatedInstance(interactionSource: InteractionSource): IndicationInstance {
-        // Collect the current focus state in a State holder.
-        val isFocusedState = interactionSource.collectIsFocusedAsState()
-        return remember(interactionSource) {
-            // Return the IndicationInstance that will perform the focus-state-based drawing.
-            CustomFocusIndicationInstance(isFocusedState)
-        }
+class CustomFocusIndication : IndicationNodeFactory {
+    override fun create(interactionSource: InteractionSource): DelegatableNode {
+        // Return the DrawModifierNode that will perform the focus-state-based drawing.
+        return CustomFocusIndicationNode(interactionSource)
     }
+    override fun hashCode(): Int = -1
+    override fun equals(other: Any?) = other === this
 }
 
-private class CustomFocusIndicationInstance(
-    val isFocusedState: State<Boolean>
-) : IndicationInstance {
-    override fun ContentDrawScope.drawIndication() {
-        drawContent()
-        if (isFocused.value) {
+private class CustomFocusIndicationNode(
+    private val interactionSource: InteractionSource
+) : Modifier.Node(), DrawModifierNode {
+    private var isFocused = false
+
+    override fun onAttach() {
+        super.onAttach()
+        coroutineScope.launch {
+            // Technique: collect the focus start and end Interactions on this composable's
+            // InteractionSource as a Boolean holding the current focus state value.
+            val focusInteractions = mutableListOf<FocusInteraction.Focus>()
+            interactionSource.interactions.collect { interaction ->
+                when (interaction) {
+                    is FocusInteraction.Focus -> focusInteractions.add(interaction)
+                    is FocusInteraction.Unfocus -> focusInteractions.remove(interaction.focus)
+                }
+                isFocused = focusInteractions.isNotEmpty()
+            }
+        }
+    }
+
+    override fun ContentDrawScope.draw() {
+        this@draw.drawContent()
+        if (isFocused) {
             drawRoundRect(
                 color = Color.Red,
                 size = size,

@@ -20,10 +20,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
@@ -55,6 +52,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
@@ -80,6 +78,7 @@ const val modalBottomSheetLayoutsExample1Button1TestTag = "modalBottomSheetLayou
 const val modalBottomSheetLayoutsExample1Button2TestTag = "modalBottomSheetLayoutsExample1Button2"
 const val modalBottomSheetLayoutsExample1SelectedItemTestTag = "modalBottomSheetLayoutsExample1SelectedItem"
 const val modalBottomSheetLayoutsExampleSheetTestTag = "modalBottomSheetLayoutsExampleSheet"
+const val modalBottomSheetLayoutsExampleSheetTitleTestTag = "modalBottomSheetLayoutsExampleSheetTitle"
 
 /**
  * Demonstrate accessibility techniques for [ModalBottomSheet] layouts.
@@ -224,16 +223,6 @@ fun ModalBottomSheetLayoutsScreen(
                                 false
                             }
                         }
-                        // Key technique: If only a half-expanded sheet is shown, limit the size of
-                        // the sheet; otherwise, it is possible to tab to and select content that is
-                        // off-screen with the keyboard.
-                        .run {
-                            if (!skipPartiallyExpanded) {
-                                fillMaxHeight(fraction = 0.5f)
-                            } else {
-                                this
-                            }
-                        }
                         .semantics {
                             paneTitle = bottomSheetTitle
                         },
@@ -247,49 +236,48 @@ fun ModalBottomSheetLayoutsScreen(
                             }
                         )
                     },
-                    // Key technique: Set the windowInsets so bottom sheet padding can be measured.
-                    windowInsets = WindowInsets.safeDrawing
+                    // Key technique: Set the contentWindowInsets to restrict the bottom sheet to a
+                    // safe area.
+                    contentWindowInsets = { WindowInsets.safeDrawing }
                 ) {
-                    // Key technique: Pad the bottom of the bottom sheet contents to avoid the
-                    // them sliding under the bottom system navigation bar and the last item
-                    // becoming unfocusable with assistive technologies. (The bottom sheet drag
-                    // handle provides sufficient top padding to protect the sheet contents.)
-                    val bottomPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-                    LazyColumn(
-                        modifier = Modifier
-                            .padding(bottom = bottomPadding)
-                            .focusRequester(focusRequester)
+                    Column(
+                        modifier = Modifier.focusRequester(focusRequester)
                     ) {
                         // Key technique: Provide a visual bottom sheet title.
-                        item {
-                            Text(
-                                text = bottomSheetTitle,
-                                modifier = Modifier.padding(horizontal = 8.dp),
-                                style = typography.headlineSmall
-                            )
-                            HorizontalDivider()
-                        }
+                        Text(
+                            text = bottomSheetTitle,
+                            modifier = Modifier
+                                .testTag(modalBottomSheetLayoutsExampleSheetTitleTestTag)
+                                .padding(horizontal = 8.dp)
+                                .semantics { heading() },
+                            style = typography.headlineSmall
+                        )
+                        HorizontalDivider()
 
-                        items(itemNames) { itemName ->
-                            ListItem(
-                                headlineContent = {
-                                    Text(itemName)
-                                },
-                                modifier = Modifier
-                                    .visibleFocusBorder()
-                                    .clickable(role = Role.Button) {
-                                        scope.launch { sheetState.hide() }.invokeOnCompletion {
-                                            if (!sheetState.isVisible) {
-                                                openBottomSheet = false
-                                                // Key technique for liveRegions: update state that
-                                                // affects a liveRegion only after the bottom sheet has
-                                                // been dismissed.
-                                                setSelectedSheetItem(itemName)
+                        // Key technique: The content following the title needs to be scrollable.
+                        LazyColumn(
+                        ) {
+                            items(itemNames) { itemName ->
+                                ListItem(
+                                    headlineContent = {
+                                        Text(itemName)
+                                    },
+                                    modifier = Modifier
+                                        .visibleFocusBorder()
+                                        .clickable(role = Role.Button) {
+                                            scope.launch { sheetState.hide() }.invokeOnCompletion {
+                                                if (!sheetState.isVisible) {
+                                                    openBottomSheet = false
+                                                    // Key technique for liveRegions: update state that
+                                                    // affects a liveRegion only after the bottom sheet
+                                                    // has been dismissed.
+                                                    setSelectedSheetItem(itemName)
+                                                }
                                             }
                                         }
-                                    }
-                            )
-                            HorizontalDivider()
+                                )
+                                HorizontalDivider()
+                            }
                         }
                     }
                 }

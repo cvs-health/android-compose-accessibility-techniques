@@ -1,5 +1,5 @@
 # Heading Semantics
-Top-level heading text must be marked as an accessibility heading. This supports the WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships), which requires information conveyed through presentation (such as larger-sized heading text) to be programmatically available to accessibility services.
+The heading text marking primary content sections of a screen must be marked as an accessibility heading. This supports the WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships), which requires information conveyed through presentation (such as larger-sized heading text) to be programmatically available to accessibility services. This principal extends to the titles of top app bars, dialogs, and bottom sheets.
 
 Mark a composable as an accessibility heading by applying `Modifier.semantics { heading() }`. 
 
@@ -16,9 +16,9 @@ Text("This is a heading",
 
 Notes:
 
-* One complication of heading semantics on Android is that list items in the standard lazy list composables (such as `LazyColumn`) can not fully acts as accessibility headings. List items marked with `heading()` should announce as headings, but heading navigation may or may not work in a lazy list. Logically, this makes a certain sense since not all of the list items are initially known.
+* Another complication of heading semantics on Android is that list items in the standard lazy list composables (such as `LazyColumn`) can not fully acts as accessibility headings. List items marked with `heading()` should announce as headings, but heading navigation may or may not work in a lazy list. Logically, this makes a certain sense since not all of the list items are initially known.
 * Never use `contentDescription` semantics property to append an accessibility property like "Heading" to a composable. It may sound almost correct in TalkBack, but doesn't work correctly.
-* Native Android apps do not have multiple heading levels. Only mark top-level headings as a heading.
+* Native Android apps do not have multiple heading levels. Therefore, only mark the labels of primary sections as semantic headings; otherwise, the extra headings can make heading navigation in TalkBack long and confusing.
 * The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.
 
 

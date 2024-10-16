@@ -52,6 +52,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
@@ -496,6 +497,7 @@ private fun Example6AlertDialog(
         title = {
             Text(
                 text = stringResource(id = R.string.popup_messages_example_6_alert_title),
+                modifier = Modifier.semantics { heading() },
             )
         },
         text = {
@@ -532,6 +534,7 @@ private fun Example6ShowMoreDialog(
         title = {
             Text(
                 text = stringResource(id = R.string.popup_messages_example_6_action_popup_title),
+                modifier = Modifier.semantics { heading() },
             )
         },
         text = {

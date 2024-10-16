@@ -23,20 +23,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.UrlAnnotation
+import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,7 +45,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ProblematicExampleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 
@@ -83,8 +84,8 @@ fun InlineLinksScreen(
             BodyText(textId = R.string.inline_links_description_1)
             BodyText(textId = R.string.inline_links_description_2)
 
-            ProblematicExample1()
-            ProblematicExample2()
+            GoodExample1()
+            GoodExample2()
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -101,68 +102,71 @@ private fun PreviewWithScaffold() {
 
 @Composable
 @OptIn(ExperimentalTextApi::class)
-private fun ProblematicExample1() {
+private fun GoodExample1() {
     // Problematic example 1: Using AnnotatedString and ClickableText
     val linkMap = mapOf(
         stringResource(id = R.string.inline_links_example_1_link_text_1) to
-                "https://developer.android.com/jetpack/compose/text/user-interactions#click-with-annotation",
+                "https://developer.android.com/develop/ui/compose/text/user-interactions#create-clickable-text",
         stringResource(id = R.string.inline_links_example_1_link_text_2) to
                 "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString",
         stringResource(id = R.string.inline_links_example_1_link_text_3) to
-                "https://developer.android.com/reference/kotlin/androidx/compose/foundation/text/package-summary#ClickableText(androidx.compose.ui.text.AnnotatedString,androidx.compose.ui.Modifier,androidx.compose.ui.text.TextStyle,kotlin.Boolean,androidx.compose.ui.text.style.TextOverflow,kotlin.Int,kotlin.Function1,kotlin.Function1)",
+                "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.Url",
     )
-    ProblematicExampleHeading(
+    GoodExampleHeading(
         text = stringResource(id = R.string.inline_links_example_1),
         modifier = Modifier.testTag(inlineLinksExample1HeadingTestTag)
     )
 
-    // Key technique 1: Use buildAnnotatedString and addUrlAnnotation to mark the parts of the
-    // display text that are links. Uses a map of link text strings to URL values, so
-    // link texts must be unique. Note that addUrlAnnotation does not style the link text as
-    // a link, so use addStyle to do so.
+    // Key technique: Use buildAnnotatedString, addLink, and LinkAnnotation.Url to mark the parts
+    // of the display text that are links. Uses a map of link text strings to URL values, so link
+    // texts must be unique. Note that LinkAnnotation.Url(...) allows styling the link text.
     val annotatedText = buildAnnotatedString {
         val baseText = stringResource(id = R.string.inline_links_example_1_text)
         append(baseText)
         for ((linkText, url) in linkMap) {
             val start = baseText.indexOf(linkText)
             val end = start + linkText.length
-            addStyle(
-                style = SpanStyle(
-                    color = MaterialTheme.colorScheme.primary,
-                    textDecoration = TextDecoration.Underline
+            addLink(
+                LinkAnnotation.Url(
+                    url = url,
+                    styles = TextLinkStyles(
+                        style = SpanStyle(
+                            color  = MaterialTheme.colorScheme.primary,
+                            textDecoration = TextDecoration.Underline
+                        ),
+                        focusedStyle = SpanStyle(
+                            color  = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                            textDecoration = TextDecoration.Underline
+                        ),
+                        hoveredStyle = SpanStyle(
+                            color  = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                            textDecoration = TextDecoration.Underline
+                        ),
+                        pressedStyle = SpanStyle(
+                            color  = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                            textDecoration = TextDecoration.Underline
+                        )
+                    ),
+                    // A LinkInteractionListener can also be specified for link click handling.
                 ),
-                start = start,
-                end = end
-            )
-            addUrlAnnotation(
-                urlAnnotation = UrlAnnotation(url),
-                start = start,
-                end = end
+                start,
+                end
             )
         }
     }
 
-    // Key technique 2: Use ClickableText to display the AnnotatedString and intercept
-    // interactions with the link texts.
-    //
-    // Note: ClickableText does not make links keyboard focusable or actionable.
-    // See https://issuetracker.google.com/issues/311488543.
-    val uriHandler = LocalUriHandler.current
-    ClickableText(
+    // Technique: Use Text to display the AnnotatedString.
+    Text(
         text = annotatedText,
         modifier = Modifier
             .testTag(inlineLinksExample1TextWithLinksTestTag)
             .fillMaxWidth()
             .padding(top = 8.dp),
         style = MaterialTheme.typography.bodyMedium.copy(color = LocalContentColor.current)
-    ) { position ->
-        // Key technique 3: Use AnnotatedString.getUrlAnnotations() to map from a string
-        // tap position to any intersecting UrlAnnotation. Then retrieve the URL string from
-        // the annotation's item.url property and open that URL.
-        annotatedText.getUrlAnnotations(position, position).firstOrNull()?.let { annotation ->
-            uriHandler.openUri(annotation.item.url)
-        }
-    }
+    )
 
     BodyText(textId = R.string.inline_links_example_1_note)
 }
@@ -176,15 +180,15 @@ private fun ProblematicExample1Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            ProblematicExample1()
+            GoodExample1()
         }
     }
 }
 
 @Composable
-private fun ProblematicExample2() {
+private fun GoodExample2() {
     // Problematic example 2: Using AndroidView and TextView
-    ProblematicExampleHeading(
+    GoodExampleHeading(
         text = stringResource(id = R.string.inline_links_example_2),
         modifier = Modifier.testTag(inlineLinksExample2HeadingTestTag)
     )
@@ -202,8 +206,6 @@ private fun ProblematicExample2() {
             }
         }
     )
-
-    BodyText(textId = R.string.inline_links_example_2_note)
 }
 
 @Preview(showBackground = true)
@@ -215,7 +217,7 @@ private fun ProblematicExample2Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            ProblematicExample2()
+            GoodExample2()
         }
     }
 }

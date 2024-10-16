@@ -37,6 +37,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.modalb
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.modalbottomsheet_layouts.modalBottomSheetLayoutsExample1HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.modalbottomsheet_layouts.modalBottomSheetLayoutsExample1SelectedItemTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.modalbottomsheet_layouts.modalBottomSheetLayoutsExampleSheetTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.modalbottomsheet_layouts.modalBottomSheetLayoutsExampleSheetTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.modalbottomsheet_layouts.modalBottomSheetLayoutsHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
@@ -76,28 +77,28 @@ class ModalBottomSheetLayoutsTests {
         composeTestRule
             .onNode(
                 hasTestTag(modalBottomSheetLayoutsExample1Button1TestTag)
-                        and
-                        !isHeading()
-                        and
-                        !hasAnyDescendant(isHeading())
+                 and
+                 !isHeading()
+                 and
+                 !hasAnyDescendant(isHeading())
             )
             .assertExists()
         composeTestRule
             .onNode(
                 hasTestTag(modalBottomSheetLayoutsExample1Button2TestTag)
-                        and
-                        !isHeading()
-                        and
-                        !hasAnyDescendant(isHeading())
+                and
+                !isHeading()
+                and
+                !hasAnyDescendant(isHeading())
             )
             .assertExists()
         composeTestRule
             .onNode(
                 hasTestTag(modalBottomSheetLayoutsExample1SelectedItemTestTag)
-                        and
-                        !isHeading()
-                        and
-                        !hasAnyDescendant(isHeading())
+                and
+                !isHeading()
+                and
+                !hasAnyDescendant(isHeading())
             )
             .assertExists()
         // Can't check modalBottomSheetLayoutsExampleSheetTestTag for a lack of headings here,
@@ -115,12 +116,12 @@ class ModalBottomSheetLayoutsTests {
         composeTestRule
             .onNode(
                 hasTestTag(modalBottomSheetLayoutsExample1Button1TestTag)
-                        and
-                        hasRole(Role.Button)
-                        and
-                        hasClickAction()
-                        and
-                        !hasAnyAncestor(SemanticsMatcher.keyIsDefined(SemanticsProperties.IsPopup))
+                and
+                hasRole(Role.Button)
+                and
+                hasClickAction()
+                and
+                !hasAnyAncestor(SemanticsMatcher.keyIsDefined(SemanticsProperties.IsDialog))
             )
             .assertExists()
 
@@ -141,17 +142,21 @@ class ModalBottomSheetLayoutsTests {
         composeTestRule
             .onNodeWithTag(modalBottomSheetLayoutsExampleSheetTestTag)
             .assert(
-                hasAnyAncestor(SemanticsMatcher.keyIsDefined(SemanticsProperties.IsPopup))
+                hasAnyAncestor(SemanticsMatcher.keyIsDefined(SemanticsProperties.IsDialog))
             )
 
-        // Verify bottom sheet contains no heading(s).
+        // Verify bottom sheet contains no heading(s) other than its title.
         composeTestRule
             .onNode(
                 hasTestTag(modalBottomSheetLayoutsExampleSheetTestTag)
-                        and
-                        !isHeading()
-                        and
-                        !hasAnyDescendant(isHeading())
+                and
+                !isHeading()
+                and
+                !hasAnyDescendant(
+                    !hasTestTag(modalBottomSheetLayoutsExampleSheetTitleTestTag)
+                    and
+                    isHeading()
+                )
             )
             .assertExists()
 
@@ -181,8 +186,8 @@ class ModalBottomSheetLayoutsTests {
         composeTestRule
             .onNode(
                 hasTestTag(modalBottomSheetLayoutsExample1SelectedItemTestTag)
-                        and
-                        hasText(text = "Banana", substring = true)
+                and
+                hasText(text = "Banana", substring = true)
             )
             .performScrollTo()
             .assertIsDisplayed()
@@ -194,12 +199,12 @@ class ModalBottomSheetLayoutsTests {
         composeTestRule
             .onNode(
                 hasTestTag(modalBottomSheetLayoutsExample1Button2TestTag)
-                        and
-                        hasRole(Role.Button)
-                        and
-                        hasClickAction()
-                        and
-                        !hasAnyAncestor(SemanticsMatcher.keyIsDefined(SemanticsProperties.IsPopup))
+                and
+                hasRole(Role.Button)
+                and
+                hasClickAction()
+                and
+                !hasAnyAncestor(SemanticsMatcher.keyIsDefined(SemanticsProperties.IsDialog))
             )
             .assertExists()
 
@@ -220,17 +225,21 @@ class ModalBottomSheetLayoutsTests {
         composeTestRule
             .onNodeWithTag(modalBottomSheetLayoutsExampleSheetTestTag)
             .assert(
-                hasAnyAncestor(SemanticsMatcher.keyIsDefined(SemanticsProperties.IsPopup))
+                hasAnyAncestor(SemanticsMatcher.keyIsDefined(SemanticsProperties.IsDialog))
             )
 
-        // Verify bottom sheet contains no heading(s).
+        // Verify bottom sheet contains no heading(s) except its title.
         composeTestRule
             .onNode(
                 hasTestTag(modalBottomSheetLayoutsExampleSheetTestTag)
-                        and
-                        !isHeading()
-                        and
-                        !hasAnyDescendant(isHeading())
+                and
+                !isHeading()
+                and
+                !hasAnyDescendant(
+                    !hasTestTag(modalBottomSheetLayoutsExampleSheetTitleTestTag)
+                    and
+                    isHeading()
+                )
             )
             .assertExists()
 
@@ -260,8 +269,8 @@ class ModalBottomSheetLayoutsTests {
         composeTestRule
             .onNode(
                 hasTestTag(modalBottomSheetLayoutsExample1SelectedItemTestTag)
-                        and
-                        hasText(text = "Cherry", substring = true)
+                and
+                hasText(text = "Cherry", substring = true)
             )
             .performScrollTo()
             .assertIsDisplayed()

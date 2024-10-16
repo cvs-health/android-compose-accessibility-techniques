@@ -110,7 +110,10 @@ if (isAlertDialogOpen) {
             }
         },
         title = {
-            Text("AlertDialog title")
+            Text(
+              "AlertDialog title",
+              modifier = Modifier.semantics { heading() }
+            )
         },
         text = {
             Text("This is an AlertDialog pop-up message.")
@@ -145,7 +148,9 @@ if (isBasicAlertDialogOpen) {
             Column(modifier = Modifier.padding(24.dp)) { // dialog surrounding padding
                 Text(
                     text = "BasicAlertDialog title",
-                    modifier = Modifier.padding(bottom = 16.dp), // space between title and content
+                    modifier = Modifier
+                        .padding(bottom = 16.dp) // space between title and content
+                        .semantics { heading() },
                     style = MaterialTheme.typography.headlineSmall // dialog title text style
                 )
               

@@ -7,15 +7,24 @@ To the extent reasonable, screen titles should also be unique. However, this mus
 
 One way to visually display a screen title is using a `TopAppBar` `title`. Note that `TopAppBar` titles have fixed vertical space, so title text display is often limited to a single line. TalkBack will still announce the full title text.
 
+It is also suggested to make screen and pane titles into semantic headings using `Modifier.semantics { heading() }`. 
+
 For example:
 
 ```kotlin
+import java.lang.reflect.Modifier
+
 Scaffold(
     // ...
     topBar = {
         TopAppBar(
             title = {
-                Text("Screen Title Example", overflow = TextOverflow.Ellipsis, maxLines = 1)
+                Text(
+                    text = "Screen Title Example",
+                    modifier = Modifier.semantics { heading() },
+                    overflow = TextOverflow . Ellipsis,
+                    maxLines = 1
+                )
             },
             navigationIcon = {
                 IconButton(onClick = { /* Handle Back navigation */ }) {

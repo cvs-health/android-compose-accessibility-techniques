@@ -1,5 +1,5 @@
 # Exposed Dropdown Selection Menus
-Exposed dropdown selection menus allow selecting a single value from a list of values. Although the Material Design [Exposed Dropdown Menu pattern](https://m2.material.io/components/menus#exposed-dropdown-menu) works well with assistive technologies -- creating dropdown menu controls that announce their name, role, and value in accordance with the WCAG [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value) and correctly express their relationships according to WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships) -- as of Compose BOM 2024.04.00, such controls are still not keyboard operable, as required by WCAG [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG22/#keyboard). 
+Exposed dropdown selection menus allow selecting a single value from a list of values. The Material Design [Exposed Dropdown Menu pattern](https://m2.material.io/components/menus#exposed-dropdown-menu) works well with assistive technologies -- creating dropdown menu controls that announce their name, role, and value in accordance with the WCAG [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value) and correctly express their relationships according to WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships). However, as of Compose BOM 2024.09.03, the Compose version of this pattern is still not keyboard operable, as required by WCAG [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG22/#keyboard). 
 
 Custom approaches are likely to be less accessible; make sure any dropdown selection menu is operable by all assistive technologies, including the keyboard, and announces the role "Drop down list."
 
@@ -13,9 +13,9 @@ For examples of how to implement the Exposed Dropdown menu pattern using the Mat
 
 Notes:
 
-* Material 3 requires applying `Modifier.menuAnchor()` to the `TextField` in order to link it with the menu.
-* For non-editable dropdown menus, set `readOnly = true` and `onValueChange = {}` on the `TextField` to prevent it from accepting user keyboard text (only data from the dropdown selection list is allowed).
-* Editable dropdown menus pose challenges for screen reader users and are a keyboard trap, so they should be avoided in Compose if at all possible.
+* Material 3 requires applying `Modifier.menuAnchor(...)` to the `TextField` (and sometimes its `trailingIcon`) in order to link the `TextView` with the menu with the proper semantics.
+* For non-editable Compose dropdown menus, set `readOnly = true` and `onValueChange = {}` on the `TextField` to prevent it from accepting user keyboard text (only data from the dropdown selection list is allowed). Also, apply `Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable)`.
+* Editable Compose dropdown menus pose challenges for screen reader users and are a keyboard trap, so they should be avoided in Compose if at all possible.
 
 For example:
 
@@ -26,7 +26,8 @@ var selectedValue by remember { mutableStateOf(options[0]) }
 
 // Key techniques for non-editable exposed dropdown menus:
 // 1. Wrap the entire dropdown menu ensemble in an ExposedDropdownMenuBox.
-// 2. Use Modifier.menuAnchor() to link the TextField to the ExposedDropdownMenuBox.
+// 2. Use Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable) to link the TextField to the 
+//    ExposedDropdownMenuBox with correct semantics.
 // 3. Use readOnly = true and onValueChange = {} to prevent editing.
 // 4. Label the TextField.
 // 5. Set trailingIcon to visually indicate the collapsed/expanded state.
@@ -38,7 +39,7 @@ ExposedDropdownMenuBox(
 ) {
     TextField(
         modifier = Modifier
-            .menuAnchor()
+            .menuAnchor(MenuAnchorType.PrimaryNotEditable)
             .fillMaxWidth(),
         readOnly = true,
         value = selectedValue,
@@ -69,9 +70,7 @@ ExposedDropdownMenuBox(
 
 ## Wrapping the View Exposed Dropdown Menu pattern for Compose
 
-One promising approach to accessible dropdown menus is to fall back on using View components, wrapped in an `AndroidView`. 
-
-Unfortunately, this approach fails at present, because of Compose-View interop issues which prevent the dropdown menu within the AndroidView from receiving focus and keyboard events, even if the AndroidView is made focusable explicitly: see https://issuetracker.google.com/issues/255628260 for one example. 
+One accessible approach to exposed dropdown menus is to fall back on using View components, wrapped in an `AndroidView`. 
 
 For example, given a file named `layout/view_dropdown_menu.xml` with the following View Exposed Dropdown Menu pattern controls:
 
@@ -104,7 +103,7 @@ AndroidViewBinding(
     factory = ViewDropdownMenuBinding::inflate,
     modifier = Modifier
         .fillMaxSize()
-        .focusable() // May or may not be needed once the focus issue is fixed; does not help now.
+        .focusable() // allows user to scroll the screen to this control using Tab key
 ) {
     val context = this.root.context
     val autoCompleteAdapter = ArrayAdapter(

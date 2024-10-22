@@ -187,7 +187,8 @@ class TabRowsTests {
             .assertExists()
 
         // press 2nd tab
-        tabs[1].performScrollTo().performClick()
+        tabs[1].performScrollTo()
+        tabs[1].performClick()
 
         // verify 2nd tab selected and 1st tab is not selected
         tabs[1].assert(isSelected())
@@ -202,7 +203,8 @@ class TabRowsTests {
         tabs[4].assert(isNotSelected())
 
         // press 5th tab
-        tabs[4].performScrollTo().performClick()
+        tabs[4].performScrollTo()
+        tabs[4].performClick()
 
         // verify 5th tab selected and 2nd tab is not selected
         tabs[4].assert(isSelected())
@@ -214,7 +216,8 @@ class TabRowsTests {
             .assertExists()
 
         // press 1st tab
-        tabs[0].performScrollTo().performClick()
+        tabs[0].performScrollTo()
+        tabs[0].performClick()
 
         // verify 1st tab selected and 5th tab is not selected
         tabs[0].assert(isSelected())
@@ -280,7 +283,8 @@ class TabRowsTests {
         composeTestRule.onNodeWithTag("${tabRowsExample2TabContentTestTagBase}0").performScrollTo()
 
         // press 2nd tab
-        tabs[1].performScrollTo().performClick()
+        tabs[1].performScrollTo()
+        tabs[1].performClick()
 
         // verify 2nd tab selected and 1st tab is not selected
         tabs[1].assert(isSelected())
@@ -295,7 +299,8 @@ class TabRowsTests {
         tabs[4].assert(isNotSelected())
 
         // press 5th tab
-        tabs[4].performScrollTo().performClick()
+        tabs[4].performScrollTo()
+        tabs[4].performClick()
 
         // verify 5th tab selected and 2nd tab is not selected
         tabs[4].assert(isSelected())
@@ -307,7 +312,8 @@ class TabRowsTests {
             .assertExists()
 
         // press 1st tab
-        tabs[0].performScrollTo().performClick()
+        tabs[0].performScrollTo()
+        tabs[0].performClick()
 
         // verify 1st tab selected and 5th tab is not selected
         tabs[0].assert(isSelected())
@@ -338,7 +344,8 @@ class TabRowsTests {
         composeTestRule.onNodeWithTag("${tabRowsExample3TabContentTestTagBase}0").performScrollTo()
 
         // verify that not all tabs are displayed
-        tabs[0].performScrollTo().assertIsDisplayed()
+        tabs[0].performScrollTo()
+        tabs[0].assertIsDisplayed()
         // Note: This test will fail if run in Landscape mode or on a tablet with enough room to
         // display the entire ScrollableTabRow.
         tabs[4].assertIsNotDisplayed()
@@ -375,7 +382,8 @@ class TabRowsTests {
         composeTestRule.onNodeWithTag("${tabRowsExample3TabContentTestTagBase}0").performScrollTo()
 
         // press 2nd tab
-        tabs[1].performScrollTo().performClick()
+        tabs[1].performScrollTo()
+        tabs[1].performClick()
 
         // verify 2nd tab selected and 1st tab is not selected
         tabs[1].assert(isSelected())
@@ -390,7 +398,8 @@ class TabRowsTests {
         tabs[4].assert(isNotSelected())
 
         // press 5th tab
-        tabs[4].performScrollTo().performClick()
+        tabs[4].performScrollTo()
+        tabs[4].performClick()
 
         // verify 5th tab selected and 2nd tab is not selected
         tabs[4].assert(isSelected())
@@ -402,7 +411,8 @@ class TabRowsTests {
             .assertExists()
 
         // press 1st tab
-        tabs[0].performScrollTo().performClick()
+        tabs[0].performScrollTo()
+        tabs[0].performClick()
 
         // verify 1st tab selected and 5th tab is not selected
         tabs[0].assert(isSelected())
@@ -472,7 +482,8 @@ class TabRowsTests {
             .assertExists()
 
         // press 2nd tab
-        tabs[1].performScrollTo().performClick()
+        tabs[1].performScrollTo()
+        tabs[1].performClick()
 
         // verify 2nd tab selected and 1st tab is not selected
         tabs[1].assert(isSelected())
@@ -487,7 +498,8 @@ class TabRowsTests {
         tabs[4].assert(isNotSelected())
 
         // press 5th tab
-        tabs[4].performScrollTo().performClick()
+        tabs[4].performScrollTo()
+        tabs[4].performClick()
 
         // verify 5th tab selected and 2nd tab is not selected
         tabs[4].assert(isSelected())
@@ -499,7 +511,8 @@ class TabRowsTests {
             .assertExists()
 
         // press 1st tab
-        tabs[0].performScrollTo().performClick()
+        tabs[0].performScrollTo()
+        tabs[0].performClick()
 
         // verify 1st tab selected and 5th tab is not selected
         tabs[0].assert(isSelected())

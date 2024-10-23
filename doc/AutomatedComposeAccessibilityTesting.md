@@ -160,7 +160,26 @@ By default, Compose jUnit UI tests automatically advance time to the next frame 
 
 To do that, use `composeTestRule.mainClock.advanceTimeBy()`. 
 
-An example of this technique is used in [PopupMessageTests.kt](../app/src/androidTest/java/com/cvshealth/composeaccessibilitytechniques/PopupMessagesTests.kt) to verify that defined-duration `Snackbar`s disappear after their established time.
+For example:
+
+```kotlin
+// Launch a limited-duration Snackbar 
+composeTestRule
+    .onNodeWithTag(snackbarButtonTestTag)
+    .performScrollTo()
+    .performClick()
+
+// Verify that the Snackbar is displayed
+composeTestRule.onNodeWithText(snackbarText).assertIsDisplayed()
+
+// Move time forward
+composeTestRule.mainClock.advanceTimeBy(20000L)
+
+// Verify that Snackbar has dismissed itself.
+composeTestRule.onNodeWithText(snackbarText).assertDoesNotExist()
+```
+
+(See [PopupMessageTests.kt](../app/src/androidTest/java/com/cvshealth/composeaccessibilitytechniques/PopupMessagesTests.kt) for more information about testing `Snackbar` semantics.)
 
 ## Summary
 Other tests for accessibility semantics are possible and are strongly suggested. The key technique is to test for semantic properties, as well as testing for functionality.

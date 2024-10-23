@@ -16,6 +16,7 @@
 package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasTestTag
@@ -27,6 +28,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.ux_change_announcements.UxChangeAnnouncementsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.ux_change_announcements.uxChangeAnnouncementsExample1HeadingTestTag
@@ -73,7 +75,15 @@ class UxChangeAnnouncementsTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(6)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(uxChangeAnnouncementsHeadingTestTag) and isHeading())
             .assertExists()

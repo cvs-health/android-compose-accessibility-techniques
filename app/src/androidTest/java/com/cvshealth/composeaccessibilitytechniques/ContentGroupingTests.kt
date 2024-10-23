@@ -15,6 +15,7 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasContentDescriptionExactly
@@ -28,6 +29,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.MainActivity
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_grouping.contentGroupingCardExample4CardTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_grouping.contentGroupingCardExample5CardTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_grouping.contentGroupingCardExample6CardTestTag
@@ -80,7 +82,15 @@ class ContentGroupingTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(4)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(contentGroupingHeadingTestTag) and isHeading())
             .assertExists()

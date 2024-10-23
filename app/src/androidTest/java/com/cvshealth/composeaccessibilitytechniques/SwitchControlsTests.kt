@@ -16,6 +16,7 @@
 package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.assertIsToggleable
@@ -27,6 +28,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.SwitchControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.switchControlsExample1SwitchTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.switchControlsExample1HeadingTestTag
@@ -58,7 +60,15 @@ class SwitchControlsTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(4)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(switchControlsHeadingTestTag) and isHeading())
             .assertExists()

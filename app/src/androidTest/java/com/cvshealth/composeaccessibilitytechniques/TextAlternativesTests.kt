@@ -15,6 +15,7 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasAnyChild
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasContentDescriptionExactly
@@ -27,6 +28,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.MainActivity
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample10HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample10Icon1TestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_alternatives.textAlternativesExample10Icon2TestTag
@@ -96,7 +98,15 @@ class TextAlternativesTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(16)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(textAlternativesHeadingTestTag) and isHeading())
             .assertExists()

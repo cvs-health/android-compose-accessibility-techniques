@@ -36,6 +36,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToIndex
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.tab_rows.TabRowsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.tab_rows.tabRowsEndSpacerTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.tab_rows.tabRowsExample1HeadingTestTag
@@ -76,7 +77,15 @@ class TabRowsTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(6)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(tabRowsHeadingTestTag) and isHeading())
             .assertExists()

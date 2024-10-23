@@ -15,6 +15,7 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -23,6 +24,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.MainActivity
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.screen_and_pane_titles.screenAndPaneTitlesHeadingTestTag
 import org.junit.Before
 import org.junit.Rule
@@ -51,7 +53,15 @@ class ScreenAndPaneTitlesTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(2)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(screenAndPaneTitlesHeadingTestTag) and isHeading())
             .assertExists()

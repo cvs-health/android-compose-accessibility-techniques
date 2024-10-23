@@ -112,6 +112,19 @@ fun verifyThatCheckboxRowToggles() {
 }
 ```
 
+## Verifying counts
+
+To verify that a specific number of nodes exist with a given set of semantic attributes, apply the `composeTestRule.onAllNodes()` method and `.assertCountEquals()`.
+
+For example, in the semantic headings test code above, verifying that there is only one semantic heading would be done as follows:
+
+```kotlin
+@Test
+fun verifySemanticHeadingCount() {
+    composeTestRule.onAllNodes(isHeading()).assertCountEquals(1)
+}
+```
+
 ## Additional SemanticMatchers
 
 In some cases, no convenient `SemanticMatcher` is supplied by Compose; however, these can be added using helper functions.

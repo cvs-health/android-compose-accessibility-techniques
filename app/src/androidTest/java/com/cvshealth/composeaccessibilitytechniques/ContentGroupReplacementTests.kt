@@ -16,6 +16,7 @@
 package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertRangeInfoEquals
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasContentDescriptionExactly
@@ -28,6 +29,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.MainActivity
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_group_replacement.contentGroupReplacementExample1HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_group_replacement.contentGroupReplacementExample1ProgressBarTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.content_group_replacement.contentGroupReplacementExample1RatingLabelTestTag
@@ -75,7 +77,15 @@ class ContentGroupReplacementTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(6)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(contentGroupReplacementHeadingTestTag) and isHeading())
             .assertExists()

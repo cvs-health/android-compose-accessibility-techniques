@@ -16,6 +16,7 @@
 package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.assertIsToggleable
@@ -33,6 +34,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.checkb
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.checkbox_controls.checkboxControlsExample2CheckboxTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.checkbox_controls.checkboxControlsExample2HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.checkbox_controls.checkboxControlsHeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
 import org.junit.Rule
@@ -58,7 +60,15 @@ class CheckboxControlsTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(4)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(checkboxControlsHeadingTestTag) and isHeading())
             .assertExists()

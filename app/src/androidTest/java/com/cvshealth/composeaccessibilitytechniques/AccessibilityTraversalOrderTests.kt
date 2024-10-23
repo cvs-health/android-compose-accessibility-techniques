@@ -15,6 +15,7 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
@@ -31,6 +32,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.access
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accessibility_traversal_order.accessibilityTraversalOrderExample3RowTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accessibility_traversal_order.accessibilityTraversalOrderExample3SidebarColumnTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accessibility_traversal_order.accessibilityTraversalOrderHeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
 import org.junit.Rule
@@ -55,7 +57,15 @@ class AccessibilityTraversalOrderTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(5)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(accessibilityTraversalOrderHeadingTestTag) and isHeading())
             .assertExists()

@@ -17,6 +17,7 @@ package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasAnyChild
 import androidx.compose.ui.test.hasAnyDescendant
@@ -30,6 +31,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.popup_messages.PopupMessagesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.popup_messages.popupMessagesExample1ButtonTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.popup_messages.popupMessagesExample1HeadingTestTag
@@ -84,7 +86,15 @@ class PopupMessagesTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(9)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(popupMessagesHeadingTestTag) and isHeading())
             .assertExists()

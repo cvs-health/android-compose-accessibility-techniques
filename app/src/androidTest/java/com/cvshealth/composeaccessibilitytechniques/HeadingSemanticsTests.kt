@@ -15,9 +15,11 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.createComposeRule
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.heading_semantics.HeadingSemanticsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.heading_semantics.headingSemanticsContentDescriptionFauxHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.heading_semantics.headingSemanticsExample3HeadingTestTag
@@ -47,7 +49,15 @@ class HeadingSemanticsTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(3)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(headingSemanticsHeadingTestTag) and isHeading())
             .assertExists()

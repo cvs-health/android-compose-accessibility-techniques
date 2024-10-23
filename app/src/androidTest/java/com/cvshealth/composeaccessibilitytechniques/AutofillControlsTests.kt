@@ -15,6 +15,7 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasImeAction
 import androidx.compose.ui.test.hasTestTag
@@ -29,6 +30,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.autofi
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.autofill_controls.autofillControlsExample2TextField1TestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.autofill_controls.autofillControlsExample2TextField2TestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.autofill_controls.autofillControlsHeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
 import org.junit.Rule
@@ -58,7 +60,15 @@ class AutofillControlsTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(4)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(autofillControlsHeadingTestTag) and isHeading())
             .assertExists()

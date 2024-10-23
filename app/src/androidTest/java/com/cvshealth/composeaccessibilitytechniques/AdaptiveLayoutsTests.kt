@@ -17,6 +17,7 @@ package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -26,6 +27,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.adapti
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.adaptive_layouts.adaptiveLayoutsExample1HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.adaptive_layouts.adaptiveLayoutsExample2HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.adaptive_layouts.adaptiveLayoutsHeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
 import org.junit.Rule
@@ -62,7 +64,15 @@ class AdaptiveLayoutsTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(4)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(adaptiveLayoutsHeadingTestTag) and isHeading())
             .assertExists()

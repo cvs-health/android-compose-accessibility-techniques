@@ -17,6 +17,7 @@ package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.input.key.KeyEvent
 import androidx.compose.ui.input.key.NativeKeyEvent
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasImeAction
@@ -29,6 +30,7 @@ import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performKeyPress
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.text.input.ImeAction
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.textfield_controls.TextFieldControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.textfield_controls.textFieldControlsExample1ButtonTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.textfield_controls.textFieldControlsExample1HeadingTestTag
@@ -58,7 +60,15 @@ class TextFieldControlsTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(3)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(textFieldControlsHeadingTestTag) and isHeading())
             .assertExists()

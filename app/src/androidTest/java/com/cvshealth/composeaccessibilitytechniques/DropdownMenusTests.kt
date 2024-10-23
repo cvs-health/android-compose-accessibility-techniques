@@ -29,6 +29,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.DropdownMenusScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample1ButtonTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.dropdown_menus.dropdownMenusExample1DropdownMenuTestTag
@@ -68,7 +69,15 @@ class DropdownMenusTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(4)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(dropdownMenusHeadingTestTag) and isHeading())
             .assertExists()

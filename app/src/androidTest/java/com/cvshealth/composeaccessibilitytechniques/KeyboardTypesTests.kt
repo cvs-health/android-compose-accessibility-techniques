@@ -15,11 +15,13 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasImeAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.text.input.ImeAction
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_types.KeyboardTypesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_types.keyboardTypesExample10HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_types.keyboardTypesExample10TextFieldTestTag
@@ -79,7 +81,15 @@ class KeyboardTypesTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(16)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(keyboardTypesHeadingTestTag) and isHeading())
             .assertExists()

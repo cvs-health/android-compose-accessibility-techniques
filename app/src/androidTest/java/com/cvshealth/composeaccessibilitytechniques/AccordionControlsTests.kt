@@ -17,6 +17,7 @@ package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasAnyAncestor
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasClickAction
@@ -40,6 +41,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accord
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.accordionExample2Item3TestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.accordionExample2TestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.accordion_controls.accordionHeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -69,7 +71,15 @@ class AccordionControlsTests {
     }
 
     @Test
+    fun verifyHeadingsCount() {
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(4)
+    }
+
+    @Test
     fun verifyHeadingsAreHeadings() {
+        composeTestRule
+            .onNode(hasTestTag(genericScaffoldTitleTestTag) and isHeading())
+            .assertExists()
         composeTestRule
             .onNode(hasTestTag(accordionHeadingTestTag) and isHeading())
             .assertExists()

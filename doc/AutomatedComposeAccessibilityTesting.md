@@ -13,9 +13,11 @@ In outline, the process is:
 
 ## Sample semantic tests
 
-Useful semantic accessibility tests include:
+Many semantic accessibility tests are possible. Some useful examples follow.
 
-* Verify that all intended headings are accessibility headings (and that non-heading text are not headings)
+### Testing Semantic Headings
+
+Verify that all intended headings are semantic accessibility headings (and that non-heading text are not headings).
 
 For example, given this Composable, the test code following will verify that it has appropriate heading semantics.
 
@@ -59,6 +61,10 @@ class SampleTests {
         composeTestRule
             .onNode(hasTestTag("screenHeading") and isHeading())
             .assertExists()
+    }
+
+    @Test
+    fun verifyBodyCopyIsNotSemanticHeading() {
         composeTestRule
             .onNode(hasTestTag("bodyCopy") and !isHeading())
             .assertExists()
@@ -66,7 +72,9 @@ class SampleTests {
 }
 ```
 
-* Verify contentDescription on informative and actionable Images (and null contentDescription on decorative images)
+### Testing Image Text Alternatives
+
+Verify the contentDescription values on informative and actionable Images (and that purely decorative images have a null contentDescription).
 
 ```kotlin
 @Test
@@ -85,9 +93,11 @@ fun verifyThatDecorativeImageHasNoContentDescription() {
 }
 ```
 
-Note: See the section [Accessing Activity Resources](#accessing-activity-resources) below regarding verify actual application content texts instead of hard-coded values.
+Note: See the section [Accessing Activity Resources](#accessing-activity-resources) below for guidance on how to retrieve externalized text string values from an app resource file.
 
-* Verify that toggleable layouts are toggleable and do toggle
+### Testing `toggleable` Layouts
+
+Verify that `toggleable` layouts are toggleable and do toggle.
 
 For example:
 
@@ -120,7 +130,7 @@ fun verifyThatCheckboxRowToggles() {
 }
 ```
 
-## Verifying semantic node counts
+### Testing semantic node counts
 
 To verify that a specific number of nodes exist with a given set of semantic attributes, apply the `composeTestRule.onAllNodes()` method and `.assertCountEquals()`.
 
@@ -133,7 +143,9 @@ fun verifySemanticHeadingCount() {
 }
 ```
 
-## Additional SemanticMatchers
+## Additional Semantic Matchers
+
+A list of available `SemanticMatcher` instances is available in the Compose [Testing cheatsheet](https://developer.android.com/develop/ui/compose/testing/testing-cheatsheet), as well as in the Compose open source code file `Filters.kt`.
 
 In some cases, no convenient `SemanticMatcher` is supplied by Compose; however, these can be added using helper functions.
 

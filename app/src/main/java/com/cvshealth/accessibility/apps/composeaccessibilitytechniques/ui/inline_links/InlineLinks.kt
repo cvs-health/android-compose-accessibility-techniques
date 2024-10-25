@@ -103,7 +103,7 @@ private fun PreviewWithScaffold() {
 @Composable
 @OptIn(ExperimentalTextApi::class)
 private fun GoodExample1() {
-    // Problematic example 1: Using AnnotatedString and ClickableText
+    // Good example 1: Using AnnotatedString and LinkAnnotation.Url
     val linkMap = mapOf(
         stringResource(id = R.string.inline_links_example_1_link_text_1) to
                 "https://developer.android.com/develop/ui/compose/text/user-interactions#create-clickable-text",

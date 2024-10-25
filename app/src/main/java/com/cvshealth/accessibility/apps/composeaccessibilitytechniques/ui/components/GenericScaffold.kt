@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 
 const val genericScaffoldTitleTestTag = "genericScaffoldTitle"
+const val genericScaffoldBackButtonTestTag = "genericScaffoldBackButton"
 
 /**
  * Creates a default screen [Scaffold], including proper screen title handling.
@@ -80,7 +81,10 @@ fun GenericScaffold(
                     )
                 },
                 navigationIcon = {
-                    VisibleFocusBorderIconButton(onClick = onBackPressed) {
+                    VisibleFocusBorderIconButton(
+                        onClick = onBackPressed,
+                        modifier = Modifier.testTag(genericScaffoldBackButtonTestTag)
+                    ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.navigate_up)

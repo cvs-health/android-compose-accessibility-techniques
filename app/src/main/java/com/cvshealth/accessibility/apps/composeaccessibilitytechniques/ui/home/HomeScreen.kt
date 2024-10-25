@@ -39,6 +39,7 @@ import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
@@ -57,6 +58,8 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.addListItemSemantics
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.visibleCardFocusBorder
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
+
+const val homeScreenTitleTestTag = "homeScreenTitle"
 
 /**
  * Display the Home screen, containing expandable accordion sections for accessibility topic areas
@@ -85,7 +88,9 @@ fun HomeScreen(
                 title = {
                     Text(
                         text = title,
-                        modifier = Modifier.semantics { heading() },
+                        modifier = Modifier
+                            .testTag(homeScreenTitleTestTag)
+                            .semantics { heading() },
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1
                     )

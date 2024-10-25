@@ -35,8 +35,8 @@ import org.junit.Test
 /**
  *  InlineLinksTests - test InlineLinksScreen semantics to the extent possible.
  *
- *  Key technique: There is no semantic information to distinguish the ClickableText in Example 1
- *  from a normal Text, except the test tag inlineLinksExample1TextWithLinksTestTag. Likewise,
+ *  Key technique: There is no semantic information to distinguish the Text in Example 1 from a Text
+ *  without inline links, except the test tag inlineLinksExample1TextWithLinksTestTag. Likewise,
  *  there is no semantic information to distinguish the AndroidView in Example 2 except its test
  *  tag. Therefore, no further semantic tests are possible.
  */

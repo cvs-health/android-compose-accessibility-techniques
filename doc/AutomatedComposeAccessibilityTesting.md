@@ -1,7 +1,15 @@
 # Automated Compose Accessibility Testing
 Automated Compose jUnit UI tests automatically test the application's accessibility, because all such tests operate only on the app's semantics tree, not its displayed UI. That said, it is appropriate to focus on verifying specific accessibility semantics when constructing tests, as well as verifying app functionality.
 
+## Compose jUnit UI Testing Setup
+
 See [testing your Compose layout](https://developer.android.com/jetpack/compose/testing) for Compose jUnit test setup details.
+
+In outline, the process is:
+
+* Set up jUnit4 library dependencies in build.gradle.
+* Construct jUnit UI tests in `app/src/androidTest` package subfolders.
+* In tests, use `createComposeRule` to access semantics tree values. (Or use `createAndroidComposeRule<YourActivity>` if you also need to access `Activity` resources.)
 
 ## Sample semantic tests
 
@@ -77,7 +85,7 @@ fun verifyThatDecorativeImageHasNoContentDescription() {
 }
 ```
 
-Note: To verify actual application texts, use `createAndroidComposeRule<MainActivity>()`, and retrieve string values with `testRule.activity.getString(R.string.sample_screen_heading)`.
+Note: See the section [Accessing Activity Resources](#accessing-activity-resources) below regarding verify actual application content texts instead of hard-coded values.
 
 * Verify that toggleable layouts are toggleable and do toggle
 
@@ -112,7 +120,7 @@ fun verifyThatCheckboxRowToggles() {
 }
 ```
 
-## Verifying counts
+## Verifying semantic node counts
 
 To verify that a specific number of nodes exist with a given set of semantic attributes, apply the `composeTestRule.onAllNodes()` method and `.assertCountEquals()`.
 
@@ -153,7 +161,51 @@ fun hasLiveRegionMode(mode: LiveRegionMode) : SemanticsMatcher {
 }
 ```
 
-Note: In some cases, the retrieved semantic property is an object with properties of its own that need further calls to access (not illustrated).
+* In some cases, the retrieved semantic property is an object with properties of its own that need further calls to access.
+
+For example, to validate the expected number of rows in a collection, use:
+
+```kotlin
+fun hasCollectionRowCount(expectedRowCount: Int) : SemanticsMatcher {
+    return SemanticsMatcher("CollectionInfo.rowCount == ${expectedRowCount}") {
+        expectedRowCount == it.config.getOrNull(SemanticsProperties.CollectionInfo)?.rowCount
+    }
+}
+```
+
+For more helpful SemanticMatcher examples, see [TestHelpers.kt](../app/src/androidTest/java/com/cvshealth/composeaccessibilitytechniques/TestHelpers.kt). 
+
+For more complete lists of available semantic attributes to test, see [SemanticsNode](https://developer.android.com/reference/kotlin/androidx/compose/ui/semantics/SemanticsNode), [SemanticsConfiguration](https://developer.android.com/reference/kotlin/androidx/compose/ui/semantics/SemanticsConfiguration), and the Android source code for `SemanticsProperties`, and `SemanticsActions`.
+
+## Accessing Activity Resources
+
+To write a test that accesses app resource files, such as externalized string values, declare the test rule using `createAndroidComposeRule<SomeActivity>()` (instead of `createComposeRule()`) and then access resources via `testRule.activity` methods.
+
+For example, retrieve string values with `testRule.activity.getString(R.string.sample_screen_heading)`.
+
+Reimplementing the test for `contentDescription` above using external string resources would look something like this:
+
+```kotlin
+class SampleAndroidTest {
+    @get:Rule
+    val androidComposeTestRule = createAndroidComposeRule<AvatarActivity>()
+
+    @Test
+    fun verifyThatInformativeImageHasContentDescription() {
+        androidComposeTestRule
+            .onNode(
+                hasTestTag("testAvatarImage") 
+                and 
+                hasContentDescription(
+                    androidComposeTestRule.activity.getString(R.string.test_avatar_description)
+                )
+            )
+            .assertExists()
+    }
+}
+```
+
+Note: For a single Activity app, the sole `Activity` must be the target of `createAndroidComposeRule`, and the test class's `setup()` method must navigate to the appropriate composables to test. See [AccordionControlsTests.kt](../app/src/androidTest/java/com/cvshealth/composeaccessibilitytechniques/AccordionControlsTests.kt) for an example.
 
 ## Adjusting time in tests
 By default, Compose jUnit UI tests automatically advance time to the next frame after performing an action. That is generally all that is necessary, but to test transient effects, manually advancing the test time can be helpful.
@@ -181,13 +233,13 @@ composeTestRule.onNodeWithText(snackbarText).assertDoesNotExist()
 
 (See [PopupMessageTests.kt](../app/src/androidTest/java/com/cvshealth/composeaccessibilitytechniques/PopupMessagesTests.kt) for more information about testing `Snackbar` semantics.)
 
-## Summary
-Other tests for accessibility semantics are possible and are strongly suggested. The key technique is to test for semantic properties, as well as testing for functionality.
-
 ## Debugging tests
 To debug tests, apply the following code in a test function to log the semantics tree: `composeTestRule.onRoot().printToLog("LOG_TAG")`. Alternatively, apply the following code to log the unmerged semantics tree: `composeTestRule.onRoot(useUnmergedTree = true).printToLog("LOG_TAG")`.
 
 If that code fails because of multiple root nodes (such as when pop-up dialogs appear), apply something like this instead: `composeTestRule.onAllNodes(isRoot()).onLast().printToLog("LOG_TAG")`
+
+## Compose Testing Summary
+Other tests for accessibility semantics are possible and are strongly suggested. The key technique is to test for expected semantic property values, as well as testing for functionality.
 
 ----
 

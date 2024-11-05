@@ -205,7 +205,7 @@ class PopupMessagesTests {
             )
             .assertExists()
 
-        // Note: Toasts do not appear in the semantics tree, so can't testing detect any result of
+        // Note: Toasts do not appear in the semantics tree, so testing can't detect any result of
         // pressing Example 1's button.
     }
 

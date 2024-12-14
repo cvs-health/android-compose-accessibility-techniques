@@ -37,8 +37,10 @@ Slider(
          // announcement for a Slider. (In this case, integer rating values (0-10) are announced.)
          stateDescription = ratingValue.roundToInt().toString()
 
-         // Technique: Set liveRegion to announce the Slider's state when its value changes.
-         liveRegion = LiveRegionMode.Polite
+         // Optional technique: Set liveRegion to announce the Slider's state when its value changes
+         // and the control does not have TalkBack focus. When the Slider has focus TalkBack will 
+         // announce state changes automatically. This is not always appropriate; it can be noisy.
+         // liveRegion = LiveRegionMode.Polite
       }
       // Technique: Allow the left and right arrow keys to adjust the slider value
       // provided the resulting value is within the slider's range; otherwise, allow

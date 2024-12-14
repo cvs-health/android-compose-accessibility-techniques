@@ -25,9 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.onKeyEvent
-import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 
@@ -120,8 +118,11 @@ fun GenericSlider(
                     stateDescription = toStateDescription.invoke(value)
                 }
 
-                // liveRegion announces the Slider's state when its value changes.
-                liveRegion = LiveRegionMode.Polite
+                // Optional technique: Set liveRegion to announce the Slider's state when its value
+                // changes and the control does not have TalkBack focus. When the Slider has focus
+                // TalkBack will announce state changes automatically. This is not always
+                // appropriate; it can be noisy.
+                // liveRegion = LiveRegionMode.Polite
             },
         enabled = enabled,
         valueRange = valueRange,

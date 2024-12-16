@@ -73,6 +73,8 @@ private const val FOCUS_DEBOUNCE_TIME = 250L
  * [Modifier] extension function for [TextField] controls to eliminate their inherent keyboard trap,
  * support Tab and Shift+Tab for keyboard navigation, and well as optional Enter key handling.
  *
+ * Note: Enter key handling also requires a non-default ImeAction on the TextField in question.
+ *
  * @param enterCallback optional callback invoked when the Enter key is pressed
  */
 fun Modifier.nextOnTabAndHandleEnter(

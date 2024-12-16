@@ -31,6 +31,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performTextClearance
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.ExposedDropdownMenusScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample1DropdownMenuBoxTestTag
@@ -38,6 +39,9 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.expose
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample1HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample2AndroidViewTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample2HeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample3DropdownMenuBoxTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample3DropdownMenuTextFieldTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample3HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
@@ -66,7 +70,7 @@ class ExposedDropdownMenusTests {
 
     @Test
     fun verifyHeadingsCount() {
-        composeTestRule.onAllNodes(isHeading()).assertCountEquals(4)
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(5)
     }
 
     @Test
@@ -82,6 +86,9 @@ class ExposedDropdownMenusTests {
             .assertExists()
         composeTestRule
             .onNode(hasTestTag(exposedDropdownMenusExample2HeadingTestTag) and isHeading())
+            .assertExists()
+        composeTestRule
+            .onNode(hasTestTag(exposedDropdownMenusExample3HeadingTestTag) and isHeading())
             .assertExists()
     }
 
@@ -99,6 +106,15 @@ class ExposedDropdownMenusTests {
         composeTestRule
             .onNode(
                 hasTestTag(exposedDropdownMenusExample2AndroidViewTestTag)
+                        and
+                        !isHeading()
+                        and
+                        !hasAnyDescendant(isHeading())
+            )
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(exposedDropdownMenusExample3DropdownMenuBoxTestTag)
                         and
                         !isHeading()
                         and
@@ -147,6 +163,52 @@ class ExposedDropdownMenusTests {
 
         composeTestRule
             .onNodeWithTag(exposedDropdownMenusExample1DropdownMenuTextFieldTestTag)
+            .assert(
+                hasTextExactly("Payment type", "Check")
+                and
+                hasRole(Role.DropdownList)
+            )
+    }
+
+    @Test
+    fun verifyExample3ExposedDropdownMenuHasExpectedInitialState() {
+        composeTestRule
+            .onNodeWithTag(exposedDropdownMenusExample3DropdownMenuTextFieldTestTag)
+            .assert(
+                hasTextExactly("Payment type", "")
+            )
+        composeTestRule
+            .onNodeWithTag(exposedDropdownMenusExample3DropdownMenuTextFieldTestTag)
+            .assert(
+                hasClickAction()
+            )
+        composeTestRule
+            .onNodeWithTag(exposedDropdownMenusExample3DropdownMenuTextFieldTestTag)
+            .assert(
+                hasRole(Role.DropdownList)
+            )
+    }
+
+    @Test
+    fun verifyExample3ExposedDropdownMenuHasExpectedMenuActions() {
+        composeTestRule
+            .onNodeWithTag(exposedDropdownMenusExample3DropdownMenuTextFieldTestTag)
+            .performScrollTo()
+            .performClick()
+
+        composeTestRule
+            .onNodeWithTag(exposedDropdownMenusExample3DropdownMenuTextFieldTestTag)
+            .performTextClearance()
+
+        composeTestRule
+            .onNodeWithText("Check")
+            .assert(
+                hasAnyAncestor(keyIsDefined(SemanticsProperties.IsPopup))
+            )
+            .performClick()
+
+        composeTestRule
+            .onNodeWithTag(exposedDropdownMenusExample3DropdownMenuTextFieldTestTag)
             .assert(
                 hasTextExactly("Payment type", "Check")
                 and

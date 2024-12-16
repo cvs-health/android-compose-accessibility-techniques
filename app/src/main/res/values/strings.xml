@@ -529,12 +529,14 @@
     <!-- Exposed dropdown selection menus -->
     <string name="exposed_dropdown_menus_title">Exposed dropdown menus</string>
     <string name="exposed_dropdown_menus_heading">Exposed Dropdown Menus are not keyboard operable</string>
-    <string name="exposed_dropdown_menus_description_1">The Exposed Dropdown Menu pattern creates a mostly-accessible dropdown selection menu. But as of Compose BOM 2024.04.00, no Compose dropdown control is keyboard accessible, and no remediation is known. Custom dropdown approaches may be even less accessible.</string>
-    <string name="exposed_dropdown_menus_description_2">Turn on TalkBack or Switch Access and navigate this page, activating the list controls and making selections. Then repeat the process using a physical keyboard to observe the problems.</string>
-    <string name="exposed_dropdown_menus_example_1_heading">Problematic example 1: Non-editable Exposed Dropdown Menu</string>
-    <string name="exposed_dropdown_menus_example_1_description">The Exposed Dropdown Menu pattern uses ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem controls to create a dropdown selection menu that is mostly accessible, except for keyboard operation.</string>
+    <string name="exposed_dropdown_menus_description_1">The Exposed Dropdown Menu pattern can create accessible dropdown selection menus with sufficient remediation. Custom dropdown approaches may be less accessible.</string>
+    <string name="exposed_dropdown_menus_description_2">Turn on TalkBack or Switch Access and navigate this page, activating the list controls and making selections for demonstrations.</string>
+    <string name="exposed_dropdown_menus_example_1_heading">Good example 1: Non-editable Exposed Dropdown Menu</string>
+    <string name="exposed_dropdown_menus_example_1_description">The Exposed Dropdown Menu pattern uses ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem controls to create a dropdown selection menu that is accessible.</string>
     <string name="exposed_dropdown_menus_example_2_heading">Good example 2: View-based non-editable Exposed Dropdown Menu</string>
     <string name="exposed_dropdown_menus_example_2_description">Wrapping the View Exposed Dropdown Menu pattern in AndroidView creates a fully accessible control. Tab to the expand/collapse icon and type Enter to expand the menu. Navigate the menu using the arrow keys and select a value with the Enter key.</string>
+    <string name="exposed_dropdown_menus_example_3_heading">Problematic example 3: Editable Exposed Dropdown Menu</string>
+    <string name="exposed_dropdown_menus_example_3_description">Editable instances of the Exposed Dropdown Menu pattern are less accessible than non-editable instances. They are hard to use with most assistive technologies, and the meaningfulness of their reading sequence and focus order are both problematic and irremediable.</string>
     <string name="exposed_dropdown_menus_example_label">Payment type</string>
     <string name="exposed_dropdown_menus_example_option_1">Cash</string>
     <string name="exposed_dropdown_menus_example_option_2">Check</string>

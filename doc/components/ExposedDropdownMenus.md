@@ -1,21 +1,23 @@
 # Exposed Dropdown Selection Menus
-Exposed dropdown selection menus allow selecting a single value from a list of values. The Material Design [Exposed Dropdown Menu pattern](https://m2.material.io/components/menus#exposed-dropdown-menu) works well with assistive technologies -- creating dropdown menu controls that announce their name, role, and value in accordance with the WCAG [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value) and correctly express their relationships according to WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships). However, as of Compose BOM 2024.09.03, the Compose version of this pattern is still not keyboard operable, as required by WCAG [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG22/#keyboard). 
+Exposed dropdown selection menus allow entering a single value, generally by selecting from a list of values. The Material Design [Exposed Dropdown Menu pattern](https://m2.material.io/components/menus#exposed-dropdown-menu) works well with assistive technologies -- creating dropdown menu controls that announce their name, role, and value in accordance with the WCAG [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value), correctly express their relationships according to WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships), and can be made keyboard operable in accordance with WCAG [Success Criterion 2.1.1 Keyboard](https://www.w3.org/TR/WCAG22/#keyboard). This pattern can be made very accessible in its read-only form, but it is less accessible when used to suggest values for an editable text entry field (i.e., an "auto-complete" control); such controls are harder to use with assistive technologies and may not fully conform to WCAG [Success Criterion 1.3.2 Meaningful Sequence](https://www.w3.org/TR/WCAG22/#meaningful-sequence) or [Success Criterion 2.4.3 Focus Order](https://www.w3.org/TR/WCAG22/#focus-order). 
 
-Custom approaches are likely to be less accessible; make sure any dropdown selection menu is operable by all assistive technologies, including the keyboard, and announces the role "Drop down list."
+For examples of how to implement the Exposed Dropdown menu pattern using the Material Design components ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem, see the following links; although they do not include the necessary accessibility remediations:
 
-## The Compose Exposed Dropdown Menu pattern
-
-For examples of how to implement the Exposed Dropdown menu pattern using the Material Design components ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem, see:
-
-* [Material Design 2 ExposedDropdownMenuBox](https://developer.android.com/reference/kotlin/androidx/compose/material/package-summary#ExposedDropdownMenuBox(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)). 
+* [Material Design 2 ExposedDropdownMenuBox](https://developer.android.com/reference/kotlin/androidx/compose/material/package-summary#ExposedDropdownMenuBox(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)).
 
 * [Material Design 3 ExposedDropdownMenuBox](https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#ExposedDropdownMenuBox(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Function1)).
 
+Custom approaches to dropdown selection menus are likely to be less accessible; make sure any dropdown selection menu is operable by all assistive technologies, including the keyboard, and announces the role "Drop down list."
+
+## The read-only Compose Exposed Dropdown Menu pattern
+
+The read-only Exposed Dropdown Menu pattern can be made fully accessibility.
+
 Notes:
 
-* Material 3 requires applying `Modifier.menuAnchor(...)` to the `TextField` (and sometimes its `trailingIcon`) in order to link the `TextView` with the menu with the proper semantics.
-* For non-editable Compose dropdown menus, set `readOnly = true` and `onValueChange = {}` on the `TextField` to prevent it from accepting user keyboard text (only data from the dropdown selection list is allowed). Also, apply `Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable)`.
-* Editable Compose dropdown menus pose challenges for screen reader users and are a keyboard trap, so they should be avoided in Compose if at all possible.
+* Material 3 requires applying `Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable)` to the `TextField` in order to link the `TextView` with the menu with the proper semantics.
+* Set `readOnly = true` and `onValueChange = {}` on the `TextField` to prevent it from accepting user keyboard text (only data from the dropdown selection list is allowed).
+* Keyboard handling and focus management menu be applied at several points.
 
 For example:
 
@@ -23,22 +25,36 @@ For example:
 val options = listOf("Yes", "No", "Maybe")
 var isExpanded by remember { mutableStateOf(false) }
 var selectedValue by remember { mutableStateOf(options[0]) }
+val focusRequester = remember { FocusRequester() }
 
-// Key techniques for non-editable exposed dropdown menus:
+// Key techniques for accessible read-only exposed dropdown menus:
 // 1. Wrap the entire dropdown menu ensemble in an ExposedDropdownMenuBox.
+// 2. Expand the dropdown list when the Enter key is pressed on the TextField.
 // 2. Use Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable) to link the TextField to the 
 //    ExposedDropdownMenuBox with correct semantics.
 // 3. Use readOnly = true and onValueChange = {} to prevent editing.
 // 4. Label the TextField.
 // 5. Set trailingIcon to visually indicate the collapsed/expanded state.
-// 7. Wrap the list of menu items in an ExposedDropdownMenu.
+// 6. Wrap the list of menu items in an ExposedDropdownMenu.
+// 7: Close the dropdown list when Esc key is pressed. 
 // 8. Hold each menu item in a DropdownMenuItem.
+// 9. Set keyboard focus onto a newly-expanded dropdown menu pop-up.
 ExposedDropdownMenuBox(
     expanded = isExpanded,
     onExpandedChange = { isExpanded = !isExpanded },
 ) {
     TextField(
         modifier = Modifier
+            .onPreviewKeyEvent { keyEvent ->
+                if (keyEvent.nativeKeyEvent.keyCode == KEYCODE_ENTER) {
+                    if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                        isExpanded = true
+                    }
+                    true
+                } else {
+                    false
+                }
+            }
             .menuAnchor(MenuAnchorType.PrimaryNotEditable)
             .fillMaxWidth(),
         readOnly = true,
@@ -53,6 +69,18 @@ ExposedDropdownMenuBox(
     ExposedDropdownMenu(
         expanded = isExpanded,
         onDismissRequest = { isExpanded = false },
+        modifier = Modifier
+            .focusRequester(focusRequester)
+            .onPreviewKeyEvent { keyEvent ->
+                if (keyEvent.nativeKeyEvent.keyCode == KEYCODE_ESCAPE) {
+                    if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                        isExpanded = false
+                    }
+                    true
+                } else {
+                    false
+                }
+            }
     ) {
         options.forEach { option ->
             DropdownMenuItem(
@@ -64,6 +92,12 @@ ExposedDropdownMenuBox(
                 contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
             )
         }
+    }
+}
+LaunchedEffect(isExpanded) {
+    if (isExpanded) {
+        delay(500)
+        focusRequester.requestFocus()
     }
 }
 ```
@@ -126,6 +160,135 @@ AndroidViewBinding(
     // values displayed in the dropdown menu list.
 }
 ```
+
+## The editable Compose Exposed Dropdown Menu pattern
+
+The editable Exposed Dropdown Menu pattern can be made largely accessibility; although it may pose challenges for assistive technology users.
+
+Notes:
+
+* Material 3 requires applying `Modifier.menuAnchor(MenuAnchorType.PrimaryEditable)` to the `TextField` and `Modifier.menuAnchor(MenuAnchorType.SecondaryEditable)` to its `trailingIcon` in order to link the `TextView` with the menu with the proper semantics.
+* Set `readOnly = false` and supply an `onValueChange` that sets the appropriate value state on the `TextField` to allow it to accept user keyboard input.
+* Keyboard handling and focus management must be applied even more extensively than for the read-only case. See [TextField Controls](TextFieldControls.md) for details of the `Modifier.nextOnTabAndEnterHandler()` extension function used in the example below.
+
+For example:
+
+```kotlin
+    val options = listOf(
+    "1 Main Street",
+    "2 Main Street",
+    "3 Main Street",
+    "11 Main Street",
+    "12 Main Street",
+    "13 Main Street",
+    "21 Main Street",
+    "22 Main Street",
+    "23 Main Street",
+    "31 Main Street",
+    "32 Main Street",
+    "33 Main Street",
+    "41 Main Street",
+    "42 Main Street",
+    "43 Main Street",
+    "10 Elm Street",
+    "11 Elm Street",
+    "12 Elm Street",
+)
+var isExpanded by remember { mutableStateOf(false) }
+var currentValue by remember { mutableStateOf("") }
+val focusRequester = remember { FocusRequester() }
+
+// Key techniques for accessible editable exposed dropdown menus:
+// 1. Wrap the entire dropdown menu ensemble in an ExposedDropdownMenuBox.
+// 2. Expand the dropdown list when the Enter key is pressed on the TextField. Use the Modifier.
+//    nextOnTabAndHandleEnter extension function to avoid the editable TextField keyboard trap.
+// 3. Use Modifier.menuAnchor(MenuAnchorType.PrimaryEditable) to link the TextField to the
+//    ExposedDropdownMenuBox with correct semantics.
+// 4. Use readOnly = false and onValueChange = { selectedValue = it } to allow editing.
+// 5. Label the TextField.
+// 6. Set trailingIcon to visually indicate the collapsed/expanded state. Make the trailing icon
+//    a secondary anchor.
+// 7. Force a non-default KeyboardOption.imeAction and a KeyboardAction callback onto this
+//    TextField to expand the dropdown menu on Enter.
+// 8. Filter the list items based on the current TextField value.
+// 9. Wrap the list of menu items in an ExposedDropdownMenu.
+// 10: Close the dropdown list when Esc key is pressed.
+// 11. Hold each menu item in a DropdownMenuItem.
+// 12. Set keyboard focus onto a newly-expanded dropdown menu pop-up.
+ExposedDropdownMenuBox(
+    expanded = isExpanded,
+    onExpandedChange = { isExpanded = !isExpanded },
+) {
+    TextField(
+        modifier = Modifier
+            .nextOnTabAndHandleEnter {
+                isExpanded = true
+            }
+            .menuAnchor(MenuAnchorType.PrimaryEditable)
+            .fillMaxWidth(),
+        readOnly = false,
+        value = currentValue,
+        onValueChange = { newValue ->
+            currentValue = newValue
+        },
+        label = {
+            Text("Street Address")
+        },
+        trailingIcon = {
+            ExposedDropdownMenuDefaults.TrailingIcon(
+                expanded = isExpanded,
+                modifier = Modifier.menuAnchor(MenuAnchorType.SecondaryEditable)
+            )
+        },
+        keyboardOptions = KeyboardOptions.Default.copy(
+            keyboardType = KeyboardType.Text,
+            imeAction = ImeAction.Search
+        ),
+        keyboardActions = KeyboardActions {
+            isExpanded = true
+        },
+        colors = ExposedDropdownMenuDefaults.textFieldColors(),
+    )
+    val filteredOptions = options.filter { it.contains(currentValue, ignoreCase = true) }
+    if (filteredOptions.isNotEmpty()) {
+        ExposedDropdownMenu(
+            expanded = isExpanded,
+            onDismissRequest = { isExpanded = false },
+            modifier = Modifier
+                .focusRequester(focusRequester)
+                .onPreviewKeyEvent { keyEvent ->
+                    if (keyEvent.nativeKeyEvent.keyCode == KEYCODE_ESCAPE) {
+                        if (keyEvent.nativeKeyEvent.action == ACTION_UP) {
+                            isExpanded = false
+                        }
+                        true
+                    } else {
+                        false
+                    }
+                }
+        ) {
+            filteredOptions.forEach { option ->
+                DropdownMenuItem(
+                    text = { Text(option) },
+                    onClick = {
+                        currentValue = option
+                        isExpanded = false
+                    },
+                    contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding,
+                )
+            }
+        }
+        LaunchedEffect(isExpanded) {
+            if (isExpanded) {
+                delay(500)
+                focusRequester.requestFocus()
+            }
+        }
+    }
+}
+```
+
+
 
 (Note: The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.)
 

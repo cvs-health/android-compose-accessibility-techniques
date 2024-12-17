@@ -30,15 +30,15 @@ val focusRequester = remember { FocusRequester() }
 // Key techniques for accessible read-only exposed dropdown menus:
 // 1. Wrap the entire dropdown menu ensemble in an ExposedDropdownMenuBox.
 // 2. Expand the dropdown list when the Enter key is pressed on the TextField.
-// 2. Use Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable) to link the TextField to the 
+// 3. Use Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable) to link the TextField to the 
 //    ExposedDropdownMenuBox with correct semantics.
-// 3. Use readOnly = true and onValueChange = {} to prevent editing.
-// 4. Label the TextField.
-// 5. Set trailingIcon to visually indicate the collapsed/expanded state.
-// 6. Wrap the list of menu items in an ExposedDropdownMenu.
-// 7: Close the dropdown list when Esc key is pressed. 
-// 8. Hold each menu item in a DropdownMenuItem.
-// 9. Set keyboard focus onto a newly-expanded dropdown menu pop-up.
+// 4. Use readOnly = true and onValueChange = {} to prevent editing.
+// 5. Label the TextField.
+// 6. Set trailingIcon to visually indicate the collapsed/expanded state.
+// 7. Wrap the list of menu items in an ExposedDropdownMenu.
+// 8: Close the dropdown list when Esc key is pressed. 
+// 9. Hold each menu item in a DropdownMenuItem.
+// 10. Set keyboard focus onto a newly-expanded dropdown menu pop-up.
 ExposedDropdownMenuBox(
     expanded = isExpanded,
     onExpandedChange = { isExpanded = !isExpanded },
@@ -104,7 +104,7 @@ LaunchedEffect(isExpanded) {
 
 ## Wrapping the View Exposed Dropdown Menu pattern for Compose
 
-One accessible approach to exposed dropdown menus is to fall back on using View components, wrapped in an `AndroidView`. 
+Another accessible approach to exposed dropdown menus is to fall back on using View components, wrapped in an `AndroidView`. 
 
 For example, given a file named `layout/view_dropdown_menu.xml` with the following View Exposed Dropdown Menu pattern controls:
 
@@ -287,7 +287,6 @@ ExposedDropdownMenuBox(
     }
 }
 ```
-
 
 
 (Note: The hard-coded text shown in these examples is only used for simplicity. _Always_ use externalized string resource references in actual code.)

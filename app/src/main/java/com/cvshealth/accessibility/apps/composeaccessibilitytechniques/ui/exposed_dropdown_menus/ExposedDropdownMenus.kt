@@ -61,7 +61,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericExposedDropdownMenu
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GenericScaffold
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.GoodExampleHeading
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ProblematicExampleHeading
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.OkExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.nextOnTabAndHandleEnter
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -115,8 +115,8 @@ fun ExposedDropdownMenusScreen(
             GoodExample1()
             // GoodExample1a() // Read-only code sample from documentation
             GoodExample2()
-            ProblematicExample3()
-            // ProblematicExample3a() // Editable code sample from documentation
+            OkExample3()
+            // OkExample3a() // Editable code sample from documentation
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -248,12 +248,12 @@ private fun GoodExample2Preview() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ProblematicExample3() {
-    // Problematic example 3: Editable Exposed Dropdown Menu
+private fun OkExample3() {
+    // OK example 3: Editable Exposed Dropdown Menu
     // Editable Exposed Dropdown Menus have more accessibility problems than the
     // non-editable version. TalkBack and Switch Access are very hard to use and many not
     // seem meaningful in their reading sequence or focus order; however, they are operable.
-    ProblematicExampleHeading(
+    OkExampleHeading(
         text = stringResource(id = R.string.exposed_dropdown_menus_example_3_heading),
         modifier = Modifier.testTag(exposedDropdownMenusExample3HeadingTestTag)
     )
@@ -285,14 +285,14 @@ private fun ProblematicExample3() {
 
 @Preview(showBackground = true)
 @Composable
-private fun ProblematicExample3Preview() {
+private fun OkExample3Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            ProblematicExample3()
+            OkExample3()
         }
     }
 }
@@ -408,10 +408,10 @@ private fun GoodExample1aPreview() {
 // Test example from documentation: Editable Exposed Dropdown Menu Pattern
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ProblematicExample3a() {
-    // Problematic example 3a: Editable Code Sample from Documentation
-    ProblematicExampleHeading(
-        text = "Problematic example 3a: Editable Code Sample from Documentation",
+private fun OkExample3a() {
+    // OK example 3a: Editable Code Sample from Documentation
+    OkExampleHeading(
+        text = "OK example 3a: Editable Code Sample from Documentation",
     )
     Spacer(modifier = Modifier.height(8.dp))
 
@@ -533,14 +533,14 @@ private fun ProblematicExample3a() {
 
 @Preview(showBackground = true)
 @Composable
-private fun ProblematicExample3aPreview() {
+private fun OkExample3aPreview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            ProblematicExample3a()
+            OkExample3a()
         }
     }
 }

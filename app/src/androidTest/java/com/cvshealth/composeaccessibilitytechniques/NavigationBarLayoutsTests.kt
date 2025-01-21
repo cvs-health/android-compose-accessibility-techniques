@@ -211,7 +211,7 @@ class NavigationBarLayoutsTests {
         navBarItems[1].assert(isNotSelected())
 
         // Scroll to Example 1 NavigationBar
-        navBarItems[0].performScrollTo()
+        navBarItems[0].performScrollTo().performClick()
 
         // verify 1st NavigationBarItem content shown
         composeTestRule
@@ -442,13 +442,8 @@ class NavigationBarLayoutsTests {
         navBarItems.assertCountEquals(4)
         navBarItems.assertAll(hasRole(Role.Tab))
 
-        // Scroll to Example 2 NavigationBar
+        // Scroll to Example 3 NavigationBar
         navBarItems[0].performScrollTo()
-
-        // verify all NavigationBarItems are displayed
-        (0..3).forEach { index ->
-            navBarItems[index].assertIsDisplayed()
-        }
 
         // verify 1st NavigationBarItems selected and no other NavigationBarItems is selected
         navBarItems[0].assert(isSelected())
@@ -478,6 +473,11 @@ class NavigationBarLayoutsTests {
                         )
             )
             .assertIsDisplayed()
+
+        // verify all NavigationBarItems are displayed
+        (0..3).forEach { index ->
+            navBarItems[index].assertIsDisplayed()
+        }
     }
 
     @Test

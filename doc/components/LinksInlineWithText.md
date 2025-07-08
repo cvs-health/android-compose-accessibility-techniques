@@ -66,6 +66,8 @@ Notes:
 - The TalkBack Links menu now displays link texts using the `TextLinkStyles` specified in the `AnnotatedString`. This can be a problem if the app does not support both Light theme and Dark theme based on the system setting, because TalkBack does. In the worst case, the link text color and background color can have insufficient contrast for the text to be read.
 - Automated testing of inline links is limited, since `Text` only surfaces the literal text of an `AnnotatedString`, not its annotations.
 
+Warning: There was an older Compose approach to in-line links using the `ClickableText` composable. That approach never worked well with keyboards and that composable is now deprecated. Avoid that technique, and if you have older code that uses, convert it to the approach show above as soon as possible; otherwise, you will have trouble conforming to WCAG [Success Criterion 2.2.1 Keyboard](https://www.w3.org/TR/WCAG22/#keyboard), among other issues.
+
 
 ## Inline links with View interop (`AndroidView`)
 
@@ -105,7 +107,7 @@ Notes:
 
 ----
 
-Copyright 2023-2024 CVS Health and/or one of its affiliates
+Copyright 2023-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

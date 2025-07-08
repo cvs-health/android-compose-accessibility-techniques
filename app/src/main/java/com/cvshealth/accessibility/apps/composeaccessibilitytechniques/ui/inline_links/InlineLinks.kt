@@ -173,7 +173,7 @@ private fun GoodExample1() {
 
 @Preview(showBackground = true)
 @Composable
-private fun ProblematicExample1Preview() {
+private fun GoodExample1Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
@@ -187,7 +187,7 @@ private fun ProblematicExample1Preview() {
 
 @Composable
 private fun GoodExample2() {
-    // Problematic example 2: Using AndroidView and TextView
+    // Good example 2: Using AndroidView and TextView
     GoodExampleHeading(
         text = stringResource(id = R.string.inline_links_example_2),
         modifier = Modifier.testTag(inlineLinksExample2HeadingTestTag)
@@ -210,7 +210,7 @@ private fun GoodExample2() {
 
 @Preview(showBackground = true)
 @Composable
-private fun ProblematicExample2Preview() {
+private fun GoodExample2Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier

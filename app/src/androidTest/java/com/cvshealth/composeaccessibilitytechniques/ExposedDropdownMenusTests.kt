@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -37,19 +37,15 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.expose
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample1DropdownMenuBoxTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample1DropdownMenuTextFieldTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample1HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample2AndroidViewTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample2DropdownMenuBoxTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample2DropdownMenuTextFieldTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample2HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample3DropdownMenuBoxTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample3DropdownMenuTextFieldTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusExample3HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.exposed_dropdown_menus.exposedDropdownMenusHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-// Note: Cannot test ExposedDropDownMenusScreen, Example 2, because AndroidView is opaque to Compose
-// jUnit UI semantic testing. Only the AndroidView's existence and outward semantics can be verified.
 class ExposedDropdownMenusTests {
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -70,7 +66,7 @@ class ExposedDropdownMenusTests {
 
     @Test
     fun verifyHeadingsCount() {
-        composeTestRule.onAllNodes(isHeading()).assertCountEquals(5)
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(4)
     }
 
     @Test
@@ -87,9 +83,6 @@ class ExposedDropdownMenusTests {
         composeTestRule
             .onNode(hasTestTag(exposedDropdownMenusExample2HeadingTestTag) and isHeading())
             .assertExists()
-        composeTestRule
-            .onNode(hasTestTag(exposedDropdownMenusExample3HeadingTestTag) and isHeading())
-            .assertExists()
     }
 
     @Test
@@ -105,16 +98,7 @@ class ExposedDropdownMenusTests {
             .assertExists()
         composeTestRule
             .onNode(
-                hasTestTag(exposedDropdownMenusExample2AndroidViewTestTag)
-                        and
-                        !isHeading()
-                        and
-                        !hasAnyDescendant(isHeading())
-            )
-            .assertExists()
-        composeTestRule
-            .onNode(
-                hasTestTag(exposedDropdownMenusExample3DropdownMenuBoxTestTag)
+                hasTestTag(exposedDropdownMenusExample2DropdownMenuBoxTestTag)
                         and
                         !isHeading()
                         and
@@ -171,33 +155,33 @@ class ExposedDropdownMenusTests {
     }
 
     @Test
-    fun verifyExample3ExposedDropdownMenuHasExpectedInitialState() {
+    fun verifyExample2ExposedDropdownMenuHasExpectedInitialState() {
         composeTestRule
-            .onNodeWithTag(exposedDropdownMenusExample3DropdownMenuTextFieldTestTag)
+            .onNodeWithTag(exposedDropdownMenusExample2DropdownMenuTextFieldTestTag)
             .assert(
                 hasTextExactly("Payment type", "")
             )
         composeTestRule
-            .onNodeWithTag(exposedDropdownMenusExample3DropdownMenuTextFieldTestTag)
+            .onNodeWithTag(exposedDropdownMenusExample2DropdownMenuTextFieldTestTag)
             .assert(
                 hasClickAction()
             )
         composeTestRule
-            .onNodeWithTag(exposedDropdownMenusExample3DropdownMenuTextFieldTestTag)
+            .onNodeWithTag(exposedDropdownMenusExample2DropdownMenuTextFieldTestTag)
             .assert(
                 hasRole(Role.DropdownList)
             )
     }
 
     @Test
-    fun verifyExample3ExposedDropdownMenuHasExpectedMenuActions() {
+    fun verifyExample2ExposedDropdownMenuHasExpectedMenuActions() {
         composeTestRule
-            .onNodeWithTag(exposedDropdownMenusExample3DropdownMenuTextFieldTestTag)
+            .onNodeWithTag(exposedDropdownMenusExample2DropdownMenuTextFieldTestTag)
             .performScrollTo()
             .performClick()
 
         composeTestRule
-            .onNodeWithTag(exposedDropdownMenusExample3DropdownMenuTextFieldTestTag)
+            .onNodeWithTag(exposedDropdownMenusExample2DropdownMenuTextFieldTestTag)
             .performTextClearance()
 
         composeTestRule
@@ -208,7 +192,7 @@ class ExposedDropdownMenusTests {
             .performClick()
 
         composeTestRule
-            .onNodeWithTag(exposedDropdownMenusExample3DropdownMenuTextFieldTestTag)
+            .onNodeWithTag(exposedDropdownMenusExample2DropdownMenuTextFieldTestTag)
             .assert(
                 hasTextExactly("Payment type", "Check")
                 and

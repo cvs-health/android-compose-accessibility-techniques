@@ -1,5 +1,5 @@
 /*
-   Copyright 2024 CVS Health and/or one of its affiliates
+   Copyright 2024-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertAll
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.hasAnyChild
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasParent
 import androidx.compose.ui.test.hasTestTag
@@ -188,9 +187,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample1NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Home: Long label example"))
+                        hasAnyDescendant(hasTextExactly("Home: Long label example"))
                         and
-                        hasAnyChild(
+                        hasAnyDescendant(
                             hasTextExactly(
                                 "Home screen placeholder. Note how the NavigationBar item text is truncated (or not)."
                             )
@@ -218,9 +217,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample1NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Home: Long label example"))
+                        hasAnyDescendant(hasTextExactly("Home: Long label example"))
                         and
-                        hasAnyChild(
+                        hasAnyDescendant(
                             hasTextExactly(
                                 "Home screen placeholder. Note how the NavigationBar item text is truncated (or not)."
                             )
@@ -240,9 +239,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample1NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Favorites"))
+                        hasAnyDescendant(hasTextExactly("Favorites"))
                         and
-                        hasAnyChild(hasTextExactly("Favorites screen placeholder."))
+                        hasAnyDescendant(hasTextExactly("Favorites screen placeholder."))
             )
             .assertIsDisplayed()
 
@@ -261,9 +260,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample1NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Settings"))
+                        hasAnyDescendant(hasTextExactly("Settings"))
                         and
-                        hasAnyChild(hasTextExactly("Settings screen placeholder."))
+                        hasAnyDescendant(hasTextExactly("Settings screen placeholder."))
             )
             .assertIsDisplayed()
 
@@ -279,9 +278,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample1NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Home: Long label example"))
+                        hasAnyDescendant(hasTextExactly("Home: Long label example"))
                         and
-                        hasAnyChild(
+                        hasAnyDescendant(
                             hasTextExactly(
                                 "Home screen placeholder. Note how the NavigationBar item text is truncated (or not)."
                             )
@@ -328,9 +327,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample2NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Home: Long label example"))
+                        hasAnyDescendant(hasTextExactly("Home: Long label example"))
                         and
-                        hasAnyChild(
+                        hasAnyDescendant(
                             hasTextExactly(
                                 "Home screen placeholder. Note how the NavigationBar item text is truncated (or not)."
                             )
@@ -358,9 +357,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample2NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Home: Long label example"))
+                        hasAnyDescendant(hasTextExactly("Home: Long label example"))
                         and
-                        hasAnyChild(
+                        hasAnyDescendant(
                             hasTextExactly(
                                 "Home screen placeholder. Note how the NavigationBar item text is truncated (or not)."
                             )
@@ -380,9 +379,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample2NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Favorites"))
+                        hasAnyDescendant(hasTextExactly("Favorites"))
                         and
-                        hasAnyChild(hasTextExactly("Favorites screen placeholder."))
+                        hasAnyDescendant(hasTextExactly("Favorites screen placeholder."))
             )
             .assertIsDisplayed()
 
@@ -402,9 +401,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample2NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Settings"))
+                        hasAnyDescendant(hasTextExactly("Settings"))
                         and
-                        hasAnyChild(hasTextExactly("Settings screen placeholder."))
+                        hasAnyDescendant(hasTextExactly("Settings screen placeholder."))
             )
             .assertIsDisplayed()
 
@@ -420,9 +419,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample2NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Home: Long label example"))
+                        hasAnyDescendant(hasTextExactly("Home: Long label example"))
                         and
-                        hasAnyChild(
+                        hasAnyDescendant(
                             hasTextExactly(
                                 "Home screen placeholder. Note how the NavigationBar item text is truncated (or not)."
                             )
@@ -464,9 +463,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample3NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Home: Long label example"))
+                        hasAnyDescendant(hasTextExactly("Home: Long label example"))
                         and
-                        hasAnyChild(
+                        hasAnyDescendant(
                             hasTextExactly(
                                 "Home screen placeholder. Note how the NavigationBar item text is truncated (or not)."
                             )
@@ -499,9 +498,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample3NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Home: Long label example"))
+                        hasAnyDescendant(hasTextExactly("Home: Long label example"))
                         and
-                        hasAnyChild(
+                        hasAnyDescendant(
                             hasTextExactly(
                                 "Home screen placeholder. Note how the NavigationBar item text is truncated (or not)."
                             )
@@ -521,9 +520,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample3NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Favorites"))
+                        hasAnyDescendant(hasTextExactly("Favorites"))
                         and
-                        hasAnyChild(hasTextExactly("Favorites screen placeholder."))
+                        hasAnyDescendant(hasTextExactly("Favorites screen placeholder."))
             )
             .assertIsDisplayed()
 
@@ -543,9 +542,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample3NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Settings"))
+                        hasAnyDescendant(hasTextExactly("Settings"))
                         and
-                        hasAnyChild(hasTextExactly("Settings screen placeholder."))
+                        hasAnyDescendant(hasTextExactly("Settings screen placeholder."))
             )
             .assertIsDisplayed()
 
@@ -561,9 +560,9 @@ class NavigationBarLayoutsTests {
             .onNode(
                 hasTestTag(navigationBarLayoutsExample3NavigationHostTestTag)
                         and
-                        hasAnyChild(hasTextExactly("Home: Long label example"))
+                        hasAnyDescendant(hasTextExactly("Home: Long label example"))
                         and
-                        hasAnyChild(
+                        hasAnyDescendant(
                             hasTextExactly(
                                 "Home screen placeholder. Note how the NavigationBar item text is truncated (or not)."
                             )

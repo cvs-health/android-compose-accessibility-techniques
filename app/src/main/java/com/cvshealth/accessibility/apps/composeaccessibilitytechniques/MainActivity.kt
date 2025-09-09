@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -68,6 +68,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.text_a
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.textfield_controls.TextFieldControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.ux_change_announcements.UxChangeAnnouncementsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.view_interop.ViewInteropScreen
 
 /**
  * Define the sole Activity in the application.
@@ -240,6 +241,9 @@ private fun ComposeAccessibilityTechniquesNavHost(
         }
         composable(route = ComposeAccessibilityTechniquesRoute.TextFieldControls.route) {
             TextFieldControlsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.ViewInterop.route) {
+            ViewInteropScreen(onBackPressed = popBackStack)
         }
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -533,10 +533,8 @@
     <string name="exposed_dropdown_menus_description_2">Turn on TalkBack or Switch Access and navigate this page, activating the list controls and making selections for demonstrations.</string>
     <string name="exposed_dropdown_menus_example_1_heading">Good example 1: Non-editable Exposed Dropdown Menu</string>
     <string name="exposed_dropdown_menus_example_1_description">The Exposed Dropdown Menu pattern uses ExposedDropdownMenuBox, TextField, DropdownMenu, and DropdownMenuItem controls to create a dropdown selection menu that is accessible.</string>
-    <string name="exposed_dropdown_menus_example_2_heading">Good example 2: View-based non-editable Exposed Dropdown Menu</string>
-    <string name="exposed_dropdown_menus_example_2_description">Wrapping the View Exposed Dropdown Menu pattern in AndroidView creates a fully accessible control. Tab to the expand/collapse icon and type Enter to expand the menu. Navigate the menu using the arrow keys and select a value with the Enter key.</string>
-    <string name="exposed_dropdown_menus_example_3_heading">OK example 3: Editable Exposed Dropdown Menu</string>
-    <string name="exposed_dropdown_menus_example_3_description">Editable instances of the Exposed Dropdown Menu pattern are less accessible than non-editable instances. They are hard to use with most assistive technologies, and the meaningfulness of their reading sequence and focus order are debatable, but they are operable.</string>
+    <string name="exposed_dropdown_menus_example_2_heading">OK example 2: Editable Exposed Dropdown Menu</string>
+    <string name="exposed_dropdown_menus_example_2_description">Editable instances of the Exposed Dropdown Menu pattern are less accessible than non-editable instances. They are hard to use with most assistive technologies, and the meaningfulness of their reading sequence and focus order are debatable, but they are operable.</string>
     <string name="exposed_dropdown_menus_example_label">Payment type</string>
     <string name="exposed_dropdown_menus_example_option_1">Cash</string>
     <string name="exposed_dropdown_menus_example_option_2">Check</string>
@@ -713,16 +711,11 @@
     <string name="slider_controls_example_2_description_2">Note that keyboard control of the Slider thumb requires pressing the Enter key after tabbing to the control, and then using the left and right arrow keys to adjust the Slider\'s value.</string>
     <string name="slider_controls_example_2_label">Rating</string>
     <string name="slider_controls_example_3_header">Problematic example 3: Compose RangeSlider is not keyboard accessible</string>
-    <string name="slider_controls_example_3_description">Like Sliders, RangeSliders require contentDescription to provide an accessible label and require semantics changes to provide good state announcements in TalkBack. However, no remediation for its keyboard accessibility issues is currently known.</string>
+    <string name="slider_controls_example_3_description_1">Like Sliders, RangeSliders require contentDescription to provide an accessible label and require semantics changes to provide good state announcements in TalkBack. However, no remediation for its keyboard accessibility issues is currently known.</string>
+    <string name="slider_controls_example_3_description_2">See the \'View interop\' screen for a potential alternative.</string>
     <string name="slider_controls_example_3_label">Rating filter range</string>
     <string name="slider_controls_example_3_content_description">Rating filter range</string>
     <string name="slider_controls_example_3_state_description">%1$d to %2$d</string>
-    <string name="slider_controls_example_4_header">Good example 4: View RangeSlider is accessible</string>
-    <string name="slider_controls_example_4_description_1">A View RangeSlider control wrapped in AndroidView is accessible.</string>
-    <string name="slider_controls_example_4_description_2">Note that keyboard control of the RangeSlider thumbs requires pressing the Enter key after tabbing to the control, and then using the left and right arrow keys to adjust each thumb\'s value and tabbing to move between the thumbs.</string>
-    <string name="slider_controls_example_4_label">Rating filter range</string>
-    <string name="slider_controls_example_4_content_description">Rating filter range</string>
-    <string name="slider_controls_example_4_selected_range">Include ratings from %1$d to %2$d</string>
 
     <!-- Stand-alone links -->
     <string name="standalone_links_title">Stand-alone links</string>
@@ -784,5 +777,26 @@
     <string name="textfield_controls_example_1_short_error">Name is required. Please supply a non-blank name.</string>
     <string name="textfield_controls_example_1_long_error">Error: Name is required. Please supply a non-blank name.</string>
     <string name="textfield_controls_example_1_message">TextField value %1$s submitted.</string>
+
+    <!-- View interop -->
+    <string name="view_interop_title">View interop</string>
+    <string name="view_interop_heading">Some View controls interoperate accessibly with Compose</string>
+    <string name="view_interop_description_1">Some View-based controls can work accessibly on Compose screens when wrapped in AndroidView. However, they pose critical problems for Compose UI tests due to theming validation checks, so use them with caution.</string>
+    <string name="view_interop_description_2">Turn on TalkBack, navigate the page, and activate the controls for demonstrations of an accessible View interop.</string>
+    <string name="view_interop_example_1_heading">Good example 1: View-based non-editable Exposed Dropdown Menu</string>
+    <string name="view_interop_example_1_description">Wrapping the View Exposed Dropdown Menu pattern in AndroidView creates a fully accessible control. Tab to the expand/collapse icon and type Enter to expand the menu. Navigate the menu using the arrow keys and select a value with the Enter key.</string>
+    <string name="view_interop_example_1_label">Payment type</string>
+    <string name="view_interop_example_1_option_1">Cash</string>
+    <string name="view_interop_example_1_option_2">Check</string>
+    <string name="view_interop_example_1_option_3">Credit/Debit card</string>
+    <string name="view_interop_example_1_option_4">Money order</string>
+    <string name="view_interop_example_1_option_5">Voucher</string>
+    <string name="view_interop_example_1_option_not_selected">(No payment type selected.)</string>
+    <string name="view_interop_example_2_header">Good example 2: View RangeSlider is accessible</string>
+    <string name="view_interop_example_2_description_1">A View RangeSlider control wrapped in AndroidView is accessible.</string>
+    <string name="view_interop_example_2_description_2">Note that keyboard control of the RangeSlider thumbs requires pressing the Enter key after tabbing to the control, and then using the left and right arrow keys to adjust each thumb\'s value and tabbing to move between the thumbs.</string>
+    <string name="view_interop_example_2_label">Rating filter range</string>
+    <string name="view_interop_example_2_content_description">Rating filter range</string>
+    <string name="view_interop_example_2_selected_range">Include ratings from %1$d to %2$d</string>
 
 </resources>

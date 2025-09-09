@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -355,7 +355,7 @@ class ListSemanticsTests {
                         and
                         hasCollectionRowCount(expectedRowCount = 1)
                         and
-                        hasCollectionColumnCount(expectedColumnCount = -1)
+                        hasCollectionColumnCount(expectedColumnCount = 6)
             )
             .assertExists()
         composeTestRule

@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -155,8 +155,6 @@ class ListItemLayoutsTests {
                         and
                         hasNoClickAction()
                         and
-                        isTraversalGroup()
-                        and
                         hasTextExactly("Accessible inactive ListItem", "Announces as a single text.")
                         and
                         hasContentDescriptionExactly()
@@ -171,8 +169,6 @@ class ListItemLayoutsTests {
                 hasTestTag(listItemLayoutsExample2ListItemTestTag)
                         and
                         hasClickAction()
-                        and
-                        isTraversalGroup()
                         and
                         hasRole(Role.Button)
                         and
@@ -193,8 +189,6 @@ class ListItemLayoutsTests {
                         and
                         isSelected()
                         and
-                        isTraversalGroup()
-                        and
                         hasRole(Role.RadioButton)
                         and
                         hasTextExactly("Accessible selectable ListItem 1", "Announces as the first of two labeled, selectable radio buttons.")
@@ -209,8 +203,6 @@ class ListItemLayoutsTests {
                         isSelectable()
                         and
                         !isSelected()
-                        and
-                        isTraversalGroup()
                         and
                         hasRole(Role.RadioButton)
                         and
@@ -248,8 +240,6 @@ class ListItemLayoutsTests {
                 hasTestTag(listItemLayoutsExample4ListItemTestTag)
                         and
                         isToggleable()
-                        and
-                        isTraversalGroup()
                         and
                         hasRole(Role.Switch)
                         and

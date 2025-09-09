@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -157,7 +157,7 @@ class TabRowsTests {
 
         // find tabs in fixed tab row
         val tabs = composeTestRule.onAllNodes(
-            hasParent(hasTestTag(tabRowsExample1TabRowTestTag))
+            hasParent(hasTestTag(tabRowsExample1TabRowTestTag)) and hasRole(Role.Tab)
         )
 
         // verify 5 tabs
@@ -184,7 +184,9 @@ class TabRowsTests {
     @Test
     fun verifyFixedTabs1ExpectedBehavior() {
         // find tabs in fixed tab row
-        val tabs = composeTestRule.onAllNodes(hasParent(hasTestTag(tabRowsExample1TabRowTestTag)))
+        val tabs = composeTestRule.onAllNodes(
+            hasParent(hasTestTag(tabRowsExample1TabRowTestTag)) and hasRole(Role.Tab)
+        )
 
         // verify 1st tab selected and 2nd tab is not selected
         tabs[0].assert(isSelected())
@@ -247,7 +249,7 @@ class TabRowsTests {
 
         // find tabs in fixed tab row
         val tabs = composeTestRule.onAllNodes(
-            hasParent(hasTestTag(tabRowsExample2TabRowTestTag))
+            hasParent(hasTestTag(tabRowsExample2TabRowTestTag)) and hasRole(Role.Tab)
         )
 
         // verify 5 tabs
@@ -277,7 +279,9 @@ class TabRowsTests {
     @Test
     fun verifyFixedTabs2ExpectedBehavior() {
         // find tabs in fixed tab row
-        val tabs = composeTestRule.onAllNodes(hasParent(hasTestTag(tabRowsExample2TabRowTestTag)))
+        val tabs = composeTestRule.onAllNodes(
+            hasParent(hasTestTag(tabRowsExample2TabRowTestTag)) and hasRole(Role.Tab)
+        )
 
         // verify 1st tab selected and 2nd tab is not selected
         tabs[0].assert(isSelected())
@@ -445,7 +449,7 @@ class TabRowsTests {
 
         // find tabs in fixed paged tab row
         val tabs = composeTestRule.onAllNodes(
-            hasParent(hasTestTag(tabRowsExample4TabRowTestTag))
+            hasParent(hasTestTag(tabRowsExample4TabRowTestTag)) and hasRole(Role.Tab)
         )
 
         // verify 5 tabs
@@ -479,7 +483,9 @@ class TabRowsTests {
         composeTestRule.onNodeWithTag(tabRowsEndSpacerTestTag).performScrollTo()
 
         // find tabs in fixed paged tab row
-        val tabs = composeTestRule.onAllNodes(hasParent(hasTestTag(tabRowsExample4TabRowTestTag)))
+        val tabs = composeTestRule.onAllNodes(
+            hasParent(hasTestTag(tabRowsExample4TabRowTestTag)) and hasRole(Role.Tab)
+        )
 
         // verify 1st tab selected and 2nd tab is not selected
         tabs[0].assert(isSelected())

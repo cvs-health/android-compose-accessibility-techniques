@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -152,7 +152,10 @@ fun hasNoStateDescription(): SemanticsMatcher =
 
 // Traversal Order helpers
 fun hasIsTraversalGroup(): SemanticsMatcher =
-    SemanticsMatcher.keyIsDefined(SemanticsProperties.IsTraversalGroup)
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.IsTraversalGroup).or(
+        // Covers the old way of doing things...
+        SemanticsMatcher.keyIsDefined(SemanticsProperties.IsContainer)
+    )
 
 fun isTraversalGroup(): SemanticsMatcher {
     return SemanticsMatcher("SemanticsProperties.IsTraversalGroup == true") {

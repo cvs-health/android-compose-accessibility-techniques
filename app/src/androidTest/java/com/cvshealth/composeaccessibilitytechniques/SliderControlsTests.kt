@@ -1,5 +1,5 @@
 /*
-   Copyright 2024 CVS Health and/or one of its affiliates
+   Copyright 2024-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -32,8 +32,6 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider_controls.sliderControlsExample2HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider_controls.sliderControlsExample3ControlTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider_controls.sliderControlsExample3HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider_controls.sliderControlsExample4ControlTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider_controls.sliderControlsExample4HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider_controls.sliderControlsHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
@@ -60,7 +58,7 @@ class SliderControlsTests {
 
     @Test
     fun verifyHeadingsCount() {
-        composeTestRule.onAllNodes(isHeading()).assertCountEquals(6)
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(5)
     }
 
     @Test
@@ -79,9 +77,6 @@ class SliderControlsTests {
             .assertExists()
         composeTestRule
             .onNode(hasTestTag(sliderControlsExample3HeadingTestTag) and isHeading())
-            .assertExists()
-        composeTestRule
-            .onNode(hasTestTag(sliderControlsExample4HeadingTestTag) and isHeading())
             .assertExists()
     }
 
@@ -108,15 +103,6 @@ class SliderControlsTests {
         composeTestRule
             .onNode(
                 hasTestTag(sliderControlsExample3ControlTestTag)
-                        and
-                        !isHeading()
-                        and
-                        !hasAnyDescendant(isHeading())
-            )
-            .assertExists()
-        composeTestRule
-            .onNode(
-                hasTestTag(sliderControlsExample4ControlTestTag)
                         and
                         !isHeading()
                         and
@@ -179,8 +165,5 @@ class SliderControlsTests {
                         )
             )
             .assertExists()
-
-        // Cannot verify values of Example 4's View-based RangeSlider, because the AndroidView
-        // wrapper is opaque to Compose jUnit UI testing.
     }
 }

@@ -1,5 +1,5 @@
 /*
-   Copyright 2024 CVS Health and/or one of its affiliates
+   Copyright 2024-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -38,7 +38,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.R
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BadExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.BodyText
@@ -48,7 +47,6 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.compon
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.ProblematicExampleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.SimpleHeading
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
-import com.google.android.material.slider.RangeSlider
 import kotlin.math.roundToInt
 
 const val sliderControlsHeadingTestTag = "sliderControlsHeading"
@@ -58,8 +56,6 @@ const val sliderControlsExample2HeadingTestTag = "sliderControlsExample2Heading"
 const val sliderControlsExample2ControlTestTag = "sliderControlsExample2Control"
 const val sliderControlsExample3HeadingTestTag = "sliderControlsExample3Heading"
 const val sliderControlsExample3ControlTestTag = "sliderControlsExample3Control"
-const val sliderControlsExample4HeadingTestTag = "sliderControlsExample4Heading"
-const val sliderControlsExample4ControlTestTag = "sliderControlsExample4Control"
 
 /**
  * Demonstrate accessibility techniques for [Slider] controls in conformance with WCAG
@@ -97,7 +93,6 @@ fun SliderControlsScreen(
 
             // RangeSlider examples
             ProblematicExample3()
-            GoodExample4()
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -195,7 +190,8 @@ private fun ProblematicExample3() {
         text = stringResource(id = R.string.slider_controls_example_3_header),
         modifier = Modifier.testTag(sliderControlsExample3HeadingTestTag)
     )
-    BodyText(textId = R.string.slider_controls_example_3_description)
+    BodyText(textId = R.string.slider_controls_example_3_description_1)
+    BodyText(textId = R.string.slider_controls_example_3_description_2)
     Spacer(modifier = Modifier.height(8.dp))
 
     BodyText(stringResource(id = R.string.slider_controls_example_3_label))
@@ -242,73 +238,6 @@ private fun ProblematicExample3Preview() {
                 .fillMaxWidth()
         )  {
             ProblematicExample3()
-        }
-    }
-}
-
-@Composable
-private fun GoodExample4() {
-    // Problematic example 4: View RangeSlider is keyboard inaccessible
-    GoodExampleHeading(
-        text = stringResource(id = R.string.slider_controls_example_4_header),
-        modifier = Modifier.testTag(sliderControlsExample4HeadingTestTag)
-    )
-    BodyText(textId = R.string.slider_controls_example_4_description_1)
-    BodyText(textId = R.string.slider_controls_example_4_description_2)
-    Spacer(modifier = Modifier.height(8.dp))
-
-    // Key technique: Provide a visible control label
-    BodyText(stringResource(id = R.string.slider_controls_example_4_label))
-
-    val range = 0f..10f
-    val (ratingFilterRange, setRatingFilterRange) = remember { mutableStateOf(range) }
-    val contentDescriptionText = stringResource(
-        id = R.string.slider_controls_example_4_content_description
-    )
-    // Key technique: Wrap a com.google.android.material.slider.RangeSlider in AndroidView.
-    AndroidView(
-        modifier = Modifier
-            .testTag(sliderControlsExample4ControlTestTag)
-            .padding(top = 8.dp),
-        factory = { context ->
-            RangeSlider(context).apply {
-                valueFrom = range.start
-                valueTo = range.endInclusive
-                stepSize = 1.0f
-                values = listOf(range.start, range.endInclusive) // sets the initially selected range
-
-                // Key technique: Label RangeSlider using contentDescription
-                contentDescription = contentDescriptionText
-
-                // Key technique: Extract the value of the RangeSlider to MutableState as it changes
-                addOnChangeListener { slider: RangeSlider, _: Float, fromUser: Boolean ->
-                    if (fromUser) {
-                        setRatingFilterRange(slider.values.first() .. slider.values.last())
-                    }
-                }
-            }
-        }
-    )
-
-    // Display the currently selected range
-    val selectedRangeText = stringResource(
-        id = R.string.slider_controls_example_4_selected_range,
-        ratingFilterRange.start.roundToInt(),
-        ratingFilterRange.endInclusive.roundToInt()
-    )
-    BodyText(selectedRangeText)
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun GoodExample4Preview() {
-    ComposeAccessibilityTechniquesTheme {
-        Column(
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .fillMaxWidth()
-        )  {
-            GoodExample4()
         }
     }
 }

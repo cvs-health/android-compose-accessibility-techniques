@@ -1,5 +1,5 @@
 /*
-   Copyright 2024 CVS Health and/or one of its affiliates
+   Copyright 2024-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.autofill.AutofillType
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -56,8 +56,8 @@ const val autofillControlsExample2TextField1TestTag = "autofillControlsExample2T
 const val autofillControlsExample2TextField2TestTag = "autofillControlsExample2TextField2"
 
 /**
- * Demonstrate techniques regarding Autofill controls, specifically selecting the correct
- * [AutofillType] for a control. See [AutofilledOutlinedTextField] for key techniques to implement
+ * Demonstrate techniques regarding Autofill controls, specifically selecting the correct autofill
+ * [ContentType] for a control. See [AutofilledOutlinedTextField] for key techniques to implement
  * autofill controls themselves.
  *
  * Applies [GenericScaffold] to wrap the screen content.
@@ -179,7 +179,7 @@ private fun GoodExample2() {
         value = name,
         onValueChange = setName,
         // Key technique: Apply the appropriate autofill type(s) to a TextField.
-        autofillType = AutofillType.PersonFullName,
+        autofillContentType = ContentType.PersonFullName,
         modifier = Modifier
             .testTag(autofillControlsExample2TextField1TestTag)
             .padding(top = 8.dp)
@@ -200,7 +200,7 @@ private fun GoodExample2() {
         value = email,
         onValueChange = setEmail,
         // Key technique: Apply the appropriate autofill type(s) to a TextField.
-        autofillType = AutofillType.EmailAddress,
+        autofillContentType = ContentType.EmailAddress,
         modifier = Modifier
             .testTag(autofillControlsExample2TextField2TestTag)
             .padding(top = 8.dp)

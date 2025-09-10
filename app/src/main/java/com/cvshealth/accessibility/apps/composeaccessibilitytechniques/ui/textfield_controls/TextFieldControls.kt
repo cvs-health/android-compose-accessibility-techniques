@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -31,7 +31,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.autofill.AutofillType
+import androidx.compose.ui.autofill.AutofillManager
+import androidx.compose.ui.autofill.ContentType
+import androidx.compose.ui.platform.LocalAutofillManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.error
@@ -129,6 +131,7 @@ private fun GoodExample1(
     val (isError, setIsError) = remember { mutableStateOf(false) }
     val shortErrorMessage =
         if (isError) stringResource(id = R.string.textfield_controls_example_1_short_error) else ""
+    val autofillManager = LocalAutofillManager.current
 
     // Key techniques 2 and 5a: Apply fixes for keyboard Tab handling and Autofill; see
     // AccessibleTextFields.kt for details.
@@ -142,8 +145,8 @@ private fun GoodExample1(
             }
             setName(newName)
         },
-        // Key technique 5b: Designate the AutofillType when necessary.
-        autofillType = AutofillType.PersonFullName,
+        // Key technique 5b: Designate the autofill ContentType when necessary.
+        autofillContentType = ContentType.PersonFullName,
         modifier = Modifier
             .testTag(textFieldControlsExample1TextFieldTestTag)
             .padding(top = 8.dp)
@@ -190,19 +193,19 @@ private fun GoodExample1(
             onDone = {
                 // Key technique 4: Supply an onDone handler that does the same things as
                 // the button onClick handler.
-                onFormSubmit(snackbarLauncher, name, submitMessage, setIsError)
+                onFormSubmit(autofillManager, snackbarLauncher, name, submitMessage, setIsError)
             }
         )
     ) {
         // Key technique 2c: To handle the Enter key as Done, supply an onEnterHandler that
         // does the same things as the onDone and button onClick handler. See
         // AccessibleTextFields.kt for how this parameter is added to the TextField.
-        onFormSubmit(snackbarLauncher, name, submitMessage, setIsError)
+        onFormSubmit(autofillManager, snackbarLauncher, name, submitMessage, setIsError)
     }
 
     VisibleFocusBorderButton(
         onClick = {
-            onFormSubmit(snackbarLauncher, name, submitMessage, setIsError)
+            onFormSubmit(autofillManager, snackbarLauncher, name, submitMessage, setIsError)
         },
         modifier = Modifier.testTag(textFieldControlsExample1ButtonTestTag)
     ) {
@@ -211,6 +214,7 @@ private fun GoodExample1(
 }
 
 private fun onFormSubmit(
+    autofillManager: AutofillManager?,
     snackbarLauncher: SnackbarLauncher?,
     name: String,
     message: String,
@@ -219,6 +223,7 @@ private fun onFormSubmit(
     // Note: Typically, the ViewModel would be invoked here to validate and submit the form data.
     setIsError(name.isBlank())
     if (name.isNotBlank()) {
+        autofillManager?.commit()
         snackbarLauncher?.show(message)
     }
 }

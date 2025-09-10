@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.input.key.KeyEvent
 import androidx.compose.ui.input.key.NativeKeyEvent
 import androidx.compose.ui.test.assertCountEquals
@@ -41,6 +42,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+/**
+ * TextFieldControlsTests verifies the semantic properties of the TextFieldControlsScreen composable.
+ */
 class TextFieldControlsTests {
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -113,6 +117,8 @@ class TextFieldControlsTests {
                         hasImeAction(ImeAction.Done)
                         and
                         !isError()
+                        and
+                        hasContentType(ContentType.PersonFullName)
             )
             .assertExists()
         composeTestRule

@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -42,8 +42,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.autofill.AutofillNode
-import androidx.compose.ui.autofill.AutofillType
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.composed
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.FocusRequester
@@ -53,12 +52,10 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
-import androidx.compose.ui.layout.boundsInWindow
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalAutofill
-import androidx.compose.ui.platform.LocalAutofillTree
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentType
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -356,7 +353,7 @@ fun AccessibleOutlinedTextField(
  * @param value the input text to be shown in the text field
  * @param onValueChange the callback that is triggered when the input service updates the text. An
  * updated text comes as a parameter of the callback
- * @param autofillType the [AutofillType] used to suggest stored values for this text field
+ * @param autofillContentType the [ContentType] used to suggest stored values for this text field
  * @param modifier the [Modifier] to be applied to this text field
  * @param enabled controls the enabled state of this text field. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to accessibility
@@ -409,7 +406,7 @@ fun AccessibleOutlinedTextField(
 fun AutofilledOutlinedTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    autofillType: AutofillType,
+    autofillContentType: ContentType,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     readOnly: Boolean = false,
@@ -432,33 +429,14 @@ fun AutofilledOutlinedTextField(
     shape: Shape = OutlinedTextFieldDefaults.shape,
     colors: TextFieldColors = OutlinedTextFieldDefaults.colors(),
     onEnterHandler: (() -> Unit)? = null
-) {
-    // Key technique: Create an AutofillNode with AutofillType(s) and state setter lambda. Connect
-    // it to the LocalAutofillTree.
-    val autofillNode = AutofillNode(listOf(autofillType), onFill = onValueChange)
-    LocalAutofillTree.current += autofillNode
-
-    // Define access to LocalAutofill for later use in a non-composable context.
-    val currentLocalAutofill = LocalAutofill.current
-
-    OutlinedTextField(
+) = AccessibleOutlinedTextField(
         value,
         onValueChange,
         modifier = modifier
-            // Handle keyboard trap and (optional) keyboard Enter processing.
-            .nextOnTabAndHandleEnter(onEnterHandler)
-            // Key technique: on focus change, request autofill data or cancel existing request.
-            .onFocusChanged { focusState ->
-                currentLocalAutofill?.run {
-                    if (focusState.isFocused) {
-                        requestAutofillForNode(autofillNode)
-                    } else {
-                        cancelAutofillForNode(autofillNode)
-                    }
-                }
-            }
-            // Key technique: Set the autofillNode bounding box for pop-up positioning.
-            .onGloballyPositioned { autofillNode.boundingBox = it.boundsInWindow() },
+            // Key technique: Apply the appropriate autofill contentType to a TextField.
+            .semantics {
+                contentType = autofillContentType
+            },
         enabled,
         readOnly,
         textStyle,
@@ -478,9 +456,9 @@ fun AutofilledOutlinedTextField(
         minLines,
         interactionSource,
         shape,
-        colors
+        colors,
+        onEnterHandler = onEnterHandler
     )
-}
 
 /**
  * Extends an [AutofilledOutlinedTextField] with an icon for clearing the field value.
@@ -488,7 +466,7 @@ fun AutofilledOutlinedTextField(
  * @param value the input text to be shown in the text field
  * @param onValueChange the callback that is triggered when the input service updates the text. An
  * updated text comes as a parameter of the callback
- * @param autofillType the [AutofillType] used to suggest stored values for this text field
+ * @param autofillContentType the [ContentType] used to suggest stored values for this text field
  * @param modifier the [Modifier] to be applied to this text field
  * @param enabled controls the enabled state of this text field. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to accessibility
@@ -541,7 +519,7 @@ fun AutofilledOutlinedTextField(
 fun AutofilledClearableOutlinedTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    autofillType: AutofillType,
+    autofillContentType: ContentType,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     readOnly: Boolean = false,
@@ -571,7 +549,7 @@ fun AutofilledClearableOutlinedTextField(
     AutofilledOutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        autofillType = autofillType,
+        autofillContentType = autofillContentType,
         // Keyboard focus technique: Declare where the focusRequester will place keyboard focus.
         modifier = modifier.focusRequester(focusRequester),
         enabled = enabled,

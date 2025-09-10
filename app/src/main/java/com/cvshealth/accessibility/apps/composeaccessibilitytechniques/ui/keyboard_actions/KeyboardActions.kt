@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.autofill.AutofillType
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -134,7 +134,7 @@ private fun OkExample1() {
     AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
-        autofillType = AutofillType.PersonFullName,
+        autofillContentType = ContentType.PersonFullName,
         modifier = Modifier
             .testTag(keyboardActionsExample1TextFieldTestTag)
             .padding(top = 8.dp)
@@ -181,7 +181,7 @@ private fun GoodExample2() {
     AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
-        autofillType = AutofillType.PostalAddress,
+        autofillContentType = ContentType.PostalAddress,
         modifier = Modifier
             .testTag(keyboardActionsExample2TextFieldTestTag)
             .padding(top = 8.dp)
@@ -240,7 +240,7 @@ private fun GoodExample3(
     AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
-        autofillType = AutofillType.PostalCode,
+        autofillContentType = ContentType.PostalCode,
         modifier = Modifier
             .testTag(keyboardActionsExample3TextFieldTestTag)
             .padding(top = 8.dp)
@@ -418,7 +418,7 @@ private fun GoodExample6(
     AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
-        autofillType = AutofillType.PhoneNumberNational,
+        autofillContentType = ContentType.PhoneNumberNational,
         modifier = Modifier
             .testTag(keyboardActionsExample6TextFieldTestTag)
             .padding(top = 8.dp)

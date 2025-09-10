@@ -10,7 +10,7 @@ The required techniques are:
     3. Apply `Modifier.onPreviewKeyEvent()` to handle keyboard activity (Tab, Shift+Tab, Enter, and Up/Down direction pad keys), if the field remained focused after debouncing, and before the key event became part of the `TextField` data.
 3. Set soft keyboard type and options with the `TextField` `keyboardOptions` property. See [Keyboard Types and Options](../interactions/KeyboardTypes.md) for details.
 4. Set the appropriate soft keyboard actions using the `TextField` `keyboardOptions` `imeAction` property and the `TextField` `keyboardActions` property. See [Keyboard Actions](../interactions/KeyboardActions.md) for details.
-5. Apply autofill with appropriate `AutofillType`(s) to the `TextField`, if the data to be entered is supported by autofill. See [Autofill Controls](../components/AutofillControls.md) for details.
+5. Apply autofill with appropriate `ContentType`(s) semantics to the `TextField`, if the data to be entered is supported by autofill. See [Autofill Controls](../components/AutofillControls.md) for details.
 
 Appropriate error handling must be added to any `TextField` in support of WCAG [Success Criterion 3.3.1 Error Identification](https://www.w3.org/TR/WCAG22/#error-identification). Error handling techniques include:
 
@@ -148,7 +148,7 @@ OutlinedTextField(
 
 ----
 
-Copyright 2023-2024 CVS Health and/or one of its affiliates
+Copyright 2023-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -16,6 +16,7 @@
 package com.cvshealth.composeaccessibilitytechniques
 
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
@@ -258,5 +259,18 @@ fun hasMinimumTouchTargetSize(density: Float, minSize: Dp) : SemanticsMatcher {
             val touchWidthDp = (it.touchBoundsInRoot.width / density).dp
             touchHeightDp >= minSize && touchWidthDp >= minSize
         }
+    }
+}
+
+// Autofill contentType helpers
+fun hasAnyContentType(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.ContentType)
+
+fun hasNoContentType(): SemanticsMatcher =
+    SemanticsMatcher.keyNotDefined(SemanticsProperties.ContentType)
+
+fun hasContentType(value: ContentType): SemanticsMatcher {
+    return SemanticsMatcher("SemanticsProperties.ContentType == {$value}") {
+        value == it.config.getOrNull(SemanticsProperties.ContentType)
     }
 }

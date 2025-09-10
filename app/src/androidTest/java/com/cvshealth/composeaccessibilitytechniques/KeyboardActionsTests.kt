@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasImeAction
 import androidx.compose.ui.test.hasTestTag
@@ -41,6 +42,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+/**
+ * KeyboardActionsTests verifies the semantic properties of the KeyboardActionsScreen composable.
+ */
 class KeyboardActionsTests {
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -161,6 +165,52 @@ class KeyboardActionsTests {
                 hasTestTag(keyboardActionsExample6TextFieldTestTag)
                         and
                         hasImeAction(ImeAction.Go)
+            )
+            .assertExists()
+    }
+
+    @Test
+    fun verifyExampleTextFieldsHaveExpectedContentTypes() {
+        composeTestRule
+            .onNode(
+                hasTestTag(keyboardActionsExample1TextFieldTestTag)
+                        and
+                        hasContentType(ContentType.PersonFullName)
+            )
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(keyboardActionsExample2TextFieldTestTag)
+                        and
+                        hasContentType(ContentType.PostalAddress)
+            )
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(keyboardActionsExample3TextFieldTestTag)
+                        and
+                        hasContentType(ContentType.PostalCode)
+            )
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(keyboardActionsExample4TextFieldTestTag)
+                        and
+                        hasNoContentType()
+            )
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(keyboardActionsExample5TextFieldTestTag)
+                        and
+                        hasNoContentType()
+            )
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(keyboardActionsExample6TextFieldTestTag)
+                        and
+                        hasContentType(ContentType.PhoneNumberNational)
             )
             .assertExists()
     }

@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.autofill.AutofillType
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -225,7 +225,7 @@ private fun GoodExample3() {
     AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
-        autofillType = AutofillType.PhoneNumberNational,
+        autofillContentType = ContentType.PhoneNumberNational,
         modifier = Modifier
             .testTag(keyboardTypesExample3TextFieldTestTag)
             .padding(top = 8.dp)
@@ -426,7 +426,7 @@ private fun GoodExample8() {
     AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
-        autofillType = AutofillType.PersonFullName,
+        autofillContentType = ContentType.PersonFullName,
         modifier = Modifier
             .testTag(keyboardTypesExample8TextFieldTestTag)
             .padding(top = 8.dp)
@@ -554,7 +554,7 @@ private fun GoodExample11() {
     AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
-        autofillType = AutofillType.EmailAddress,
+        autofillContentType = ContentType.EmailAddress,
         modifier = Modifier
             .testTag(keyboardTypesExample11TextFieldTestTag)
             .padding(top = 8.dp)
@@ -634,7 +634,7 @@ private fun GoodExample13() {
     AutofilledOutlinedTextField(
         value = exampleText,
         onValueChange = setExampleText,
-        autofillType = AutofillType.Password,
+        autofillContentType = ContentType.NewPassword,
         modifier = Modifier
             .testTag(keyboardTypesExample13TextFieldTestTag)
             .padding(top = 8.dp)

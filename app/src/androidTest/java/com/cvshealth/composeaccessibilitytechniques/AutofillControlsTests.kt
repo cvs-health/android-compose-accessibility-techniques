@@ -1,5 +1,5 @@
 /*
-   Copyright 2024 CVS Health and/or one of its affiliates
+   Copyright 2024-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package com.cvshealth.composeaccessibilitytechniques
 
+import androidx.compose.ui.autofill.ContentType
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasImeAction
@@ -38,8 +39,6 @@ import org.junit.Test
 
 /**
  * AutofillControlsTests verifies the semantic properties of the AutofillControlsScreen composable.
- * As the association of autofill with a TextField is not a semantic property, only the heading and
- * imeActions statuses of the screen's component composables are verified.
  */
 class AutofillControlsTests {
     @get:Rule
@@ -134,6 +133,8 @@ class AutofillControlsTests {
                         hasImeAction(ImeAction.Next)
                         and
                         !isError()
+                        and
+                        hasNoContentType()
             )
             .assertExists()
         composeTestRule
@@ -143,6 +144,8 @@ class AutofillControlsTests {
                         hasImeAction(ImeAction.Next)
                         and
                         !isError()
+                        and
+                        hasNoContentType()
             )
             .assertExists()
     }
@@ -156,6 +159,8 @@ class AutofillControlsTests {
                         hasImeAction(ImeAction.Next)
                         and
                         !isError()
+                        and
+                        hasContentType(ContentType.PersonFullName)
             )
             .assertExists()
         composeTestRule
@@ -165,6 +170,8 @@ class AutofillControlsTests {
                         hasImeAction(ImeAction.Next)
                         and
                         !isError()
+                        and
+                        hasContentType(ContentType.EmailAddress)
             )
             .assertExists()
     }

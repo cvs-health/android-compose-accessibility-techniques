@@ -5,10 +5,10 @@ Two approaches to auto-filling input field values are to connect `TextField` dat
 
 ## Connect `TextField` data to an Autofill Service
 
-Text input fields can be autofilled by connecting their underlying state data to an `AutofillNode`, and requesting that autofill information be populated when the fields each receive focus. By doing so, any installed Autofill Service can provide suggested data values to those fields. 
+Text input fields can have their content autofilled by providing a semantic `contentType`. By doing so, any installed Autofill Service can provide suggested data values to those fields. 
 
-* See [Autofill Overview](https://developer.android.com/reference/kotlin/androidx/compose/ui/autofill/package-summary) (especially [AutofillType](https://developer.android.com/reference/kotlin/androidx/compose/ui/autofill/AutofillType)) and the [ExplicitAutofillTypesDemo.kt](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui/integration-tests/ui-demos/src/main/java/androidx/compose/ui/demos/autofill/ExplicitAutofillTypesDemo.kt) sample code for details. 
-    * Also, read the View UI framework document [Optimize your app for autofill](https://developer.android.com/guide/topics/text/autofill-optimize) for background on the Android autofill framework and Autofill Services.
+* See [Autofill in Compose](https://developer.android.com/develop/ui/compose/text/autofill) (especially [ContentType](https://developer.android.com/reference/kotlin/androidx/compose/ui/autofill/ContentType)) and the [TextFieldAutofillDemo.kt](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui/integration-tests/ui-demos/src/main/java/androidx/compose/ui/demos/autofill/TextFieldAutofillDemo.kt) sample code for details. 
+    * It may also help to read the View UI framework document [Optimize your app for autofill](https://developer.android.com/guide/topics/text/autofill-optimize) for background on the Android autofill framework and Autofill Services.
 * This approach, and supplying [Keyboard Types](../interactions/KeyboardTypes.md), are necessary to fulfill WCAG [Success Criterion 1.3.5 Identify Input Purpose](https://www.w3.org/TR/WCAG22/#identify-input-purpose) on Android.
 
 For example:
@@ -18,32 +18,15 @@ For example:
 fun AutofilledEmailTextField(
     email: String,
     setEmail: (String) -> Unit
-) {
-    // Technique: Create an AutofillNode with AutofillType(s) and state setter lambda. Connect it to 
-    // the LocalAutofillTree.  
-    val autofillNode = AutofillNode(listOf(AutofillType.EmailAddress), onFill = setEmail)
-    LocalAutofillTree.current += autofillNode
-    
-    // Define access to LocalAutofill for later use in a non-composable context.
-    val localAutofill = LocalAutofill.current
-
-    OutlinedTextField(
+) = OutlinedTextField(
         value = email,
         onValueChange = setEmail,
         modifier = Modifier
             // ... handle keyboard trap, etc. ...
-            .onFocusChanged { focusState ->
-                // Technique: on focus change, request autofill data or cancel existing request.
-                localAutofill?.run {
-                    if (focusState.isFocused) {
-                        requestAutofillForNode(autofillNode)
-                    } else {
-                        cancelAutofillForNode(autofillNode)
-                    }
-                }
-            }
-            // Technique: Set the autofillNode bounding box for pop-up positioning.
-            .onGloballyPositioned { autofillNode.boundingBox = it.boundsInWindow() },
+            // Key technique: Apply the appropriate autofill contentType to a TextField.
+            .semantics {
+                contentType = ContentType.EmailAddress
+            },
         // Always label TextFields...
         label = { Text("Email")},
         // Use KeyboardType.Email to enter email addresses.
@@ -53,6 +36,48 @@ fun AutofilledEmailTextField(
         ),
         // ... other TextField properties ...
     )
+
+```
+Multiple autofill content types can be set by adding `ContentType` values. For example, `contentType = ContentType.EmailAddress + ContentType.UserName`.
+
+When a form is complete, commit autofill values using the current `LocalAutofillManager` instance's `.commit()` method. For example:
+
+```kotlin
+val autofillManager = LocalAutofillManager.current
+Button(
+  onClick = {
+    autofillManager?.commit()
+    // submit the form...
+  },
+) {
+  Text("Submit")
+}
+```
+
+Semantic autofill content type can be tested in Compose UI tests using `SemanticsMatcher` functions.
+
+```kotlin
+fun hasAnyContentType(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.ContentType)
+
+fun hasNoContentType(): SemanticsMatcher =
+    SemanticsMatcher.keyNotDefined(SemanticsProperties.ContentType)
+
+fun hasContentType(value: ContentType): SemanticsMatcher {
+    return SemanticsMatcher("SemanticsProperties.ContentType == {$value}") {
+        value == it.config.getOrNull(SemanticsProperties.ContentType)
+    }
+}
+// ...
+@Test
+fun verifyNameTextFieldAutofillContentType() {
+    composeTestRule
+        .onNode(
+            hasTestTag(nameTextFieldTestTag) 
+            and
+            hasContentType(ContentType.PersonFullName)
+        )
+        .assertExists()
 }
 ```
 
@@ -64,7 +89,7 @@ Input fields can also be auto-populated by supplying default data values from kn
 
 ----
 
-Copyright 2024 CVS Health and/or one of its affiliates
+Copyright 2024-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

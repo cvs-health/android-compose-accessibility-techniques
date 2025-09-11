@@ -1,11 +1,11 @@
 # Content Group Replacement
-Sometimes content groups should be replaced with a single text that better describes the group for a screen reader user. Applying the `Modifier.semantics` `contentDescription` property to the enclosing layout composable adds a group text alternative. To fully replace all of the existing group accessibility text, the enclosed content is either rendered `invisibleToUser()` or its semantics is completely overridden by `Modifier.clearAndSetSemantics {}`.
+Sometimes content groups should be replaced with a single text that better describes the group for a screen reader user. Applying the `Modifier.semantics` `contentDescription` property to the enclosing layout composable adds a group text alternative. To fully replace all of the existing group accessibility text, the enclosed content is either rendered `hideFromAccessibility()` or its semantics is completely overridden by `Modifier.clearAndSetSemantics {}`.
 
-## Replacing group content with `invisibleToUser()`
+## Replacing group content with `hideFromAccessibility()`
 
-Children of a composable can remove themselves from the accessibility tree using the experimental `Modifier.semantics { invisibleToUser() }` property. (Note that this may not remove their own child content.)
+Children of a composable can remove themselves from the accessibility tree using the `Modifier.semantics { hideFromAccessibility() }` property. (Note that this may not remove their own child content.)
 
-The challenge of applying `invisibleToUser()` is that all applicable composables must apply it over time or the parent content description will be read in addition to its (unmarked) children. Automated testing can help catch such regression errors.
+The challenge of applying `hideFromAccessibility()` is that all applicable composables must apply it over time or the parent content description will be read in addition to its (unmarked) children. Automated testing can help catch such regression errors.
 
 ```kotlin
 val rating = 3.4f
@@ -18,17 +18,17 @@ Row(
 ) {
     Text(
         text = "Rating:",
-        modifier = Modifier.semantics { invisibleToUser() }
+        modifier = Modifier.semantics { hideFromAccessibility() }
     )
     LinearProgressIndicator(
         progress = { rating / maxRating },
         modifier = Modifier
             .padding(start = 8.dp, end = 8.dp)
-            .semantics { invisibleToUser() }
+            .semantics { hideFromAccessibility() }
     )
     Text(
         text = "${rating} / ${maxRating}", // "3.4 / 5"
-        modifier = Modifier.semantics { invisibleToUser() }
+        modifier = Modifier.semantics { hideFromAccessibility() }
     )
 }
 ```
@@ -65,7 +65,7 @@ Row(
 
 ----
 
-Copyright 2023-2024 CVS Health and/or one of its affiliates
+Copyright 2023-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

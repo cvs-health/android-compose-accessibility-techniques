@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -600,11 +600,11 @@ class TextAlternativesTests {
     @Test
     fun verifyExample5GroupedTextAndIconsHaveExpectedContentDescription() {
         // It is hard to write automated tests that distinguish between texts suppressed with
-        // invisibleToUser() and not those which are not: the merged semantics nodes do have text,
-        // so calling hasTextExactly() with no arguments on the merged semantics tree will fail.
-        // TalkBack just doesn't announce those texts, because that are marked invisibleToUser().
+        // hideFromAccessibility() and not those which are not: the merged semantics nodes do have
+        // text, so calling hasTextExactly() with no arguments on the merged semantics tree will fail.
+        // TalkBack just doesn't announce those texts, because that are marked hideFromAccessibility().
         // The current test on the unmerged tree works around that problem by looking for a node
-        // with the expected text and verifying that it is invisibleToUser.
+        // with the expected text and verifying that it is hideFromAccessibility.
         //
         // Testing would be simpler for the clearAndSetSemantics{} technique: just use
         // hasTextExactly() with no argument on the merged semantics tree.
@@ -617,7 +617,7 @@ class TextAlternativesTests {
                                 composeTestRule.activity.getString(
                                     R.string.text_alternatives_example_sunrise_time
                                 )
-                            ) and isInvisibleToUser()
+                            ) and isHiddenFromAccessibility()
                         )
                         and
                         hasContentDescriptionExactly(
@@ -637,7 +637,7 @@ class TextAlternativesTests {
                                 composeTestRule.activity.getString(
                                     R.string.text_alternatives_example_sunset_time
                                 )
-                            ) and isInvisibleToUser()
+                            ) and isHiddenFromAccessibility()
                         )
                         and
                         hasContentDescriptionExactly(
@@ -818,11 +818,11 @@ class TextAlternativesTests {
     }
 
     @Test
-    fun verifyExample13GroupedTextAndIconsHaveExpectedTextAndInvisibleToUserContentDescriptions() {
+    fun verifyExample13GroupedTextAndIconsHaveExpectedTextAndHiddenContentDescriptions() {
         // It is hard to write automated tests that distinguish between texts suppressed with
-        // invisibleToUser() and not those which are not. The current test on the unmerged tree
-        // works around that problem by looking for a node with the expected contentDescription and
-        // verifying that it is invisibleToUser.
+        // hideFromAccessibility() and not those which are not. The current test on the unmerged
+        // tree works around that problem by looking for a node with the expected contentDescription
+        // and verifying that it has hideFromAccessibility semantics.
         composeTestRule
             .onNode(
                 hasTestTag(textAlternativesExample13GroupTestTag)
@@ -832,7 +832,7 @@ class TextAlternativesTests {
                                 composeTestRule.activity.getString(
                                     R.string.text_alternatives_example_13_content_description
                                 )
-                            ) and isInvisibleToUser()
+                            ) and isHiddenFromAccessibility()
                         )
                         and
                         hasAnyDescendant(

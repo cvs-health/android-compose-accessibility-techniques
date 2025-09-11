@@ -37,7 +37,7 @@ import androidx.compose.ui.platform.LocalAutofillManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.error
-import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -171,11 +171,11 @@ private fun GoodExample1(
                 //
                 // Also, because the Modifier.semantics error property is set, the
                 // supportingText must be hidden from accessibility services (with
-                // invisibleToUser() semantics) to prevent duplicate announcements.
+                // hideFromAccessibility() semantics) to prevent duplicate announcements.
                 // This is hacky, but improves the audio-semantic user experience.
                 Text(
                     text = stringResource(id = R.string.textfield_controls_example_1_long_error),
-                    modifier = Modifier.semantics { invisibleToUser() }
+                    modifier = Modifier.semantics { hideFromAccessibility() }
                 )
             } else {
                 // Optionally display instructions in the supportingText when field is not in error.

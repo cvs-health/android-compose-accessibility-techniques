@@ -30,8 +30,11 @@ fun hasNoTestTag(): SemanticsMatcher =
     SemanticsMatcher.keyNotDefined(SemanticsProperties.TestTag)
 
 @OptIn(ExperimentalComposeUiApi::class)
-fun isInvisibleToUser(): SemanticsMatcher =
-    SemanticsMatcher.keyIsDefined(SemanticsProperties.InvisibleToUser)
+fun isHiddenFromAccessibility(): SemanticsMatcher =
+    SemanticsMatcher.keyIsDefined(SemanticsProperties.HideFromAccessibility).or(
+        // Covers the old way of doing things...
+        SemanticsMatcher.keyIsDefined(SemanticsProperties.InvisibleToUser)
+    )
 
 fun hasText(): SemanticsMatcher {
     val propertyName = "${SemanticsProperties.Text.name} + ${SemanticsProperties.EditableText.name}"

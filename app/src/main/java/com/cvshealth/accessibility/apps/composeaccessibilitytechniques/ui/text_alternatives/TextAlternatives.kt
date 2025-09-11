@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -328,7 +328,7 @@ private fun GoodExample5() {
     // 1. Set a group-level contentDescription with
     //    Modifier.semantics(mergeDescendants = true) { contentDescription = ... }
     // 2. Suppress unnecessary child composable accessibility text/contentDescription with
-    //    Modifier.semantics { invisibleToUser() } or Modifier.clearAndSetSemantics {...}.
+    //    Modifier.semantics { hideFromAccessibility() } or Modifier.clearAndSetSemantics {...}.
     // 3. Set contentDescription = null for all decorative or redundant images.
     TextAndImageGroupSemanticsReplaced(
         textId = R.string.text_alternatives_example_sunrise_time,
@@ -626,13 +626,13 @@ private fun BadExample12Preview() {
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun OkExample13() {
-    // OK example 13: Grouped decorative images with invisibleToUser()
+    // OK example 13: Grouped decorative images with hideFromAccessibility()
 
     // Key techniques:
     // 1. Use Modifier.semantics(mergeDescendants = true) {} to group content semantic text.
-    // 2. Use Modifier.semantics { invisibleToUser() } to mark the Icons as not
+    // 2. Use Modifier.semantics { hideFromAccessibility() } to mark the Icons as not
     //    applicable to the accessibility API.
-    // Use the invisibleToUser() technique for more complex composables, because for Icons,
+    // Use the hideFromAccessibility() technique for more complex composables, because for Icons,
     // contentDescription=null is a simpler approach. See Good Example 14 below.
     OkExampleHeading(
         text = stringResource(id = R.string.text_alternatives_example_13_heading),
@@ -650,7 +650,7 @@ private fun OkExample13() {
             contentDescription = stringResource(
                 id = R.string.text_alternatives_example_13_content_description
             ),
-            modifier = Modifier.semantics { invisibleToUser() }
+            modifier = Modifier.semantics { hideFromAccessibility() }
         )
         SampleText(
             textId = R.string.text_alternatives_example_13_decorated_text,
@@ -661,7 +661,7 @@ private fun OkExample13() {
             contentDescription = stringResource(
                 id = R.string.text_alternatives_example_13_content_description
             ),
-            modifier = Modifier.semantics { invisibleToUser() }
+            modifier = Modifier.semantics { hideFromAccessibility() }
         )
     }
 }
@@ -868,9 +868,10 @@ private fun TextAndImageGroupSemanticsReplaced(
             textId = textId,
             modifier = Modifier
                 .padding(end = 8.dp)
-                // Key technique 2: Make all redundant child composable semantics invisibleToUser()
+                // Key technique 2: Make all redundant child composable semantics
+                // hideFromAccessibility()
                 .semantics {
-                    invisibleToUser()
+                    hideFromAccessibility()
                 }
         )
         Icon(

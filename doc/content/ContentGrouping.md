@@ -64,7 +64,7 @@ Row {
 
 ## Disable redundant content announcements
 
-Disable announcement of any redundant content within the grouping layout composable by using `invisibleToUser()` semantics or a null `contentDescription` (as described in [Text Alternatives](../content/TextAlternatives.md)).
+Disable announcement of any redundant content within the grouping layout composable by using `hideFromAccessibility()` semantics or a null `contentDescription` (as described in [Text Alternatives](../content/TextAlternatives.md)).
 
 Alternatively, override the `contentDescription` of the entire group composable; see [Content Group Replacement](./ContentGroupReplacement.md) for details.
 
@@ -76,7 +76,7 @@ For clickable grouped content (such as cards or list items that allow drilling d
 
 ----
 
-Copyright 2023-2024 CVS Health and/or one of its affiliates
+Copyright 2023-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

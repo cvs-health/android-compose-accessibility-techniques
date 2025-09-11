@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -238,12 +238,12 @@ private fun BadExample2Preview() {
 @Composable
 @OptIn(ExperimentalComposeUiApi::class)
 private fun GoodExample3() {
-    // Good example 3: Rating with grouped content replaced with invisibleToUser()
+    // Good example 3: Rating with grouped content replaced with hideFromAccessibility()
 
     // Key techniques:
     // 1. Group the Row's content using Modifier.semantics(mergeDescendants = true).
     // 2. Provide a Row-level contentDescription in the Modifier.semantics lambda.
-    // 3. Remove the Row's existing content using Modifier.semantics { invisibleToUser() }
+    // 3. Remove the Row's existing content using Modifier.semantics { hideFromAccessibility() }
     //    on each child element, and when necessary on children of children. (In this case,
     //    the LinearProgressIndicator nested child requires this treatment.)
     GoodExampleHeading(
@@ -276,7 +276,7 @@ private fun GoodExample3() {
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.semantics { invisibleToUser() }
+            modifier = Modifier.semantics { hideFromAccessibility() }
         ) {
             Text(text = stringResource(id = R.string.content_group_replacement_rating_label))
             LinearProgressIndicator(
@@ -285,7 +285,7 @@ private fun GoodExample3() {
                     .width(80.dp)
                     .padding(start = 8.dp, end = 8.dp)
                     // Note that LinearProgressIndicator has to be made invisible too.
-                    .semantics { invisibleToUser() },
+                    .semantics { hideFromAccessibility() },
             )
             Text(
                 text = stringResource(
@@ -300,7 +300,7 @@ private fun GoodExample3() {
                 id = R.string.content_group_replacement_reviews,
                 contentGroupReplacementExamplesReviews
             ),
-            modifier = Modifier.semantics { invisibleToUser() }
+            modifier = Modifier.semantics { hideFromAccessibility() }
         )
     }
 }

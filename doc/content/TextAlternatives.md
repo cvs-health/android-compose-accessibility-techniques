@@ -35,14 +35,14 @@ Icon(
 )
 ```
 
-If necessary, it is possible to mark a composable with `invisibleToUser()` semantics to achieve the same effect, but that is not recommended in simple cases such as decorative `Icon`s.
+If necessary, it is possible to mark a composable with `hideFromAccessibility()` semantics to achieve the same effect, but that is not recommended in simple cases such as decorative `Icon`s.
 
 ```
 // Avoid applying this technique in this circumstance; prefer contentDescription = null.
 Icon(
     painter = painterResource(id = R.drawable.ic_sprout_fill),
     contentDescription = "Sprout",
-    modifier = Modifier.semantics { invisibleToUser() }
+    modifier = Modifier.semantics { hideFromAccessibility() }
 )
 ```
 
@@ -81,9 +81,9 @@ Another alternative for grouping images and text content is to set a `contentDes
 
 However, if a layout composable supplies a `contentDescription` and sets `mergeDescendants=true`, both the layout's `contentDescription` and any semantic text in the layout's child composables will be announced. There are two approaches to that issue.
 
-### Overriding content with `invisibleToUser()`
+### Overriding content with `hideFromAccessibility()`
 
-One way to avoid announcing both the layout-level and child-level text alternatives is to make any child composable that would announce text `invisibleToUser()`:
+One way to avoid announcing both the layout-level and child-level text alternatives is to make any child composable that would announce text `hideFromAccessibility()`:
 
 ```kotlin
 Row(
@@ -96,7 +96,7 @@ Row(
         textId = "6:35am",
         modifier = Modifier
             .padding(end = 8.dp)
-            .semantics { invisibleToUser() }
+            .semantics { hideFromAccessibility() }
     )
     Icon(
         painter = painterResource(id = R.drawable_ic_sunrise),
@@ -145,7 +145,7 @@ Complex images, such as charts and graphs, should have a concise `contentDescrip
 
 ----
 
-Copyright 2023-2024 CVS Health and/or one of its affiliates
+Copyright 2023-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

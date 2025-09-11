@@ -26,15 +26,15 @@ OutlinedCard(
 ) { /* ... */ }
 ```
 
-* Mark actionable composables within the card (or list item) with `Modifier.semantics { invisibleToUser() }` or wrap them in a composable employing `Modifier.clearAndSetSemantics {}`. Either of these semantics settings will prevent those actionable composables from appearing individually in Accessibility Services while remaining touch clickable and keyboard focusable.
+* Mark actionable composables within the card (or list item) with `Modifier.semantics { hideFromAccessibility() }` or wrap them in a composable employing `Modifier.clearAndSetSemantics {}`. Either of these semantics settings will prevent those actionable composables from appearing individually in Accessibility Services while remaining touch clickable and keyboard focusable.
 
 ```kotlin
 Row(
     // ...
 ) {
-    LikeButton(cardId, modifier = Modifier.semantics { invisibleToUser() })
-    ShareButton(cardId, modifier = Modifier.semantics { invisibleToUser() })
-    ReportButton(cardId, modifier = Modifier.semantics { invisibleToUser() }) 
+    LikeButton(cardId, modifier = Modifier.semantics { hideFromAccessibility() })
+    ShareButton(cardId, modifier = Modifier.semantics { hideFromAccessibility() })
+    ReportButton(cardId, modifier = Modifier.semantics { hideFromAccessibility() }) 
 }
 ```
 
@@ -53,7 +53,7 @@ Row(
 
 ----
 
-Copyright 2023-2024 CVS Health and/or one of its affiliates
+Copyright 2023-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

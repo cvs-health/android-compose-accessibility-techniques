@@ -122,12 +122,12 @@ OutlinedTextField(
     supportingText = {
         if (isError) {
            // Error technique: Display a visual error message using supportingText.
-           // Because the Modifier.semantics error property is set, the supportingText must be hidden 
-           // from accessibility services (with invisibleToUser() semantics) to prevent a duplicate 
-           // announcement.
+           // Because the Modifier.semantics error property is set, the supportingText must be 
+           // hidden from accessibility services (with hideFromAccessibility() semantics) to prevent
+           // a duplicate announcement.
             Text(
                 text = "Error: Website URI is required. Enter a web site address.",
-                modifier = Modifier.semantics { invisibleToUser() }
+                modifier = Modifier.semantics { hideFromAccessibility() }
             )
         } else {
             // Optional instruction technique: Display brief instructions using supportingText when 

@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.customActions
-import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -295,7 +295,7 @@ private fun GoodExample2(
         // Key Technique 2a: Remove the buttons from the accessibility tree using
         // Modifier.clearAndSetSemantics() on the enclosing Row. The buttons will remain touch-
         // clickable and keyboard-activateable. Alternatively, apply
-        // Modifier.semantics { invisibleToUser() } to each button (see Example 3).
+        // Modifier.semantics { hideFromAccessibility() } to each button (see Example 3).
         Row(
             modifier = Modifier
                 .padding(horizontal = 8.dp)
@@ -392,8 +392,8 @@ private fun GoodExample3(
             modifier = Modifier.padding(horizontal = 8.dp)
         )
         // Key Technique 2b: Remove each button from the accessibility tree using
-        // Modifier.semantics { invisibleToUser() }. The buttons will remain touch-clickable and
-        // keyboard-activatable. Alternatively, use Modifier.clearAndSetSemantics {} on the
+        // Modifier.semantics { hideFromAccessibility() }. The buttons will remain touch-clickable
+        // and keyboard-activatable. Alternatively, use Modifier.clearAndSetSemantics {} on the
         // surrounding Row (see Example 2).
         Row(
             modifier = Modifier
@@ -402,9 +402,9 @@ private fun GoodExample3(
                 .clearAndSetSemantics { },
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            LikeButton(cardId, Modifier.semantics { invisibleToUser() }, handleMessageEvent)
-            ShareButton(cardId, Modifier.semantics { invisibleToUser() }, handleMessageEvent)
-            ReportButton(cardId, Modifier.semantics { invisibleToUser() }, handleMessageEvent)
+            LikeButton(cardId, Modifier.semantics { hideFromAccessibility() }, handleMessageEvent)
+            ShareButton(cardId, Modifier.semantics { hideFromAccessibility() }, handleMessageEvent)
+            ReportButton(cardId, Modifier.semantics { hideFromAccessibility() }, handleMessageEvent)
         }
         Spacer(modifier = Modifier.height(8.dp))
     }

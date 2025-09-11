@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -284,7 +284,7 @@ class ContentGroupReplacementTests {
                         and
                         hasContentDescriptionExactly(groupContentDescription)
                         and
-                        // invisibleToUser() text nodes are still present in the semantics tree
+                        // hideFromAccessibility() text nodes are still present in the semantics tree
                         hasTextExactly(
                             composeTestRule.activity.getString(
                                 R.string.content_group_replacement_rating_label

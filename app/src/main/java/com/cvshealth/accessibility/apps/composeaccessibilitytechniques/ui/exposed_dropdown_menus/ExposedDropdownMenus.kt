@@ -29,9 +29,9 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -241,8 +241,8 @@ private fun GoodExample1a() {
     // Key techniques for accessible read-only exposed dropdown menus:
     // 1. Wrap the entire dropdown menu ensemble in an ExposedDropdownMenuBox.
     // 2. Expand the dropdown list when the Enter key is pressed on the TextField.
-    // 3. Use Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable) to link the TextField to the
-    //    ExposedDropdownMenuBox with correct semantics.
+    // 3. Use Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable) to link the
+    //    TextField to the ExposedDropdownMenuBox with correct semantics.
     // 4. Use readOnly = true and onValueChange = {} to prevent editing.
     // 5. Label the TextField.
     // 6. Set trailingIcon to visually indicate the collapsed/expanded state.
@@ -266,7 +266,7 @@ private fun GoodExample1a() {
                         false
                     }
                 }
-                .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+                .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
                 .fillMaxWidth(),
             readOnly = true,
             value = selectedValue,
@@ -367,8 +367,8 @@ private fun OkExample2a() {
     // 1. Wrap the entire dropdown menu ensemble in an ExposedDropdownMenuBox.
     // 2. Expand the dropdown list when the Enter key is pressed on the TextField. Use the Modifier.
     //    nextOnTabAndHandleEnter extension function to avoid the editable TextField keyboard trap.
-    // 3. Use Modifier.menuAnchor(MenuAnchorType.PrimaryEditable) to link the TextField to the
-    //    ExposedDropdownMenuBox with correct semantics.
+    // 3. Use Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable) to link the
+    //    TextField to the ExposedDropdownMenuBox with correct semantics.
     // 4. Use readOnly = false and onValueChange = { selectedValue = it } to allow editing.
     // 5. Label the TextField.
     // 6. Set trailingIcon to visually indicate the collapsed/expanded state. Make the trailing icon
@@ -389,7 +389,7 @@ private fun OkExample2a() {
                 .nextOnTabAndHandleEnter {
                     isExpanded = true
                 }
-                .menuAnchor(MenuAnchorType.PrimaryEditable)
+                .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable)
                 .fillMaxWidth(),
             readOnly = false,
             value = currentValue,
@@ -402,7 +402,7 @@ private fun OkExample2a() {
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(
                     expanded = isExpanded,
-                    modifier = Modifier.menuAnchor(MenuAnchorType.SecondaryEditable)
+                    modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.SecondaryEditable)
                 )
             },
             keyboardOptions = KeyboardOptions.Default.copy(

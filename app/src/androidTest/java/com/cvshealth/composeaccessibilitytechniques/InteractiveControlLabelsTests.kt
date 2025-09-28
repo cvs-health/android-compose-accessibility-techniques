@@ -291,6 +291,20 @@ class InteractiveControlLabelsTests {
                 )
             )
         composeTestRule
+            .onNodeWithTag(interactiveControlLabelsExample2ControlTestTag)
+            .performKeyPress(
+                KeyEvent(
+                    NativeKeyEvent(
+                        0,
+                        0,
+                        NativeKeyEvent.ACTION_UP,
+                        NativeKeyEvent.KEYCODE_TAB,
+                        0,
+                        NativeKeyEvent.META_SHIFT_ON
+                    )
+                )
+            )
+        composeTestRule
             .onNode(hasTestTag(interactiveControlLabelsExample1ControlTestTag))
             .assert(isFocused())
 

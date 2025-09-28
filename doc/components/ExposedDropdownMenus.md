@@ -15,7 +15,7 @@ The read-only Exposed Dropdown Menu pattern can be made fully accessibility.
 
 Notes:
 
-* Material 3 requires applying `Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable)` to the `TextField` in order to link the `TextView` with the menu with the proper semantics.
+* Material 3 requires applying `Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)` to the `TextField` in order to link the `TextView` with the menu with the proper semantics.
 * Set `readOnly = true` and `onValueChange = {}` on the `TextField` to prevent it from accepting user keyboard text (only data from the dropdown selection list is allowed).
 * Keyboard handling and focus management menu be applied at several points.
 
@@ -30,8 +30,8 @@ val focusRequester = remember { FocusRequester() }
 // Key techniques for accessible read-only exposed dropdown menus:
 // 1. Wrap the entire dropdown menu ensemble in an ExposedDropdownMenuBox.
 // 2. Expand the dropdown list when the Enter key is pressed on the TextField.
-// 3. Use Modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable) to link the TextField to the 
-//    ExposedDropdownMenuBox with correct semantics.
+// 3. Use Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable) to link the 
+//    TextField to the ExposedDropdownMenuBox with correct semantics.
 // 4. Use readOnly = true and onValueChange = {} to prevent editing.
 // 5. Label the TextField.
 // 6. Set trailingIcon to visually indicate the collapsed/expanded state.
@@ -55,7 +55,7 @@ ExposedDropdownMenuBox(
                     false
                 }
             }
-            .menuAnchor(MenuAnchorType.PrimaryNotEditable)
+            .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable)
             .fillMaxWidth(),
         readOnly = true,
         value = selectedValue,
@@ -167,7 +167,7 @@ The editable Exposed Dropdown Menu pattern can be made largely accessibility; al
 
 Notes:
 
-* Material 3 requires applying `Modifier.menuAnchor(MenuAnchorType.PrimaryEditable)` to the `TextField` and `Modifier.menuAnchor(MenuAnchorType.SecondaryEditable)` to its `trailingIcon` in order to link the `TextView` with the menu with the proper semantics.
+* Material 3 requires applying `Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable)` to the `TextField` and `Modifier.menuAnchor(ExposedDropdownMenuAnchorType.SecondaryEditable)` to its `trailingIcon` in order to link the `TextView` with the menu with the proper semantics.
 * Set `readOnly = false` and supply an `onValueChange` that sets the appropriate value state on the `TextField` to allow it to accept user keyboard input.
 * Keyboard handling and focus management must be applied even more extensively than for the read-only case. See [TextField Controls](TextFieldControls.md) for details of the `Modifier.nextOnTabAndEnterHandler()` extension function used in the example below.
 
@@ -202,8 +202,8 @@ val focusRequester = remember { FocusRequester() }
 // 1. Wrap the entire dropdown menu ensemble in an ExposedDropdownMenuBox.
 // 2. Expand the dropdown list when the Enter key is pressed on the TextField. Use the Modifier.
 //    nextOnTabAndHandleEnter extension function to avoid the editable TextField keyboard trap.
-// 3. Use Modifier.menuAnchor(MenuAnchorType.PrimaryEditable) to link the TextField to the
-//    ExposedDropdownMenuBox with correct semantics.
+// 3. Use Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable) to link the TextField 
+//    to the ExposedDropdownMenuBox with correct semantics.
 // 4. Use readOnly = false and onValueChange = { selectedValue = it } to allow editing.
 // 5. Label the TextField.
 // 6. Set trailingIcon to visually indicate the collapsed/expanded state. Make the trailing icon
@@ -224,7 +224,7 @@ ExposedDropdownMenuBox(
             .nextOnTabAndHandleEnter {
                 isExpanded = true
             }
-            .menuAnchor(MenuAnchorType.PrimaryEditable)
+            .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable)
             .fillMaxWidth(),
         readOnly = false,
         value = currentValue,
@@ -237,7 +237,7 @@ ExposedDropdownMenuBox(
         trailingIcon = {
             ExposedDropdownMenuDefaults.TrailingIcon(
                 expanded = isExpanded,
-                modifier = Modifier.menuAnchor(MenuAnchorType.SecondaryEditable)
+                modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.SecondaryEditable)
             )
         },
         keyboardOptions = KeyboardOptions.Default.copy(

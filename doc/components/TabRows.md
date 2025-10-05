@@ -34,9 +34,7 @@ Note: Material Design components version 1.2 will deprecate `TabRow` in favor of
 
 The `ScrollableTabRow` composable creates a scrollable tab row: not all tabs on such a row are necessarily visible and the length of the tab labels is less constrained. `ScrollableTabRow` also works in conjunction with the `Tab` composable and is followed by its tab pane content composable(s). 
 
-At present `ScrollableTabRow` use presents two challenges to accessibility:
-1. TalkBack has trouble shifting from tab pane content back to the tab row with the right-to-left ("previous") swipe.
-2. Switch Access puts early focus on any visible `ScrollableTabRow`, because it is scrollable, even if it is lower on the page than other focusable widgets.
+At present `ScrollableTabRow` use presents a challenges to accessibility: Switch Access puts early focus on any visible `ScrollableTabRow`, because it is scrollable, even if it is lower on the page than other focusable widgets.
 
 For example:
 

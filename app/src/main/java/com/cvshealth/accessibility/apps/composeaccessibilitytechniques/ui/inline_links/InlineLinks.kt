@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
@@ -164,7 +165,10 @@ private fun GoodExample1() {
         modifier = Modifier
             .testTag(inlineLinksExample1TextWithLinksTestTag)
             .fillMaxWidth()
-            .padding(top = 8.dp),
+            .padding(top = 8.dp)
+            // Key Technique: Merge the descendants of this Text; otherwise, the link annotations
+            // will force the Text too early in the content traversal (and focus) orders.
+            .semantics(mergeDescendants = true) {},
         style = MaterialTheme.typography.bodyMedium.copy(color = LocalContentColor.current)
     )
 

@@ -54,12 +54,15 @@ val text = buildAnnotatedString {
 Text(
     text = text, 
     modifier = Modifier.fillMaxWidth()
+        // Merge the descendants of this Text; otherwise, the link annotations will force the Text 
+        // too early in the content traversal (and focus) orders.
+        .semantics(mergeDescendants = true) {},
 )
 ```
 
 Notes:
 
-- Presently, `LinkAnnotion`s in `Text` composables receive TalkBack and Switch Access focus priority on entry to a screen (and when TalkBack focus wraps around from the bottom of the screen). That means they get focus before the top `AppBar`. This causes clear violations of WCAG [Success Criterion 1.3.2 Meaningful Sequence](https://www.w3.org/TR/WCAG22/#meaningful-sequence) and [Success Criterion 2.4.3 Focus Order](https://www.w3.org/TR/WCAG22/#focus-order). Avoid this technique until these problems are resolved. (See the Google Issues [441137287](https://issuetracker.google.com/issues/441137287), [435583641](https://issuetracker.google.com/issues/435583641), and [434156309](https://issuetracker.google.com/issues/434156309).)
+- Unless remediated with `mergeDescendant=true` semantics, `LinkAnnotion`s in `Text` composables receive TalkBack and Switch Access focus priority on entry to a screen (and when TalkBack focus wraps around from the bottom of the screen). That means they get focus before the top `AppBar`. This causes clear violations of WCAG [Success Criterion 1.3.2 Meaningful Sequence](https://www.w3.org/TR/WCAG22/#meaningful-sequence) and [Success Criterion 2.4.3 Focus Order](https://www.w3.org/TR/WCAG22/#focus-order). (See the Google Issues [441137287](https://issuetracker.google.com/issues/441137287), [435583641](https://issuetracker.google.com/issues/435583641), and [434156309](https://issuetracker.google.com/issues/434156309).)
 - The hard-coded text shown in these examples are only used for simplicity. _Always_ use externalized string resource references in actual code. However, URL values may be an exceptions, depending on how the website in question handles internationalization.
 - `LinkAnnotation.Url` can also take a `LinkInteractionListener` for link click handling. The default listener opens a link in the default browser. 
     - The more generic class `LinkAnnotation.Clickable` is also available for non-URL-based interactions and requires a `LinkInteractionListener`.

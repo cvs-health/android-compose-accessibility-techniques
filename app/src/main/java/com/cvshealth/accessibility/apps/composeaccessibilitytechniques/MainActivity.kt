@@ -60,6 +60,8 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.naviga
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.popup_messages.PopupMessagesScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups.RadioButtonGroupsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.screen_and_pane_titles.ScreenAndPaneTitlesScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.scrolling_columns.ScrollingInteractiveColumnsScreen
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.scrolling_columns.ScrollingTextColumnsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.slider_controls.SliderControlsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.StandAloneLinksScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.switch_controls.SwitchControlsScreen
@@ -195,6 +197,12 @@ private fun ComposeAccessibilityTechniquesNavHost(
         }
         composable(route = ComposeAccessibilityTechniquesRoute.CustomAccessibilityActions.route) {
             CustomAccessibilityActionsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.ScrollingInteractiveColumns.route) {
+            ScrollingInteractiveColumnsScreen(onBackPressed = popBackStack)
+        }
+        composable(route = ComposeAccessibilityTechniquesRoute.ScrollingTextColumns.route) {
+            ScrollingTextColumnsScreen(onBackPressed = popBackStack)
         }
         composable(route = ComposeAccessibilityTechniquesRoute.AccordionControls.route) {
             AccordionControlsScreen(onBackPressed = popBackStack)

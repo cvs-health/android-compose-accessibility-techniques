@@ -277,3 +277,28 @@ fun hasContentType(value: ContentType): SemanticsMatcher {
         value == it.config.getOrNull(SemanticsProperties.ContentType)
     }
 }
+
+// VerticalScrollAxis helpers
+fun isNotVerticallyScrolled(): SemanticsMatcher {
+    return SemanticsMatcher("SemanticsProperties.VerticalScrollAxisRange value <= 0") {
+        val verticalScrollAxisRange = it.config.getOrNull(SemanticsProperties.VerticalScrollAxisRange)
+        if (verticalScrollAxisRange == null) {
+            return@SemanticsMatcher false
+        } else {
+            val scrollPosition: Float = verticalScrollAxisRange.value.invoke()
+            return@SemanticsMatcher scrollPosition <= 0.0f
+        }
+    }
+}
+
+fun isVerticallyScrolled(): SemanticsMatcher {
+    return SemanticsMatcher("SemanticsProperties.VerticalScrollAxisRange value > 0") {
+        val verticalScrollAxisRange = it.config.getOrNull(SemanticsProperties.VerticalScrollAxisRange)
+        if (verticalScrollAxisRange == null) {
+            return@SemanticsMatcher false
+        } else {
+            val scrollPosition: Float = verticalScrollAxisRange.value.invoke()
+            return@SemanticsMatcher scrollPosition > 0.0f
+        }
+    }
+}

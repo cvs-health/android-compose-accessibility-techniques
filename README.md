@@ -29,6 +29,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
     - [x] [Custom click labels](doc/interactions/CustomClickLabels.md)
     - [x] [Custom state descriptions](doc/interactions/CustomStateDescriptions.md)
     - [x] [Custom accessibility actions](doc/interactions/CustomAccessibilityActions.md)
+    - [x] [Scrolling columns](doc/interactions/ScrollingColumns.md)
 - Specific Component Types
     - [x] [Accordion controls](doc/components/AccordionControls.md)
     - [x] [Autofill controls](doc/components/AutofillControls.md)

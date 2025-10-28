@@ -41,6 +41,8 @@ enum class ComposeAccessibilityTechniquesRoute(val route: String) {
     CustomClickLabels("customClickLabels"),
     CustomStateDescriptions("customStateDescriptions"),
     CustomAccessibilityActions("customAccessibilityActions"),
+    ScrollingInteractiveColumns("scrollingInteractiveColumns"),
+    ScrollingTextColumns("scrollingTextColumns"),
     AccordionControls("accordionControls"),
     AutofillControls("autofillControls"),
     CheckboxControls("checkboxControls"),

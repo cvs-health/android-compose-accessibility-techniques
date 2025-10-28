@@ -205,6 +205,14 @@ fun HomeScreen(
                     labelId = R.string.custom_accessibility_actions_title,
                     route = ComposeAccessibilityTechniquesRoute.CustomAccessibilityActions,
                 ),
+                NavigationCardInfo(
+                    labelId = R.string.scrolling_interactive_columns_title,
+                    route = ComposeAccessibilityTechniquesRoute.ScrollingInteractiveColumns,
+                ),
+                NavigationCardInfo(
+                    labelId = R.string.scrolling_text_columns_title,
+                    route = ComposeAccessibilityTechniquesRoute.ScrollingTextColumns,
+                ),
             )
             BasicAccordionHeading(
                 text = stringResource(id = R.string.home_interactive_behaviors)

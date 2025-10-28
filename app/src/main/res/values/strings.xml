@@ -471,6 +471,52 @@
     <string name="custom_accessibility_actions_share_event">Selected to share card example #%1$d</string>
     <string name="custom_accessibility_actions_report_event">Selected to report card example #%1$d as inappropriate</string>
 
+    <!-- Scrolling text columns -->
+    <string name="scrolling_text_columns_title">Scrolling text columns</string>
+    <string name="scrolling_text_columns_heading">Scrolling text columns requires keyboard remediation</string>
+    <string name="scrolling_text_columns_description_1">Columns of non-interactive (text) content can be made keyboard accessible with specific remediations for scrolling. First, the Column must be "focusable". Second, the Column must have a visible focus indicator.</string>
+    <string name="scrolling_text_columns_description_2">Attach an external keyboard, tab to the content area, then scroll the list using the Page Up and Page Down keys.</string>
+    <string name="scrolling_text_columns_example_1_header">Good example 1: Remediated scrolling text column</string>
+    <string name="scrolling_text_columns_example_1_content_block">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+
+    <!-- Scrolling interactive columns -->
+    <string name="scrolling_interactive_columns_title">Scrolling interactive columns</string>
+    <string name="scrolling_interactive_columns_heading">Scrolling interactive columns requires keyboard remediation</string>
+    <string name="scrolling_interactive_columns_description_1">Columns containing interactive content can be made keyboard accessible with specific remediations for scrolling. First, the Column must be "focusable". Second, the Column must have a visible focus indicator.</string>
+    <string name="scrolling_interactive_columns_description_2">Attach an external keyboard, tab to the content area, then scroll the list using the Page Up and Page Down keys.</string>
+    <string name="scrolling_interactive_columns_example_1_header">Good example 1: Remediated scrolling interactive column</string>
+    <string name="scrolling_interactive_columns_item_1">Apple</string>
+    <string name="scrolling_interactive_columns_item_2">Apricot</string>
+    <string name="scrolling_interactive_columns_item_3">Banana</string>
+    <string name="scrolling_interactive_columns_item_4">Blueberry</string>
+    <string name="scrolling_interactive_columns_item_5">Cherry</string>
+    <string name="scrolling_interactive_columns_item_6">Date</string>
+    <string name="scrolling_interactive_columns_item_7">Durian</string>
+    <string name="scrolling_interactive_columns_item_8">Elderberry</string>
+    <string name="scrolling_interactive_columns_item_9">Fig</string>
+    <string name="scrolling_interactive_columns_item_10">Grape</string>
+    <string name="scrolling_interactive_columns_item_11">Guava</string>
+    <string name="scrolling_interactive_columns_item_12">Honeydew melon</string>
+    <string name="scrolling_interactive_columns_item_13">Jackfruit</string>
+    <string name="scrolling_interactive_columns_item_14">Kiwi</string>
+    <string name="scrolling_interactive_columns_item_15">Lime</string>
+    <string name="scrolling_interactive_columns_item_16">Lychee</string>
+    <string name="scrolling_interactive_columns_item_17">Mango</string>
+    <string name="scrolling_interactive_columns_item_18">Nectarine</string>
+    <string name="scrolling_interactive_columns_item_19">Orange</string>
+    <string name="scrolling_interactive_columns_item_20">Papaya</string>
+    <string name="scrolling_interactive_columns_item_21">Peach</string>
+    <string name="scrolling_interactive_columns_item_22">Raspberry</string>
+    <string name="scrolling_interactive_columns_item_23">Strawberry</string>
+    <string name="scrolling_interactive_columns_item_24">Tamarind</string>
+    <string name="scrolling_interactive_columns_item_25">Ugli Fruit</string>
+    <string name="scrolling_interactive_columns_item_26">Watermelon</string>
+    <string name="scrolling_interactive_columns_item_27">Xigua</string>
+    <string name="scrolling_interactive_columns_item_28">Yangmei</string>
+    <string name="scrolling_interactive_columns_last_item_label">Last item</string>
+    <string name="scrolling_interactive_columns_last_item_button_label">Test</string>
+    <string name="scrolling_interactive_columns_last_item_button_message">Last item button pressed.</string>
+
     <!-- Accordion controls -->
     <string name="accordion_title">Accordion controls</string>
     <string name="accordion_heading">Accordion controls require an expand or collapse semantics property</string>

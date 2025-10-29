@@ -775,8 +775,12 @@
     <string name="standalone_links_example_2_text">Read about Jetpack Compose Accessibility</string>
     <string name="standalone_links_example_3_header">Good example 3: Accessible stand-alone link with icon</string>
     <string name="standalone_links_example_3_text">Read about Jetpack Compose Accessibility</string>
-    <string name="standalone_links_example_4_header">Good example 4: Stand-alone link TextButton with semantic onClickLabel</string>
+    <string name="standalone_links_example_4_header">Good example 4: Accessible stand-alone link using icon with contentDescription</string>
+    <string name="standalone_links_example_4_description">Instead of applying an onClickLabel, the external link icon\'s contentDescription can be used to convey link role information.</string>
     <string name="standalone_links_example_4_text">Read about Jetpack Compose Accessibility</string>
+    <string name="standalone_links_example_4_icon_description">Opens in browser</string>
+    <string name="standalone_links_example_5_header">Good example 5: Stand-alone link TextButton with semantic onClickLabel</string>
+    <string name="standalone_links_example_5_text">Read about Jetpack Compose Accessibility</string>
 
     <!-- Switch controls -->
     <string name="switch_controls_title">Switch controls</string>

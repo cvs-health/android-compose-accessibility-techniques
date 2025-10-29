@@ -1,5 +1,5 @@
 /*
-   Copyright 2024 CVS Health and/or one of its affiliates
+   Copyright 2024-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -50,19 +50,20 @@ fun GenericStandAloneLink(
     text: String,
     modifier: Modifier = Modifier,
     showExternalLinkIcon: Boolean = true,
+    // Key technique 1a: Role information can be conveyed via either the external link icon's
+    // content description or via the link's overall onClickLabel. The onClickLabel is used by
+    // default here.
+    externalLinkIconContentDescription: String? = null,
+    linkOnClickLabel: String? = stringResource(R.string.standalone_link_on_click_label),
     onClick: () -> Unit
 ) {
-    // Key technique 1a: Acquire the onClickLabel text.
-    val genericLinkOnClickLabel =
-        stringResource(id = R.string.standalone_link_on_click_label)
-
     Row(
         modifier = modifier
             // Optional technique: Provide an enhanced keyboard focus indicator.
             .visibleFocusBorder()
             .clickable(
-                // Key technique 1b: Apply the onClickLabel
-                onClickLabel = genericLinkOnClickLabel,
+                // Key technique 1b: Apply the role information via the overall link onClickLabel.
+                onClickLabel = linkOnClickLabel,
                 onClick = onClick
             )
             // Key technique 2: Make the stand-alone link large enough to easily tap.
@@ -82,11 +83,13 @@ fun GenericStandAloneLink(
         )
         if (showExternalLinkIcon) {
             Spacer(Modifier.width(8.dp))
-            // Key technique: 3b: Use an external link icon to visually indicate that the link opens in
+            // Key technique 3b: Use an external link icon to visually indicate that the link opens in
             // the browser, not within this app.
             Icon(
                 painter = painterResource(id = R.drawable.ic_external_link_outline),
-                contentDescription = null, // Note: This information is already conveyed in onClickLabel.
+                // Key technique 1c: Apply the role information via the external link icon's
+                // contentDescription.
+                contentDescription = externalLinkIconContentDescription,
                 tint = MaterialTheme.colorScheme.primary
             )
         }

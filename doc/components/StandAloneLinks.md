@@ -5,6 +5,7 @@ Stand-alone links (links not embedded in blocks of text) require specific constr
 * [Success Criterion 2.4.4 Link Purpose (In Context)](https://www.w3.org/TR/WCAG22/#link-purpose-in-context)
 * [Success Criterion 1.4.1 Use of Color](https://www.w3.org/TR/WCAG22/#use-of-color)
 * [Success Criterion 2.5.8 Target Size (Minimum)](https://www.w3.org/TR/WCAG22/#target-size-minimum)
+* [Success Criterion 2.4.7 Focus Visible](https://www.w3.org/TR/WCAG22/#focus-visible)
 * [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value)
 
 The following techniques are important to make stand-alone links accessible:
@@ -12,6 +13,7 @@ The following techniques are important to make stand-alone links accessible:
 * Link text must convey its purpose
 * Link text style must be sufficiently distinct from other text
 * Links must be large enough to tap easily
+* Links must have a visible focus indicator
 * The link role should be communicated as best possible
 
 ## Link text must convey its purpose
@@ -71,6 +73,10 @@ Text(
 )
 ```
 
+## Stand-alone links must have a visible focus indicator
+
+A stand-alone link requires a visible focus indicator. Although, applying `clickable()` to a composable adds a default focus indicator, a custom focus indicator can improve focus visibility. See [Custom Focus Indicators](../interactions/CustomFocusIndicators.md) for techniques.
+
 ## The link role should be communicated as best possible
 
 Addressing [Success Criterion 4.1.2 Name, Role, Value](https://www.w3.org/TR/WCAG22/#name-role-value) for stand-alone links is particularly tricky, because unlike the web and iOS, Android has never had a distinct "link" semantic role. That renders most web accessibility discussion and advice about distinguishing links from buttons entirely moot, because the Android platform does not support that distinction in its accessibility API. 
@@ -79,20 +85,18 @@ In the Android View framework, it was possible to supply an overriding "roleDesc
 
 All that said, there are things developers should do to make stand-alone links understandable to all app users. As mentioned above, text wording and styling help indicate that text is a stand-alone link.
 
-A stand-alone link can include an "external link" icon to show that it opens in a browser.
+A stand-alone link can include an "external link" icon to show that it opens in a browser. Additionally, that external link icon can contain a `contentDescription` such as "Link" or "Opens in browser".
 
-A stand-alone link requires a visible focus indicator. Although, applying `clickable()` to a `Text` adds a default focus indicator, a custom focus indicator can improve focus visibility. 
+The TalkBack announcement of the link click action can also be adjusted from "Double-tap to activate" to an announcement that better indicates that clicking opens a link. This is done using the `clickable()`'s `onClickLabel` parameter. For example, setting `onClickLabel = "open in browser"` will cause TalkBack to announce "Double-tap to open in browser."
 
-The TalkBack announcement of the link click action can also be adjusted from "Double-tap to activate" to an announcement that better indicates that clicking opens a link. For example, "Double-tap to open in browser."
-
-The following example includes these techniques (except for a custom focus indicator):
+The following example uses the above techniques (except for a custom focus indicator) and conveys link role information via the link's `onClickLabel`:
 
 ```kotlin
 val uriHandler = LocalUriHandler.current
 Row(
     modifier = Modifier
         .clickable(
-            onClickLabel = "open in browser"
+            onClickLabel = "open in browser"  // Link role information is conveyed here
         ) {
             uriHandler.openUri(COMPOSE_ACCESSIBILITY_URL)
         }
@@ -110,7 +114,36 @@ Row(
     Spacer(Modifier.width(8.dp))
     Icon(
         painter = painterResource(id = R.drawable.ic_external_link_outline),
-        contentDescription = null, // information is already conveyed in onClickLabel
+        contentDescription = null, // Note: Link role is conveyed via clickable's onClickLabel
+        tint = MaterialTheme.colorScheme.primary
+    )
+}
+```
+
+The following example uses the above techniques (except for a custom focus indicator) and conveys link role information via the link icon's `contentDescription`:
+
+```kotlin
+val uriHandler = LocalUriHandler.current
+Row(
+    modifier = Modifier
+        .clickable { // Note: No onClickLabel here; link role is conveyed via contentDescription
+            uriHandler.openUri(COMPOSE_ACCESSIBILITY_URL)
+        }
+        .minimumInteractiveComponentSize(),
+    verticalAlignment = Alignment.CenterVertically
+) {
+    Text(
+        text = "Read about Jetpack Compose Accessibility",
+        // Use weight() without fill to keep the icon visible when the text wraps at large text size
+        modifier = Modifier.weight(1f, fill = false),
+        color = MaterialTheme.colorScheme.primary,
+        fontWeight = FontWeight.Bold,
+        textDecoration = TextDecoration.Underline
+    )
+    Spacer(Modifier.width(8.dp))
+    Icon(
+        painter = painterResource(id = R.drawable.ic_external_link_outline),
+        contentDescription = "Link", // Link role information is conveyed here.
         tint = MaterialTheme.colorScheme.primary
     )
 }
@@ -160,7 +193,7 @@ TextButton(
 
 ----
 
-Copyright 2024 CVS Health and/or one of its affiliates
+Copyright 2024-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,5 +1,5 @@
 /*
-   Copyright 2024 CVS Health and/or one of its affiliates
+   Copyright 2024-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -18,7 +18,9 @@ package com.cvshealth.composeaccessibilitytechniques
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasClickAction
+import androidx.compose.ui.test.hasContentDescriptionExactly
 import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.hasTextExactly
 import androidx.compose.ui.test.isHeading
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
@@ -30,7 +32,9 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standa
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample3HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample3LinkTextTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample4HeadingTestTag
-import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample4LinkButtonTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample4LinkTextTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample5HeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksExample5LinkButtonTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.standalone_links.standaloneLinksHeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
 import org.junit.Before
@@ -62,7 +66,7 @@ class StandAloneLinksTests {
 
     @Test
     fun verifyHeadingsCount() {
-        composeTestRule.onAllNodes(isHeading()).assertCountEquals(6)
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(7)
     }
 
     @Test
@@ -84,6 +88,9 @@ class StandAloneLinksTests {
             .assertExists()
         composeTestRule
             .onNode(hasTestTag(standaloneLinksExample4HeadingTestTag) and isHeading())
+            .assertExists()
+        composeTestRule
+            .onNode(hasTestTag(standaloneLinksExample5HeadingTestTag) and isHeading())
             .assertExists()
     }
 
@@ -118,7 +125,16 @@ class StandAloneLinksTests {
             .assertExists()
         composeTestRule
             .onNode(
-                hasTestTag(standaloneLinksExample4LinkButtonTestTag)
+                hasTestTag(standaloneLinksExample4LinkTextTestTag)
+                        and
+                        !isHeading()
+                        and
+                        !hasAnyDescendant(isHeading())
+            )
+            .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(standaloneLinksExample5LinkButtonTestTag)
                         and
                         !isHeading()
                         and
@@ -175,7 +191,24 @@ class StandAloneLinksTests {
     fun verifyExample4LinkTextHasExpectedSemantics() {
         composeTestRule
             .onNode(
-                hasTestTag(standaloneLinksExample4LinkButtonTestTag)
+                hasTestTag(standaloneLinksExample4LinkTextTestTag)
+                        and
+                        hasClickAction()
+                        and
+                        !hasClickActionLabel()
+                        and
+                        hasTextExactly("Read about Jetpack Compose Accessibility")
+                        and
+                        hasContentDescriptionExactly("Opens in browser")
+            )
+            .assertExists()
+    }
+
+    @Test
+    fun verifyExample5LinkButtonHasExpectedSemantics() {
+        composeTestRule
+            .onNode(
+                hasTestTag(standaloneLinksExample5LinkButtonTestTag)
                         and
                         hasClickAction()
                         and

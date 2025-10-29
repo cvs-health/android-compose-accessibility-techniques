@@ -1,5 +1,5 @@
 /*
-   Copyright 2024 CVS Health and/or one of its affiliates
+   Copyright 2024-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -54,7 +54,9 @@ const val standaloneLinksExample2LinkTextTestTag = "standaloneLinksExample2LinkT
 const val standaloneLinksExample3HeadingTestTag = "standaloneLinksExample3Heading"
 const val standaloneLinksExample3LinkTextTestTag = "standaloneLinksExample3LinkText"
 const val standaloneLinksExample4HeadingTestTag = "standaloneLinksExample4Heading"
-const val standaloneLinksExample4LinkButtonTestTag = "standaloneLinksExample4LinkButton"
+const val standaloneLinksExample4LinkTextTestTag = "standaloneLinksExample4LinkText"
+const val standaloneLinksExample5HeadingTestTag = "standaloneLinksExample5Heading"
+const val standaloneLinksExample5LinkButtonTestTag = "standaloneLinksExample5LinkButton"
 
 private const val COMPOSE_ACCESSIBILITY_URL = "https://developer.android.com/jetpack/compose/accessibility"
 
@@ -91,6 +93,7 @@ fun StandAloneLinksScreen(
             GoodExample2()
             GoodExample3()
             GoodExample4()
+            GoodExample5()
             Spacer(modifier = Modifier.height(8.dp))
         }
     }
@@ -210,15 +213,52 @@ private fun GoodExample3Preview() {
 
 @Composable
 private fun GoodExample4() {
-    // Good example 4: Stand-alone link TextButton with semantic onClickLabel
+    // Good example 4: Accessible stand-alone link using icon with contentDescription
+    val uriHandler = LocalUriHandler.current
+
+    GoodExampleHeading(
+        text = stringResource(id = R.string.standalone_links_example_4_header),
+        modifier = Modifier.testTag(standaloneLinksExample4HeadingTestTag)
+    )
+    BodyText(textId = R.string.standalone_links_example_4_description)
+
+    GenericStandAloneLink(
+        text = stringResource(id = R.string.standalone_links_example_4_text),
+        modifier = Modifier.testTag(standaloneLinksExample4LinkTextTestTag),
+        showExternalLinkIcon = true,
+        externalLinkIconContentDescription =
+            stringResource(R.string.standalone_links_example_4_icon_description),
+        linkOnClickLabel = null // Announce click action as "Double-tap to activate"
+    ) {
+        uriHandler.openUri(COMPOSE_ACCESSIBILITY_URL)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun GoodExample4Preview() {
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        ) {
+            GoodExample4()
+        }
+    }
+}
+
+@Composable
+private fun GoodExample5() {
+    // Good example 5: Stand-alone link TextButton with semantic onClickLabel
     val uriHandler = LocalUriHandler.current
     val goToComposeAccessibility = {
         uriHandler.openUri(COMPOSE_ACCESSIBILITY_URL)
     }
 
     GoodExampleHeading(
-        text = stringResource(id = R.string.standalone_links_example_4_header),
-        modifier = Modifier.testTag(standaloneLinksExample4HeadingTestTag)
+        text = stringResource(id = R.string.standalone_links_example_5_header),
+        modifier = Modifier.testTag(standaloneLinksExample5HeadingTestTag)
     )
     Spacer(modifier = Modifier.height(8.dp))
 
@@ -227,11 +267,11 @@ private fun GoodExample4() {
     // to the Button onClick parameter, instead of Modifier.clickable().
     VisibleFocusBorderTextButton(
         onClick = goToComposeAccessibility,
-        modifier = Modifier.testTag(standaloneLinksExample4LinkButtonTestTag),
+        modifier = Modifier.testTag(standaloneLinksExample5LinkButtonTestTag),
         onClickLabel = stringResource(id = R.string.standalone_link_on_click_label)
     ) {
         Text(
-            text = stringResource(id = R.string.standalone_links_example_4_text),
+            text = stringResource(id = R.string.standalone_links_example_5_text),
             // Key technique: Use weight() without fill to keep the icon visible when the text
             // wraps at large text size.
             modifier = Modifier.weight(1f, fill = false),
@@ -248,14 +288,14 @@ private fun GoodExample4() {
 
 @Preview(showBackground = true)
 @Composable
-private fun GoodExample4Preview() {
+private fun GoodExample5Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         ) {
-            GoodExample4()
+            GoodExample5()
         }
     }
 }

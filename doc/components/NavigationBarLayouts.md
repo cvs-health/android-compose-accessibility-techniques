@@ -34,13 +34,13 @@ val pageNavController = rememberNavController()
 // NavigationBarItem data
 data class NavItemData(
     val label: String,
-    val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector
+    @DrawableRes val selectedIcon: Int,
+    @DrawableRes val  unselectedIcon: Int
 )
 val navItemsData = listOf(
-    NavItemData("Home", Icons.Filled.Home, Icons.Outlined.Home),
-    NavItemData("Favorites", Icons.Filled.Favorite, Icons.Outlined.FavoriteBorder),
-    NavItemData("Settings", Icons.Filled.Settings, Icons.Outlined.Settings),
+    NavItemData("Home", R.drawable.home_24dp_filled, R.drawable.home_24dp_outlined),
+    NavItemData("Favorites", R.drawable.favorite_24dp_filled, R.drawable.favorite_24dp_outlined),
+    NavItemData("Settings", R.drawable.settings_24dp_filled, R.drawable.settings_24dp_outlined),
 )
 
 Scaffold(
@@ -64,10 +64,12 @@ Scaffold(
                     // Display the appropriate icon. Use a filled icon for the selected item.
                     icon = {
                         Icon(
-                            imageVector = if (selectedItemIndex == 0)
-                                navItemData.selectedIcon 
-                            else
-                                navItemData.unselectedIcon,
+                            painter = painterResource (
+                                if (selectedItemIndex == index)
+                                    navItemData.selectedIcon 
+                                else
+                                    navItemData.unselectedIcon
+                            ),
                             // Icon contentDescription will only be used if there is no label or the
                             // label is not shown. Best practice is to provide it.
                             contentDescription = navItemData.label
@@ -103,7 +105,7 @@ Scaffold(
 
 ----
 
-Copyright 2024 CVS Health and/or one of its affiliates
+Copyright 2024-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -29,7 +29,7 @@ Scaffold(
             navigationIcon = {
                 IconButton(onClick = { /* Handle Back navigation */ }) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        painter = painterResource(R.drawable.arrow_back_24dp),
                         contentDescription = "Navigate up"
                     )
                 }
@@ -63,7 +63,7 @@ Significant panes within a screen should also be titled. For example, a navigati
 
 ----
 
-Copyright 2024 CVS Health and/or one of its affiliates
+Copyright 2024-2025  CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

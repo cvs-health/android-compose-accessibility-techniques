@@ -1,5 +1,5 @@
 /*
-   Copyright 2024 CVS Health and/or one of its affiliates
+   Copyright 2024-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -26,9 +26,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
@@ -53,6 +50,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -169,7 +167,7 @@ private fun ProblematicExample1(
                         .testTag(dropdownMenusExample1ButtonTestTag)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.MoreVert,
+                        painter = painterResource(R.drawable.more_vert_24dp),
                         contentDescription = stringResource(id = R.string.dropdown_menus_example_menu_content_description)
                     )
                 }
@@ -273,7 +271,7 @@ private fun GoodExample2(
                         .testTag(dropdownMenusExample2ButtonTestTag)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.MoreVert,
+                        painter = painterResource(R.drawable.more_vert_24dp),
                         contentDescription = stringResource(id = R.string.dropdown_menus_example_menu_content_description)
                     )
                 }
@@ -350,7 +348,7 @@ private fun GoodExample2(
                             // Note: This Icon's information is redundant with the menu item's text,
                             // so its contentDescription is omitted.
                             Icon(
-                                imageVector = Icons.Default.Close,
+                                painter = painterResource(R.drawable.close_24dp),
                                 contentDescription = null
                             )
                         }

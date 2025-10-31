@@ -23,8 +23,6 @@ import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
@@ -53,6 +51,7 @@ import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentType
 import androidx.compose.ui.semantics.semantics
@@ -577,7 +576,7 @@ fun AutofilledClearableOutlinedTextField(
                     enabled = value.isNotEmpty()
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Clear,
+                        painter = painterResource(R.drawable.close_small_24dp),
                         contentDescription = stringResource(id = R.string.textfield_clear_button_description),
                     )
                 }

@@ -28,7 +28,7 @@ Box(
         onClick = { isMenuExpanded = true }
     ) {
         Icon(
-            imageVector = Icons.Default.MoreVert,
+            painter = painterResource(R.drawable.more_vert_24dp),
             contentDescription = "Show menu"
         )
     }
@@ -72,7 +72,7 @@ Box(
             },
             trailingIcon = {
                 Icon(
-                    imageVector = Icons.Default.Close,
+                    painter = painterResource(R.drawable.close_24dp),
                     contentDescription = null // Icon information is redundant with text, so omit.
                 )
             }
@@ -93,7 +93,7 @@ Box(
 
 ----
 
-Copyright 2024 CVS Health and/or one of its affiliates
+Copyright 2024-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -18,7 +18,7 @@ For example:
         }
     ) {
         Icon(
-            imageVector = Icons.Default.Add,
+            painter = painterResource(R.drawable.add_24dp),
             contentDescription = "Add"
         )
     }
@@ -40,7 +40,7 @@ For example:
         modifier = Modifier.minimumInteractiveComponentSize()
     ) {
         Icon(
-            imageVector = Icons.Default.Add,
+            painter = painterResource(R.drawable.add_24dp),
             contentDescription = "Add"
         )
     }
@@ -58,7 +58,7 @@ For example:
         modifier = Modifier.defaultMinSize(minWidth = 48.dp, minHeight = 48.dp)
     ) {
         Icon(
-            imageVector = Icons.Default.Add,
+            painter = painterResource(R.drawable.add_24dp),
             contentDescription = "Add"
         )
     }
@@ -80,7 +80,7 @@ For example, if two adjacent `IconButton`s each have the size 24dp by 24dp, they
 
 ----
 
-Copyright 2024 CVS Health and/or one of its affiliates
+Copyright 2024-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,5 +1,5 @@
 /*
-   Copyright 2024 CVS Health and/or one of its affiliates
+   Copyright 2024-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.navigationbar_layouts
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,15 +24,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Notifications
-import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -43,8 +35,8 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -125,8 +117,8 @@ private fun PreviewWithScaffold() {
 
 private data class NavigationItemData(
     @StringRes val labelStringId: Int,
-    val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector,
+    @DrawableRes val selectedIcon: Int,
+    @DrawableRes val  unselectedIcon: Int,
     val route: String,
     @StringRes val bodyTextId: Int
 )
@@ -134,29 +126,29 @@ private data class NavigationItemData(
 private val navigationBarItemsData = listOf(
     NavigationItemData(
         labelStringId = R.string.navigationbar_layouts_tab_1_label,
-        selectedIcon = Icons.Filled.Home,
-        unselectedIcon = Icons.Outlined.Home,
+        selectedIcon = R.drawable.home_24dp_filled,
+        unselectedIcon = R.drawable.home_24dp_outlined,
         route = "Home",
         bodyTextId = R.string.navigationbar_layouts_tab_1_description_1
     ),
     NavigationItemData(
         labelStringId = R.string.navigationbar_layouts_tab_2_label,
-        selectedIcon = Icons.Filled.Favorite,
-        unselectedIcon = Icons.Outlined.FavoriteBorder,
+        selectedIcon = R.drawable.favorite_24dp_filled,
+        unselectedIcon = R.drawable.favorite_24dp_outlined,
         route = "Favorites",
         bodyTextId = R.string.navigationbar_layouts_tab_2_description_1
     ),
     NavigationItemData(
         labelStringId = R.string.navigationbar_layouts_tab_3_label,
-        selectedIcon = Icons.Filled.Notifications,
-        unselectedIcon = Icons.Outlined.Notifications,
+        selectedIcon = R.drawable.notifications_24dp_filled,
+        unselectedIcon = R.drawable.notifications_24dp_outlined,
         route = "Notifications",
         bodyTextId = R.string.navigationbar_layouts_tab_3_description_1
     ),
     NavigationItemData(
         labelStringId = R.string.navigationbar_layouts_tab_4_label,
-        selectedIcon = Icons.Filled.Settings,
-        unselectedIcon = Icons.Outlined.Settings,
+        selectedIcon = R.drawable.settings_24dp_filled,
+        unselectedIcon = R.drawable.settings_24dp_outlined,
         route = "Settings",
         bodyTextId = R.string.navigationbar_layouts_tab_4_description_1
     ),
@@ -214,10 +206,12 @@ private fun BadExample1() {
                     Icon(
                         // Display filled icon for selected navigation bar items and an outlined
                         // icon otherwise.
-                        imageVector = if (selectedItemIndex == index)
-                            navigationItemData.selectedIcon
-                        else
-                            navigationItemData.unselectedIcon,
+                        painter = painterResource (
+                            if (selectedItemIndex == index)
+                                navigationItemData.selectedIcon
+                            else
+                                navigationItemData.unselectedIcon
+                        ),
                         // Good practice suggests always providing an Icon contentDescription, but
                         // it will only be used if there is no label or when the label is not shown.
                         // In this example, the contentDescription will not be used, since the text
@@ -310,10 +304,12 @@ private fun GoodExample2() {
                     Icon(
                         // Display filled icon for selected navigation bar items and an outlined
                         // icon otherwise.
-                        imageVector = if (selectedItemIndex == index)
-                            navigationItemData.selectedIcon
-                        else
-                            navigationItemData.unselectedIcon,
+                        painter = painterResource (
+                            if (selectedItemIndex == index)
+                                navigationItemData.selectedIcon
+                            else
+                                navigationItemData.unselectedIcon
+                        ),
                         // Good practice suggests always providing an Icon contentDescription, but
                         // it will only be used if there is no label or when the label is not shown.
                         // In this example, the contentDescription will not be used, since the text
@@ -397,10 +393,12 @@ private fun OkExample3() {
                     Icon(
                         // Display filled icon for selected navigation bar items and an outlined
                         // icon otherwise.
-                        imageVector = if (selectedItemIndex == index)
-                            navigationItemData.selectedIcon
-                        else
-                            navigationItemData.unselectedIcon,
+                        painter = painterResource (
+                            if (selectedItemIndex == index)
+                                navigationItemData.selectedIcon
+                            else
+                                navigationItemData.unselectedIcon
+                        ),
                         // Good practice suggests always providing an Icon contentDescription, but
                         // it will only be used if there is no label or when the label is not shown.
                         // In this example, the contentDescription will be used, since the text

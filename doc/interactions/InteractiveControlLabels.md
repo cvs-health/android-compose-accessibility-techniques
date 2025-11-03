@@ -1,9 +1,9 @@
 # Interactive Control Labels
 All interactive controls must have associated labels, as required by WCAG [Success Criterion 1.3.1 Info and Relationships](https://www.w3.org/TR/WCAG22/#info-and-relationships). Android Jetpack Compose uses several techniques to associate controls and labels, depending on the control type.
 
-## Use the `label` parameter to associate a label with a `TextField`
+## Use the `label` parameter to associate a floating label with a `TextField`
 
-`TextField` and `OutlinedTextField` composables are labeled by their `label` parameter.
+`TextField` and `OutlinedTextField` composables that use a floating label are labeled by their `label` parameter.
 
 For example:
 
@@ -16,6 +16,27 @@ OutlinedTextField(
     label = {
         Text(text = "TextField label")
     }
+)
+```
+
+## Use the `contentDescription` parameter to associate a fixed text label with a `TextField`
+
+`TextField` and `OutlinedTextField` composables that use a fixed text label must use their `semantics` `contentDescription` property as their accessibility label. This accessibility label must match (or at least contain) the exact text of the visible label.
+
+For example:
+
+```kotlin
+val label = "TextField label"
+val (text, setText) = remember { mutableStateOf("") }
+Text(text = label)
+OutlinedTextField(
+    value = text,
+    onValueChange = setText,
+    modifier = Modifier
+        .fillMaxWidth()
+        .semantics {
+            contentDescription = label
+        }
 )
 ```
 
@@ -156,7 +177,7 @@ Slider(
 
 ----
 
-Copyright 2023-2024 CVS Health and/or one of its affiliates
+Copyright 2023-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

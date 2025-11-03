@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -45,6 +45,8 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.intera
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample11HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample12ControlTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample12HeadingTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample13ControlTestTag
+import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample13HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample1ControlTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample1HeadingTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.interactive_control_labels.interactiveControlLabelsExample2ControlTestTag
@@ -89,7 +91,7 @@ class InteractiveControlLabelsTests {
 
     @Test
     fun verifyHeadingsCount() {
-        composeTestRule.onAllNodes(isHeading()).assertCountEquals(14)
+        composeTestRule.onAllNodes(isHeading()).assertCountEquals(15)
     }
 
     @Test
@@ -135,6 +137,9 @@ class InteractiveControlLabelsTests {
             .assertExists()
         composeTestRule
             .onNode(hasTestTag(interactiveControlLabelsExample12HeadingTestTag) and isHeading())
+            .assertExists()
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample13HeadingTestTag) and isHeading())
             .assertExists()
     }
 
@@ -248,6 +253,15 @@ class InteractiveControlLabelsTests {
                         !hasAnyDescendant(isHeading())
             )
             .assertExists()
+        composeTestRule
+            .onNode(
+                hasTestTag(interactiveControlLabelsExample13ControlTestTag)
+                        and
+                        !isHeading()
+                        and
+                        !hasAnyDescendant(isHeading())
+            )
+            .assertExists()
     }
 
     @Test
@@ -256,14 +270,15 @@ class InteractiveControlLabelsTests {
     }
 
     /**
-     * verifyTextFieldFocusability - verifies that pressing a TextField focuses on it and that Tab
-     * and Shift-Tab work appropriately.
+     * verifyExample2TextFieldFocusability - verifies that pressing the Example 2 TextField focuses
+     * on it and that Tab and Shift-Tab work appropriately.
      *
      * While this functionality isn't the point of the screen, it's a good place to demonstrate how
      * to test this. Because at the time of writing, isFocused() only appears to work on TextFields.
      */
     @Test
-    fun verifyTextFieldFocusability() {
+    fun verifyExample2TextFieldFocusability() {
+        // Click on Example 2 TextField focuses on it
         composeTestRule
             .onNode(hasTestTag(interactiveControlLabelsExample2ControlTestTag))
             .assert(!isFocused())
@@ -327,30 +342,111 @@ class InteractiveControlLabelsTests {
             .assert(isFocused())
     }
 
+
+    /**
+     * verifyExample3TextFieldFocusability - verifies that pressing the Example 3 TextField focuses
+     * on it and that Tab and Shift-Tab work appropriately.
+     *
+     * While this functionality isn't the point of the screen, it's a good place to demonstrate how
+     * to test this. Because at the time of writing, isFocused() only appears to work on TextFields.
+     */
+    @Test
+    fun verifyExample3TextFieldFocusability() {
+        // Click on Example 3 TextField focuses on it
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample3ControlTestTag))
+            .assert(!isFocused())
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample3ControlTestTag))
+            .performScrollTo()
+            .performClick()
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample3ControlTestTag))
+            .assert(isFocused())
+
+        // Back-tab to Example 2 TextField
+        composeTestRule
+            .onNodeWithTag(interactiveControlLabelsExample3ControlTestTag)
+            .performKeyPress(
+                KeyEvent(
+                    NativeKeyEvent(
+                        0,
+                        0,
+                        NativeKeyEvent.ACTION_DOWN,
+                        NativeKeyEvent.KEYCODE_TAB,
+                        0,
+                        NativeKeyEvent.META_SHIFT_ON
+                    )
+                )
+            )
+        composeTestRule
+            .onNodeWithTag(interactiveControlLabelsExample3ControlTestTag)
+            .performKeyPress(
+                KeyEvent(
+                    NativeKeyEvent(
+                        0,
+                        0,
+                        NativeKeyEvent.ACTION_UP,
+                        NativeKeyEvent.KEYCODE_TAB,
+                        0,
+                        NativeKeyEvent.META_SHIFT_ON
+                    )
+                )
+            )
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample2ControlTestTag))
+            .assert(isFocused())
+
+        // Forward-tab to Example 3 TextField
+        composeTestRule
+            .onNodeWithTag(interactiveControlLabelsExample2ControlTestTag)
+            .performScrollTo()
+        composeTestRule
+            .onNodeWithTag(interactiveControlLabelsExample2ControlTestTag)
+            .performKeyPress(
+                KeyEvent(NativeKeyEvent(NativeKeyEvent.ACTION_DOWN, NativeKeyEvent.KEYCODE_TAB))
+            )
+        composeTestRule
+            .onNodeWithTag(interactiveControlLabelsExample2ControlTestTag)
+            .performKeyPress(
+                KeyEvent(NativeKeyEvent(NativeKeyEvent.ACTION_UP, NativeKeyEvent.KEYCODE_TAB))
+            )
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample3ControlTestTag))
+            .assert(isFocused())
+    }
+
     @Test
     fun verifyGoodExamplesHaveText() {
         composeTestRule
-            .onNode(hasTestTag(interactiveControlLabelsExample2ControlTestTag) and hasText())
+            .onNode(
+                hasTestTag(interactiveControlLabelsExample2ControlTestTag)
+                        and
+                        hasContentDescription()
+            )
             .assertExists()
         composeTestRule
-            .onNode(hasTestTag(interactiveControlLabelsExample4ControlTestTag) and hasText())
+            .onNode(hasTestTag(interactiveControlLabelsExample3ControlTestTag) and hasText())
             .assertExists()
         composeTestRule
-            .onNode(hasTestTag(interactiveControlLabelsExample6ControlTestTag) and hasText())
+            .onNode(hasTestTag(interactiveControlLabelsExample5ControlTestTag) and hasText())
             .assertExists()
         composeTestRule
-            .onNode(hasTestTag(interactiveControlLabelsExample9ControlTestTag) and hasText())
+            .onNode(hasTestTag(interactiveControlLabelsExample7ControlTestTag) and hasText())
+            .assertExists()
+        composeTestRule
+            .onNode(hasTestTag(interactiveControlLabelsExample10ControlTestTag) and hasText())
             .assertExists()
         composeTestRule
             .onNode(
-                hasTestTag(interactiveControlLabelsExample11ControlTestTag)
+                hasTestTag(interactiveControlLabelsExample12ControlTestTag)
                         and
                         hasContentDescription()
             )
             .assertExists()
         composeTestRule
             .onNode(
-                hasTestTag(interactiveControlLabelsExample12ControlTestTag)
+                hasTestTag(interactiveControlLabelsExample13ControlTestTag)
                         and
                         hasContentDescription()
             )
@@ -363,14 +459,14 @@ class InteractiveControlLabelsTests {
             .onNode(hasTestTag(interactiveControlLabelsExample1ControlTestTag) and !hasText())
             .assertExists()
         composeTestRule
-            .onNode(hasTestTag(interactiveControlLabelsExample3ControlTestTag) and !hasText())
+            .onNode(hasTestTag(interactiveControlLabelsExample4ControlTestTag) and !hasText())
             .assertExists()
         composeTestRule
-            .onNode(hasTestTag(interactiveControlLabelsExample5ControlTestTag) and !hasText())
+            .onNode(hasTestTag(interactiveControlLabelsExample6ControlTestTag) and !hasText())
             .assertExists()
         composeTestRule
             .onNode(
-                hasTestTag(interactiveControlLabelsExample10ControlTestTag)
+                hasTestTag(interactiveControlLabelsExample11ControlTestTag)
                         and
                         !hasText()
                         and
@@ -382,75 +478,75 @@ class InteractiveControlLabelsTests {
     @Test
     fun verifyThatFauxCheckboxRowIsNotToggleable() {
         composeTestRule
-            .onNode(hasTestTag(interactiveControlLabelsExample3ControlTestTag) and !isToggleable())
+            .onNode(hasTestTag(interactiveControlLabelsExample4ControlTestTag) and !isToggleable())
             .assertExists()
     }
 
     @Test
     fun verifyThatCheckboxRowIsToggleable() {
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample4ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample5ControlTestTag)
             .assertIsToggleable()
     }
 
     @Test
     fun verifyThatCheckboxRowToggles() {
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample4ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample5ControlTestTag)
             .assertIsOff()
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample4ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample5ControlTestTag)
             .performScrollTo()
             .performClick()
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample4ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample5ControlTestTag)
             .assertIsOn()
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample4ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample5ControlTestTag)
             .performClick()
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample4ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample5ControlTestTag)
             .assertIsOff()
     }
 
     @Test
     fun verifyThatFauxSwitchRowIsNotToggleable() {
         composeTestRule
-            .onNode(hasTestTag(interactiveControlLabelsExample5ControlTestTag) and !isToggleable())
+            .onNode(hasTestTag(interactiveControlLabelsExample6ControlTestTag) and !isToggleable())
             .assertExists()
     }
 
     @Test
     fun verifyThatSwitchRowIsToggleable() {
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample6ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample7ControlTestTag)
             .assertIsToggleable()
     }
 
     @Test
     fun verifyThatSwitchRowToggles() {
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample6ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample7ControlTestTag)
             .assertIsOff()
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample6ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample7ControlTestTag)
             .performScrollTo()
             .performClick()
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample6ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample7ControlTestTag)
             .assertIsOn()
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample6ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample7ControlTestTag)
             .performClick()
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample6ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample7ControlTestTag)
             .assertIsOff()
     }
 
     @Test
     fun verifyThatButtonHasClickAction() {
         composeTestRule
-            .onNodeWithTag(interactiveControlLabelsExample9ControlTestTag)
+            .onNodeWithTag(interactiveControlLabelsExample10ControlTestTag)
             .assertHasClickAction()
     }
 
@@ -458,7 +554,7 @@ class InteractiveControlLabelsTests {
     fun verifyThatSlidersHaveExpectedRanges() {
         composeTestRule
             .onNode(
-                hasTestTag(interactiveControlLabelsExample10ControlTestTag)
+                hasTestTag(interactiveControlLabelsExample11ControlTestTag)
                         and
                         hasProgressBarRangeInfo(
                             ProgressBarRangeInfo(0f,0f..10f, 9)
@@ -467,7 +563,7 @@ class InteractiveControlLabelsTests {
             .assertExists()
         composeTestRule
             .onNode(
-                hasTestTag(interactiveControlLabelsExample11ControlTestTag)
+                hasTestTag(interactiveControlLabelsExample12ControlTestTag)
                         and
                         hasProgressBarRangeInfo(
                             ProgressBarRangeInfo(0f,0f..10f, 9)
@@ -481,7 +577,7 @@ class InteractiveControlLabelsTests {
         // Test Example 12, Range start thumb value
         composeTestRule
             .onNode(
-                hasParent(hasTestTag(interactiveControlLabelsExample12ControlTestTag))
+                hasParent(hasTestTag(interactiveControlLabelsExample13ControlTestTag))
                         and
                         hasContentDescriptionExactly("Range start")
                         and
@@ -494,7 +590,7 @@ class InteractiveControlLabelsTests {
         // Test Example 12, Range end thumb value
         composeTestRule
             .onNode(
-                hasParent(hasTestTag(interactiveControlLabelsExample12ControlTestTag))
+                hasParent(hasTestTag(interactiveControlLabelsExample13ControlTestTag))
                         and
                         hasContentDescriptionExactly("Range end")
                         and

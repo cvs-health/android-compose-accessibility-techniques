@@ -1,5 +1,5 @@
 /*
-   Copyright 2023-2024 CVS Health and/or one of its affiliates
+   Copyright 2023-2025 CVS Health and/or one of its affiliates
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -96,6 +96,8 @@ const val interactiveControlLabelsExample11HeadingTestTag = "interactiveControlL
 const val interactiveControlLabelsExample11ControlTestTag = "interactiveControlLabelsExample11Control"
 const val interactiveControlLabelsExample12HeadingTestTag = "interactiveControlLabelsExample12Heading"
 const val interactiveControlLabelsExample12ControlTestTag = "interactiveControlLabelsExample12Control"
+const val interactiveControlLabelsExample13HeadingTestTag = "interactiveControlLabelsExample13Heading"
+const val interactiveControlLabelsExample13ControlTestTag = "interactiveControlLabelsExample13Control"
 
 /**
  * Demonstrate accessibility techniques for labeling interactive controls in conformance with WCAG
@@ -132,29 +134,30 @@ fun InteractiveControlLabelsScreen(
 
             // TextField examples
             BadExample1()
-            GoodExample2()
+            OkExample2()
+            GoodExample3()
 
             // Checkbox examples
-            BadExample3()
-            GoodExample4()
+            BadExample4()
+            GoodExample5()
 
             // Switch examples
-            BadExample5(columnScope = this)
-            GoodExample6(columnScope = this)
+            BadExample6(columnScope = this)
+            GoodExample7(columnScope = this)
 
             // RadioButton examples
-            BadExample7()
-            GoodExample8()
+            BadExample8()
+            GoodExample9()
 
             // Button example
-            GoodExample9(snackbarLauncher)
+            GoodExample10(snackbarLauncher)
 
             // Slider examples
-            BadExample10()
-            OkExample11()
+            BadExample11()
+            OkExample12()
 
             // RangeSlider example
-            ProblematicExample12()
+            ProblematicExample13()
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -206,80 +209,94 @@ private fun BadExample1Preview() {
 }
 
 @Composable
-private fun GoodExample2() {
-    // Good example 2: TextField automatically associates label and uses as hint
-    GoodExampleHeading(
+private fun OkExample2() {
+    // OK example 2: TextField with associated fixed label text
+    OkExampleHeading(
         text = stringResource(id = R.string.interactive_control_labels_example_2),
         modifier = Modifier.testTag(interactiveControlLabelsExample2HeadingTestTag)
     )
+    BodyText(textId = R.string.interactive_control_labels_example_2_description)
+
+    val label = stringResource(id = R.string.interactive_control_labels_associated_textinput_fixed_label)
+    Text(
+        text = label,
+        modifier = Modifier.padding(top = 8.dp),
+        fontWeight = FontWeight.Medium
+    )
+
     val (example2Text, setExample2Text) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
         value = example2Text,
         onValueChange = setExample2Text,
         modifier = Modifier
             .testTag(interactiveControlLabelsExample2ControlTestTag)
-            .padding(top = 8.dp)
-            .fillMaxWidth(),
-        label = {
-            Text(text = stringResource(id = R.string.interactive_control_labels_associated_textinput_label))
-        }
+            .fillMaxWidth()
+            // Key technique: Duplicate the label text as the TextField accessibility label
+            .semantics() {
+                contentDescription = label
+            },
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun GoodExample2Preview() {
+private fun OkExample2Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         )  {
-            GoodExample2()
+            OkExample2()
         }
     }
 }
 
 @Composable
-private fun BadExample3() {
-    // Bad example 3: CheckBox without associated field label
-    BadExampleHeading(
+private fun GoodExample3() {
+    // Good example 3: TextField automatically associates floating label/hint
+    GoodExampleHeading(
         text = stringResource(id = R.string.interactive_control_labels_example_3),
         modifier = Modifier.testTag(interactiveControlLabelsExample3HeadingTestTag)
     )
-    val (example3CheckboxValue, setExample3CheckboxValue) = remember { mutableStateOf(false) }
-    FauxCheckboxRow(
-        text = stringResource(id = R.string.interactive_control_labels_unassociated_checkbox_label),
-        checked = example3CheckboxValue,
-        toggleHandler = setExample3CheckboxValue,
-        modifier = Modifier.testTag(interactiveControlLabelsExample3ControlTestTag)
+    val (example3Text, setExample3Text) = remember { mutableStateOf("") }
+    AccessibleOutlinedTextField(
+        value = example3Text,
+        onValueChange = setExample3Text,
+        modifier = Modifier
+            .testTag(interactiveControlLabelsExample3ControlTestTag)
+            .padding(top = 8.dp)
+            .fillMaxWidth(),
+        label = {
+            Text(text = stringResource(id = R.string.interactive_control_labels_associated_textinput_floating_label))
+        }
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun BadExample3Preview() {
+private fun GoodExample3Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         )  {
-            BadExample3()
+            GoodExample3()
         }
     }
 }
 
 @Composable
-private fun GoodExample4() {
-    // Good example 4: CheckBox with associated field label
-    GoodExampleHeading(
+private fun BadExample4() {
+    // Bad example 4: CheckBox without associated field label
+    BadExampleHeading(
         text = stringResource(id = R.string.interactive_control_labels_example_4),
         modifier = Modifier.testTag(interactiveControlLabelsExample4HeadingTestTag)
     )
     val (example4CheckboxValue, setExample4CheckboxValue) = remember { mutableStateOf(false) }
-    CheckboxRow(
-        text = stringResource(id = R.string.interactive_control_labels_associated_checkbox_label),
+    FauxCheckboxRow(
+        text = stringResource(id = R.string.interactive_control_labels_unassociated_checkbox_label),
         checked = example4CheckboxValue,
         toggleHandler = setExample4CheckboxValue,
         modifier = Modifier.testTag(interactiveControlLabelsExample4ControlTestTag)
@@ -288,63 +305,59 @@ private fun GoodExample4() {
 
 @Preview(showBackground = true)
 @Composable
-private fun GoodExample4Preview() {
+private fun BadExample4Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         )  {
-            GoodExample4()
+            BadExample4()
         }
     }
 }
 
 @Composable
-private fun BadExample5(columnScope: ColumnScope){
-    // Bad example 5: Switch without associated field label
-    BadExampleHeading(
+private fun GoodExample5() {
+    // Good example 5: CheckBox with associated field label
+    GoodExampleHeading(
         text = stringResource(id = R.string.interactive_control_labels_example_5),
         modifier = Modifier.testTag(interactiveControlLabelsExample5HeadingTestTag)
     )
-    val (example5SwitchValue, setExample5SwitchValue) = remember { mutableStateOf(false) }
-    columnScope.apply {
-        FauxSwitchRow(
-            text = stringResource(id = R.string.interactive_control_labels_unassociated_switch_label),
-            checked = example5SwitchValue,
-            toggleHandler = setExample5SwitchValue,
-            modifier = Modifier
-                .testTag(interactiveControlLabelsExample5ControlTestTag)
-                .align(alignment = Alignment.End)
-        )
-    }
+    val (example5CheckboxValue, setExample5CheckboxValue) = remember { mutableStateOf(false) }
+    CheckboxRow(
+        text = stringResource(id = R.string.interactive_control_labels_associated_checkbox_label),
+        checked = example5CheckboxValue,
+        toggleHandler = setExample5CheckboxValue,
+        modifier = Modifier.testTag(interactiveControlLabelsExample5ControlTestTag)
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun BadExample5Preview() {
+private fun GoodExample5Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         )  {
-            BadExample5(columnScope = this)
+            GoodExample5()
         }
     }
 }
 
 @Composable
-private fun GoodExample6(columnScope: ColumnScope) {
-    // Good example 6: Switch with associated field label
-    GoodExampleHeading(
+private fun BadExample6(columnScope: ColumnScope){
+    // Bad example 6: Switch without associated field label
+    BadExampleHeading(
         text = stringResource(id = R.string.interactive_control_labels_example_6),
         modifier = Modifier.testTag(interactiveControlLabelsExample6HeadingTestTag)
     )
     val (example6SwitchValue, setExample6SwitchValue) = remember { mutableStateOf(false) }
     columnScope.apply {
-        SwitchRow(
-            text = stringResource(id = R.string.interactive_control_labels_associated_switch_label),
+        FauxSwitchRow(
+            text = stringResource(id = R.string.interactive_control_labels_unassociated_switch_label),
             checked = example6SwitchValue,
             toggleHandler = setExample6SwitchValue,
             modifier = Modifier
@@ -356,27 +369,61 @@ private fun GoodExample6(columnScope: ColumnScope) {
 
 @Preview(showBackground = true)
 @Composable
-private fun GoodExample6Preview() {
+private fun BadExample6Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         )  {
-            GoodExample6(columnScope = this)
+            BadExample6(columnScope = this)
         }
     }
 }
 
 @Composable
-private fun BadExample7() {
-    // Bad example 7: RadioButton group without associated field labels, etc.
-    BadExampleHeading(
+private fun GoodExample7(columnScope: ColumnScope) {
+    // Good example 7: Switch with associated field label
+    GoodExampleHeading(
         text = stringResource(id = R.string.interactive_control_labels_example_7),
         modifier = Modifier.testTag(interactiveControlLabelsExample7HeadingTestTag)
     )
+    val (example6SwitchValue, setExample6SwitchValue) = remember { mutableStateOf(false) }
+    columnScope.apply {
+        SwitchRow(
+            text = stringResource(id = R.string.interactive_control_labels_associated_switch_label),
+            checked = example6SwitchValue,
+            toggleHandler = setExample6SwitchValue,
+            modifier = Modifier
+                .testTag(interactiveControlLabelsExample7ControlTestTag)
+                .align(alignment = Alignment.End)
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun GoodExample7Preview() {
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        )  {
+            GoodExample7(columnScope = this)
+        }
+    }
+}
+
+@Composable
+private fun BadExample8() {
+    // Bad example 8: RadioButton group without associated field labels, etc.
+    BadExampleHeading(
+        text = stringResource(id = R.string.interactive_control_labels_example_8),
+        modifier = Modifier.testTag(interactiveControlLabelsExample8HeadingTestTag)
+    )
     Spacer(modifier = Modifier.height(8.dp))
-    val (example7SelectedRadioGroupOption, setExample7RadioGroupOption) = remember {
+    val (example8SelectedRadioGroupOption, setExample8RadioGroupOption) = remember {
         mutableIntStateOf(
             0
         )
@@ -387,35 +434,35 @@ private fun BadExample7() {
             stringResource(id = R.string.interactive_control_labels_unassociated_radio_button_label_1),
             stringResource(id = R.string.interactive_control_labels_unassociated_radio_button_label_2)
         ),
-        selectedIndex = example7SelectedRadioGroupOption,
-        selectHandler = setExample7RadioGroupOption,
-        modifier = Modifier.testTag(interactiveControlLabelsExample7ControlTestTag)
+        selectedIndex = example8SelectedRadioGroupOption,
+        selectHandler = setExample8RadioGroupOption,
+        modifier = Modifier.testTag(interactiveControlLabelsExample8ControlTestTag)
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun BadExample7Preview() {
+private fun BadExample8Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         )  {
-            BadExample7()
+            BadExample8()
         }
     }
 }
 
 @Composable
-private fun GoodExample8() {
-    // Good example 8: RadioButton group with associated field labels, etc.
+private fun GoodExample9() {
+    // Good example 9: RadioButton group with associated field labels, etc.
     GoodExampleHeading(
-        text = stringResource(id = R.string.interactive_control_labels_example_8),
-        modifier = Modifier.testTag(interactiveControlLabelsExample8HeadingTestTag)
+        text = stringResource(id = R.string.interactive_control_labels_example_9),
+        modifier = Modifier.testTag(interactiveControlLabelsExample9HeadingTestTag)
     )
     Spacer(modifier = Modifier.height(8.dp))
-    val (example8SelectedRadioGroupOption, setExample8RadioGroupOption) = remember {
+    val (example9SelectedRadioGroupOption, setExample9RadioGroupOption) = remember {
         mutableIntStateOf(
             0
         )
@@ -426,50 +473,10 @@ private fun GoodExample8() {
             stringResource(id = R.string.interactive_control_labels_associated_radio_button_label_1),
             stringResource(id = R.string.interactive_control_labels_associated_radio_button_label_2)
         ),
-        selectedIndex = example8SelectedRadioGroupOption,
-        selectHandler = setExample8RadioGroupOption,
-        modifier = Modifier.testTag(interactiveControlLabelsExample8ControlTestTag)
+        selectedIndex = example9SelectedRadioGroupOption,
+        selectHandler = setExample9RadioGroupOption,
+        modifier = Modifier.testTag(interactiveControlLabelsExample9ControlTestTag)
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun GoodExample8Preview() {
-    ComposeAccessibilityTechniquesTheme {
-        Column(
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .fillMaxWidth()
-        )  {
-            GoodExample8()
-        }
-    }
-}
-
-@Composable
-private fun GoodExample9(
-    snackbarLauncher: SnackbarLauncher?
-) {
-    // Good example 9: Button with associated label
-    GoodExampleHeading(
-        text = stringResource(id = R.string.interactive_control_labels_example_9),
-        modifier = Modifier.testTag(interactiveControlLabelsExample9HeadingTestTag)
-    )
-    Spacer(modifier = Modifier.height(8.dp))
-    // Key Technique: Button() composable content is its programmatically-associated label
-    val buttonMessage =
-        stringResource(id = R.string.interactive_control_labels_associated_button_message)
-    VisibleFocusBorderButton(
-        onClick = {
-            snackbarLauncher?.show(buttonMessage)
-        },
-        modifier = Modifier
-            .testTag(interactiveControlLabelsExample9ControlTestTag)
-    ) {
-        Text(
-            text = stringResource(id = R.string.interactive_control_labels_associated_button_label)
-        )
-    }
 }
 
 @Preview(showBackground = true)
@@ -481,17 +488,57 @@ private fun GoodExample9Preview() {
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         )  {
-            GoodExample9(snackbarLauncher = null)
+            GoodExample9()
         }
     }
 }
 
 @Composable
-private fun BadExample10() {
-    // Bad example 10: Slider without associated field label
-    BadExampleHeading(
+private fun GoodExample10(
+    snackbarLauncher: SnackbarLauncher?
+) {
+    // Good example 10: Button with associated label
+    GoodExampleHeading(
         text = stringResource(id = R.string.interactive_control_labels_example_10),
         modifier = Modifier.testTag(interactiveControlLabelsExample10HeadingTestTag)
+    )
+    Spacer(modifier = Modifier.height(8.dp))
+    // Key Technique: Button() composable content is its programmatically-associated label
+    val buttonMessage =
+        stringResource(id = R.string.interactive_control_labels_associated_button_message)
+    VisibleFocusBorderButton(
+        onClick = {
+            snackbarLauncher?.show(buttonMessage)
+        },
+        modifier = Modifier
+            .testTag(interactiveControlLabelsExample10ControlTestTag)
+    ) {
+        Text(
+            text = stringResource(id = R.string.interactive_control_labels_associated_button_label)
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun GoodExample10Preview() {
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        )  {
+            GoodExample10(snackbarLauncher = null)
+        }
+    }
+}
+
+@Composable
+private fun BadExample11() {
+    // Bad example 11: Slider without associated field label
+    BadExampleHeading(
+        text = stringResource(id = R.string.interactive_control_labels_example_11),
+        modifier = Modifier.testTag(interactiveControlLabelsExample11HeadingTestTag)
     )
     Spacer(modifier = Modifier.height(8.dp))
     val slider1LabelText = stringResource(
@@ -503,7 +550,7 @@ private fun BadExample10() {
         value = slider1Value,
         onValueChange = setSlider1Value,
         modifier = Modifier
-            .testTag(interactiveControlLabelsExample10ControlTestTag),
+            .testTag(interactiveControlLabelsExample11ControlTestTag),
         valueRange = 0f..10f,
         steps = 9
     )
@@ -511,26 +558,26 @@ private fun BadExample10() {
 
 @Preview(showBackground = true)
 @Composable
-private fun BadExample10Preview() {
+private fun BadExample11Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         )  {
-            BadExample10()
+            BadExample11()
         }
     }
 }
 
 @Composable
-private fun OkExample11() {
-    // OK example 11: Slider with associated field label
+private fun OkExample12() {
+    // OK example 12: Slider with associated field label
     OkExampleHeading(
-        text = stringResource(id = R.string.interactive_control_labels_example_11),
-        modifier = Modifier.testTag(interactiveControlLabelsExample11HeadingTestTag)
+        text = stringResource(id = R.string.interactive_control_labels_example_12),
+        modifier = Modifier.testTag(interactiveControlLabelsExample12HeadingTestTag)
     )
-    BodyText(textId = R.string.interactive_control_labels_example_11_description)
+    BodyText(textId = R.string.interactive_control_labels_example_12_description)
     Spacer(modifier = Modifier.height(8.dp))
 
     BodyText(textId = R.string.interactive_control_labels_associated_slider_label)
@@ -545,7 +592,7 @@ private fun OkExample11() {
         value = slider2Value,
         onValueChange = setSlider2Value,
         modifier = Modifier
-            .testTag(interactiveControlLabelsExample11ControlTestTag)
+            .testTag(interactiveControlLabelsExample12ControlTestTag)
             // Key technique: Allow the left and right arrow keys to adjust the slider value
             // provided the resulting value is within the slider's range; otherwise, allow
             // normal arrow key navigation to apply.
@@ -603,26 +650,26 @@ private fun OkExample11() {
 
 @Preview(showBackground = true)
 @Composable
-private fun OkExample11Preview() {
+private fun OkExample12Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         )  {
-            OkExample11()
+            OkExample12()
         }
     }
 }
 
 @Composable
-private fun ProblematicExample12() {
+private fun ProblematicExample13() {
     // Problematic example 12: RangeSlider with associated field label
     ProblematicExampleHeading(
-        text = stringResource(id = R.string.interactive_control_labels_example_12),
-        modifier = Modifier.testTag(interactiveControlLabelsExample12HeadingTestTag)
+        text = stringResource(id = R.string.interactive_control_labels_example_13),
+        modifier = Modifier.testTag(interactiveControlLabelsExample13HeadingTestTag)
     )
-    BodyText(textId = R.string.interactive_control_labels_example_12_description)
+    BodyText(textId = R.string.interactive_control_labels_example_13_description)
     Spacer(modifier = Modifier.height(8.dp))
 
     BodyText(stringResource(id = R.string.interactive_control_labels_associated_rangeslider_label))
@@ -642,7 +689,7 @@ private fun ProblematicExample12() {
         value = rangeSlider2Value,
         onValueChange = setRangeSlider2Value,
         modifier = Modifier
-            .testTag(interactiveControlLabelsExample12ControlTestTag)
+            .testTag(interactiveControlLabelsExample13ControlTestTag)
             .semantics {
                 // RangeSlider contentDescription must duplicate label text, because
                 // RangeSlider does not support a text label, just as Slider does not.
@@ -661,14 +708,14 @@ private fun ProblematicExample12() {
 
 @Preview(showBackground = true)
 @Composable
-private fun ProblematicExample12Preview() {
+private fun ProblematicExample13Preview() {
     ComposeAccessibilityTechniquesTheme {
         Column(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxWidth()
         )  {
-            ProblematicExample12()
+            ProblematicExample13()
         }
     }
 }

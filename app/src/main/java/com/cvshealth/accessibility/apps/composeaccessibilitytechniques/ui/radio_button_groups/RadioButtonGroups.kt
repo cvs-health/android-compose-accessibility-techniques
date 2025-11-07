@@ -16,8 +16,10 @@
 package com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.radio_button_groups
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,6 +27,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
@@ -55,6 +60,12 @@ const val radioButtonGroupsExample2HeadingTestTag = "radioButtonGroupsExample2He
 const val radioButtonGroupsExample2RadioButtonGroupTestTag = "radioButtonGroupsExample2RadioButtonGroup"
 const val radioButtonGroupsExample3HeadingTestTag = "radioButtonGroupsExample3Heading"
 const val radioButtonGroupsExample3RadioButtonGroupTestTag = "radioButtonGroupsExample3RadioButtonGroup"
+const val radioButtonGroupsExample4HeadingTestTag = "radioButtonGroupsExample4Heading"
+const val radioButtonGroupsExample4RadioButtonGroupTestTag = "radioButtonGroupsExample4RadioButtonGroup"
+const val radioButtonGroupsExample5HeadingTestTag = "radioButtonGroupsExample5Heading"
+const val radioButtonGroupsExample5RadioButtonGroupTestTag = "radioButtonGroupsExample5RadioButtonGroup"
+const val radioButtonGroupsExample6HeadingTestTag = "radioButtonGroupsExample6Heading"
+const val radioButtonGroupsExample6SegmentedButtonRowTestTag = "radioButtonGroupsExample6SegmentedButtonRow"
 
 /**
  * Demonstrate accessibility techniques for [RadioButton] groups in conformance with WCAG
@@ -90,52 +101,17 @@ fun RadioButtonGroupsScreen(
             BodyText(textId = R.string.radio_button_groups_description_1)
             BodyText(textId = R.string.radio_button_groups_description_2)
 
-            BadExampleHeading(
-                text = stringResource(id = R.string.radio_button_groups_example_1_header),
-                modifier = Modifier.testTag(radioButtonGroupsExample1HeadingTestTag)
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            val (example1Selection, setExample1Selection) = remember { mutableIntStateOf(0) }
-            FauxRadioButtonGroup(
-                groupLabel = stringResource(id = R.string.radio_button_groups_group_label),
-                itemLabels = options,
-                selectedIndex = example1Selection,
-                selectHandler = setExample1Selection,
-                modifier = Modifier.testTag(radioButtonGroupsExample1RadioButtonGroupTestTag)
-            )
+            // RadioButton group semantics examples
+            BadExample1()
+            BadExample2()
+            GoodExample3()
 
-            BadExampleHeading(
-                text = stringResource(id = R.string.radio_button_groups_example_2_header),
-                modifier = Modifier.testTag(radioButtonGroupsExample2HeadingTestTag)
-            )
-            BodyText(textId = R.string.radio_button_groups_example_2_description)
-            Spacer(modifier = Modifier.height(8.dp))
-            val (example2Selection, setExample2Selection) = remember { mutableIntStateOf(0) }
-            FauxRadioButtonGroup2(
-                groupLabel = stringResource(id = R.string.radio_button_groups_group_label),
-                itemLabels = options,
-                selectedIndex = example2Selection,
-                selectHandler = setExample2Selection,
-                modifier = Modifier.testTag(radioButtonGroupsExample2RadioButtonGroupTestTag)
-            )
+            // RadioButton group context examples
+            BadExample4()
+            GoodExample5()
 
-            GoodExampleHeading(
-                text = stringResource(id = R.string.radio_button_groups_example_3_header),
-                modifier = Modifier.testTag(radioButtonGroupsExample3HeadingTestTag)
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            // Important technique: RadioButton group state has been hoisted up to this parent
-            // composable. The state value and a state mutator function lambda are passed down to
-            // the RadioButtonGroup() composable.
-            val (example3Selection, setExample3Selection) = remember { mutableIntStateOf(0) }
-            // Key accessibility techniques are described in components/RadioButtonGroup.kt.
-            RadioButtonGroup(
-                groupLabel = stringResource(id = R.string.radio_button_groups_group_label),
-                itemLabels = options,
-                selectedIndex = example3Selection,
-                selectHandler = setExample3Selection,
-                modifier = Modifier.testTag(radioButtonGroupsExample3RadioButtonGroupTestTag)
-            )
+            // SingleChoiceSegmentedButtonRow example
+            GoodExample6()
 
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -147,6 +123,265 @@ fun RadioButtonGroupsScreen(
 private fun PreviewWithScaffold() {
     ComposeAccessibilityTechniquesTheme {
         RadioButtonGroupsScreen {}
+    }
+}
+
+@Composable
+private fun BadExample1() {
+    val options = listOf(
+        stringResource(id = R.string.radio_button_groups_option_1),
+        stringResource(id = R.string.radio_button_groups_option_2),
+        stringResource(id = R.string.radio_button_groups_option_3)
+    )
+
+    BadExampleHeading(
+        text = stringResource(id = R.string.radio_button_groups_example_1_header),
+        modifier = Modifier.testTag(radioButtonGroupsExample1HeadingTestTag)
+    )
+    Spacer(modifier = Modifier.height(8.dp))
+    val (example1Selection, setExample1Selection) = remember { mutableIntStateOf(0) }
+    FauxRadioButtonGroup(
+        groupLabel = stringResource(id = R.string.radio_button_groups_group_label),
+        itemLabels = options,
+        selectedIndex = example1Selection,
+        selectHandler = setExample1Selection,
+        modifier = Modifier.testTag(radioButtonGroupsExample1RadioButtonGroupTestTag)
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun BadExample1Preview() {
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        )  {
+            BadExample1()
+        }
+    }
+}
+
+@Composable
+private fun BadExample2() {
+    val options = listOf(
+        stringResource(id = R.string.radio_button_groups_option_1),
+        stringResource(id = R.string.radio_button_groups_option_2),
+        stringResource(id = R.string.radio_button_groups_option_3)
+    )
+
+    BadExampleHeading(
+        text = stringResource(id = R.string.radio_button_groups_example_2_header),
+        modifier = Modifier.testTag(radioButtonGroupsExample2HeadingTestTag)
+    )
+    BodyText(textId = R.string.radio_button_groups_example_2_description)
+    Spacer(modifier = Modifier.height(8.dp))
+    val (example2Selection, setExample2Selection) = remember { mutableIntStateOf(0) }
+    FauxRadioButtonGroup2(
+        groupLabel = stringResource(id = R.string.radio_button_groups_group_label),
+        itemLabels = options,
+        selectedIndex = example2Selection,
+        selectHandler = setExample2Selection,
+        modifier = Modifier.testTag(radioButtonGroupsExample2RadioButtonGroupTestTag)
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun BadExample2Preview() {
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        )  {
+            BadExample2()
+        }
+    }
+}
+
+@Composable
+private fun GoodExample3() {
+    val options = listOf(
+        stringResource(id = R.string.radio_button_groups_option_1),
+        stringResource(id = R.string.radio_button_groups_option_2),
+        stringResource(id = R.string.radio_button_groups_option_3)
+    )
+
+    GoodExampleHeading(
+        text = stringResource(id = R.string.radio_button_groups_example_3_header),
+        modifier = Modifier.testTag(radioButtonGroupsExample3HeadingTestTag)
+    )
+    BodyText(textId = R.string.radio_button_groups_example_3_description)
+    Spacer(modifier = Modifier.height(8.dp))
+
+    // Important technique: RadioButton group state has been hoisted up to this parent
+    // composable. The state value and a state mutator function lambda are passed down to
+    // the RadioButtonGroup() composable.
+    val (example3Selection, setExample3Selection) = remember { mutableIntStateOf(0) }
+    // Key accessibility techniques are described in components/RadioButtonGroup.kt.
+    RadioButtonGroup(
+        groupLabel = stringResource(id = R.string.radio_button_groups_group_label),
+        itemLabels = options,
+        selectedIndex = example3Selection,
+        selectHandler = setExample3Selection,
+        modifier = Modifier.testTag(radioButtonGroupsExample3RadioButtonGroupTestTag)
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun GoodExample3Preview() {
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        )  {
+            GoodExample3()
+        }
+    }
+}
+
+@Composable
+private fun BadExample4() {
+    val options = listOf(
+        stringResource(id = R.string.radio_button_groups_example_4_option_yes),
+        stringResource(id = R.string.radio_button_groups_example_4_option_no)
+    )
+    val (example4Selection, setExample4Selection) = remember { mutableIntStateOf(0) }
+
+    BadExampleHeading(
+        text = stringResource(id = R.string.radio_button_groups_example_4_header),
+        modifier = Modifier.testTag(radioButtonGroupsExample4HeadingTestTag)
+    )
+    BodyText(textId = R.string.radio_button_groups_example_4_description)
+    Spacer(modifier = Modifier.height(8.dp))
+
+    // Key failure: This RadioButtonGroup's items do not provide sufficient group context. They only
+    // announce "Yes" and "No" in a screen reader without saying what question is being answered.
+    // See Example 5 for how RadioButton item contentDescriptions can address this problem.
+    RadioButtonGroup(
+        groupLabel = stringResource(id = R.string.radio_button_groups_example_4_question),
+        itemLabels = options,
+        selectedIndex = example4Selection,
+        selectHandler = setExample4Selection,
+        modifier = Modifier.testTag(radioButtonGroupsExample4RadioButtonGroupTestTag)
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun BadExample4Preview() {
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        )  {
+            BadExample4()
+        }
+    }
+}
+
+@Composable
+private fun GoodExample5() {
+    val options = listOf(
+        stringResource(id = R.string.radio_button_groups_example_5_option_yes),
+        stringResource(id = R.string.radio_button_groups_example_5_option_no)
+    )
+    val optionDescriptions = listOf(
+        stringResource(id = R.string.radio_button_groups_example_5_option_yes_description),
+        stringResource(id = R.string.radio_button_groups_example_5_option_no_description)
+    )
+    val (example5Selection, setExample5Selection) = remember { mutableIntStateOf(0) }
+
+    GoodExampleHeading(
+        text = stringResource(id = R.string.radio_button_groups_example_5_header),
+        modifier = Modifier.testTag(radioButtonGroupsExample5HeadingTestTag)
+    )
+    BodyText(textId = R.string.radio_button_groups_example_5_description)
+    Spacer(modifier = Modifier.height(8.dp))
+
+    // Key technique: This RadioButtonGroup's items provide sufficient group context via
+    // contentDescriptions. While they only visually display "Yes" and "No", they announce the
+    // question's content in a screen reader. Note that it is not necessary to exactly repeat the
+    // group label (the question text) to provide that context. Best practice is also followed by
+    // placing the visible label text first in each contentDescription; this assists voice control
+    // software.
+    RadioButtonGroup(
+        groupLabel = stringResource(id = R.string.radio_button_groups_example_5_question),
+        itemLabels = options,
+        selectedIndex = example5Selection,
+        selectHandler = setExample5Selection,
+        modifier = Modifier.testTag(radioButtonGroupsExample5RadioButtonGroupTestTag),
+        itemDescriptions = optionDescriptions
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun GoodExample5Preview() {
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        )  {
+            GoodExample5()
+        }
+    }
+}
+
+@Composable
+private fun GoodExample6() {
+    val options = listOf(
+        stringResource(id = R.string.radio_button_groups_option_1),
+        stringResource(id = R.string.radio_button_groups_option_2),
+        stringResource(id = R.string.radio_button_groups_option_3)
+    )
+    val (example6Selection, setExample6Selection) = remember { mutableIntStateOf(0) }
+
+    GoodExampleHeading(
+        text = stringResource(id = R.string.radio_button_groups_example_6_header),
+        modifier = Modifier.testTag(radioButtonGroupsExample6HeadingTestTag)
+    )
+    BodyText(textId = R.string.radio_button_groups_example_6_description)
+    Spacer(modifier = Modifier.height(8.dp))
+
+    Text(stringResource(id = R.string.radio_button_groups_group_label))
+    SingleChoiceSegmentedButtonRow(
+        modifier = Modifier
+            .testTag(radioButtonGroupsExample6SegmentedButtonRowTestTag)
+            .fillMaxWidth()
+            .height(IntrinsicSize.Min)
+    ) {
+        options.forEachIndexed { index, option ->
+            SegmentedButton(
+                selected = example6Selection == index,
+                onClick = { setExample6Selection(index) },
+                shape = SegmentedButtonDefaults.itemShape(index, options.size),
+                modifier = Modifier.fillMaxHeight(),
+                // Note: Role.RadioButton is the default, so Modifier.semantics is unnecessary here.
+            ) {
+                Text(option)
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun GoodExample6Preview() {
+    ComposeAccessibilityTechniquesTheme {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        )  {
+            GoodExample6()
+        }
     }
 }
 

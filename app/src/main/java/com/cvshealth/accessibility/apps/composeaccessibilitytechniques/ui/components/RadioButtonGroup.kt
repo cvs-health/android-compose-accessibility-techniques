@@ -30,6 +30,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.ComposeAccessibilityTechniquesTheme
@@ -54,6 +56,7 @@ import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.theme.
  * @param selectedIndex the currently selected radio button's 0-based index in the [itemLabels] list
  * @param selectHandler: callback to set the currently selected radio button, given its index value
  * @param modifier optional [Modifier] for the RadioButtonGroup layout [Column]
+ * @param itemDescriptions optional list of radio button label contentDescriptions
  */
 @Composable
 fun RadioButtonGroup(
@@ -61,7 +64,8 @@ fun RadioButtonGroup(
     itemLabels: List<String>,
     selectedIndex: Int,
     selectHandler: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    itemDescriptions: List<String>? = null,
 ) {
     Column(modifier = modifier) {
         Text(groupLabel)
@@ -93,7 +97,17 @@ fun RadioButtonGroup(
                         // to be smaller.
                         modifier = Modifier.minimumInteractiveComponentSize()
                     )
-                    Text(text = label, modifier = Modifier.padding(start = 4.dp))
+                    val itemDescription = itemDescriptions?.getOrNull(index)
+                    Text(
+                        text = label,
+                        modifier = Modifier
+                            .padding(start = 4.dp)
+                            .semantics {
+                                if (itemDescription != null) {
+                                    contentDescription = itemDescription
+                                }
+                            }
+                    )
                 }
             }
         }

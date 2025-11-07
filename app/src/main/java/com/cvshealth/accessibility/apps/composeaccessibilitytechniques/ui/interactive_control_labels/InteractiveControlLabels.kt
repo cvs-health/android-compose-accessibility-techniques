@@ -461,7 +461,9 @@ private fun GoodExample9() {
         text = stringResource(id = R.string.interactive_control_labels_example_9),
         modifier = Modifier.testTag(interactiveControlLabelsExample9HeadingTestTag)
     )
+    BodyText(textId = R.string.interactive_control_labels_example_9_description)
     Spacer(modifier = Modifier.height(8.dp))
+
     val (example9SelectedRadioGroupOption, setExample9RadioGroupOption) = remember {
         mutableIntStateOf(
             0

@@ -28,16 +28,18 @@ For example:
 ```kotlin
 val label = "TextField label"
 val (text, setText) = remember { mutableStateOf("") }
-Text(text = label)
-OutlinedTextField(
-    value = text,
-    onValueChange = setText,
-    modifier = Modifier
-        .fillMaxWidth()
-        .semantics {
-            contentDescription = label
-        }
-)
+Column {
+    Text(text = label)
+    OutlinedTextField(
+        value = text,
+        onValueChange = setText,
+        modifier = Modifier
+            .fillMaxWidth()
+            .semantics {
+                contentDescription = label
+            }
+    )
+}
 ```
 
 ## Use the `content` parameter to associate a label with a `Button` or `IconButton`
@@ -104,36 +106,54 @@ The key points are:
 
 `RadioButton` requires `Modifier.selectable` on the enclosing `Row` layout, `role = Role.RadioButton`, and the layout enclosing all of the labeling radio button layouts (here, a `Column`) requires `Modifier.selectableGroup()` to impose single-selection semantics.
 
+For example, a `RadioButton` group can be labeled as follows.
+
 ```kotlin
 val initialRadioButtonIndex = 0
-val buttonLabels = listOf("Yes", "No")
+val buttonLabels = listOf("Cash", "Check", "Credit card")
 val (radioButtonSelection, setRadioButtonSelection) = remember { mutableState(initialRadioButtonIndex) }
-Column(modifier = Modifier.selectableGroup()) {
-    buttonLabels.forEachIndexed { index: Int, label: String ->
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .selectable(
+Column {
+    // Technique: Provide a group label. Note: This label is not associated with the RadioButton 
+    // group. Therefore, each RadioButton's item label must describe its context well enough itself.
+    Text(text = "Payment method")
+    
+    // Technique: Apply Modifier.selectableGroup() around all radio button items.
+    Column(modifier = Modifier.selectableGroup()) {
+        buttonLabels.forEachIndexed { index: Int, label: String ->
+            // Technique: Group each RadioButton item in a selectable Row.
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    // Technique: Apply Modifier.selectable() and role=Role.RadioButton to each 
+                    // radio button item row. This groups the Row's RadioButton and Text label 
+                    // together.
+                    .selectable(
+                        selected = (radioButtonSelectionState == index),
+                        role = Role.RadioButton,
+                        onClick = setRadioButtonSelection
+                    ),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                RadioButton(
                     selected = (radioButtonSelectionState == index),
-                    role = Role.RadioButton,
-                    onClick = setRadioButtonSelection
-                ),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            RadioButton(
-                selected = (radioButtonSelectionState == index),
-                onClick = null,
-                modifier = Modifier.minimumInteractiveComponentSize()
-            )
-            Text(
-                text = label, 
-                modifier = Modifier.padding(start = 4.dp)
-            )
+                    // Technique: Do not provide an onClick to each RadioButton; let the Row do it.
+                    onClick = null, 
+                    // Technique: Make the RadioButton as large as it would be if it had a non-null 
+                    // onClick.
+                    modifier = Modifier.minimumInteractiveComponentSize()
+                )
+                // Technique: Label each RadioButton
+                Text(
+                    text = label,
+                    modifier = Modifier.padding(start = 4.dp)
+                )
+            }
         }
     }
 }
 ```
 
+Note that Jetpack Compose cannot associate group labels with grouped controls like `RadioButton` groups. Each such grouped control's label must provide sufficient group context to be meaningful when announced by a screen reader program. If necessary, additional context can be provided using `Modifier.semantics` `contentDescription` on each `RadioButton` item label.
 
 ## Use a visible label text and the `Modifier.semantics` `contentDescription` property to associate a label with a `Slider` or `RangeSlider`
 

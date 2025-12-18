@@ -386,7 +386,7 @@ class KeyboardTypesTests {
             .onNode(
                 hasTestTag(keyboardTypesExample14TextFieldTestTag)
                         and
-                        hasNoContentType()
+                        hasContentType(ContentType.Password)
             )
             .assertExists()
     }

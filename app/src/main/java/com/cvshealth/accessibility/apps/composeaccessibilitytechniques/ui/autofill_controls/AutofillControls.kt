@@ -122,7 +122,7 @@ private fun BadExample1() {
         label = {
             Text(text = stringResource(id = R.string.autofill_example_1_label_1))
         },
-        // Key technique: use KeyboardType.Text and KeyboardCapitalization.Words to enter names.
+        // Key technique: Use KeyboardType.Text and KeyboardCapitalization.Words to enter names.
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = KeyboardType.Text,
             capitalization = KeyboardCapitalization.Words,
@@ -130,7 +130,8 @@ private fun BadExample1() {
         )
     )
 
-    // Key issue: Uses a non-autofilled TextField for autofillable data (email).
+    // Key issues: Uses a non-autofilled TextField for autofillable data (email) and lacks proper
+    // keyboard type. Note: Applying KeyboardType.Email will implicitly add email autofill type.
     val (email, setEmail) = remember { mutableStateOf("") }
     AccessibleOutlinedTextField(
         value = email,
@@ -142,9 +143,9 @@ private fun BadExample1() {
         label = {
             Text(text = stringResource(id = R.string.autofill_example_1_label_2))
         },
-        // Technique: use KeyboardType.Email to enter email addresses.
+        // Key issue: Should use KeyboardType.Email to enter email addresses.
         keyboardOptions = KeyboardOptions.Default.copy(
-            keyboardType = KeyboardType.Email,
+            keyboardType = KeyboardType.Text,
             imeAction = ImeAction.Next
         )
     )
@@ -187,7 +188,7 @@ private fun GoodExample2() {
         label = {
             Text(text = stringResource(id = R.string.autofill_example_2_label_1))
         },
-        // Key technique: use KeyboardType.Text and KeyboardCapitalization.Words to enter names.
+        // Key technique: Use KeyboardType.Text and KeyboardCapitalization.Words to enter names.
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = KeyboardType.Text,
             capitalization = KeyboardCapitalization.Words,
@@ -208,7 +209,7 @@ private fun GoodExample2() {
         label = {
             Text(text = stringResource(id = R.string.autofill_example_2_label_2))
         },
-        // Key technique: use KeyboardType.Email to enter email addresses.
+        // Key technique: Use KeyboardType.Email to enter email addresses.
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = KeyboardType.Email,
             imeAction = ImeAction.Next

@@ -75,6 +75,7 @@ dependencies {
 
     implementation "androidx.constraintlayout:constraintlayout-compose:1.1.1"
     implementation "androidx.navigation:navigation-compose:2.9.7"
+    lintChecks project(':lint-checks')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
@@ -83,4 +84,41 @@ dependencies {
     androidTestImplementation "androidx.navigation:navigation-testing:2.9.7"
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+}
+
+// a11y-check: runs on every build, produces clickable warnings + HTML report
+tasks.register('a11yCheck', JavaExec) {
+    description = 'Run accessibility check on Compose source files'
+    group = 'verification'
+    def jarTask = project(':A11yAgent').tasks.named('shadowJar')
+    dependsOn jarTask
+    classpath = files(jarTask.map { it.archiveFile })
+    args = ["${projectDir}/src/main/java", '--format', 'gradle']
+    ignoreExitValue = true  // don't fail the build, just show warnings
+}
+
+tasks.register('a11yCheckHtml', JavaExec) {
+    description = 'Generate accessibility HTML report'
+    group = 'verification'
+    def jarTask = project(':A11yAgent').tasks.named('shadowJar')
+    dependsOn jarTask
+    classpath = files(jarTask.map { it.archiveFile })
+    args = ["${projectDir}/src/main/java", '--format', 'html']
+
+    def reportFile = file("${buildDir}/reports/a11y-check.html")
+    doFirst {
+        reportFile.parentFile.mkdirs()
+        standardOutput = new FileOutputStream(reportFile)
+    }
+    doLast {
+        println ""
+        println "====================================================================="
+        println " Accessibility report: file://${reportFile.absolutePath}"
+        println "====================================================================="
+    }
+    ignoreExitValue = true
+}
+
+tasks.named('a11yCheck').configure {
+    finalizedBy 'a11yCheckHtml'
 }

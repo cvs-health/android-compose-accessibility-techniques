@@ -9,3 +9,10 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# a11y-check score tracking and baseline files
+.a11y-scores.json
+.a11y-baseline.json
+
+# Gradle daemon JVM properties (auto-generated)
+gradle/gradle-daemon-jvm.properties

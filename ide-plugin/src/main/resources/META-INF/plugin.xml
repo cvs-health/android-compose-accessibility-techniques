@@ -1,0 +1,54 @@
+<!--
+  Copyright 2026 CVS Health and/or one of its affiliates
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<idea-plugin>
+    <id>com.cvshealth.a11y.compose-checker</id>
+    <name>Compose Accessibility Checker</name>
+    <vendor email="accessibility@cvshealth.com" url="https://github.com/cvs-health/android-compose-accessibility-techniques">CVS Health</vendor>
+    <description><![CDATA[
+        Inline accessibility warnings for Jetpack Compose code. Detects WCAG 2.2 violations
+        including missing content descriptions, unlabeled form controls, missing heading semantics,
+        insufficient color contrast, and more. Powered by the a11y-check-android analysis engine
+        with 31 rules mapped to WCAG success criteria.
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <b>0.3.0</b>
+        <ul>
+            <li>Alt+Enter quick-fixes for rules with auto-fix support (6 rules)</li>
+            <li>New auto-fixes: clickable missing onClickLabel, IconButton missing label, toggle label</li>
+        </ul>
+        <b>0.2.0</b>
+        <ul>
+            <li>Improved tooltip UX — WCAG criteria visible on hover without "toggle info"</li>
+            <li>Fix suggestions shown in formatted HTML tooltip</li>
+        </ul>
+        <b>0.1.0</b>
+        <ul>
+            <li>Initial release with 31 accessibility rules mapped to WCAG 2.2</li>
+            <li>Inline squiggly underlines for Compose accessibility issues</li>
+            <li>Severity levels: Error, Warning, and Info</li>
+        </ul>
+    ]]></change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.kotlin</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <externalAnnotator
+            language="kotlin"
+            implementationClass="com.cvshealth.accessibility.plugin.A11yExternalAnnotator"/>
+    </extensions>
+</idea-plugin>

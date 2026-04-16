@@ -1,0 +1,22 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+kotlin {
+    jvmToolchain(21)
+}
+
+dependencies {
+    compileOnly 'com.android.tools.lint:lint-api:32.1.1'
+    compileOnly 'com.android.tools.lint:lint-checks:32.1.1'
+
+    testImplementation 'com.android.tools.lint:lint-tests:32.1.1'
+    testImplementation 'com.android.tools.lint:lint-api:32.1.1'
+    testImplementation "junit:junit:4.13.2"
+}
+
+jar {
+    manifest {
+        attributes("Lint-Registry-v2": "com.cvshealth.accessibility.lint.A11yIssueRegistry")
+    }
+}

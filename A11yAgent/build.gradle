@@ -1,0 +1,62 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+    id 'application'
+    id 'com.gradleup.shadow' version '9.0.0-beta12'
+}
+
+group = 'com.cvshealth.a11y'
+version = '0.1.0'
+
+application {
+    mainClass = 'com.cvshealth.a11y.agent.cli.A11yCheckKt'
+}
+
+kotlin {
+    jvmToolchain(21)
+}
+
+dependencies {
+    implementation 'com.github.ajalt.clikt:clikt:4.4.0'
+    implementation 'com.charleskorn.kaml:kaml:0.72.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+shadowJar {
+    archiveBaseName = 'a11y-check-android'
+    archiveClassifier = ''
+    archiveVersion = project.version
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.register('npmInstallMcp', Exec) {
+    description = 'Install MCP server npm dependencies'
+    group = 'build'
+    workingDir = file('mcp-server')
+    commandLine 'npm', 'install'
+    onlyIf { !file('mcp-server/node_modules').exists() }
+}
+
+tasks.register('buildMcpServer', Exec) {
+    description = 'Build the MCP server TypeScript code'
+    group = 'build'
+    workingDir = file('mcp-server')
+    commandLine 'npm', 'run', 'build'
+    dependsOn 'npmInstallMcp'
+}
+
+tasks.register('a11yCheck', JavaExec) {
+    description = 'Run accessibility check on the app source code'
+    group = 'verification'
+    classpath = files(shadowJar.archiveFile)
+    dependsOn shadowJar
+    args = [project.findProperty('a11y.paths') ?: "${rootProject.projectDir}/app/src/main/java",
+            '--format', project.findProperty('a11y.format') ?: 'gradle']
+}

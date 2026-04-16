@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+# pre-commit – Run A11yAgent accessibility checks on staged Kotlin files.
+#
+# Copies the staged (index) version of each modified/added .kt file into a
+# temporary directory and runs the A11yAgent shadow JAR against that snapshot.
+# Warnings are shown but do not block the commit; errors cause an exit 1.
+#
+# To skip this hook for a single commit:
+#   git commit --no-verify
+#
+# To build the JAR if it is missing:
+#   ./gradlew :A11yAgent:shadowJar
+set -euo pipefail
+
+JAR_PATH="A11yAgent/build/libs/a11y-check-android-0.1.0.jar"
+
+# ---------------------------------------------------------------------------
+# 1. Collect staged .kt files (added, copied, or modified – not deleted).
+# ---------------------------------------------------------------------------
+KT_FILES=()
+while IFS= read -r line; do
+    KT_FILES+=("$line")
+done < <(git diff --cached --name-only --diff-filter=ACM | grep '\.kt$' || true)
+
+if [[ ${#KT_FILES[@]} -eq 0 ]]; then
+    exit 0
+fi
+
+# ---------------------------------------------------------------------------
+# 2. Verify the shadow JAR is available.
+# ---------------------------------------------------------------------------
+if [[ ! -f "$JAR_PATH" ]]; then
+    echo ""
+    echo "pre-commit: A11yAgent JAR not found at $JAR_PATH"
+    echo "  Build it first with:  ./gradlew :A11yAgent:shadowJar"
+    echo "  To skip this check:   git commit --no-verify"
+    echo ""
+    exit 1
+fi
+
+# ---------------------------------------------------------------------------
+# 3. Mirror staged file content into a temp directory.
+# ---------------------------------------------------------------------------
+TMPDIR_HOOK="$(mktemp -d)"
+trap 'rm -rf "$TMPDIR_HOOK"' EXIT
+
+for f in "${KT_FILES[@]}"; do
+    dest="$TMPDIR_HOOK/$f"
+    mkdir -p "$(dirname "$dest")"
+    # Read the staged (index) version, not the working-tree version.
+    git show ":$f" > "$dest"
+done
+
+# ---------------------------------------------------------------------------
+# 4. Run the accessibility checker.
+# ---------------------------------------------------------------------------
+echo ""
+echo "pre-commit: Running A11yAgent accessibility checks on ${#KT_FILES[@]} staged Kotlin file(s)…"
+echo ""
+
+# Capture output; strip the temp-dir prefix so paths look project-relative.
+RAW_OUTPUT="$(java -jar "$JAR_PATH" "$TMPDIR_HOOK" --format gradle 2>&1)" || true
+OUTPUT="$(printf '%s\n' "$RAW_OUTPUT" | sed "s|$TMPDIR_HOOK/||g")"
+
+# ---------------------------------------------------------------------------
+# 5. Evaluate results.
+# ---------------------------------------------------------------------------
+HAS_ERRORS=0
+
+if printf '%s\n' "$OUTPUT" | grep -q '^.*: error:'; then
+    HAS_ERRORS=1
+fi
+
+if [[ -n "$OUTPUT" ]]; then
+    printf '%s\n' "$OUTPUT"
+    echo ""
+fi
+
+if [[ $HAS_ERRORS -eq 1 ]]; then
+    echo "pre-commit: Accessibility errors found – commit blocked."
+    echo "  Fix the errors above, then re-stage your files and commit."
+    echo "  To skip this check:  git commit --no-verify"
+    echo ""
+    exit 1
+fi
+
+echo "pre-commit: Accessibility checks passed."
+echo ""
+exit 0

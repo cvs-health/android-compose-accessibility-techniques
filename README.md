@@ -51,6 +51,70 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
 - Other
     - [x] [Compose Semantics automated testing](doc/AutomatedComposeAccessibilityTesting.md)
 
+## Accessibility static analysis tools
+
+This project includes static analysis tools and an IDE plugin for detecting Compose accessibility issues:
+
+### A11yAgent (a11y-check-android)
+
+A standalone CLI tool with **32 rules** mapped to WCAG 2.2 criteria, WCAG scoring (0-100), trend tracking, baseline suppression, and multiple output formats (terminal, JSON, HTML, SARIF, Gradle). Runs on-demand via `./gradlew a11yCheck` with clickable results in Android Studio's Build tab.
+
+```bash
+./gradlew a11yCheck                    # Run check + generate HTML report
+java -jar A11yAgent/build/libs/a11y-check-android-0.1.0.jar app/src/main/java  # Run directly
+```
+
+See [`A11yAgent/README.md`](A11yAgent/README.md) for full documentation.
+
+### Custom Android Lint rules (lint-checks)
+
+A custom Lint module with **32 rules** that integrate into Android's built-in Lint system. Shows **real-time squiggly underlines** in the Android Studio editor and appears in `./gradlew lint` HTML reports alongside standard Lint checks. Works behind any corporate proxy with zero external downloads.
+
+See [`lint-checks/README.md`](lint-checks/README.md) for details.
+
+### IDE Plugin (IntelliJ / Android Studio)
+
+An IntelliJ Platform plugin (`ide-plugin/`) that shows **real-time inline accessibility warnings** in the editor as you type — squiggly underlines with hover tooltips showing WCAG criteria and fix suggestions. Powered by the same 32-rule a11y-check-android engine.
+
+**Install from disk:**
+```bash
+./gradlew :A11yAgent:shadowJar          # Build the analysis engine first
+cd ide-plugin && ./gradlew buildPlugin  # Build the plugin zip
+```
+Then in Android Studio: **Settings > Plugins > gear icon > Install Plugin from Disk** — select `ide-plugin/build/distributions/compose-accessibility-checker-0.3.0.zip` and restart. Supports **Alt+Enter quick-fixes** for 6 rules with auto-fix support.
+
+**Install from JetBrains Marketplace** (once published): **Settings > Plugins > Marketplace** — search "Compose Accessibility Checker".
+
+See [`ide-plugin/README.md`](ide-plugin/README.md) for full documentation including corporate proxy setup and publishing instructions.
+
+### Gradle Plugin
+
+A Gradle plugin (`gradle-plugin/`) for easy integration into any Android project:
+
+```groovy
+// settings.gradle
+includeBuild 'gradle-plugin'
+
+// app/build.gradle
+plugins { id 'com.cvshealth.a11y' }
+a11y {
+    minScore = 70
+    format = 'gradle'
+    paths = ['src/main/java']
+}
+```
+
+Run `./gradlew a11yCheck` to analyze your project. See [`gradle-plugin/`](gradle-plugin/) for details.
+
+### Pre-commit Hook
+
+A git pre-commit hook (`.githooks/`) that checks staged `.kt` files for accessibility errors before each commit:
+
+```bash
+bash .githooks/install-hooks.sh   # One-time setup
+```
+
+Errors block the commit; warnings are informational. Skip with `git commit --no-verify`.
 
 ## Screenshots
 <img src="doc/images/HomePartiallyExpanded.png" width=50% height=50% alt="android-compose-accessibility-techniques app Home screen showing the three accessibility technique topic groups: Informative Content, Interactive Behaviors, and Specific Component Types. The Specific Component Types topic group is expanded and shows topics such as Accordion controls and Dropdown menus.">
@@ -64,7 +128,7 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
 ## License
 android-compose-accessibility-techniques is licensed under under the Apache License, Version 2.0.  See [LICENSE](LICENSE) file for more information.
 
-Copyright 2023-2024 CVS Health and/or one of its affiliates
+Copyright 2023-2025 CVS Health and/or one of its affiliates
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

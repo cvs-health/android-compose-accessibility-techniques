@@ -21,7 +21,7 @@ import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasClickAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.v2.createComposeRule
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_focus_indicators.CustomFocusIndicatorsScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.custom_focus_indicators.customFocusIndicatorsExample1ButtonTestTag

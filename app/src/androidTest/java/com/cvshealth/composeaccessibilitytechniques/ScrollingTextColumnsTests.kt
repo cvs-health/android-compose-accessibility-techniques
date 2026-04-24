@@ -20,7 +20,7 @@ import androidx.compose.ui.input.key.NativeKeyEvent
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performKeyPress
 import androidx.compose.ui.test.requestFocus

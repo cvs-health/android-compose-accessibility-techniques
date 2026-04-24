@@ -19,7 +19,7 @@ import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasAnyDescendant
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.v2.createComposeRule
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_focus_order.KeyboardFocusOrderScreen
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_focus_order.keyboardFocusOrderExample1HeadingTestTag

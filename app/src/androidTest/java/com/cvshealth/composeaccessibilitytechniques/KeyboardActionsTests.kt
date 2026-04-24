@@ -20,7 +20,7 @@ import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.hasImeAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.isHeading
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.text.input.ImeAction
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.components.genericScaffoldTitleTestTag
 import com.cvshealth.accessibility.apps.composeaccessibilitytechniques.ui.keyboard_actions.KeyboardActionsScreen

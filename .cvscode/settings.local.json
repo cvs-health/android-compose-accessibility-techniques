@@ -1,0 +1,11 @@
+{
+  "allowlist": [
+    "Bash(ls:*)",
+    "GetSkill",
+    "Bash(which:*)",
+    "TodoWrite",
+    "Bash(npm install:*)",
+    "Skill",
+    "Launch"
+  ]
+}

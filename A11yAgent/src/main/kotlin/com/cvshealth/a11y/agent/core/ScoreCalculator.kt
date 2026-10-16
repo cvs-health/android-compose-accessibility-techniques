@@ -66,6 +66,30 @@ class ScoreCalculator {
         private const val WARNING_PENALTY = 2.0
         private const val INFO_PENALTY = 0.5
 
+        /// Most credit a criterion under review can lose to warning volume.
+        /// A reviewed criterion is never worth less than half a passing one.
+        private const val REVIEW_MAX_DISCOUNT = 0.5
+
+        /// Warning count at which a reviewed criterion has lost half of
+        /// REVIEW_MAX_DISCOUNT. Chosen so a handful of warnings costs a little
+        /// and thousands cost no more than the cap.
+        private const val REVIEW_HALF_LIFE = 10.0
+
+        /// Credit a single checked criterion contributes to its principle, in 0.0...1.0.
+        ///
+        /// Warnings scale the discount through a saturating curve rather than being
+        /// subtracted from the principle percentage directly, so warning volume can
+        /// never drive a principle to zero on its own.
+        internal fun criterionCredit(status: CriterionStatus, warnings: Int): Double = when (status) {
+            CriterionStatus.FAIL -> 0.0
+            CriterionStatus.NOT_CHECKED -> 0.0
+            CriterionStatus.PASS -> 1.0
+            CriterionStatus.REVIEW -> {
+                val w = warnings.toDouble()
+                1.0 - REVIEW_MAX_DISCOUNT * (w / (w + REVIEW_HALF_LIFE))
+            }
+        }
+
         private fun impactMultiplier(impact: A11yImpact): Double = when (impact) {
             A11yImpact.CRITICAL -> 2.0
             A11yImpact.SERIOUS -> 1.5
@@ -146,25 +170,19 @@ class ScoreCalculator {
             )
         }
 
-        // Principle-level scores
+        // Principle-level scores.
+        //
+        // Only principles with at least one checked criterion get an entry. A
+        // principle no rule covers is absent rather than 100.0, so missing rule
+        // coverage cannot inflate the overall score.
         val principleScores = mutableMapOf<WCAGPrinciple, Double>()
         for (principle in WCAGPrinciple.entries) {
             val critForPrinciple = criteriaScores.filter {
                 it.principle == principle && it.status != CriterionStatus.NOT_CHECKED
             }
-            if (critForPrinciple.isEmpty()) {
-                principleScores[principle] = 100.0
-            } else {
-                val passed = critForPrinciple.count {
-                    it.status == CriterionStatus.PASS || it.status == CriterionStatus.REVIEW
-                }
-                var base = (passed.toDouble() / critForPrinciple.size) * 100.0
-                val warningPenalty = critForPrinciple
-                    .filter { it.status == CriterionStatus.REVIEW }
-                    .sumOf { it.warningCount } * 1.0
-                base = max(0.0, base - warningPenalty)
-                principleScores[principle] = base
-            }
+            if (critForPrinciple.isEmpty()) continue
+            val credit = critForPrinciple.sumOf { criterionCredit(it.status, it.warningCount) }
+            principleScores[principle] = (credit / critForPrinciple.size) * 100.0
         }
 
         // Per-file scores
@@ -177,7 +195,9 @@ class ScoreCalculator {
             FileScore(path, computeFileScore(fe, fw, fi), fe, fw, fi)
         }
 
-        // Overall score
+        // Overall score. principleScores holds only covered principles, so this
+        // averages what was actually checked. An empty map means no rule covered
+        // any catalogued criterion, in which case there is nothing to report against.
         val principleAvg = if (principleScores.isEmpty()) 100.0
         else principleScores.values.sum() / principleScores.size
 

@@ -179,4 +179,62 @@ class ScoreCalculatorTest {
         assertEquals(99.5, ScoreCalculator.computeFileScore(0, 0, 1))
         assertEquals(0.0, ScoreCalculator.computeFileScore(100, 0, 0))
     }
+
+    @Test
+    fun `criterionCredit stays within bounds and decreases with warnings`() {
+        assertEquals(1.0, ScoreCalculator.criterionCredit(CriterionStatus.PASS, 0))
+        assertEquals(0.0, ScoreCalculator.criterionCredit(CriterionStatus.FAIL, 0))
+        assertEquals(1.0, ScoreCalculator.criterionCredit(CriterionStatus.REVIEW, 0))
+
+        val few = ScoreCalculator.criterionCredit(CriterionStatus.REVIEW, 10)
+        val many = ScoreCalculator.criterionCredit(CriterionStatus.REVIEW, 5_000)
+        assertTrue(few > many, "more warnings must cost more credit")
+        assertTrue(many >= 0.5, "a reviewed criterion never drops below half credit, was $many")
+        assertTrue(few <= 1.0)
+    }
+
+    @Test
+    fun `warning volume cannot floor a principle to zero`() {
+        // 1.3.2 reviewed with a very large warning count, 1.1.1 passing.
+        val rule = makeRule(wcag = listOf("1.1.1", "1.3.2"))
+        val diags = List(5_000) {
+            makeDiag(severity = A11ySeverity.WARNING, wcag = listOf("1.3.2"))
+        }
+        val score = calculator.calculate(diags, listOf(rule), listOf("test.kt"))
+
+        val perceivable = score.principleScores[WCAGPrinciple.PERCEIVABLE]!!
+        assertTrue(
+            perceivable > 0.0,
+            "warnings alone must not zero a principle, was $perceivable"
+        )
+        // One passing criterion plus one reviewed-at-half gives at least 75%.
+        assertTrue(perceivable >= 75.0, "expected >= 75.0, was $perceivable")
+    }
+
+    @Test
+    fun `uncovered principles are excluded rather than scored as perfect`() {
+        // Only 1.1.1 is covered, so Perceivable is the only principle with an entry.
+        val rule = makeRule(wcag = listOf("1.1.1"))
+        val diags = listOf(makeDiag(wcag = listOf("1.1.1")))
+        val score = calculator.calculate(diags, listOf(rule), listOf("test.kt"))
+
+        assertEquals(setOf(WCAGPrinciple.PERCEIVABLE), score.principleScores.keys)
+        assertEquals(0.0, score.principleScores[WCAGPrinciple.PERCEIVABLE])
+    }
+
+    @Test
+    fun `adding rule coverage that finds nothing does not lower the score`() {
+        val diags = listOf(makeDiag(wcag = listOf("1.1.1")))
+        val narrow = calculator.calculate(
+            diags, listOf(makeRule(wcag = listOf("1.1.1"))), listOf("test.kt")
+        )
+        // Same findings, but now 4.1.2 is also covered and passes clean.
+        val broad = calculator.calculate(
+            diags, listOf(makeRule(wcag = listOf("1.1.1", "4.1.2"))), listOf("test.kt")
+        )
+        assertTrue(
+            broad.score >= narrow.score,
+            "covering more criteria must not be punished (${broad.score} vs ${narrow.score})"
+        )
+    }
 }

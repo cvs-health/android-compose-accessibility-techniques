@@ -1,6 +1,6 @@
 # Compose Accessibility Checker — IDE Plugin
 
-An IntelliJ Platform plugin that shows **inline accessibility warnings** in the Android Studio editor as you type. It runs the [a11y-check-android](../A11yAgent/README.md) analysis engine with **32 rules mapped to WCAG 2.2** and displays results as squiggly underlines with hover tooltips.
+An IntelliJ Platform plugin that shows **inline accessibility warnings** in the Android Studio editor as you type. It runs the [a11y-check-android](../a11y-check/README.md) analysis engine with **32 rules mapped to WCAG 2.2** and displays results as squiggly underlines with hover tooltips.
 
 ## What it does
 
@@ -15,9 +15,9 @@ If the plugin is not yet on the JetBrains Marketplace, install it manually:
 
 ### Prerequisites
 
-1. **Build the A11yAgent shadow JAR** (from the repo root):
+1. **Build the a11y-check shadow JAR** (from the repo root):
    ```bash
-   ./gradlew :A11yAgent:shadowJar
+   ./gradlew :a11y-check:shadowJar
    ```
 
 2. **Set your Android Studio path** (if not the default). Create `ide-plugin/gradle.properties`:
@@ -95,7 +95,7 @@ And add change notes in `src/main/resources/META-INF/plugin.xml` under `<change-
 
 ## Rules
 
-The plugin runs all 32 rules from the a11y-check-android engine. See [`A11yAgent/README.md`](../A11yAgent/README.md) for the full rule list with WCAG mappings.
+The plugin runs all 32 rules from the a11y-check-android engine. See [`a11y-check/README.md`](../a11y-check/README.md) for the full rule list with WCAG mappings.
 
 ## Architecture
 
@@ -112,7 +112,7 @@ ide-plugin/
 
 The plugin uses IntelliJ's `ExternalAnnotator` extension point:
 1. `collectInformation()` — captures file text and path for Kotlin files
-2. `doAnnotate()` — runs the A11yAgent `RuleRegistry.analyze()` engine
+2. `doAnnotate()` — runs the a11y-check `RuleRegistry.analyze()` engine
 3. `apply()` — converts diagnostics to editor annotations with severity and tooltips
 
 ## Relationship to lint-checks
@@ -121,9 +121,9 @@ The plugin uses IntelliJ's `ExternalAnnotator` extension point:
 |---|---|---|
 | **When it runs** | Real-time as you type | During `./gradlew lint` |
 | **Where results appear** | Editor squiggly underlines + hover tooltips | HTML report + Build tab |
-| **Rules** | 31 (via A11yAgent engine) | 31 (via Android Lint detectors) |
+| **Rules** | 31 (via a11y-check engine) | 31 (via Android Lint detectors) |
 | **Install** | Plugin zip (manual or Marketplace) | `lintChecks project(':lint-checks')` in build.gradle |
-| **Requires** | A11yAgent shadow JAR | Nothing extra |
+| **Requires** | a11y-check shadow JAR | Nothing extra |
 
 Both provide the same 31 accessibility rules. Use the IDE plugin for real-time feedback while coding, and lint-checks for CI/CD and build reports.
 

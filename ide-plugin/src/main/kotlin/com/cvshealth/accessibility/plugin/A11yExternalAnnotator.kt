@@ -16,9 +16,9 @@
 
 package com.cvshealth.accessibility.plugin
 
-import com.cvshealth.a11y.agent.core.A11yDiagnostic
-import com.cvshealth.a11y.agent.core.A11ySeverity
-import com.cvshealth.a11y.agent.core.RuleRegistry
+import com.cvshealth.a11y.check.core.A11yDiagnostic
+import com.cvshealth.a11y.check.core.A11ySeverity
+import com.cvshealth.a11y.check.core.RuleRegistry
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.ExternalAnnotator
 import com.intellij.lang.annotation.HighlightSeverity

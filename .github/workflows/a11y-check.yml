@@ -33,12 +33,12 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Build a11y-check-android
-        run: ./gradlew :A11yAgent:shadowJar
+        run: ./gradlew :a11y-check:shadowJar
 
       - name: Run a11y-check (JSON)
         id: a11y_json
         run: |
-          java -jar A11yAgent/build/libs/a11y-check-android-*.jar \
+          java -jar a11y-check/build/libs/a11y-check-android-*.jar \
             app/src/main/java \
             --format json > a11y-results.json || true
           echo "score=$(python3 -c 'import json,sys; d=json.load(open("a11y-results.json")); print(d.get("score",{}).get("score",0))')" >> "$GITHUB_OUTPUT"
@@ -57,7 +57,7 @@ jobs:
 
       - name: Run a11y-check (SARIF)
         run: |
-          java -jar A11yAgent/build/libs/a11y-check-android-*.jar \
+          java -jar a11y-check/build/libs/a11y-check-android-*.jar \
             app/src/main/java \
             --format sarif > a11y-results.sarif || true
 

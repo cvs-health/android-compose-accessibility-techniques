@@ -58,8 +58,8 @@ abstract class A11yCheckTask @Inject constructor(
         val jar = jarFile.get().asFile
         if (!jar.exists()) {
             throw GradleException(
-                "A11yAgent JAR not found at: ${jar.absolutePath}\n" +
-                "Build it first with: ./gradlew :A11yAgent:shadowJar"
+                "a11y-check JAR not found at: ${jar.absolutePath}\n" +
+                "Build it first with: ./gradlew :a11y-check:shadowJar"
             )
         }
 
@@ -85,7 +85,7 @@ abstract class A11yCheckTask @Inject constructor(
         val result = execOperations.javaexec(object : Action<JavaExecSpec> {
             override fun execute(spec: JavaExecSpec) {
                 spec.classpath(jarRef)
-                spec.mainClass.set("com.cvshealth.a11y.agent.cli.A11yCheckKt")
+                spec.mainClass.set("com.cvshealth.a11y.check.cli.A11yCheckKt")
                 spec.args(argsRef)
                 spec.isIgnoreExitValue = true
             }

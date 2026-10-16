@@ -90,7 +90,7 @@ dependencies {
 tasks.register('a11yCheck', JavaExec) {
     description = 'Run accessibility check on Compose source files'
     group = 'verification'
-    def jarTask = project(':A11yAgent').tasks.named('shadowJar')
+    def jarTask = project(':a11y-check').tasks.named('shadowJar')
     dependsOn jarTask
     classpath = files(jarTask.map { it.archiveFile })
     args = ["${projectDir}/src/main/java", '--format', 'gradle']
@@ -100,7 +100,7 @@ tasks.register('a11yCheck', JavaExec) {
 tasks.register('a11yCheckHtml', JavaExec) {
     description = 'Generate accessibility HTML report'
     group = 'verification'
-    def jarTask = project(':A11yAgent').tasks.named('shadowJar')
+    def jarTask = project(':a11y-check').tasks.named('shadowJar')
     dependsOn jarTask
     classpath = files(jarTask.map { it.archiveFile })
     args = ["${projectDir}/src/main/java", '--format', 'html']

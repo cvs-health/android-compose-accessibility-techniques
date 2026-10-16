@@ -2,7 +2,7 @@
 # install-hooks.sh – Symlink the project's Git hooks into .git/hooks/.
 #
 # Run this script once after cloning the repository to activate the
-# pre-commit accessibility checks provided by A11yAgent.
+# pre-commit accessibility checks provided by a11y-check.
 #
 # Usage:
 #   bash .githooks/install-hooks.sh
@@ -50,11 +50,11 @@ install_hook "pre-commit"
 echo ""
 echo "Git hooks installed successfully."
 echo ""
-echo "The pre-commit hook will run A11yAgent accessibility checks on staged"
+echo "The pre-commit hook will run a11y-check accessibility checks on staged"
 echo "Kotlin files before each commit."
 echo ""
-echo "To build the A11yAgent JAR (required by the hook):"
-echo "  ./gradlew :A11yAgent:shadowJar"
+echo "To build the a11y-check JAR (required by the hook):"
+echo "  ./gradlew :a11y-check:shadowJar"
 echo ""
 echo "To skip the hook for a single commit:"
 echo "  git commit --no-verify"

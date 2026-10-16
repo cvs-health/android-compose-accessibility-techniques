@@ -59,6 +59,6 @@ dependencies {
     intellijPlatform {
         local(androidStudioPath)
     }
-    // Use the A11yAgent shadow JAR — build it first with: ./gradlew :A11yAgent:shadowJar
-    implementation(files("../A11yAgent/build/libs/a11y-check-android-0.1.0.jar"))
+    // Use the a11y-check shadow JAR — build it first with: ./gradlew :a11y-check:shadowJar
+    implementation(files("../a11y-check/build/libs/a11y-check-android-0.1.0.jar"))
 }

@@ -45,8 +45,8 @@ class A11yGradlePlugin : Plugin<Project> {
     private fun locateShadowJar(project: Project): File {
         val rootDir = project.rootProject.projectDir
         val candidates = listOf(
-            File(rootDir.parentFile, "A11yAgent/build/libs"),
-            File(rootDir, "A11yAgent/build/libs")
+            File(rootDir.parentFile, "a11y-check/build/libs"),
+            File(rootDir, "a11y-check/build/libs")
         )
         for (dir in candidates) {
             if (dir.isDirectory) {

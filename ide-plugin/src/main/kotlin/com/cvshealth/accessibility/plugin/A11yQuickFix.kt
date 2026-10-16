@@ -16,7 +16,7 @@
 
 package com.cvshealth.accessibility.plugin
 
-import com.cvshealth.a11y.agent.core.A11yFix
+import com.cvshealth.a11y.check.core.A11yFix
 import com.intellij.codeInsight.intention.IntentionAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project

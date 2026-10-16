@@ -55,16 +55,16 @@ Since some of the code demonstrates the effect of inaccessible coding practices,
 
 This project includes static analysis tools and an IDE plugin for detecting Compose accessibility issues:
 
-### A11yAgent (a11y-check-android)
+### a11y-check (a11y-check-android)
 
 A standalone CLI tool with **32 rules** mapped to WCAG 2.2 criteria, WCAG scoring (0-100), trend tracking, baseline suppression, and multiple output formats (terminal, JSON, HTML, SARIF, Gradle). Runs on-demand via `./gradlew a11yCheck` with clickable results in Android Studio's Build tab.
 
 ```bash
 ./gradlew a11yCheck                    # Run check + generate HTML report
-java -jar A11yAgent/build/libs/a11y-check-android-0.1.0.jar app/src/main/java  # Run directly
+java -jar a11y-check/build/libs/a11y-check-android-0.1.0.jar app/src/main/java  # Run directly
 ```
 
-See [`A11yAgent/README.md`](A11yAgent/README.md) for full documentation.
+See [`a11y-check/README.md`](a11y-check/README.md) for full documentation.
 
 ### Custom Android Lint rules (lint-checks)
 
@@ -78,7 +78,7 @@ An IntelliJ Platform plugin (`ide-plugin/`) that shows **real-time inline access
 
 **Install from disk:**
 ```bash
-./gradlew :A11yAgent:shadowJar          # Build the analysis engine first
+./gradlew :a11y-check:shadowJar          # Build the analysis engine first
 cd ide-plugin && ./gradlew buildPlugin  # Build the plugin zip
 ```
 Then in Android Studio: **Settings > Plugins > gear icon > Install Plugin from Disk** — select `ide-plugin/build/distributions/compose-accessibility-checker-0.3.0.zip` and restart. Supports **Alt+Enter quick-fixes** for 6 rules with auto-fix support.

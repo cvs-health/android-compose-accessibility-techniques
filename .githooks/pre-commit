@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# pre-commit – Run A11yAgent accessibility checks on staged Kotlin files.
+# pre-commit – Run a11y-check accessibility checks on staged Kotlin files.
 #
 # Copies the staged (index) version of each modified/added .kt file into a
-# temporary directory and runs the A11yAgent shadow JAR against that snapshot.
+# temporary directory and runs the a11y-check shadow JAR against that snapshot.
 # Warnings are shown but do not block the commit; errors cause an exit 1.
 #
 # Test sources, fakes, mocks and demo code are excluded. Fixtures for the lint
-# rules and for A11yAgent itself contain deliberate accessibility defects — that
+# rules and for a11y-check itself contain deliberate accessibility defects — that
 # is what they are for — so scanning them reports the fixture, not a regression,
 # and blocks every commit that touches a test. This matches the exclusion applied
 # when scanning an app with this JAR.
@@ -15,10 +15,10 @@
 #   git commit --no-verify
 #
 # To build the JAR if it is missing:
-#   ./gradlew :A11yAgent:shadowJar
+#   ./gradlew :a11y-check:shadowJar
 set -euo pipefail
 
-JAR_PATH="A11yAgent/build/libs/a11y-check-android-0.1.0.jar"
+JAR_PATH="a11y-check/build/libs/a11y-check-android-0.1.0.jar"
 
 # ---------------------------------------------------------------------------
 # 1. Collect staged .kt files (added, copied, or modified – not deleted).
@@ -40,8 +40,8 @@ fi
 # ---------------------------------------------------------------------------
 if [[ ! -f "$JAR_PATH" ]]; then
     echo ""
-    echo "pre-commit: A11yAgent JAR not found at $JAR_PATH"
-    echo "  Build it first with:  ./gradlew :A11yAgent:shadowJar"
+    echo "pre-commit: a11y-check JAR not found at $JAR_PATH"
+    echo "  Build it first with:  ./gradlew :a11y-check:shadowJar"
     echo "  To skip this check:   git commit --no-verify"
     echo ""
     exit 1
@@ -64,7 +64,7 @@ done
 # 4. Run the accessibility checker.
 # ---------------------------------------------------------------------------
 echo ""
-echo "pre-commit: Running A11yAgent accessibility checks on ${#KT_FILES[@]} staged Kotlin file(s)…"
+echo "pre-commit: Running a11y-check accessibility checks on ${#KT_FILES[@]} staged Kotlin file(s)…"
 echo ""
 
 # Capture output; strip the temp-dir prefix so paths look project-relative.

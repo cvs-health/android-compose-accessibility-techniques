@@ -5,7 +5,7 @@ class A11yCheckAndroid < Formula
   license "Apache-2.0"
 
   url "https://github.com/cvs-health/android-compose-accessibility-techniques/releases/download/v#{version}/a11y-check-android-#{version}.jar"
-  # To update sha256: shasum -a 256 A11yAgent/build/libs/a11y-check-android-0.1.0.jar
+  # To update sha256: shasum -a 256 a11y-check/build/libs/a11y-check-android-0.1.0.jar
   sha256 "PLACEHOLDER_UPDATE_ON_RELEASE"
 
   depends_on "openjdk@21"

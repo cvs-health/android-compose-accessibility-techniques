@@ -103,9 +103,9 @@ Custom accessibility issues appear under the **"Accessibility"** category in the
 
 Custom lint rules appear as **real-time squiggly underlines** in the editor. Configure severity in **Settings > Inspections > Android Lint: Accessibility**.
 
-## Relationship to A11yAgent
+## Relationship to a11y-check
 
-This module provides the same 32 rules as A11yAgent, integrated into Android's native Lint system for inline editor feedback. For WCAG scoring, trend tracking, baseline suppression, and additional output formats, see [`A11yAgent/`](../A11yAgent/README.md).
+This module provides the same 32 rules as a11y-check, integrated into Android's native Lint system for inline editor feedback. For WCAG scoring, trend tracking, baseline suppression, and additional output formats, see [`a11y-check/`](../a11y-check/README.md).
 
 ## Contributor Guide
 

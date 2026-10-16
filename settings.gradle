@@ -14,7 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Compose Accessibility Techniques"
 include ':app'
-include ':A11yAgent'
+include ':a11y-check'
 include ':lint-checks'
 
 includeBuild 'gradle-plugin'

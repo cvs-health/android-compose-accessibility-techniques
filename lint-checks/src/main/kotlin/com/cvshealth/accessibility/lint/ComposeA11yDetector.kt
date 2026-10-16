@@ -25,7 +25,9 @@ import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.SourceCodeScanner
 import com.intellij.psi.PsiMethod
+import org.jetbrains.uast.UBlockExpression
 import org.jetbrains.uast.UCallExpression
+import org.jetbrains.uast.ULambdaExpression
 import org.jetbrains.uast.ULiteralExpression
 
 class ComposeA11yDetector : Detector(), SourceCodeScanner {
@@ -230,6 +232,13 @@ class ComposeA11yDetector : Detector(), SourceCodeScanner {
         )
     }
 
+    /** True when [arg] is a content lambda with nothing in its body, i.e. `{ }`. */
+    private fun isEmptyContentLambda(arg: org.jetbrains.uast.UExpression): Boolean {
+        val lambda = arg as? ULambdaExpression ?: return false
+        val body = lambda.body as? UBlockExpression ?: return false
+        return body.expressions.isEmpty()
+    }
+
     private fun checkTabLabel(
         context: JavaContext,
         node: UCallExpression,
@@ -237,16 +246,25 @@ class ComposeA11yDetector : Detector(), SourceCodeScanner {
     ) {
         val params = method.parameterList.parameters
         val textIndex = params.indexOfFirst { it.name == "text" }
-        if (textIndex >= 0) {
-            val arg = node.getArgumentForParameter(textIndex)
-            if (arg != null && !(arg is ULiteralExpression && arg.isNull)) return
-        }
+        val textArg = if (textIndex >= 0) node.getArgumentForParameter(textIndex) else null
+        val textIsNull = textArg is ULiteralExpression && textArg.isNull
 
-        val sourceText = node.asSourceString()
-        if (sourceText.contains("contentDescription") ||
-            sourceText.contains("Text(") ||
-            sourceText.contains("text =")) {
-            return
+        // A supplied-but-empty text slot is not a label. On composables where `text` is a
+        // required parameter — LeadingIconTab, for one — omitting it will not compile, so
+        // `text = { }` is the only shape this defect can actually take.
+        val textIsEmpty = textArg != null && isEmptyContentLambda(textArg)
+
+        if (textArg != null && !textIsNull && !textIsEmpty) return
+
+        // An explicitly empty text slot is decisive, so skip the source-text fallbacks: they
+        // look for the substring "text =", which an empty slot always contains.
+        if (!textIsEmpty) {
+            val sourceText = node.asSourceString()
+            if (sourceText.contains("contentDescription") ||
+                sourceText.contains("Text(") ||
+                sourceText.contains("text =")) {
+                return
+            }
         }
 
         context.report(

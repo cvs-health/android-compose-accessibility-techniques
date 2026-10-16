@@ -31,7 +31,7 @@ class ComposeFormDetector : Detector(), SourceCodeScanner {
 
     override fun getApplicableMethodNames() = listOf(
         "TextField", "OutlinedTextField", "BasicTextField",
-        "RadioButton",
+        "RadioButton", "selectable",
     )
 
     override fun visitMethodCall(
@@ -41,7 +41,10 @@ class ComposeFormDetector : Detector(), SourceCodeScanner {
     ) {
         when (node.methodName) {
             "TextField", "OutlinedTextField", "BasicTextField" -> checkInputPurpose(context, node)
-            "RadioButton" -> checkRadioGroupMissing(context, node)
+            // A bare Modifier.selectable() is a radio button in all but name: it declares
+            // single-selection semantics, so it needs an enclosing selectableGroup() just as
+            // much as a RadioButton does.
+            "RadioButton", "selectable" -> checkRadioGroupMissing(context, node)
         }
     }
 
@@ -69,31 +72,38 @@ class ComposeFormDetector : Detector(), SourceCodeScanner {
     }
 
     private fun checkRadioGroupMissing(context: JavaContext, node: UCallExpression) {
-        // Walk parent chain looking for selectableGroup
+        // Walk the parent chain looking for selectableGroup() on any enclosing call.
+        //
+        // Deliberately not restricted to Column/Row. selectableGroup() is valid on any
+        // container, and restricting it to those two missed the common lazy-list case:
+        // LazyRow(modifier = Modifier.selectableGroup()) { items(...) { RadioButton(...) } }
+        // puts an items lambda between the group and its buttons, so neither radio group in
+        // the CVS flagship Android app was recognised. Depth is bounded to keep the walk cheap
+        // and to avoid crediting a selectableGroup() far up an unrelated part of the tree.
         var parent = node.uastParent
         var depth = 0
-        while (parent != null && depth < 8) {
-            if (parent is UCallExpression) {
-                val parentName = parent.methodName
-                if (parentName in listOf("Column", "Row")) {
-                    val parentSource = parent.asSourceString()
-                    if (parentSource.contains("selectableGroup")) return
-                }
+        while (parent != null && depth < MAX_GROUP_SEARCH_DEPTH) {
+            if (parent is UCallExpression && parent.asSourceString().contains("selectableGroup")) {
+                return
             }
             parent = parent.uastParent
             depth++
         }
 
+        val what = if (node.methodName == "selectable") "Modifier.selectable()" else "RadioButton"
         context.report(
             RADIO_GROUP_MISSING,
             node,
             context.getNameLocation(node),
-            "RadioButton is not inside a Column/Row with `selectableGroup()`. " +
+            "$what is not inside a container with `selectableGroup()`. " +
                 "Screen readers need group semantics to announce radio button position."
         )
     }
 
     companion object {
+        /** How far up the UAST tree to look for an enclosing `selectableGroup()`. */
+        private const val MAX_GROUP_SEARCH_DEPTH = 12
+
         val INPUT_PURPOSE = Issue.create(
             id = "A11yInputPurpose",
             briefDescription = "Input field missing autofill purpose",
@@ -117,9 +127,10 @@ class ComposeFormDetector : Detector(), SourceCodeScanner {
             id = "A11yRadioGroupMissing",
             briefDescription = "RadioButton not in selectable group",
             explanation = """
-                RadioButton should be inside a Column or Row with \
-                `Modifier.selectableGroup()` so screen readers can announce \
-                the radio button's position (e.g., "1 of 3").
+                A `RadioButton`, or any composable carrying `Modifier.selectable()`, \
+                should be inside a container with `Modifier.selectableGroup()` so screen \
+                readers can announce the control's position (e.g., "1 of 3"). Any container \
+                will do, including lazy lists such as `LazyRow` and `LazyColumn`.
 
                 WCAG 1.3.1 Info and Relationships (Level A)
             """.trimIndent(),

@@ -5,6 +5,12 @@
 # temporary directory and runs the A11yAgent shadow JAR against that snapshot.
 # Warnings are shown but do not block the commit; errors cause an exit 1.
 #
+# Test sources, fakes, mocks and demo code are excluded. Fixtures for the lint
+# rules and for A11yAgent itself contain deliberate accessibility defects — that
+# is what they are for — so scanning them reports the fixture, not a regression,
+# and blocks every commit that touches a test. This matches the exclusion applied
+# when scanning an app with this JAR.
+#
 # To skip this hook for a single commit:
 #   git commit --no-verify
 #
@@ -20,7 +26,10 @@ JAR_PATH="A11yAgent/build/libs/a11y-check-android-0.1.0.jar"
 KT_FILES=()
 while IFS= read -r line; do
     KT_FILES+=("$line")
-done < <(git diff --cached --name-only --diff-filter=ACM | grep '\.kt$' || true)
+done < <(git diff --cached --name-only --diff-filter=ACM \
+    | grep '\.kt$' \
+    | grep -vE '(^|/)(test|androidTest|testFixtures|demo)/|[Mm]ock|[Ff]ake|[Ss]tub' \
+    || true)
 
 if [[ ${#KT_FILES[@]} -eq 0 ]]; then
     exit 0

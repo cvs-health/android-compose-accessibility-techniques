@@ -19,6 +19,7 @@ package com.cvshealth.accessibility.lint
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Issue
+import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 class ComposeStructureDetectorTest : LintDetectorTest() {
@@ -36,14 +37,17 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
 
     @Test
     fun testRowWithClearandsetsemanticsAndButtonChildTriggersA11yhiddenwithinteractivechildren() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
                 import androidx.compose.runtime.Composable
                 import androidx.compose.foundation.layout.Row
+                import androidx.compose.material3.Button
+                import androidx.compose.material3.Text
+                import androidx.compose.ui.Modifier
+                import androidx.compose.ui.semantics.clearAndSetSemantics
                 @Composable
                 fun Foo() {
                     Row(modifier = Modifier.clearAndSetSemantics {}) {
@@ -52,14 +56,13 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yHiddenWithInteractiveChildren")
     }
 
     @Test
     fun testColumnWithClearandsetsemanticsAndCheckboxChildTriggersA11yhiddenwithinteractivechildren() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -75,12 +78,13 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yHiddenWithInteractiveChildren")
     }
 
     @Test
     fun testRowWithClearandsetsemanticsAndOnlyTextChildIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -95,14 +99,13 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testBoxWithClearandsetsemanticsAndSwitchChildTriggersA11yhiddenwithinteractivechildren() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -117,16 +120,15 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yHiddenWithInteractiveChildren")
     }
 
     // ---- A11yAccessibilityGrouping ----
 
     @Test
     fun testClickableRowWithIconAndTextButNoMergedescendantsTriggersA11yaccessibilitygrouping() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -143,14 +145,13 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testClickableColumnWithImageAndTextButNoMergedescendantsTriggersA11yaccessibilitygrouping() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -167,12 +168,13 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testClickableRowWithIconAndTextAndMergedescendantsIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -192,12 +194,13 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testNonclickableRowWithIconAndTextIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -214,16 +217,15 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     // ---- A11yBoxChildOrder ----
 
     @Test
     fun testBoxWithAlignAndZindexButNoTraversalindexTriggersA11yboxchildorder() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -245,12 +247,13 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yBoxChildOrder")
     }
 
     @Test
     fun testBoxWithAlignAndZindexAndTraversalindexIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -278,12 +281,13 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testBoxWithoutZindexIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -302,16 +306,15 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     // ---- A11yButtonUsedAsLink ----
 
     @Test
     fun testButtonWithHttpsUrlTriggersA11ybuttonusedaslink() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -327,14 +330,13 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yButtonUsedAsLink")
     }
 
     @Test
     fun testTextbuttonWithUriParseTriggersA11ybuttonusedaslink() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -352,12 +354,13 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yButtonUsedAsLink")
     }
 
     @Test
     fun testButtonWithRoleDotLinkSemanticsIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -374,12 +377,13 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testButtonWithoutLinkBehaviorIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -393,6 +397,6 @@ class ComposeStructureDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 }

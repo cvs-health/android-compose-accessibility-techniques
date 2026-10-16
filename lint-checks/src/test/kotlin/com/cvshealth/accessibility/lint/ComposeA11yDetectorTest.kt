@@ -19,13 +19,13 @@ package com.cvshealth.accessibility.lint
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest
 import com.android.tools.lint.detector.api.Detector
 import com.android.tools.lint.detector.api.Issue
+import com.android.tools.lint.checks.infrastructure.TestMode
 import org.junit.Test
 
 class ComposeA11yDetectorTest : LintDetectorTest() {
 
     override fun getDetector(): Detector = ComposeA11yDetector()
 
-    override fun allowCompilationErrors(): Boolean = true
 
     override fun getIssues(): List<Issue> = listOf(
         ComposeA11yDetector.ICON_MISSING_LABEL,
@@ -47,9 +47,8 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
 
     @Test
     fun testIconWithNullContentdescriptionTriggersA11yiconmissinglabel() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -61,12 +60,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yIconMissingLabel")
     }
 
     @Test
     fun testIconWithNonnullContentdescriptionIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -78,14 +78,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testImageWithNullContentdescriptionTriggersA11yiconmissinglabel() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -97,12 +96,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yIconMissingLabel")
     }
 
     @Test
     fun testImageWithNonnullContentdescriptionIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -114,16 +114,15 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     // ---- A11yEmptyContentDescription ----
 
     @Test
     fun testIconWithEmptyContentdescriptionTriggersA11yemptycontentdescription() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -135,14 +134,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testImageWithEmptyContentdescriptionTriggersA11yemptycontentdescription() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -154,12 +152,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testImageWithDescriptiveContentdescriptionIsCleanForEmptyCheck() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -171,16 +170,15 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     // ---- A11yTextFieldMissingLabel ----
 
     @Test
     fun testTextfieldWithoutLabelTriggersA11ytextfieldmissinglabel() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -192,14 +190,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yTextFieldMissingLabel")
     }
 
     @Test
     fun testOutlinedtextfieldWithoutLabelTriggersA11ytextfieldmissinglabel() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -211,12 +208,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yTextFieldMissingLabel")
     }
 
     @Test
     fun testTextfieldWithLabelIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -229,16 +227,15 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     // ---- A11yIconButtonMissingLabel ----
 
     @Test
     fun testIconbuttonWithNoContentdescriptionTriggersA11yiconbuttonmissinglabel() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -253,12 +250,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testIconbuttonWithLabeledIconIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -273,16 +271,15 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     // ---- A11ySliderMissingLabel ----
 
     @Test
     fun testSliderWithoutLabelTriggersA11yslidermissinglabel() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -294,12 +291,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11ySliderMissingLabel")
     }
 
     @Test
     fun testSliderWithContentdescriptionSemanticsIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -315,14 +313,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testRangesliderWithoutLabelTriggersA11yslidermissinglabel() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -334,16 +331,15 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11ySliderMissingLabel")
     }
 
     // ---- A11yDropdownMissingLabel ----
 
     @Test
     fun testExposeddropdownmenuboxWithoutLabeledTextfieldTriggersA11ydropdownmissinglabel() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -356,12 +352,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yDropdownMissingLabel")
     }
 
     @Test
     fun testExposeddropdownmenuboxWithLabeledTextfieldIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -377,16 +374,15 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     // ---- A11yTabMissingLabel ----
 
     @Test
     fun testTabWithoutTextLabelTriggersA11ytabmissinglabel() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -399,12 +395,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yTabMissingLabel")
     }
 
     @Test
     fun testTabWithTextParameterIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -417,14 +414,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testLeadingicontabWithoutTextTriggersA11ytabmissinglabel() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -433,22 +429,24 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 import androidx.compose.runtime.Composable
                 @Composable
                 fun Foo() {
-                    LeadingIconTab(selected = false, onClick = {}, icon = {
-                        Icon(painter = painterResource(R.drawable.ic_home), contentDescription = null)
-                    })
+                    LeadingIconTab(
+                        selected = false,
+                        onClick = {},
+                        text = { },
+                        icon = { Icon(imageVector = null, contentDescription = "Home") }
+                    )
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yTabMissingLabel")
     }
 
     // ---- A11yMissingPaneTitle ----
 
     @Test
     fun testScaffoldWithoutPanetitleTriggersA11ymissingpanetitle() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -461,12 +459,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yMissingPaneTitle")
     }
 
     @Test
     fun testScaffoldWithPanetitleSemanticsIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -479,12 +478,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testScaffoldWithTopappbarAndTitleIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -501,16 +501,15 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     // ---- A11yToggleMissingLabel ----
 
     @Test
     fun testCheckboxWithoutLabelTriggersA11ytogglemissinglabel() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -522,14 +521,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yToggleMissingLabel")
     }
 
     @Test
     fun testSwitchWithoutLabelTriggersA11ytogglemissinglabel() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -541,12 +539,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yToggleMissingLabel")
     }
 
     @Test
     fun testCheckboxWithContentdescriptionSemanticsIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -562,16 +561,15 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     // ---- A11yLabelContainsRoleImage ----
 
     @Test
     fun testIconWithImageInContentdescriptionTriggersA11ylabelcontainsroleimage() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -583,14 +581,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testImageWithIconInContentdescriptionTriggersA11ylabelcontainsroleimage() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -602,12 +599,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     @Test
     fun testIconWithDescriptiveContentdescriptionWithoutRoleWordIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -619,16 +617,15 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     // ---- A11yLabelContainsRoleButton ----
 
     @Test
     fun testButtonWithButtonInLabelTriggersA11ylabelcontainsrolebutton() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -643,14 +640,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yLabelContainsRoleButton")
     }
 
     @Test
     fun testTextbuttonWithButtonInLabelTriggersA11ylabelcontainsrolebutton() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -665,12 +661,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yLabelContainsRoleButton")
     }
 
     @Test
     fun testButtonWithActiononlyLabelIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -685,16 +682,15 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 
     // ---- A11yLabelInNameError / A11yLabelInNameWarning ----
 
     @Test
     fun testButtonWithMismatchedContentdescriptionTriggersA11ylabelinnameerror() {
-        // TODO: UAST cannot resolve unresolved Compose imports with allowCompilationErrors(),
-        // so visitMethodCall is not invoked and the detector does not trigger in tests.
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -712,12 +708,13 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectContains("A11yLabelInNameError")
     }
 
     @Test
     fun testButtonWithMatchingLabelIsClean() {
         lint().files(
+            *ComposeStubs.all,
             kotlin(
                 """
                 package test
@@ -735,6 +732,6 @@ class ComposeA11yDetectorTest : LintDetectorTest() {
                 }
                 """.trimIndent()
             )
-        ).allowCompilationErrors().run().expectClean()
+        ).testModes(TestMode.DEFAULT).run().expectClean()
     }
 }
